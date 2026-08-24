@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "texas-webcoders",
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

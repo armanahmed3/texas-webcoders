@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
+  }
+}
+
+.font-bebas, [class*="Bebas_Neue"], [class*="font-bebas"] {
+  font-family: 'Bebas Neue', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  letter-spacing: 0.03em;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.max-h-full {
+  max-height: 90%;
+}
+
+/* Animated Dark Blue Backgrounds */
+@keyframes darkBlueShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animated-dark-blue {
+  background: linear-gradient(135deg, #051329 0%, #092652 25%, #0e3b79 50%, #082046 75%, #040f21 100%);
+  background-size: 250% 250%;
+  animation: darkBlueShimmer 12s ease infinite;
+}
+
+.bg-animated-dark-blue-glow {
+  background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.18) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.22) 0%, transparent 50%),
+              linear-gradient(145deg, #06152e 0%, #0a254d 50%, #040e21 100%);
+  background-size: 200% 200%;
+  animation: darkBlueShimmer 10s ease infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #080c14;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Custom glowing effects */
+.glow-sky {
+  box-shadow: 0 0 35px -5px rgba(255, 255, 255, 0.2);
+}
+
+.glow-blue-lg {
+  box-shadow: 0 0 60px -10px rgba(255, 255, 255, 0.25);
+}
+
+/* Hide scrollbar for clean slide mode */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Slide snap container */
+.slide-snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.slide-snap-item {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* Continuous Auto-Scrolling Website Mockup Animations */
+@keyframes autoScrollVertical {
+  0%, 15% {
+    transform: translateY(0%);
+  }
+  48%, 58% {
+    transform: translateY(calc(-100% + 280px));
+  }
+  90%, 100% {
+    transform: translateY(0%);
+  }
+}
+
+.animate-auto-scroll {
+  animation: autoScrollVertical 16s ease-in-out infinite;
+}
+
+.group:hover .animate-auto-scroll,
+.animate-auto-scroll:hover {
+  animation-play-state: paused;
+}
+

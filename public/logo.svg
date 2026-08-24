@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 160" width="680" height="160" fill="none">
+  <defs>
+    <linearGradient id="twcEmblemDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#32363e" />
+      <stop offset="40%" stop-color="#1c1e23" />
+      <stop offset="80%" stop-color="#0e1013" />
+      <stop offset="100%" stop-color="#050607" />
+    </linearGradient>
+    <linearGradient id="twcEmblemFacet" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64748b" />
+      <stop offset="50%" stop-color="#334155" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="twcEmblemHighlight" x1="0%" y1="100%" x2="70%" y2="0%">
+      <stop offset="0%" stop-color="#94a3b8" />
+      <stop offset="40%" stop-color="#ffffff" />
+      <stop offset="80%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#64748b" />
+    </linearGradient>
+    <filter id="logoDrop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="1" dy="3" stdDeviation="2.5" flood-opacity="0.25" flood-color="#000" />
+    </filter>
+  </defs>
+
+  <!-- 3D Winged Arrow Emblem -->
+  <g transform="translate(10, 10)" filter="url(#logoDrop)">
+    <!-- Left Wing Flare -->
+    <path d="M 12 36 C 12 36 36 50 62 66 C 48 69 30 62 12 36 Z" fill="url(#twcEmblemDark)" />
+    <path d="M 12 36 C 26 46 48 58 62 66 C 51 56 32 44 12 36 Z" fill="url(#twcEmblemFacet)" opacity="0.9" />
+
+    <!-- Left Arch Body -->
+    <path d="M 18 42 C 40 60 66 94 78 130 C 70 130 54 104 32 76 C 21 62 16 51 18 42 Z" fill="url(#twcEmblemDark)" />
+
+    <!-- Central Chrome Highlight Sweep -->
+    <path d="M 25 48 C 46 68 74 108 83 131 C 80 129 65 98 44 73 C 32 58 26 50 25 48 Z" fill="url(#twcEmblemHighlight)" />
+
+    <!-- Main Right Arrow Shaft -->
+    <path d="M 78 130 C 84 106 106 62 152 14 L 114 20 C 94 48 76 82 72 114 L 78 130 Z" fill="url(#twcEmblemDark)" />
+
+    <!-- Arrow Head Body & Facet -->
+    <path d="M 152 14 L 108 10 L 122 34 L 152 14 Z" fill="url(#twcEmblemDark)" />
+    <path d="M 152 14 L 114 20 L 122 34 L 152 14 Z" fill="url(#twcEmblemFacet)" />
+    <path d="M 152 14 L 138 22 L 132 17 Z" fill="#ffffff" />
+  </g>
+
+  <!-- Wordmark Text (Dark / Black for Light Background) -->
+  <text x="180" y="82" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="54" font-weight="900" letter-spacing="-0.03em" fill="#090b0e">
+    TEXAS WEBCODERS
+  </text>
+  
+  <!-- Subtitle Tagline -->
+  <text x="182" y="118" font-family="'Montserrat', 'Segoe UI', sans-serif" font-size="16" font-weight="600" letter-spacing="0.22em" fill="#475569">
+    SOFTWARE . INNOVATION . TRANSFORMATION
+  </text>
+</svg>
