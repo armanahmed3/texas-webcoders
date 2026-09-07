@@ -95,7 +95,7 @@ async function startServer() {
             ${message || 'No additional details provided.'}
           </div>
           <div style="margin-top: 24px; padding: 16px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; text-align: center;">
-            <p style="margin: 0; font-size: 13px; color: #166534; font-weight: bold;">Lead Assigned to Texas WebCoders Engineering Team (Tyler, TX)</p>
+            <p style="margin: 0; font-size: 13px; color: #166534; font-weight: bold;">Lead Assigned to Texas WebCoders Engineering Team</p>
           </div>
         </div>
       </div>

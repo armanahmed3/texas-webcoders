@@ -71,7 +71,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       gender: 'man',
       role: 'Executive Medical Director & Founder',
       company: 'Pendelton Healthcare Systems',
-      location: 'Tyler, TX',
+      location: 'Texas',
       avatar: avatar11Img,
       projectType: 'HIPAA-Compliant Patient Intake & Telehealth Portal',
       budget: '$28,000',

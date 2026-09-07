@@ -212,7 +212,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
           <p>© 2026 Texas WebCoders. All Rights Reserved.</p>
           <div className="flex items-center gap-2 text-slate-900 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Accepting New Client Projects • Tyler, TX HQ</span>
+            <span>Accepting New Client Projects • Texas HQ</span>
           </div>
         </div>
       </div>

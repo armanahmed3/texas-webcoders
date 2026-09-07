@@ -108,7 +108,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
                 isWhite ? 'text-slate-600' : 'text-slate-300'
               }`}
             >
-              Tyler, TX Engineering Firm • 5221 S Broadway Ave, Tyler, TX 75703
+              Texas Engineering Firm • 5221 S Broadway Ave, Tyler, TX 75703
             </motion.span>
 
             <motion.h2
@@ -120,7 +120,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
                 isWhite ? 'text-slate-950' : 'text-white'
               }`}
             >
-              Engineering Reliable Digital Platforms for Tyler & East Texas Leaders
+              Engineering Reliable Digital Platforms for Texas Leaders
             </motion.h2>
 
             <motion.p
@@ -132,7 +132,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
                 isWhite ? 'text-zinc-600' : 'text-slate-300'
               }`}
             >
-              Based at 5221 S Broadway Ave in Tyler, Texas, TexasWebCoders delivers tailored software engineering, conversion-focused web development, and localized search optimization. We partner directly with medical practices, legal counsel, commercial contractors, logistics companies, and retail operators across Smith County, Longview, and surrounding East Texas communities to build dependable digital systems that drive measurable client acquisition.
+              Based at 5221 S Broadway Ave, Tyler, TX 75703, TexasWebCoders delivers tailored software engineering, conversion-focused web development, and localized search optimization. We partner directly with medical practices, legal counsel, commercial contractors, logistics companies, and retail operators across Smith County, Longview, and surrounding East Texas communities to build dependable digital systems that drive measurable client acquisition.
             </motion.p>
           </div>
 
@@ -228,12 +228,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               <h3 className={`text-xl font-semibold font-['Montserrat'] ${
                 isWhite ? 'text-slate-950' : 'text-white'
               }`}>
-                High-Converting Web Design & Tyler SEO
+                High-Converting Web Design & Texas SEO
               </h3>
               <p className={`text-xs sm:text-sm leading-relaxed ${
                 isWhite ? 'text-zinc-600' : 'text-slate-400'
               }`}>
-                We build high-performance WordPress systems, custom React applications, and WooCommerce storefronts architected to rank #1 across Tyler and East Texas search queries, converting local traffic into booked consultations.
+                We build high-performance WordPress systems, custom React applications, and WooCommerce storefronts architected to rank #1 across Texas and regional search queries, converting local traffic into booked consultations.
               </p>
             </motion.div>
 

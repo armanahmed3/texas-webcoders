@@ -43,7 +43,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-white/20 text-white text-xs sm:text-sm font-semibold uppercase tracking-wider font-['Montserrat',sans-serif] backdrop-blur-md shadow-lg shadow-white/5"
             >
               <Sparkles className="w-3.5 h-3.5 text-white" />
-              <span>Tyler, TX Custom Software & Web Engineering Agency</span>
+              <span>Texas Custom Software & Web Engineering Agency</span>
             </motion.div>
 
             {/* Main Headline in Bebas Neue Font */}
@@ -59,7 +59,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </span>{' '}
               <br />
               <span className="font-bebas text-slate-300 text-2xl sm:text-3xl md:text-4xl font-normal block mt-1 tracking-wide">
-                Engineered in Tyler, Texas for Regional Leaders
+                Engineered in Texas for Regional Leaders
               </span>
             </motion.h1>
 
@@ -90,7 +90,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-white/10">
                 <Award className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Tyler & East Texas Developers</span>
+                <span>Texas Software Developers</span>
               </div>
             </motion.div>
 

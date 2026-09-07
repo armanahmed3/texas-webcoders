@@ -32,7 +32,7 @@ export const PRICING_PACKAGES: PricingPackage[] = [
     description: 'Perfect for East Texas small businesses, local services, and medical/legal practices wanting an ultra-fast custom website.',
     features: [
       'Up to 5 Custom Responsive Pages',
-      'Tyler, TX Local SEO & Google Maps Setup',
+      'Local SEO & Google Maps Setup',
       'Sub-0.5s Load Speed Optimization',
       'SSL Security & Contact Inquiry Forms',
       '100% Full Code & Domain Ownership',
@@ -70,7 +70,7 @@ export const PRICING_PACKAGES: PricingPackage[] = [
       'PostgreSQL / Firebase Real-Time Database',
       'Role-Based Staff & Client Portals',
       'Automated Invoicing & Stripe Payment Gateway',
-      'Dedicated Tyler, TX Engineering Lead',
+      'Dedicated Texas Engineering Lead',
       'Full IP Transfer & GitHub Repository'
     ]
   }
@@ -185,7 +185,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     number: 1,
     title: 'Discovery',
     shortDesc: 'Strategic discovery and roadmap.',
-    fullDesc: 'We analyze your Tyler business requirements, competitors, customer demographics, and technical architecture to build a guaranteed milestone roadmap.',
+    fullDesc: 'We analyze your business requirements, competitors, customer demographics, and technical architecture to build a guaranteed milestone roadmap.',
     iconName: 'Compass',
     deliverables: ['Discovery Brief', 'Architecture Blueprint', 'Fixed Price Quote', 'Project Timeline'],
     duration: 'Day 1'
@@ -194,7 +194,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     number: 2,
     title: 'UI/UX Design',
     shortDesc: 'Wireframes and interactive prototyping.',
-    fullDesc: 'Our Tyler design team crafts responsive Figma wireframes and interactive prototypes with custom typography, 3D assets, and branded color palettes.',
+    fullDesc: 'Our design team crafts responsive Figma wireframes and interactive prototypes with custom typography, 3D assets, and branded color palettes.',
     iconName: 'Palette',
     deliverables: ['Figma High-Fidelity Prototype', 'Design System Library', 'Mobile & Desktop Views', 'Design Review'],
     duration: 'Days 2-3'
@@ -223,12 +223,12 @@ export const SERVICES_LIST: ServiceItem[] = [
   {
     id: 'custom_web_dev',
     title: 'Custom Web Application & High-Performance SaaS',
-    description: 'Ultra-fast, conversion-optimized web applications and SaaS platforms engineered with React 19, Next.js 15, Vite, and Tailwind CSS. Built with sub-0.3s TTFB load speed to outrank competitors in Tyler and regional search.',
+    description: 'Ultra-fast, conversion-optimized web applications and SaaS platforms engineered with React 19, Next.js 15, Vite, and Tailwind CSS. Built with sub-0.3s TTFB load speed to outrank competitors in Texas and regional search.',
     icon: '🌐',
     features: [
       'Sub-0.3s Page Load Speed & 100/100 Google Core Web Vitals',
       'Full-Stack Edge Serverless Architecture & Global Cloud CDN',
-      'Tyler, TX Entity SEO, Schema.org & Google SGE Search Domination',
+      'Texas Entity SEO, Schema.org & Google SGE Search Domination',
       'Interactive 3D WebGL / Framer Motion Physics Animations',
       'Encrypted REST & GraphQL Microservices Integration',
       '100% Full IP Code Transfer & GitHub Repository Ownership'
@@ -366,12 +366,12 @@ export const SERVICES_LIST: ServiceItem[] = [
   },
   {
     id: 'local_seo_growth',
-    title: 'Tyler, TX Local SEO & Google Maps Domination',
-    description: 'Dominate Google search results and Google Maps in Tyler, Longview, and East Texas. We engineer semantic schema markup, Google Business Profile authority, and speed optimization for maximum phone calls.',
+    title: 'Texas Local SEO & Google Maps Domination',
+    description: 'Dominate Google search results and Google Maps across Texas and regional markets. We engineer semantic schema markup, Google Business Profile authority, and speed optimization for maximum phone calls.',
     icon: '🚀',
     features: [
       'Google Business Profile Geo-Optimized Citation Matrix',
-      'High-Intent Local Keyword Strategy (Tyler, East Texas, Dallas)',
+      'High-Intent Local Keyword Strategy (East Texas, Dallas, Austin)',
       'Rich Snippet & LocalBusiness JSON-LD Schema Structuring',
       'Top-Tier High-Authority Texas Business Directory Citations',
       'Core Web Vitals Speed Tuning (<0.3s Server Response)',
@@ -516,7 +516,7 @@ export const TESTIMONIALS: Testimonial[] = [
     name: 'Dr. Arthur H. Pendelton',
     role: 'Executive Medical Director & Founder',
     company: 'Pendelton Healthcare Systems',
-    location: 'Tyler, TX',
+    location: 'Texas',
     rating: 5.0,
     metrics: '100% HIPAA Compliant • 4,800+ Patients',
     budget: '$28,000',

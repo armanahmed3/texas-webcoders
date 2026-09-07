@@ -46,7 +46,7 @@ export const ARTICLES_LIST: Article[] = [
       'Vite 6 route-based code splitting prevents heavy JS bundle execution',
       'Sub-0.5s loading correlates with a 38% increase in organic Google search rankings'
     ],
-    seoKeywords: ['Web Architecture 2026', 'Serverless Edge SSR', 'Lighthouse 100 Performance', 'Tyler Web Development', 'Texas Software House']
+    seoKeywords: ['Web Architecture 2026', 'Serverless Edge SSR', 'Lighthouse 100 Performance', 'Texas Web Development', 'Texas Software House']
   },
   {
     id: 'article-2',
@@ -88,7 +88,7 @@ export const ARTICLES_LIST: Article[] = [
       'Deterministic validation gates prevent hallucination in critical business processes',
       'Average client ROI yields a 4.2x reduction in customer support response latency'
     ],
-    seoKeywords: ['Enterprise AI Agents', 'Multi-Agent Systems', 'Workflow Automation 2026', 'Custom Business Software', 'Tyler AI Engineering']
+    seoKeywords: ['Enterprise AI Agents', 'Multi-Agent Systems', 'Workflow Automation 2026', 'Custom Business Software', 'Texas AI Engineering']
   }
 ];
 

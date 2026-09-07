@@ -18,7 +18,8 @@ import {
   Send,
   ChevronRight,
   ShieldCheck,
-  Zap
+  Zap,
+  FileText
 } from 'lucide-react';
 import { TexasWebcodersLogo } from './TexasWebcodersLogo';
 
@@ -77,11 +78,11 @@ export const Navbar: React.FC<NavbarProps> = ({
     { label: 'Process', slideIndex: 2, href: '#process', icon: Zap, desc: '4-Step agile framework' },
     { label: 'Services', slideIndex: 3, href: '#services', icon: Cpu, desc: 'Web, Mobile, SEO & AI' },
     { label: 'Packages', slideIndex: 4, href: '#packages', icon: Layers, desc: 'Transparent milestone pricing' },
-    { label: 'About', slideIndex: 5, href: '#about', icon: Users, desc: 'Tyler, TX engineering team' },
+    { label: 'About', slideIndex: 5, href: '#about', icon: Users, desc: 'Texas engineering team' },
     { label: 'Testimonials', slideIndex: 6, href: '#testimonials', icon: Users, desc: '500+ Client reviews & video' },
     { label: 'Blog Insights', slideIndex: 7, href: '#blog', icon: BookOpen, desc: 'Tech & SEO strategies' },
     { label: 'Reviews & FAQ', slideIndex: 8, href: '#faq', icon: HelpCircle, desc: 'Client ratings & answers' },
-    { label: 'Contact & Hire', slideIndex: 9, href: '#contact', icon: Send, desc: 'Direct Tyler office contact' }
+    { label: 'Contact & Hire', slideIndex: 9, href: '#contact', icon: Send, desc: 'Direct office contact' }
   ];
 
   const handleLinkClick = (e: React.MouseEvent, slideIndex: number) => {
@@ -138,13 +139,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Desktop Action Buttons & Mobile Hamburger Button */}
             <div className="flex items-center justify-end flex-shrink-0 gap-2 sm:gap-3 pl-1 sm:pl-4 lg:pl-6 z-10">
-              {/* Desktop Book Now Button */}
+              {/* Desktop Get a Quote Button */}
               <button
-                onClick={onOpenAppointmentModal || (() => onNavigateSlide(8))}
+                onClick={onOpenQuoteCalculator || onOpenAppointmentModal || (() => onNavigateSlide(8))}
                 className="hidden sm:inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 active:scale-95 text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md cursor-pointer border border-slate-800 hover:border-slate-700 group"
               >
-                <Calendar className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span>Book Now</span>
+                <FileText className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
+                <span>Get a Quote</span>
               </button>
 
               {/* Mobile Sidebar Toggle Button - Prominent High-Contrast UI */}
@@ -203,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="px-4 sm:px-5 py-2.5 bg-slate-900/60 border-b border-slate-800/60 flex items-center justify-between text-[11px] text-slate-300">
                 <div className="flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Tyler, TX Headquarters</span>
+                  <span>Texas Headquarters</span>
                 </div>
                 <span className="text-slate-400 font-mono">Mon–Fri 8am–6pm</span>
               </div>
@@ -261,7 +262,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <div className="grid grid-cols-2 gap-2">
                   <button
                     onClick={() => {
-                      if (onOpenAppointmentModal) {
+                      if (onOpenQuoteCalculator) {
+                        onOpenQuoteCalculator();
+                      } else if (onOpenAppointmentModal) {
                         onOpenAppointmentModal();
                       } else {
                         onNavigateSlide(8);
@@ -270,8 +273,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }}
                     className="p-2.5 rounded-xl bg-white hover:bg-zinc-200 text-slate-950 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-all active:scale-95"
                   >
-                    <Calendar className="w-3.5 h-3.5 text-slate-950" />
-                    <span>Book Now</span>
+                    <FileText className="w-3.5 h-3.5 text-slate-950" />
+                    <span>Get a Quote</span>
                   </button>
 
                   <a
@@ -338,13 +341,13 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span className="text-[10px] font-semibold tracking-wider uppercase mt-0.5">Services</span>
         </button>
 
-        {/* Book Now Button */}
+        {/* Get a Quote Button */}
         <button
-          onClick={onOpenAppointmentModal || (() => onNavigateSlide(8))}
+          onClick={onOpenQuoteCalculator || onOpenAppointmentModal || (() => onNavigateSlide(8))}
           className="flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer active:scale-95"
         >
-          <Calendar className="w-5 h-5" />
-          <span className="text-[10px] font-bold tracking-wider uppercase mt-0.5">Book Now</span>
+          <FileText className="w-5 h-5" />
+          <span className="text-[10px] font-bold tracking-wider uppercase mt-0.5">Get a Quote</span>
         </button>
 
         {/* Call Office Button */}

@@ -135,7 +135,7 @@ export const BlogDetailPage: React.FC<BlogDetailPageProps> = ({
             Ready to Implement This Architecture in Your Project?
           </h3>
           <p className="text-xs sm:text-sm text-zinc-300 max-w-xl mx-auto leading-relaxed">
-            Our senior engineering team in Tyler, Texas designs, develops, and deploys high-speed web and mobile systems tailored to your exact operational requirements.
+            Our senior engineering team in Texas designs, develops, and deploys high-speed web and mobile systems tailored to your exact operational requirements.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <button

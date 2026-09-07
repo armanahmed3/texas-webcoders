@@ -379,7 +379,7 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
             <span className="text-white font-semibold block sm:inline">
               Need a custom architecture recommendation?
             </span>{' '}
-            Our lead engineers in Tyler, TX provide technical consultations free of charge.
+            Our lead engineers in Texas provide technical consultations free of charge.
           </div>
           <button
             onClick={() => onNavigateSlide(3)}

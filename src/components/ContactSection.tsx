@@ -355,7 +355,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <p className={`text-xs leading-relaxed max-w-md mx-auto ${
                         isBlack ? 'text-slate-300' : 'text-zinc-600'
                       }`}>
-                        Thank you, <span className="font-semibold text-emerald-400">{formData.name}</span>! Our lead engineering team in Tyler, Texas has logged your inquiry.
+                        Thank you, <span className="font-semibold text-emerald-400">{formData.name}</span>! Our lead engineering team in Texas has logged your inquiry.
                       </p>
                     </motion.div>
 

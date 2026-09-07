@@ -20,7 +20,7 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
     "@id": "https://texaswebcoders.com/#localbusiness",
     "name": "Texas WebCoders",
     "alternateName": ["Texas WebCoders", "Texas WebCoders LLC"],
-    "description": "Texas WebCoders is a top-rated Texas web design, mobile application engineering, SEO optimization, and custom software development agency in Tyler, TX.",
+    "description": "Texas WebCoders is a top-rated Texas web design, mobile application engineering, SEO optimization, and custom software development agency in Texas.",
     "url": "https://texaswebcoders.com",
     "telephone": "+1-903-222-6022",
     "email": "info@texaswebcoders.com",
@@ -71,10 +71,6 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
       {
         "@type": "State",
         "name": "Texas"
-      },
-      {
-        "@type": "City",
-        "name": "Tyler"
       },
       {
         "@type": "Country",
@@ -142,14 +138,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                 isBlack ? 'text-white' : 'text-slate-950'
               }`}
             >
-              Our Tyler, Texas Office
+              Our Texas Office
             </h2>
             <p
               className={`max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed ${
                 isBlack ? 'text-slate-300' : 'text-zinc-600'
               }`}
             >
-              Based in Tyler, Texas, we serve ambitious startups and enterprise brands with top-tier web, mobile app, and custom software engineering.
+              Based in Texas, we serve ambitious startups and enterprise brands with top-tier web, mobile app, and custom software engineering.
             </p>
           </motion.div>
 

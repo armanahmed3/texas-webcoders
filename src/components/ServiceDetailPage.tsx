@@ -30,7 +30,7 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
   }> = {
     custom_web_dev: {
       subtitle: 'Sub-0.3s TTFB Edge Web Applications & Multi-Tenant SaaS Architecture',
-      overview: 'We architect and engineer bespoke, conversion-optimized web applications with React 19, Next.js 15, Vite, and Tailwind CSS. Backed by global CDN edge execution, 3D WebGL motion physics, and structured Schema.org data, our web solutions command top search rankings in Tyler and nationwide.',
+      overview: 'We architect and engineer bespoke, conversion-optimized web applications with React 19, Next.js 15, Vite, and Tailwind CSS. Backed by global CDN edge execution, 3D WebGL motion physics, and structured Schema.org data, our web solutions command top search rankings in Texas and nationwide.',
       processTimeline: [
         { step: '01', title: 'System Architecture & Wireframes', desc: 'Defining data schemas, conversion funnels, API routes, and Google Core Web Vitals targets.' },
         { step: '02', title: 'Interactive UI & Motion Prototyping', desc: 'Crafting responsive high-fidelity Figma components, dark mode UI, and 3D WebGL canvas motion.' },

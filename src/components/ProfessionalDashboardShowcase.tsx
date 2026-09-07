@@ -27,7 +27,7 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
             </div>
             <div className="text-[11px] text-zinc-500 font-medium flex items-center gap-1">
               <MapPin className="w-3 h-3 text-cyan-600" />
-              <span>Tyler & Austin, Texas • USA</span>
+              <span>Texas • USA</span>
             </div>
           </div>
         </div>

@@ -47,7 +47,7 @@ const DEFAULT_BLOGS: BlogArticle[] = [
       'Vite 6 route-based code splitting prevents heavy JS bundle execution',
       'Sub-0.5s loading correlates with a 38% increase in organic Google search rankings'
     ],
-    seoKeywords: ['Web Architecture 2026', 'Serverless Edge SSR', 'Lighthouse 100 Performance', 'Tyler Web Development', 'Texas Software House'],
+    seoKeywords: ['Web Architecture 2026', 'Serverless Edge SSR', 'Lighthouse 100 Performance', 'Texas Web Development', 'Texas Software House'],
     generatedAt: '2026-08-24T08:00:00.000Z'
   },
   {
@@ -91,7 +91,7 @@ const DEFAULT_BLOGS: BlogArticle[] = [
       'Deterministic validation gates prevent hallucination in critical business processes',
       'Average client ROI yields a 4.2x reduction in customer support response latency'
     ],
-    seoKeywords: ['Enterprise AI Agents', 'Multi-Agent Systems', 'Workflow Automation 2026', 'Custom Business Software', 'Tyler AI Engineering'],
+    seoKeywords: ['Enterprise AI Agents', 'Multi-Agent Systems', 'Workflow Automation 2026', 'Custom Business Software', 'Texas AI Engineering'],
     generatedAt: '2026-08-22T08:00:00.000Z'
   }
 ];
@@ -115,7 +115,7 @@ const TOPIC_BLUEPRINTS = [
       'Passing all 3 Core Web Vitals is an essential prerequisite for top-tier local rankings',
       'Automated review integration establishes immediate high-conversion social proof'
     ],
-    seoKeywords: ['Local SEO Tyler TX', 'Google Map Pack Optimization', 'Technical Schema Markup', 'East Texas SEO Agency', 'Conversion Rate Optimization']
+    seoKeywords: ['Local SEO Texas', 'Google Map Pack Optimization', 'Technical Schema Markup', 'East Texas SEO Agency', 'Conversion Rate Optimization']
   },
   {
     category: 'E-Commerce Engineering',
@@ -134,7 +134,7 @@ const TOPIC_BLUEPRINTS = [
       'Decoupled architectures allow limitless custom UI design and interactive 3D product previews',
       'Direct API integrations streamline multi-warehouse inventory syncing in real time'
     ],
-    seoKeywords: ['Headless E-Commerce', 'Shopify Storefront API', 'E-Commerce CRO', 'Custom Online Store Tyler TX', 'Fast Checkout UX']
+    seoKeywords: ['Headless E-Commerce', 'Shopify Storefront API', 'E-Commerce CRO', 'Custom Online Store Texas', 'Fast Checkout UX']
   },
   {
     category: 'Enterprise Software',
@@ -153,7 +153,7 @@ const TOPIC_BLUEPRINTS = [
       'Full IP ownership increases company enterprise valuation during acquisitions',
       'Tailored internal workflows reduce employee training time and operational bottlenecks'
     ],
-    seoKeywords: ['Custom CRM Development', 'Enterprise Software Tyler TX', 'SaaS Total Cost of Ownership', 'Bespoke Business Portals', 'Proprietary Software IP']
+    seoKeywords: ['Custom CRM Development', 'Enterprise Software Texas', 'SaaS Total Cost of Ownership', 'Bespoke Business Portals', 'Proprietary Software IP']
   },
   {
     category: 'Cloud & DevOps',
@@ -191,7 +191,7 @@ const TOPIC_BLUEPRINTS = [
       'Strict Role-Based Access Control (RBAC) prevents unauthorized horizontal privilege escalation',
       'Automated security scans catch CVE vulnerabilities before code reaches production'
     ],
-    seoKeywords: ['Web Application Security', 'HIPAA Compliant Web Apps', 'SOC2 Architectural Controls', 'Data Encryption Tyler TX', 'Secure Software Engineering']
+    seoKeywords: ['Web Application Security', 'HIPAA Compliant Web Apps', 'SOC2 Architectural Controls', 'Data Encryption Texas', 'Secure Software Engineering']
   }
 ];
 
