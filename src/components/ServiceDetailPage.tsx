@@ -105,6 +105,19 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
       techStackTools: ['Adobe Illustrator', 'Photoshop', 'InDesign', 'Figma', 'Pantone Color Bridge'],
       guarantees: ['100% Vector Scalability (Infinite DPI)', 'Full Trademark & Copyright IP Ownership', 'Print-Ready 300DPI Bleed Formats', 'Complete Master Brand Guidelines'],
       startingPrice: '$299'
+    },
+    ai_automation_agents: {
+      subtitle: 'Autonomous AI Multi-Agent Systems, Private LLM Orchestration & RAG Pipelines',
+      overview: 'We architect and deploy custom enterprise AI agents and private LLM pipelines that autonomously execute multi-step operations, parse unstructured documents, integrate with internal CRM/ERP databases, and handle customer conversations with zero data leakage.',
+      processTimeline: [
+        { step: '01', title: 'Workflow & Knowledge Extraction', desc: 'Auditing existing business processes, APIs, knowledge bases, and structured data schemas.' },
+        { step: '02', title: 'Vector Database & RAG Architecture', desc: 'Engineering low-latency vector embeddings, semantic retrieval, and prompt guardrails.' },
+        { step: '03', title: 'Agent Logic & Tool Calling', desc: 'Coding deterministic LangChain/LlamaIndex agents with bi-directional CRM, email, and database hooks.' },
+        { step: '04', title: 'Evaluation & Enterprise Rollout', desc: 'Conducting hallucination benchmarks, latency tuning, SOC2 security audits, and staff training.' }
+      ],
+      techStackTools: ['Python', 'FastAPI', 'LangChain', 'LlamaIndex', 'Pinecone / Qdrant', 'PostgreSQL (pgvector)', 'OpenAI / Claude APIs', 'Docker'],
+      guarantees: ['Zero Training On Customer Data', 'Sub-1.2s Average Token Response', '100% Full Source Code Transfer', 'Deterministic Tool Calling Accuracy'],
+      startingPrice: '$899'
     }
   };
 

@@ -130,7 +130,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <div className={`flex flex-wrap gap-1.5 mb-6 pt-4 border-t ${
                     isDarkBlue || isBlack ? 'border-zinc-800' : 'border-zinc-200'
                   }`}>
-                    {service.features.map((feat, i) => (
+                    {service.features.slice(0, 3).map((feat, i) => (
                       <span
                         key={i}
                         className={`px-2.5 py-1 rounded-lg text-[11px] font-medium flex items-center gap-1.5 border shadow-sm ${
@@ -143,6 +143,21 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         <span>{feat}</span>
                       </span>
                     ))}
+                    {service.features.length > 3 && (
+                      <span
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleOpenSpecs(service);
+                        }}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-semibold flex items-center gap-1 border cursor-pointer transition-colors ${
+                          isDarkBlue || isBlack
+                            ? 'bg-zinc-950 text-zinc-400 border-zinc-800 hover:text-white hover:border-zinc-600'
+                            : 'bg-zinc-100 text-zinc-600 border-zinc-300 hover:text-black hover:border-zinc-400'
+                        }`}
+                      >
+                        <span>+{service.features.length - 3} More in Full Specs</span>
+                      </span>
+                    )}
                   </div>
 
                   {/* Balanced Equal-Size Action Buttons */}

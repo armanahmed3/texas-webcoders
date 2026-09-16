@@ -316,11 +316,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
             </p>
           </div>
           
-          <div className="bg-white rounded-2xl p-3 sm:p-4 border border-zinc-300 shadow-sm flex-shrink-0 flex items-center justify-center">
+          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-zinc-300 shadow-md flex-shrink-0 flex items-center justify-center">
             <img
               src="/assets/payment-methods.png"
               alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe, Skrill, Bank Transfer, Amazon Pay, Venmo"
-              className="h-16 sm:h-20 w-auto object-contain max-w-[340px] sm:max-w-md"
+              className="h-24 sm:h-32 md:h-36 w-auto object-contain max-w-[360px] sm:max-w-lg"
               loading="lazy"
             />
           </div>

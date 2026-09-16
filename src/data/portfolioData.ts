@@ -395,6 +395,22 @@ export const SERVICES_LIST: ServiceItem[] = [
     ],
     deliverables: ['Infrastructure as Code (Terraform)', 'CI/CD Pipeline Suite', 'Security Audit Certificate', '24/7 Monitoring Dashboard'],
     imageUrl: '/portfolio-media/texaswebcoders/software/Software and CRM Development3.jpg'
+  },
+  {
+    id: 'ai_automation_agents',
+    title: 'AI Automation Agents & Custom LLM Architecture',
+    description: 'Autonomous multi-agent workflows, custom private LLMs, intelligent document processing, and bi-directional CRM/ERP integrations designed to automate complex business operations.',
+    icon: '🤖',
+    features: [
+      'Autonomous Task Agents & Multi-Step LLM Workflow Engines',
+      'Private Enterprise Vector RAG Search with Zero Data Leaks',
+      'Intelligent Document OCR, Data Extraction & Parsing',
+      '24/7 AI Voice, Chat & Multi-Channel Customer Concierge',
+      'Bi-Directional Slack, WhatsApp, CRM & ERP AI Connectors',
+      'Strict SOC2 & HIPAA Compliant On-Premise / Cloud Deployment'
+    ],
+    deliverables: ['Custom AI Multi-Agent System', 'Vector DB & RAG Pipeline', 'REST / WebSocket API Connectors', 'Executive AI Analytics Dashboard'],
+    imageUrl: '/portfolio-media/texaswebcoders/software/software_crm_nexora_sales_pipeline.png'
   }
 ];
 

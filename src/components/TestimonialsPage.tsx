@@ -231,7 +231,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
                 onClick={onOpenQuoteCalculator}
                 className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm border border-zinc-700 transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
-                <span>Instant Cost Calculator</span>
+                <span>Request Custom Quote</span>
               </button>
             </div>
           </div>
