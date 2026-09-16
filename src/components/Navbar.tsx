@@ -139,15 +139,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* Desktop Action Buttons & Mobile Hamburger Button */}
             <div className="flex items-center justify-end flex-shrink-0 gap-2 sm:gap-3 pl-1 sm:pl-4 lg:pl-6 z-10">
-              {/* Desktop Get a Quote Button */}
-              <button
-                onClick={onOpenQuoteCalculator || onOpenAppointmentModal || (() => onNavigateSlide(8))}
-                className="hidden sm:inline-flex items-center gap-2 px-4.5 py-2.5 rounded-xl bg-slate-950 hover:bg-slate-900 active:scale-95 text-white text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md cursor-pointer border border-slate-800 hover:border-slate-700 group"
-              >
-                <FileText className="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform" />
-                <span>Get a Quote</span>
-              </button>
-
               {/* Mobile Sidebar Toggle Button - Prominent High-Contrast UI */}
               <button
                 id="mobile-sidebar-toggle-btn"

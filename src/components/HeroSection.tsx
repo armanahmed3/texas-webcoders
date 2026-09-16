@@ -94,33 +94,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
             </motion.div>
 
-            {/* Action CTA Buttons in Montserrat */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2"
-            >
-              <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigateSlide(8);
-                }}
-                className="bg-white hover:bg-zinc-200 text-slate-950 px-6 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider font-['Montserrat',sans-serif] transition-all duration-300 shadow-xl shadow-white/10 rounded-xl flex items-center gap-2 cursor-pointer group"
-              >
-                <span>Request Free Consultation</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
 
-              <button
-                onClick={onOpenQuoteCalculator}
-                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-5 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider font-['Montserrat',sans-serif] transition-all duration-300 rounded-xl flex items-center gap-2 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-white" />
-                <span>Calculate Project Cost</span>
-              </button>
-            </motion.div>
           </div>
 
           {/* Right Column: Professional Animation Showcase with Dedicated Background */}

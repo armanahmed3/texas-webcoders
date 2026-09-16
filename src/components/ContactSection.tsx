@@ -3,6 +3,7 @@ import { PricingPackage, ServiceItem } from '../types';
 import confetti from 'canvas-confetti';
 import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle2, Send, Sparkles, Phone, Mail, Clock, ShieldCheck, MapPin, Award, Lock, MessageSquare, ArrowRight, Calendar, Check, Copy } from 'lucide-react';
+import { submitToFormSubmit, FORMSUBMIT_ENDPOINT } from '../utils/formSubmit';
 
 interface ContactSectionProps {
   selectedPackage?: PricingPackage | null;
@@ -69,7 +70,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     setProjectId(generatedId);
     setSubmitted(true);
 
-    // Send email dispatch to backend API
+    // 1. Send email dispatch to info@texaswebcoders.com via FormSubmit
+    submitToFormSubmit({
+      _subject: `🚀 New Project Inquiry [${generatedId}]: ${formData.name}`,
+      projectId: generatedId,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone || 'Not provided',
+      service: formData.serviceType || formData.packageSelect,
+      budget: formData.budget,
+      message: formData.details || 'No additional details provided'
+    }).catch(err => console.error('FormSubmit inquiry error:', err));
+
+    // 2. Also notify local backend if running
     try {
       fetch('/api/inquiry', {
         method: 'POST',
@@ -83,9 +96,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           budget: formData.budget,
           message: formData.details
         })
-      }).catch(err => console.error('Inquiry email notification error:', err));
-    } catch (err) {
-      console.error('Contact submit error:', err);
+      }).catch(() => {});
+    } catch {
+      // Ignore static hosting fetch errors
     }
 
     // Fire confetti celebration
@@ -158,12 +171,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 {!submitted ? (
                   <motion.form
                     key="contact-form"
+                    action={FORMSUBMIT_ENDPOINT}
+                    method="POST"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -10, transition: { duration: 0.2 } }}
                     onSubmit={handleSubmit}
                     className="space-y-4"
                   >
+                    {/* Hidden FormSubmit Configuration */}
+                    <input type="hidden" name="_subject" value="New Website Project Inquiry - Texas WebCoders" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="service" value={formData.serviceType || formData.packageSelect} />
+                    <input type="hidden" name="budget" value={formData.budget} />
+
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
@@ -174,6 +196,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         <input
                           required
                           type="text"
+                          name="name"
                           placeholder="e.g. John Smith"
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -193,6 +216,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         <input
                           required
                           type="email"
+                          name="email"
                           placeholder="e.g. john@company.com"
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -205,63 +229,22 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                          isBlack ? 'text-slate-300' : 'text-zinc-700'
-                        }`}>
-                          Phone Number
-                        </label>
-                        <input
-                          type="tel"
-                          placeholder="+1 9032226022"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
-                            isBlack
-                              ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                              : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
-                          }`}
-                        />
-                      </div>
-
-                      <div>
-                        <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                          isBlack ? 'text-slate-300' : 'text-zinc-700'
-                        }`}>
-                          Est. Project Budget
-                        </label>
-                        <select
-                          value={formData.budget}
-                          onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                          className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
-                            isBlack
-                              ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                              : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
-                          }`}
-                        >
-                          <option value="$500 - $1,000">$500 - $1,000</option>
-                          <option value="$1,000 - $2,500">$1,000 - $2,500</option>
-                          <option value="$2,500 - $5,000">$2,500 - $5,000</option>
-                          <option value="$5,000+">$5,000+ Enterprise</option>
-                        </select>
-                      </div>
-                    </div>
-
                     <div>
                       <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
                         isBlack ? 'text-slate-300' : 'text-zinc-700'
                       }`}>
-                        Selected Package / Service Scope
+                        Phone Number
                       </label>
                       <input
-                        type="text"
-                        value={formData.packageSelect}
-                        onChange={(e) => setFormData({ ...formData, packageSelect: e.target.value })}
-                        className={`w-full font-medium rounded-xl px-4 py-2.5 text-xs focus:outline-none border ${
+                        type="tel"
+                        name="phone"
+                        placeholder="+1 9032226022"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
                           isBlack
-                            ? 'bg-slate-900 border-slate-700 text-white'
-                            : 'bg-zinc-100 border-zinc-300 text-slate-950'
+                            ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
+                            : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
                         }`}
                       />
                     </div>
@@ -274,6 +257,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       </label>
                       <textarea
                         rows={3}
+                        name="message"
                         placeholder="Describe your website requirements, desired features, or launch timeline..."
                         value={formData.details}
                         onChange={(e) => setFormData({ ...formData, details: e.target.value })}
@@ -283,6 +267,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                             : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
                         }`}
                       />
+                    </div>
+
+                    {/* SMS Consent Checkbox */}
+                    <div className="flex items-start gap-2.5 pt-1">
+                      <input
+                        id="sms-consent"
+                        type="checkbox"
+                        required
+                        defaultChecked
+                        className="mt-0.5 w-4 h-4 rounded border-zinc-400 text-slate-950 focus:ring-slate-950 cursor-pointer flex-shrink-0 accent-slate-950"
+                      />
+                      <label
+                        htmlFor="sms-consent"
+                        className={`text-[11px] leading-relaxed cursor-pointer select-none ${
+                          isBlack ? 'text-slate-400' : 'text-zinc-600'
+                        }`}
+                      >
+                        By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
+                      </label>
                     </div>
 
                     <button
@@ -296,13 +299,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <Send className="w-4 h-4" />
                       <span>Submit Inquiry & Get Free Estimate</span>
                     </button>
-
-                    {/* SMS Consent Notice */}
-                    <p className={`text-[10px] leading-relaxed pt-2 ${
-                      isBlack ? 'text-slate-400' : 'text-zinc-500'
-                    }`}>
-                      By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
-                    </p>
                   </motion.form>
                 ) : (
                   <motion.div

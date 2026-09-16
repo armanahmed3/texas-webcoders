@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { X, Calendar, Clock, Sparkles, CheckCircle2, User, Mail, Phone, Video, Download, ExternalLink, ShieldCheck, ArrowRight, Building2, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import confetti from 'canvas-confetti';
+import { submitToFormSubmit, FORMSUBMIT_ENDPOINT } from '../utils/formSubmit';
 
 interface BookAppointmentModalProps {
   isOpen: boolean;
@@ -113,7 +114,23 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
     const activeType = appointmentTypes.find(t => t.id === selectedType);
 
-    // Send email dispatch to backend API
+    // 1. Dispatch appointment booking details to info@texaswebcoders.com via FormSubmit
+    submitToFormSubmit({
+      _subject: `📅 New Strategy Consultation Booking [${generatedId}]: ${clientInfo.name}`,
+      bookingId: generatedId,
+      name: clientInfo.name,
+      email: clientInfo.email,
+      phone: clientInfo.phone || 'Not provided',
+      company: clientInfo.company || 'Not provided',
+      appointment_type: activeType?.title || 'Architecture & Scope Discovery',
+      duration: activeType?.duration || '30 Min',
+      date: selectedDate,
+      time: selectedTimeSlot,
+      meeting_platform: meetingPlatform,
+      notes: clientInfo.notes || 'None provided'
+    }).catch(err => console.error('FormSubmit appointment dispatch error:', err));
+
+    // 2. Also notify local backend if active
     try {
       fetch('/api/appointment', {
         method: 'POST',
@@ -123,16 +140,16 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
           serviceTitle: activeType?.title || 'Architecture & Scope Discovery',
           duration: activeType?.duration || '30 Min',
           date: selectedDate,
-          time: selectedTime,
+          time: selectedTimeSlot,
           meetingPlatform,
           clientName: clientInfo.name,
           clientEmail: clientInfo.email,
           clientPhone: clientInfo.phone || '',
           clientNotes: clientInfo.notes || ''
         })
-      }).catch(err => console.error('Appointment email notification error:', err));
-    } catch (err) {
-      console.error('Appointment booking error:', err);
+      }).catch(() => {});
+    } catch {
+      // Ignore static hosting fetch error
     }
 
     // Trigger celebratory confetti
@@ -407,7 +424,21 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
         {/* STEP 3: CLIENT DETAILS FORM */}
         {step === 'details' && (
-          <form onSubmit={handleConfirmBooking} className="space-y-4">
+          <form
+            action={FORMSUBMIT_ENDPOINT}
+            method="POST"
+            onSubmit={handleConfirmBooking}
+            className="space-y-4"
+          >
+            {/* Hidden FormSubmit Configuration */}
+            <input type="hidden" name="_subject" value="New Strategy Consultation Booking - Texas WebCoders" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="scheduled_date" value={selectedDate} />
+            <input type="hidden" name="scheduled_time" value={`${selectedTimeSlot} (${timeZone})`} />
+            <input type="hidden" name="meeting_platform" value={meetingPlatform} />
+            <input type="hidden" name="consultation_type" value={appointmentTypes.find(t => t.id === selectedType)?.title || 'Strategy Consultation'} />
+
             <div className="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 text-xs flex items-center justify-between">
               <div>
                 <span className="text-zinc-500 font-medium">Scheduled Time: </span>
@@ -430,6 +461,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 </label>
                 <input
                   type="text"
+                  name="name"
                   required
                   placeholder="e.g. Marcus Vance"
                   value={clientInfo.name}
@@ -445,6 +477,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 </label>
                 <input
                   type="email"
+                  name="email"
                   required
                   placeholder="e.g. marcus@company.com"
                   value={clientInfo.email}
@@ -462,6 +495,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 </label>
                 <input
                   type="tel"
+                  name="phone"
                   placeholder="+1 (555) 000-0000"
                   value={clientInfo.phone}
                   onChange={(e) => setClientInfo({ ...clientInfo, phone: e.target.value })}
@@ -476,6 +510,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 </label>
                 <input
                   type="text"
+                  name="company"
                   placeholder="e.g. Apex Innovations"
                   value={clientInfo.company}
                   onChange={(e) => setClientInfo({ ...clientInfo, company: e.target.value })}
@@ -490,6 +525,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
               </label>
               <textarea
                 rows={2}
+                name="notes"
                 placeholder="What web application or redesign features would you like to discuss on the call?"
                 value={clientInfo.notes}
                 onChange={(e) => setClientInfo({ ...clientInfo, notes: e.target.value })}

@@ -15,6 +15,7 @@ import {
   Palette
 } from 'lucide-react';
 import { TexasWebcodersLogo } from './TexasWebcodersLogo';
+import { submitToFormSubmit } from '../utils/formSubmit';
 
 interface FooterProps {
   onNavigateSlide: (slideIndex: number) => void;
@@ -59,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
                 </div>
                 <a
                   href="mailto:info@texaswebcoders.com"
-                  className="font-medium text-slate-900 hover:text-slate-700 hover:underline transition-colors"
+                  className="font-medium text-slate-950 hover:text-slate-700 hover:underline transition-colors"
                 >
                   info@texaswebcoders.com
                 </a>
@@ -79,6 +80,49 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
                   <span className="font-medium block text-slate-950">Texas WebCoders</span>
                   <span>5221 S Broadway Ave, Tyler, TX 75703, United States</span>
                 </a>
+              </div>
+
+              {/* Quick Newsletter & Project Updates Form (FormSubmit) */}
+              <div className="pt-3">
+                <p className="text-[11px] font-bold text-slate-950 uppercase tracking-wider mb-2 font-['Montserrat']">
+                  Subscribe for Engineering Updates & Insights
+                </p>
+                <form
+                  action="https://formsubmit.co/info@texaswebcoders.com"
+                  method="POST"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
+                    if (email) {
+                      submitToFormSubmit({
+                        _subject: `📬 New Newsletter Subscriber: ${email}`,
+                        email,
+                        source: 'Footer Subscription'
+                      });
+                      alert('Thank you! You are now subscribed to Texas WebCoders engineering insights.');
+                      form.reset();
+                    }
+                  }}
+                  className="flex flex-col sm:flex-row gap-2 max-w-md"
+                >
+                  <input type="hidden" name="_subject" value="New Newsletter Subscription - Texas WebCoders" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Enter your work email..."
+                    className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-slate-950 hover:bg-zinc-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer flex-shrink-0 font-['Montserrat'] uppercase tracking-wider"
+                  >
+                    Subscribe
+                  </button>
+                </form>
               </div>
             </div>
           </div>

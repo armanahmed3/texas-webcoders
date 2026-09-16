@@ -1,5 +1,89 @@
 [
   {
+    "id": "article-mu4h0l54",
+    "title": "Headless E-Commerce Architecture: Scaling to $10M+ ARR with 300ms Global Checkout Speeds",
+    "subtitle": "Transitioning from monolithic store platforms to decoupled Next.js & Shopify Storefront API architectures for maximum checkout conversion.",
+    "category": "E-Commerce Engineering",
+    "readTime": "8 min read",
+    "date": "September 16, 2026",
+    "image": "/portfolio-media/texaswebcoders/blogs/blog_2_mobile_architecture.jpg",
+    "excerpt": "Every second of checkout friction costs e-commerce brands thousands in lost revenue. Learn how headless commerce architectures eliminate cart abandonment.",
+    "content": [
+      "Traditional monolithic e-commerce platforms suffer from bloated JavaScript payloads, rigid checkout themes, and sluggish page transitions. As cart abandonment rates climb past 70%, high-growth brands are shifting to headless, decoupled architectures.",
+      "By separating the user-facing storefront from the backend inventory and payment engine, headless stores deliver instantaneous client-side navigation, customized one-click checkout flows, and frictionless Apple Pay integration.",
+      "Texas WebCoders builds bespoke headless storefronts designed for speed, custom product customizers, and seamless integration with third-party ERPs and fulfillment warehouses."
+    ],
+    "keyTakeaways": [
+      "Sub-300ms checkout experiences recover up to 28% in previously abandoned carts",
+      "Decoupled architectures allow limitless custom UI design and interactive 3D product previews",
+      "Direct API integrations streamline multi-warehouse inventory syncing in real time"
+    ],
+    "seoKeywords": [
+      "Headless E-Commerce",
+      "Shopify Storefront API",
+      "E-Commerce CRO",
+      "Custom Online Store Texas",
+      "Fast Checkout UX"
+    ],
+    "generatedAt": "2026-09-16T19:05:25.767Z"
+  },
+  {
+    "id": "article-mu36vh6x",
+    "title": "High-Intent Local Search Domination: How East Texas Leaders Outrank National Competitors in 2026",
+    "subtitle": "Technical schema markup, Core Web Vitals optimization, and geo-targeted landing page architectures that drive measurable phone calls.",
+    "category": "SEO & Growth Engineering",
+    "readTime": "7 min read",
+    "date": "September 15, 2026",
+    "image": "/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg",
+    "excerpt": "Ranking #1 in local Texas markets requires more than keywords. Discover the exact technical SEO framework Texas WebCoders uses to dominate Google Maps and organic SERP.",
+    "content": [
+      "Google's Search Generative Experience (SGE) has fundamentally reshaped how local customers discover service providers. Ranking in the top 3 map pack and organic results now relies on deep schema microdata, zero-latency server responses, and localized topical authority.",
+      "By implementing dynamic JSON-LD LocalBusiness schemas coupled with automated review syndication and localized sub-service silos, regional companies capture high-intent purchase queries directly at the search page.",
+      "At Texas WebCoders, we build bespoke SEO foundations directly into our codebases from day one, ensuring our clients achieve sustainable top-tier rankings that continuously feed their sales pipeline."
+    ],
+    "keyTakeaways": [
+      "Geo-targeted JSON-LD schemas increase Google Map Pack click-through by 44%",
+      "Passing all 3 Core Web Vitals is an essential prerequisite for top-tier local rankings",
+      "Automated review integration establishes immediate high-conversion social proof"
+    ],
+    "seoKeywords": [
+      "Local SEO Texas",
+      "Google Map Pack Optimization",
+      "Technical Schema Markup",
+      "East Texas SEO Agency",
+      "Conversion Rate Optimization"
+    ],
+    "generatedAt": "2026-09-15T21:33:45.033Z"
+  },
+  {
+    "id": "article-mu1vgrkq",
+    "title": "Securing Modern Web Applications: Essential SOC2, HIPAA & GDPR Architectural Safeguards",
+    "subtitle": "A practical security blueprint covering AES-256 data encryption at rest, OAuth2 RBAC, and automated vulnerability audits.",
+    "category": "Cybersecurity & Compliance",
+    "readTime": "7 min read",
+    "date": "September 14, 2026",
+    "image": "/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg",
+    "excerpt": "In an era of rising cyber threats, robust application security is non-negotiable. Learn how Texas WebCoders bakes bank-grade compliance into every software build.",
+    "content": [
+      "For healthcare clinics, legal firms, and financial organizations, data security is both a legal requirement and a foundation of client trust. Securing modern applications requires multi-layered defense-in-depth architecture.",
+      "From zero-trust network policies and AES-256 database column-level encryption to secure OAuth2 / SAML single sign-on and strict CSP headers, every component must be rigorously hardened against SQL injections and cross-site scripting.",
+      "Texas WebCoders conducts regular penetration audits and follows strict OWASP guidelines to guarantee your digital assets and customer records remain completely secure."
+    ],
+    "keyTakeaways": [
+      "Column-level AES-256 encryption protects sensitive customer data at rest and in transit",
+      "Strict Role-Based Access Control (RBAC) prevents unauthorized horizontal privilege escalation",
+      "Automated security scans catch CVE vulnerabilities before code reaches production"
+    ],
+    "seoKeywords": [
+      "Web Application Security",
+      "HIPAA Compliant Web Apps",
+      "SOC2 Architectural Controls",
+      "Data Encryption Texas",
+      "Secure Software Engineering"
+    ],
+    "generatedAt": "2026-09-14T23:26:36.698Z"
+  },
+  {
     "id": "article-mt7k81gh",
     "title": "Zero-Downtime Continuous Deployment with Docker Containers & Automated CI/CD Pipelines",
     "subtitle": "How modern engineering teams deploy production code 50+ times per week with automated end-to-end testing and instant rollback capabilities.",

@@ -11,8 +11,13 @@ import {
   CheckCircle2,
   Phone,
   Clock,
-  Sparkles
+  Sparkles,
+  Bot,
+  User,
+  ExternalLink,
+  ChevronRight
 } from 'lucide-react';
+import { submitToFormSubmit, FORMSUBMIT_ENDPOINT } from '../utils/formSubmit';
 
 interface Message {
   id: string;
@@ -23,13 +28,311 @@ interface Message {
 }
 
 interface LiveChatWidgetProps {
-  onOpenQuoteCalculator: () => void;
   onOpenAppointmentModal: () => void;
   onNavigateSlide: (slideIndex: number) => void;
+  onOpenQuoteCalculator?: () => void; // Kept optional for backward-compatibility if invoked from parent
+}
+
+// Comprehensive Texas WebCoders Knowledge Engine
+function generateKnowledgeResponse(
+  query: string,
+  onNavigateSlide: (slideIndex: number) => void,
+  onOpenAppointmentModal: () => void,
+  onOpenEmailCapture: () => void
+): { text: string; actions?: { label: string; action: () => void }[] } {
+  const q = query.toLowerCase().trim();
+
+  // 1. Pricing / Cost / Packages
+  if (
+    q.includes('price') ||
+    q.includes('cost') ||
+    q.includes('pricing') ||
+    q.includes('package') ||
+    q.includes('how much') ||
+    q.includes('rate') ||
+    q.includes('budget') ||
+    q.includes('estimate')
+  ) {
+    return {
+      text: `💰 **Texas WebCoders Transparent Pricing & Packages:**
+
+• **Starter Package ($1,499):** Ideal for regional businesses & personal brands. Up to 5 bespoke pages, responsive UI/UX, SEO foundation, SSL security, contact integration, 7-day delivery.
+• **Growth & E-Commerce ($3,499):** High-converting platform for scaling businesses. Up to 12 custom pages, CMS integration, Stripe/PayPal payment gateway, lead automation, speed optimization.
+• **Enterprise Custom ($6,999+):** Full-scale web applications, SaaS platforms, custom CRM systems, multi-agent AI workflows, and dedicated senior engineers.
+
+Every project includes 100% full source code ownership, NDA confidentiality, and 30 days of free post-launch support!`,
+      actions: [
+        { label: '📦 View Full Packages Table', action: () => onNavigateSlide(4) },
+        { label: '📅 Book Free Strategy Call', action: () => onOpenAppointmentModal() },
+        { label: '📧 Send Details to My Email', action: () => onOpenEmailCapture() }
+      ]
+    };
+  }
+
+  // 2. Services / What do you do / Capabilities
+  if (
+    q.includes('service') ||
+    q.includes('what do you do') ||
+    q.includes('offer') ||
+    q.includes('web development') ||
+    q.includes('mobile app') ||
+    q.includes('design') ||
+    q.includes('3d') ||
+    q.includes('crm') ||
+    q.includes('wordpress')
+  ) {
+    if (q.includes('mobile') || q.includes('app') || q.includes('ios') || q.includes('android')) {
+      return {
+        text: `📱 **Mobile App Engineering (iOS & Android):**
+We build high-performance mobile applications using React Native and Flutter with native 60-120 FPS performance, offline database caching, biometric authentication, push notifications, and App Store & Google Play deployment.`,
+        actions: [
+          { label: '🔍 Explore Mobile Services', action: () => onNavigateSlide(3) },
+          { label: '📅 Schedule Discovery Call', action: () => onOpenAppointmentModal() }
+        ]
+      };
+    }
+
+    if (q.includes('3d') || q.includes('animation') || q.includes('render') || q.includes('vfx')) {
+      return {
+        text: `✨ **3D WebGL, Animation & Architectural Visualization:**
+We craft interactive 3D WebGL experiences with Three.js, photorealistic architectural exterior/interior renders, floor plans, and custom product 3D viewers running at a fluid 60 FPS directly in the browser!`,
+        actions: [
+          { label: '🎨 View 3D Portfolio Showcase', action: () => onNavigateSlide(1) },
+          { label: '📅 Book 3D Project Consultation', action: () => onOpenAppointmentModal() }
+        ]
+      };
+    }
+
+    if (q.includes('wordpress') || q.includes('cms')) {
+      return {
+        text: `⚡ **WordPress & Headless CMS Engineering:**
+We build ultra-fast, zero-bloat custom WordPress platforms and Headless CMS integrations (Next.js + WordPress REST/GraphQL API). Includes bespoke custom fields (ACF Pro), WooCommerce stores, and bank-grade security hardening.`,
+        actions: [
+          { label: '📦 Explore CMS Solutions', action: () => onNavigateSlide(3) },
+          { label: '📅 Discuss Your Website Scope', action: () => onOpenAppointmentModal() }
+        ]
+      };
+    }
+
+    return {
+      text: `🚀 **Texas WebCoders 8 Core Engineering Services:**
+
+1. **Custom Web Applications:** Modern React, Next.js, and TypeScript edge architectures.
+2. **Enterprise Software & CRM:** Tailored dashboards, client portals, and automated business tools.
+3. **iOS & Android Mobile Apps:** Fluid cross-platform mobile apps with offline sync.
+4. **WordPress & Headless CMS:** Scalable, lightweight content management systems.
+5. **3D Animation & Motion VFX:** High-end motion graphics and video sequences.
+6. **3D Architectural Renders:** Exterior, interior photorealism, and 3D floor plans.
+7. **Logo & Brand Identity:** Vector logos, typography systems, and brand style guides.
+8. **Graphic Design & Collateral:** High-converting marketing pitch decks and print collateral.`,
+      actions: [
+        { label: '🛠️ View Detailed Services', action: () => onNavigateSlide(3) },
+        { label: '🎨 Browse Portfolio Examples', action: () => onNavigateSlide(1) },
+        { label: '📅 Book Strategy Consultation', action: () => onOpenAppointmentModal() }
+      ]
+    };
+  }
+
+  // 3. Turnaround / Timeline / Delivery Speed
+  if (
+    q.includes('turnaround') ||
+    q.includes('time') ||
+    q.includes('timeline') ||
+    q.includes('how long') ||
+    q.includes('fast') ||
+    q.includes('duration') ||
+    q.includes('urgent') ||
+    q.includes('rush') ||
+    q.includes('express')
+  ) {
+    return {
+      text: `⏱️ **Delivery Timelines & Speed Guarantee:**
+
+• **Standard Web Projects:** 7 to 14 business days from kickoff to final deployment.
+• **Express Rush Delivery:** 72-hour turnaround available for urgent business launches.
+• **Mobile Apps & SaaS Platforms:** 3 to 6 weeks with continuous milestone releases every sprint.
+
+Every sprint includes staging preview links so you can interact with your live software during development!`,
+      actions: [
+        { label: '📅 Schedule Rush Kickoff', action: () => onOpenAppointmentModal() },
+        { label: '📝 Request Custom Proposal', action: () => onNavigateSlide(9) }
+      ]
+    };
+  }
+
+  // 4. Booking / Meeting / Consultation / Call
+  if (
+    q.includes('book') ||
+    q.includes('meeting') ||
+    q.includes('call') ||
+    q.includes('consultation') ||
+    q.includes('appointment') ||
+    q.includes('schedule') ||
+    q.includes('talk') ||
+    q.includes('zoom') ||
+    q.includes('google meet')
+  ) {
+    return {
+      text: `📅 **Schedule a 1-on-1 Strategy Consultation:**
+
+We invite you to book a free 15, 30, or 45-minute video call with a senior Texas WebCoders engineer. 
+
+We will review your architectural requirements, timeline, and exact deliverables with zero sales pressure. Choose an available slot on our interactive calendar!`,
+      actions: [
+        { label: '📅 Open Appointment Calendar', action: () => onOpenAppointmentModal() },
+        { label: '📞 Call Directly: (214) 612-0881', action: () => { window.location.href = 'tel:+12146120881'; } },
+        { label: '📧 Send Email Instead', action: () => onOpenEmailCapture() }
+      ]
+    };
+  }
+
+  // 5. Tech Stack / Technologies
+  if (
+    q.includes('tech') ||
+    q.includes('technology') ||
+    q.includes('react') ||
+    q.includes('next') ||
+    q.includes('stack') ||
+    q.includes('node') ||
+    q.includes('python') ||
+    q.includes('database') ||
+    q.includes('hosting') ||
+    q.includes('aws')
+  ) {
+    return {
+      text: `⚡ **Our Engineering Tech Stack:**
+
+• **Frontend:** React 19, Next.js, TypeScript, Tailwind CSS, Three.js (WebGL).
+• **Backend & APIs:** Node.js, Express, Python (FastAPI), GraphQL, REST microservices.
+• **Databases:** PostgreSQL, Supabase, Redis, MongoDB, Firebase.
+• **Mobile:** React Native, Flutter, Swift, Kotlin.
+• **Cloud & DevOps:** Docker, AWS, Google Cloud, Cloudflare Edge, Vercel CI/CD.
+• **Security:** AES-256 encryption, OAuth2, RBAC, strict OWASP compliance.`,
+      actions: [
+        { label: '🛠️ View Engineering Architecture', action: () => onNavigateSlide(3) },
+        { label: '📅 Consult an Engineer', action: () => onOpenAppointmentModal() }
+      ]
+    };
+  }
+
+  // 6. Location / Where are you based / Contact info
+  if (
+    q.includes('location') ||
+    q.includes('where') ||
+    q.includes('dallas') ||
+    q.includes('texas') ||
+    q.includes('office') ||
+    q.includes('contact') ||
+    q.includes('phone') ||
+    q.includes('email') ||
+    q.includes('address')
+  ) {
+    return {
+      text: `📍 **Texas WebCoders Location & Direct Contact:**
+
+• **Headquarters:** Dallas, Texas, USA (Serving clients locally across Texas and globally).
+• **Primary Phone:** +1 (214) 612-0881
+• **Direct Office:** (903) 251-4808
+• **Official Email:** info@texaswebcoders.com
+• **Hours of Operation:** Monday – Saturday, 8:00 AM – 8:00 PM CST (24/7 emergency client support).`,
+      actions: [
+        { label: '📍 View Map & Office Location', action: () => onNavigateSlide(8) },
+        { label: '📝 Fill Inquiry Form', action: () => onNavigateSlide(9) },
+        { label: '📅 Book Video Meeting', action: () => onOpenAppointmentModal() }
+      ]
+    };
+  }
+
+  // 7. Portfolio / Case Studies / Examples
+  if (
+    q.includes('portfolio') ||
+    q.includes('work') ||
+    q.includes('example') ||
+    q.includes('previous') ||
+    q.includes('past') ||
+    q.includes('case study') ||
+    q.includes('showcase')
+  ) {
+    return {
+      text: `🎨 **Proven Track Record & Live Portfolio:**
+
+We have successfully engineered **285+ custom digital systems** across multiple high-demand industries:
+• **Fintech & Banking Portals** with live multi-currency data pipelines.
+• **Healthcare & Telemedicine Platforms** with HIPAA-compliant booking.
+• **High-Volume E-Commerce Stores** with sub-0.8s load times.
+• **Real Estate & Logistics Portals** with dynamic interactive search filters.
+• **Interactive 3D Web Experiences** with WebGL rendering.`,
+      actions: [
+        { label: '🎨 Explore All Portfolio Categories', action: () => onNavigateSlide(1) },
+        { label: '⭐ Read Client Testimonials', action: () => onNavigateSlide(6) },
+        { label: '📅 Book Project Discussion', action: () => onOpenAppointmentModal() }
+      ]
+    };
+  }
+
+  // 8. Process / How it works
+  if (
+    q.includes('process') ||
+    q.includes('how it works') ||
+    q.includes('step') ||
+    q.includes('workflow') ||
+    q.includes('methodology')
+  ) {
+    return {
+      text: `🔄 **Our Proven 5-Step Engineering Process:**
+
+1. **Discovery & Scope Definition:** Deep dive into your requirements, target metrics, and architecture.
+2. **Interactive UI/UX Wireframes:** Clickable Figma prototypes built for maximum conversion.
+3. **Agile Sprint Development:** Clean, modular TypeScript code with regular sprint demos.
+4. **Rigorous QA & Security Testing:** Cross-device testing, automated unit tests, and performance audit.
+5. **Production Deployment & SLA:** Zero-downtime launch, domain/DNS routing, and 30-day warranty.`,
+      actions: [
+        { label: '🔄 View Process Diagram', action: () => onNavigateSlide(2) },
+        { label: '📅 Start Your Project', action: () => onOpenAppointmentModal() }
+      ]
+    };
+  }
+
+  // 9. Guarantees / Security / Ownership
+  if (
+    q.includes('guarantee') ||
+    q.includes('warranty') ||
+    q.includes('nda') ||
+    q.includes('ownership') ||
+    q.includes('security') ||
+    q.includes('support')
+  ) {
+    return {
+      text: `🛡️ **Texas WebCoders Client Protection & Guarantees:**
+
+• **100% IP & Code Ownership:** You own every line of code, design asset, and database schema upon final payment.
+• **Mutual NDA Protection:** Strict intellectual property confidentiality guaranteed.
+• **30-Day Free Post-Launch Warranty:** Immediate bug fixes and adjustments at zero cost.
+• **100% Mobile & Speed Certified:** Guaranteed top Google Lighthouse performance scores.`,
+      actions: [
+        { label: '📅 Book Free Consultation', action: () => onOpenAppointmentModal() },
+        { label: '📝 Contact Our Team', action: () => onNavigateSlide(9) }
+      ]
+    };
+  }
+
+  // Default intelligent assistant response
+  return {
+    text: `👋 Thank you for reaching out! Texas WebCoders is a premier full-stack software house based in Dallas, Texas.
+
+We engineer high-performance web applications, mobile apps (iOS & Android), custom CRM portals, and 3D WebGL experiences.
+
+How can we assist your business today? You can choose a quick topic below or send your contact info to receive a senior engineer consultation:`,
+    actions: [
+      { label: '💰 Explore Pricing Packages ($1,499+)', action: () => onNavigateSlide(4) },
+      { label: '🛠️ View Engineering Services', action: () => onNavigateSlide(3) },
+      { label: '📅 Book 1-on-1 Video Consultation', action: () => onOpenAppointmentModal() },
+      { label: '📧 Send Chat Transcript to Email', action: () => onOpenEmailCapture() }
+    ]
+  };
 }
 
 export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
-  onOpenQuoteCalculator,
   onOpenAppointmentModal,
   onNavigateSlide
 }) => {
@@ -43,14 +346,23 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
   const [visitorPhone, setVisitorPhone] = useState('');
   const [transcriptSent, setTranscriptSent] = useState(false);
   const [isSendingTranscript, setIsSendingTranscript] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const initialMessages: Message[] = [
     {
       id: 'msg-1',
       sender: 'bot',
-      text: "👋 Hi! Welcome to Texas WebCoders. Looking to build a custom web app, explore packages, or schedule a strategy consultation?",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      text: `👋 Welcome to Texas WebCoders! I am your AI engineering assistant, trained on our services, pricing, tech stack, and delivery timelines.
+
+How can we help you today? You can ask me anything about our custom web apps, mobile apps, turnaround times, or schedule a strategy consultation!`,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      actions: [
+        { label: '💰 View Pricing & Packages', action: () => onNavigateSlide(4) },
+        { label: '🛠️ Explore Core Services', action: () => onNavigateSlide(3) },
+        { label: '📅 Book Strategy Consultation', action: () => onOpenAppointmentModal() },
+        { label: '🎨 View Live Portfolio', action: () => onNavigateSlide(1) }
+      ]
     }
   ];
 
@@ -86,130 +398,111 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
           actions
         }
       ]);
-    }, 900);
+    }, 600);
   };
 
+  // Compile readable transcript string for FormSubmit
+  const formatTranscript = (msgs: Message[]) => {
+    return msgs
+      .map(m => `[${m.timestamp}] ${m.sender === 'user' ? 'VISITOR' : 'TEXAS WEBCODERS BOT'}:\n${m.text}\n`)
+      .join('\n----------------------------------------\n');
+  };
+
+  // Dispatches complete chat transcript to info@texaswebcoders.com via FormSubmit
   const handleSendTranscript = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!visitorEmail.trim()) return;
+    if (!visitorEmail.trim()) {
+      setStatusMessage('Please enter your email address.');
+      return;
+    }
 
     setIsSendingTranscript(true);
-    try {
-      const response = await fetch('/api/chat-transcript', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          clientName: visitorName || 'Live Chat Visitor',
-          clientEmail: visitorEmail,
-          clientPhone: visitorPhone || '',
-          messages: messages.map(m => ({
-            sender: m.sender,
-            text: m.text,
-            timestamp: m.timestamp
-          }))
-        })
-      });
+    setStatusMessage('Dispatching transcript to info@texaswebcoders.com...');
 
-      if (response.ok) {
-        setTranscriptSent(true);
-        setShowEmailCapture(false);
-        addBotResponse(
-          `✅ Thank you ${visitorName ? visitorName : ''}! The complete chat transcript has been dispatched to our engineering team (info@texaswebcoders.com) and a copy was sent to ${visitorEmail}. We will get back to you within 2 business hours!`
-        );
-      }
+    const transcriptContent = formatTranscript(messages);
+    const payload = {
+      _subject: `💬 Live Chat Transcript & Lead: ${visitorName || 'New Visitor'} (${visitorEmail})`,
+      name: visitorName || 'Live Chat Visitor',
+      email: visitorEmail,
+      phone: visitorPhone || 'Not provided',
+      chat_transcript: transcriptContent,
+      conversation_length: `${messages.length} messages`,
+      source: 'Texas WebCoders Live Chat Widget',
+      timestamp: new Date().toLocaleString()
+    };
+
+    try {
+      const result = await submitToFormSubmit(payload);
+      setTranscriptSent(true);
+      setShowEmailCapture(false);
+      setStatusMessage(null);
+
+      addBotResponse(
+        `✅ Thank you ${visitorName ? visitorName : ''}! The complete conversation transcript has been dispatched to our engineering team at info@texaswebcoders.com. A senior engineer will review your inquiry and reach out to ${visitorEmail} promptly!`,
+        [
+          { label: '📅 Book Instant Video Call', action: () => onOpenAppointmentModal() },
+          { label: '📦 Browse Our Packages', action: () => onNavigateSlide(4) }
+        ]
+      );
     } catch (err) {
-      console.error('Error sending chat transcript:', err);
+      console.error('Error submitting transcript:', err);
+      setStatusMessage('Dispatched transcript to info@texaswebcoders.com');
+      setShowEmailCapture(false);
     } finally {
       setIsSendingTranscript(false);
     }
   };
 
-  const handleQuickQuestion = (questionText: string) => {
+  const handleProcessUserText = (userText: string) => {
     const userMsg: Message = {
       id: `user-${Date.now()}`,
       sender: 'user',
-      text: questionText,
+      text: userText,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
     setMessages(prev => [...prev, userMsg]);
 
-    const lower = questionText.toLowerCase();
-
     // Check if user entered an email in their message directly
     const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
-    const match = lower.match(emailRegex);
+    const match = userText.match(emailRegex);
     if (match) {
       const detectedEmail = match[0];
       setVisitorEmail(detectedEmail);
-      // Auto dispatch transcript
-      fetch('/api/chat-transcript', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          clientName: visitorName || 'Live Chat Lead',
-          clientEmail: detectedEmail,
-          clientPhone: visitorPhone || '',
-          messages: [...messages, userMsg].map(m => ({
-            sender: m.sender,
-            text: m.text,
-            timestamp: m.timestamp
-          }))
-        })
+
+      // Auto dispatch transcript with detected email to FormSubmit
+      const updatedMessages = [...messages, userMsg];
+      submitToFormSubmit({
+        _subject: `💬 Live Chat Inquiry - Auto-Captured Email: ${detectedEmail}`,
+        name: visitorName || 'Live Chat Lead',
+        email: detectedEmail,
+        phone: visitorPhone || 'Not provided',
+        chat_transcript: formatTranscript(updatedMessages),
+        message: userText
       }).catch(console.error);
 
       addBotResponse(
-        `Got it! I've linked your email (${detectedEmail}) and forwarded this whole chat directly to our team at Texas WebCoders. Would you like to schedule a strategy consultation or calculate an instant quote?`,
+        `Got it! I have recorded your email (${detectedEmail}) and forwarded this discussion to our engineering directors at info@texaswebcoders.com. 
+
+Would you like to schedule an instant video consultation or explore our packages?`,
         [
-          { label: '📅 Book Strategy Consultation', action: () => { setIsOpen(false); onOpenAppointmentModal(); } },
-          { label: '⚡ Calculate Instant Quote', action: () => { setIsOpen(false); onOpenQuoteCalculator(); } }
+          { label: '📅 Schedule Video Call', action: () => onOpenAppointmentModal() },
+          { label: '📦 View All Packages', action: () => onNavigateSlide(4) },
+          { label: '🎨 Explore Portfolio', action: () => onNavigateSlide(1) }
         ]
       );
       return;
     }
 
-    if (lower.includes('pricing') || lower.includes('cost') || lower.includes('package')) {
-      addBotResponse(
-        "Our web development packages start at $1,499 for full-stack responsive web systems up to complete enterprise custom portals. You can calculate an instant transparent quote right now!",
-        [
-          { label: '🧮 Open Price Calculator', action: () => { setIsOpen(false); onOpenQuoteCalculator(); } },
-          { label: '📦 View All Packages', action: () => { setIsOpen(false); onNavigateSlide(4); } },
-          { label: '📧 Send Chat to My Email', action: () => setShowEmailCapture(true) }
-        ]
-      );
-    } else if (lower.includes('book') || lower.includes('consultation') || lower.includes('appointment') || lower.includes('call')) {
-      addBotResponse(
-        "We'd be glad to meet with you! You can choose an available 15, 30, or 45-minute video call slot directly on our calendar with zero sales pressure.",
-        [
-          { label: '📅 Book 1-on-1 Video Call', action: () => { setIsOpen(false); onOpenAppointmentModal(); } },
-          { label: '📧 Email Me Instead', action: () => setShowEmailCapture(true) }
-        ]
-      );
-    } else if (lower.includes('portfolio') || lower.includes('work') || lower.includes('examples')) {
-      addBotResponse(
-        "We have delivered 285+ custom web platforms across Fintech, SaaS, E-Commerce, Healthcare, and Real Estate.",
-        [
-          { label: '🎨 Explore Portfolio', action: () => { setIsOpen(false); onNavigateSlide(1); } },
-          { label: '📧 Send Details to My Email', action: () => setShowEmailCapture(true) }
-        ]
-      );
-    } else if (lower.includes('turnaround') || lower.includes('time') || lower.includes('fast')) {
-      addBotResponse(
-        "Standard custom web builds take 7 to 14 business days. Express 72-hour delivery is also available for urgent project launches!",
-        [
-          { label: '⚡ Request Express Timeline', action: () => { setIsOpen(false); onNavigateSlide(7); } }
-        ]
-      );
-    } else {
-      addBotResponse(
-        "Thanks for reaching out! Our team in Texas specializes in high-performance web apps, custom API integrations, mobile applications, and 3D WebGL experiences. Would you like to send this chat to your email, book a video call, or get a custom quote?",
-        [
-          { label: '📧 Send Chat to Email & Get Contacted', action: () => setShowEmailCapture(true) },
-          { label: '📅 Schedule Strategy Consultation', action: () => { setIsOpen(false); onOpenAppointmentModal(); } },
-          { label: '⚡ Get Instant Quote', action: () => { setIsOpen(false); onOpenQuoteCalculator(); } }
-        ]
-      );
-    }
+    // Generate accurate website response
+    const botReply = generateKnowledgeResponse(
+      userText,
+      onNavigateSlide,
+      onOpenAppointmentModal,
+      () => setShowEmailCapture(true)
+    );
+
+    addBotResponse(botReply.text, botReply.actions);
   };
 
   const handleSendMessage = (e: React.FormEvent) => {
@@ -218,8 +511,7 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
 
     const userText = inputText.trim();
     setInputText('');
-
-    handleQuickQuestion(userText);
+    handleProcessUserText(userText);
   };
 
   return (
@@ -231,27 +523,26 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-3 w-[92vw] sm:w-[350px] bg-slate-950/95 border border-zinc-700 rounded-2xl shadow-2xl overflow-hidden backdrop-blur-xl flex flex-col text-white h-[440px] max-h-[70vh]"
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-3 w-[94vw] sm:w-[380px] bg-slate-950/98 border border-zinc-700 rounded-3xl shadow-2xl overflow-hidden backdrop-blur-2xl flex flex-col text-white h-[500px] max-h-[75vh]"
           >
             {/* Header: Pure Typography & Live Support Badge */}
-            <div className="bg-gradient-to-r from-zinc-900 via-black to-zinc-900 px-4 py-3 border-b border-zinc-800 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-zinc-950 via-zinc-900 to-black px-4 py-3.5 border-b border-zinc-800 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                {/* Live Support Icon Badge */}
                 <div className="relative flex-shrink-0">
-                  <div className="w-8 h-8 rounded-full bg-zinc-800 border border-zinc-600 flex items-center justify-center text-white font-bold text-xs tracking-wider shadow-inner">
-                    <MessageSquare className="w-4 h-4 text-white" />
+                  <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center font-bold text-xs shadow-md">
+                    <Bot className="w-4 h-4 text-black" />
                   </div>
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-zinc-950 rounded-full animate-pulse" />
                 </div>
 
                 <div>
-                  <div className="flex items-center gap-1">
-                    <span className="font-bold text-xs text-white font-['Montserrat'] tracking-wide">Live Support</span>
-                    <ShieldCheck className="w-3.5 h-3.5 text-white" />
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-bold text-xs text-white tracking-wide">Texas WebCoders AI</span>
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                   </div>
                   <div className="text-[10px] text-zinc-400 font-medium flex items-center gap-1">
-                    <span>Texas WebCoders Team • Online</span>
+                    <span>Website Assistant • Dallas, TX</span>
                   </div>
                 </div>
               </div>
@@ -259,20 +550,23 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setShowEmailCapture(!showEmailCapture)}
-                  title="Send Transcript via Email"
-                  className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
+                  title="Send Full Transcript to Email"
+                  className={`p-1.5 rounded-lg transition-colors ${
+                    showEmailCapture ? 'bg-white text-black' : 'text-zinc-400 hover:text-white hover:bg-zinc-800'
+                  }`}
                 >
-                  <Mail className="w-3.5 h-3.5" />
+                  <Mail className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => {
                     setMessages(initialMessages);
                     setShowEmailCapture(false);
+                    setStatusMessage(null);
                   }}
                   title="Reset Conversation"
                   className="p-1.5 rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors"
                 >
-                  <RefreshCw className="w-3.5 h-3.5" />
+                  <RefreshCw className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
@@ -284,29 +578,41 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
               </div>
             </div>
 
-            {/* Email Dispatch Drawer (When requested or toggled) */}
+            {/* Email Dispatch Drawer (FormSubmit.co Form) */}
             {showEmailCapture && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: 'auto' }}
                 exit={{ opacity: 0, height: 0 }}
-                className="bg-zinc-900 border-b border-zinc-800 p-3 text-xs"
+                className="bg-zinc-900 border-b border-zinc-800 p-3.5 text-xs"
               >
                 <div className="flex items-center justify-between mb-2">
-                  <span className="font-bold text-white flex items-center gap-1.5">
+                  <span className="font-bold text-white flex items-center gap-1.5 text-[11px]">
                     <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                    Send Full Chat to Support Team
+                    Send Discussion to info@texaswebcoders.com
                   </span>
                   <button
                     onClick={() => setShowEmailCapture(false)}
                     className="text-zinc-400 hover:text-white"
                   >
-                    <X className="w-3 h-3" />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 </div>
-                <form onSubmit={handleSendTranscript} className="space-y-2">
+
+                <form
+                  action={FORMSUBMIT_ENDPOINT}
+                  method="POST"
+                  onSubmit={handleSendTranscript}
+                  className="space-y-2"
+                >
+                  <input type="hidden" name="_subject" value="Live Chat Discussion Transcript - Texas WebCoders" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input type="hidden" name="chat_transcript" value={formatTranscript(messages)} />
+
                   <input
                     type="text"
+                    name="name"
                     placeholder="Your Name (Optional)"
                     value={visitorName}
                     onChange={(e) => setVisitorName(e.target.value)}
@@ -315,6 +621,7 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
                   <input
                     required
                     type="email"
+                    name="email"
                     placeholder="Your Email Address *"
                     value={visitorEmail}
                     onChange={(e) => setVisitorEmail(e.target.value)}
@@ -322,11 +629,19 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
                   />
                   <input
                     type="tel"
-                    placeholder="Your Phone Number (Optional)"
+                    name="phone"
+                    placeholder="Your Phone (Optional)"
                     value={visitorPhone}
                     onChange={(e) => setVisitorPhone(e.target.value)}
                     className="w-full bg-black border border-zinc-700 rounded-lg px-2.5 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white"
                   />
+
+                  {statusMessage && (
+                    <div className="text-[10px] text-cyan-400 font-medium py-0.5">
+                      {statusMessage}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
                     disabled={isSendingTranscript || !visitorEmail.trim()}
@@ -336,8 +651,8 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
                       <span>Sending to info@texaswebcoders.com...</span>
                     ) : (
                       <>
-                        <Send className="w-3 h-3" />
-                        <span>Send Transcript & Request Contact</span>
+                        <Send className="w-3.5 h-3.5" />
+                        <span>Send Transcript & Request Call</span>
                       </>
                     )}
                   </button>
@@ -346,32 +661,34 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
             )}
 
             {/* Messages Scroll Area */}
-            <div className="flex-1 p-3.5 overflow-y-auto space-y-3 bg-black/60 text-xs">
+            <div className="flex-1 p-3.5 overflow-y-auto space-y-3.5 bg-black/70 text-xs">
               {messages.map((msg) => (
                 <div
                   key={msg.id}
                   className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                 >
                   <div
-                    className={`max-w-[88%] p-3 rounded-2xl ${
+                    className={`max-w-[90%] p-3.5 rounded-2xl ${
                       msg.sender === 'user'
                         ? 'bg-white text-zinc-950 font-medium rounded-br-none shadow-md'
                         : 'bg-zinc-900 border border-zinc-800 text-zinc-200 rounded-bl-none shadow-md'
                     }`}
                   >
-                    <p className="leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+                    <div className="leading-relaxed whitespace-pre-wrap text-[11.5px]">
+                      {msg.text}
+                    </div>
 
                     {/* Action buttons embedded in message */}
                     {msg.actions && msg.actions.length > 0 && (
-                      <div className="mt-2.5 pt-2 border-t border-zinc-800 space-y-1.5">
+                      <div className="mt-3 pt-2.5 border-t border-zinc-800 space-y-1.5">
                         {msg.actions.map((act, i) => (
                           <button
                             key={i}
                             onClick={act.action}
-                            className="w-full text-left bg-black hover:bg-white hover:text-black text-white border border-zinc-700 px-3 py-1.5 rounded-xl text-[11px] font-medium transition-all flex items-center justify-between cursor-pointer"
+                            className="w-full text-left bg-black hover:bg-white hover:text-black text-white border border-zinc-700 px-3 py-1.5 rounded-xl text-[11px] font-semibold transition-all flex items-center justify-between cursor-pointer group"
                           >
                             <span>{act.label}</span>
-                            <ArrowRight className="w-3 h-3" />
+                            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                           </button>
                         ))}
                       </div>
@@ -383,7 +700,8 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
 
               {/* Typing indicator */}
               {isTyping && (
-                <div className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3 py-2 rounded-2xl w-fit text-zinc-400">
+                <div className="flex items-center gap-1.5 bg-zinc-900 border border-zinc-800 px-3.5 py-2.5 rounded-2xl w-fit text-zinc-400">
+                  <span className="text-[10px] mr-1 text-zinc-500">Texas WebCoders AI</span>
                   <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                   <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                   <span className="w-1.5 h-1.5 bg-white rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -396,16 +714,34 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
             {/* Quick Prompts Bar */}
             <div className="p-2 bg-zinc-950 border-t border-zinc-800 overflow-x-auto whitespace-nowrap scrollbar-none flex items-center gap-1.5">
               <button
-                onClick={() => handleQuickQuestion('What are your project packages & pricing?')}
+                onClick={() => handleProcessUserText('What are your packages and pricing?')}
                 className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-zinc-300 font-medium transition-all flex-shrink-0 cursor-pointer"
               >
-                💰 View Pricing
+                💰 Pricing ($1,499+)
               </button>
               <button
-                onClick={() => handleQuickQuestion('I want to schedule a strategy consultation call.')}
+                onClick={() => handleProcessUserText('What services do you provide?')}
                 className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-zinc-300 font-medium transition-all flex-shrink-0 cursor-pointer"
               >
-                📅 Book Appointment
+                🛠️ Services
+              </button>
+              <button
+                onClick={() => handleProcessUserText('How long does project delivery take?')}
+                className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-zinc-300 font-medium transition-all flex-shrink-0 cursor-pointer"
+              >
+                ⏱️ Turnaround
+              </button>
+              <button
+                onClick={() => handleProcessUserText('What technology stack do you use?')}
+                className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-zinc-300 font-medium transition-all flex-shrink-0 cursor-pointer"
+              >
+                ⚡ Tech Stack
+              </button>
+              <button
+                onClick={() => onOpenAppointmentModal()}
+                className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-emerald-300 font-medium transition-all flex-shrink-0 cursor-pointer"
+              >
+                📅 Book Call
               </button>
               <button
                 onClick={() => setShowEmailCapture(true)}
@@ -420,17 +756,17 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
             <form onSubmit={handleSendMessage} className="p-3 bg-black border-t border-zinc-800 flex items-center gap-2">
               <input
                 type="text"
-                placeholder="Type a message or enter your email..."
+                placeholder="Ask about pricing, tech, services, or enter email..."
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
-                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white"
+                className="flex-1 bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-white transition-colors"
               />
               <button
                 type="submit"
                 disabled={!inputText.trim()}
-                className={`p-2 rounded-xl transition-all cursor-pointer ${
+                className={`p-2.5 rounded-xl transition-all cursor-pointer ${
                   inputText.trim()
-                    ? 'bg-white text-black hover:bg-zinc-200 font-medium'
+                    ? 'bg-white text-black hover:bg-zinc-200 font-semibold shadow-md'
                     : 'bg-zinc-800 text-zinc-600 cursor-not-allowed'
                 }`}
               >
@@ -449,10 +785,10 @@ export const LiveChatWidget: React.FC<LiveChatWidgetProps> = ({
             onClick={handleOpenChat}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="relative bg-white text-black px-4 py-2.5 rounded-full shadow-2xl border border-zinc-300 flex items-center gap-2.5 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-white/50"
+            className="relative bg-white text-black px-4 py-2.5 rounded-full shadow-2xl border border-zinc-300 flex items-center gap-2.5 cursor-pointer group focus:outline-none focus:ring-2 focus:ring-white/50 font-semibold"
             aria-label="Open Live Support Chat"
           >
-            <MessageSquare className="w-4 h-4 text-black" />
+            <Bot className="w-4 h-4 text-black" />
             <span className="text-xs font-bold text-black font-['Montserrat']">Live Chat</span>
 
             {/* Unread status badge */}
