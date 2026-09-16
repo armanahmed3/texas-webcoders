@@ -275,65 +275,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
         </div>
       </section>
 
-      {/* 2. PRIORITY INTAKE LIVE COUNTDOWN BANNER (Monochrome Black & White) */}
-      <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div className="bg-zinc-950 border border-zinc-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
-            <div className="text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-xs text-zinc-300 font-mono mb-2">
-                <Clock className="w-3.5 h-3.5 text-white animate-spin" style={{ animationDuration: '8s' }} />
-                <span>LIMITED CLIENT INTAKE WINDOW</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight">
-                Current Sprint Kickoff Closes In
-              </h3>
-              <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-md">
-                To guarantee 100% engineering fidelity, we onboard a maximum of 3 custom development projects per sprint cycle.
-              </p>
-            </div>
 
-            {/* Countdown Digital Clocks */}
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-              <div className="flex items-center gap-2 sm:gap-2.5 font-mono">
-                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    {String(countdown.days).padStart(2, '0')}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Days</span>
-                </div>
-                <span className="text-xl font-bold text-zinc-600">:</span>
-                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    {String(countdown.hours).padStart(2, '0')}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Hours</span>
-                </div>
-                <span className="text-xl font-bold text-zinc-600">:</span>
-                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                    {String(countdown.minutes).padStart(2, '0')}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Mins</span>
-                </div>
-                <span className="text-xl font-bold text-zinc-600">:</span>
-                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight animate-pulse">
-                    {String(countdown.seconds).padStart(2, '0')}
-                  </span>
-                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Secs</span>
-                </div>
-              </div>
-
-              <button
-                onClick={onOpenAppointmentModal}
-                className="px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md shrink-0 cursor-pointer"
-              >
-                Claim Slot
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 3. MAIN TESTIMONIALS DIRECTORY (Monochrome Black & White) */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">

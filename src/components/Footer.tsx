@@ -123,59 +123,47 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
                 </div>
               </div>
 
-              {/* Quick Newsletter & Project Updates Form with Payment Card Image to the Right */}
+              {/* Quick Newsletter & Project Updates Form */}
               <div className="pt-3">
                 <p className="text-[11px] font-bold text-black uppercase tracking-wider mb-2 font-['Montserrat']">
                   Subscribe for Engineering Updates &amp; Insights
                 </p>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                  <form
-                    action="https://formsubmit.co/info@texaswebcoders.com"
-                    method="POST"
-                    onSubmit={(e) => {
-                      e.preventDefault();
-                      const form = e.currentTarget;
-                      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
-                      if (email) {
-                        submitToFormSubmit({
-                          _subject: `📬 New Newsletter Subscriber: ${email}`,
-                          email,
-                          source: 'Footer Subscription'
-                        });
-                        alert('Thank you! You are now subscribed to Texas WebCoders engineering insights.');
-                        form.reset();
-                      }
-                    }}
-                    className="flex flex-col sm:flex-row gap-2 max-w-sm w-full"
+                <form
+                  action="https://formsubmit.co/info@texaswebcoders.com"
+                  method="POST"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const form = e.currentTarget;
+                    const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
+                    if (email) {
+                      submitToFormSubmit({
+                        _subject: `📬 New Newsletter Subscriber: ${email}`,
+                        email,
+                        source: 'Footer Subscription'
+                      });
+                      alert('Thank you! You are now subscribed to Texas WebCoders engineering insights.');
+                      form.reset();
+                    }
+                  }}
+                  className="flex flex-col sm:flex-row gap-2 max-w-md"
+                >
+                  <input type="hidden" name="_subject" value="New Newsletter Subscription - Texas WebCoders" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="_template" value="table" />
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder="Enter your work email..."
+                    className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-black hover:bg-zinc-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer flex-shrink-0 font-['Montserrat'] uppercase tracking-wider"
                   >
-                    <input type="hidden" name="_subject" value="New Newsletter Subscription - Texas WebCoders" />
-                    <input type="hidden" name="_captcha" value="false" />
-                    <input type="hidden" name="_template" value="table" />
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      placeholder="Enter your work email..."
-                      className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
-                    />
-                    <button
-                      type="submit"
-                      className="bg-black hover:bg-zinc-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer flex-shrink-0 font-['Montserrat'] uppercase tracking-wider"
-                    >
-                      Subscribe
-                    </button>
-                  </form>
-
-                  {/* Card Payment Image right side of newsletter */}
-                  <div className="flex-shrink-0 bg-white rounded-xl p-1.5 border border-zinc-200 shadow-sm flex items-center justify-center">
-                    <img
-                      src="/assets/payment-methods.png"
-                      alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe"
-                      className="h-10 sm:h-12 w-auto object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+                    Subscribe
+                  </button>
+                </form>
               </div>
             </div>
           </div>
@@ -311,6 +299,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
                 </button>
               </li>
             </ul>
+
+            {/* Accepted Payment Methods - Down of Core Engineering Services & Right Side of Newsletter */}
+            <div className="pt-6">
+              <p className="text-[10px] font-bold text-black uppercase tracking-wider mb-2 font-['Montserrat']">
+                Accepted Payment Methods
+              </p>
+              <div className="bg-white rounded-xl p-2.5 border border-zinc-200 shadow-sm inline-flex items-center justify-center">
+                <img
+                  src="/assets/payment-methods.png"
+                  alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe"
+                  className="h-8 sm:h-9 w-auto object-contain scale-95"
+                  loading="lazy"
+                />
+              </div>
+            </div>
           </div>
 
         </div>
