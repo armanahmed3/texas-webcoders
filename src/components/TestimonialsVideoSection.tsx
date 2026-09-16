@@ -752,7 +752,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         Project Scope
                       </span>
                       <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
-                        Enterprise Cloud & Custom Platform
+                        Custom Application Engineering
                       </span>
                     </div>
 
@@ -769,7 +769,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         Execution Speed
                       </span>
                       <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
-                        Sub-Second Streaming & Zero Downtime
+                        Proactive Problem Solving & Rapid Fixes
                       </span>
                     </div>
 
@@ -786,7 +786,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         Client Satisfaction
                       </span>
                       <span className="text-xs font-semibold leading-snug block text-emerald-500">
-                        +320% Signups • Highly Recommended
+                        &ldquo;Excellent Support • Highly Recommend&rdquo;
                       </span>
                     </div>
                   </div>
@@ -858,7 +858,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         isWhite ? 'text-zinc-800' : 'text-zinc-200'
                       }`}
                     >
-                      &ldquo;Texas WebCoders architected our mission-critical enterprise portal with sub-second data streaming and bank-grade security. Conversions jumped 320% within the first 60 days. If you want an enterprise platform or bespoke web application that performs at Silicon Valley standards right here in Texas, Texas WebCoders is completely unmatched.&rdquo;
+                      &ldquo;I built my application with Texas WebCoders. They&apos;re doing a fantastic job, helped me solve my problems, and their support has been excellent. I highly recommend them.&rdquo;
                     </blockquote>
 
                     <div
@@ -868,7 +868,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                     >
                       <span className="flex items-center gap-1.5 text-[11px]">
                         <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                        <span>Enterprise Cloud Architecture Client</span>
+                        <span>Custom Application & Dedicated Support Client</span>
                       </span>
                       <span className="font-mono text-[10px] font-semibold text-emerald-500">
                         Verified Review

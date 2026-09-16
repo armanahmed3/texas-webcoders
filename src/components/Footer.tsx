@@ -16,8 +16,7 @@ import {
   Facebook,
   Linkedin,
   Instagram,
-  Shield,
-  CreditCard
+  Shield
 } from 'lucide-react';
 import { TexasWebcodersLogo } from './TexasWebcodersLogo';
 import { submitToFormSubmit } from '../utils/formSubmit';
@@ -124,47 +123,59 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
                 </div>
               </div>
 
-              {/* Quick Newsletter & Project Updates Form (FormSubmit) */}
+              {/* Quick Newsletter & Project Updates Form with Payment Card Image to the Right */}
               <div className="pt-3">
                 <p className="text-[11px] font-bold text-black uppercase tracking-wider mb-2 font-['Montserrat']">
-                  Subscribe for Engineering Updates & Insights
+                  Subscribe for Engineering Updates &amp; Insights
                 </p>
-                <form
-                  action="https://formsubmit.co/info@texaswebcoders.com"
-                  method="POST"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const form = e.currentTarget;
-                    const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
-                    if (email) {
-                      submitToFormSubmit({
-                        _subject: `📬 New Newsletter Subscriber: ${email}`,
-                        email,
-                        source: 'Footer Subscription'
-                      });
-                      alert('Thank you! You are now subscribed to Texas WebCoders engineering insights.');
-                      form.reset();
-                    }
-                  }}
-                  className="flex flex-col sm:flex-row gap-2 max-w-md"
-                >
-                  <input type="hidden" name="_subject" value="New Newsletter Subscription - Texas WebCoders" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="_template" value="table" />
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="Enter your work email..."
-                    className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-black hover:bg-zinc-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer flex-shrink-0 font-['Montserrat'] uppercase tracking-wider"
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <form
+                    action="https://formsubmit.co/info@texaswebcoders.com"
+                    method="POST"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const form = e.currentTarget;
+                      const email = (form.elements.namedItem('email') as HTMLInputElement)?.value;
+                      if (email) {
+                        submitToFormSubmit({
+                          _subject: `📬 New Newsletter Subscriber: ${email}`,
+                          email,
+                          source: 'Footer Subscription'
+                        });
+                        alert('Thank you! You are now subscribed to Texas WebCoders engineering insights.');
+                        form.reset();
+                      }
+                    }}
+                    className="flex flex-col sm:flex-row gap-2 max-w-sm w-full"
                   >
-                    Subscribe
-                  </button>
-                </form>
+                    <input type="hidden" name="_subject" value="New Newsletter Subscription - Texas WebCoders" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="Enter your work email..."
+                      className="flex-1 bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
+                    />
+                    <button
+                      type="submit"
+                      className="bg-black hover:bg-zinc-800 text-white font-bold text-xs px-4 py-2 rounded-xl transition-colors cursor-pointer flex-shrink-0 font-['Montserrat'] uppercase tracking-wider"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+
+                  {/* Card Payment Image right side of newsletter */}
+                  <div className="flex-shrink-0 bg-white rounded-xl p-1.5 border border-zinc-200 shadow-sm flex items-center justify-center">
+                    <img
+                      src="/assets/payment-methods.png"
+                      alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe"
+                      className="h-10 sm:h-12 w-auto object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -304,27 +315,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
 
         </div>
 
-        {/* Payment Methods & Secure Checkout Matrix */}
-        <div className="border-t border-zinc-200 pt-8 pb-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1 text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start gap-2 text-black text-xs font-bold uppercase tracking-wider font-['Montserrat']">
-              <CreditCard className="w-4 h-4 text-black" />
-              <span>Accepted Payment Methods &amp; Direct Bank Settlement</span>
-            </div>
-            <p className="text-zinc-500 text-xs max-w-xl">
-              All transactions are encrypted with 256-bit SSL protection. We accept Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe, Skrill, Wire Transfer, Amazon Pay, and Venmo.
-            </p>
-          </div>
-          
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-zinc-300 shadow-md flex-shrink-0 flex items-center justify-center">
-            <img
-              src="/assets/payment-methods.png"
-              alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe, Skrill, Bank Transfer, Amazon Pay, Venmo"
-              className="h-24 sm:h-32 md:h-36 w-auto object-contain max-w-[360px] sm:max-w-lg"
-              loading="lazy"
-            />
-          </div>
-        </div>
+
 
         {/* Bottom Bar */}
         <div className="border-t border-zinc-200 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-medium gap-4">

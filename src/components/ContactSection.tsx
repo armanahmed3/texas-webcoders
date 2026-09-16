@@ -27,7 +27,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     email: '',
     phone: '',
     serviceType: 'Website Design & Dev',
-    packageSelect: 'Business Package ($949)',
+    packageSelect: 'Website Design & Dev',
     budget: '$1,000 - $2,500',
     details: ''
   });
@@ -48,8 +48,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     if (selectedPackage) {
       setFormData(prev => ({
         ...prev,
-        packageSelect: `${selectedPackage.name} Package ($${selectedPackage.price})`,
-        details: prev.details || `Interested in ${selectedPackage.name} Package ($${selectedPackage.price}).`
+        packageSelect: `${selectedPackage.name} Package`,
+        details: prev.details || `Interested in ${selectedPackage.name} Package.`
       }));
     }
   }, [selectedPackage]);
@@ -297,7 +297,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       }`}
                     >
                       <Send className="w-4 h-4" />
-                      <span>Submit Inquiry & Get Free Estimate</span>
+                      <span>Submit Inquiry</span>
                     </button>
                   </motion.form>
                 ) : (
@@ -382,8 +382,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           <span className="font-medium truncate block">{formData.email}</span>
                         </div>
                         <div>
-                          <span className="text-zinc-400 block text-[10px] uppercase">Estimated Scope</span>
-                          <span className="font-medium truncate block">{formData.packageSelect}</span>
+                          <span className="text-zinc-400 block text-[10px] uppercase">Requested Service</span>
+                          <span className="font-medium truncate block">{formData.serviceType || formData.packageSelect || 'Web Engineering'}</span>
                         </div>
                       </div>
                       <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs">
