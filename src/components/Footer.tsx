@@ -12,16 +12,22 @@ import {
   Film,
   Box,
   PenTool,
-  Palette
+  Palette,
+  Facebook,
+  Linkedin,
+  Instagram,
+  Shield,
+  CreditCard
 } from 'lucide-react';
 import { TexasWebcodersLogo } from './TexasWebcodersLogo';
 import { submitToFormSubmit } from '../utils/formSubmit';
 
 interface FooterProps {
   onNavigateSlide: (slideIndex: number) => void;
+  onOpenPrivacyPolicy?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
+export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPolicy }) => {
   return (
     <footer className="bg-white text-slate-900 pt-16 pb-20 lg:pb-8 border-t border-zinc-200 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -80,6 +86,42 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
                   <span className="font-medium block text-slate-950">Texas WebCoders</span>
                   <span>5221 S Broadway Ave, Tyler, TX 75703, United States</span>
                 </a>
+              </div>
+
+              {/* Social Media Channels */}
+              <div className="pt-2">
+                <p className="text-[11px] font-bold text-slate-950 uppercase tracking-wider mb-2 font-['Montserrat']">
+                  Follow Texas WebCoders
+                </p>
+                <div className="flex items-center gap-2.5">
+                  <a
+                    href="https://www.facebook.com/share/1CNUeH9kjm/?mibextid=wwXIfr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Texas WebCoders Facebook"
+                    className="w-9 h-9 rounded-xl bg-zinc-100 hover:bg-slate-950 text-slate-800 hover:text-white border border-zinc-200 flex items-center justify-center transition-all shadow-sm group"
+                  >
+                    <Facebook className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/company/texas-web-coders/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Texas WebCoders LinkedIn"
+                    className="w-9 h-9 rounded-xl bg-zinc-100 hover:bg-slate-950 text-slate-800 hover:text-white border border-zinc-200 flex items-center justify-center transition-all shadow-sm group"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="https://www.instagram.com/texaswebcoders"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Texas WebCoders Instagram"
+                    className="w-9 h-9 rounded-xl bg-zinc-100 hover:bg-slate-950 text-slate-800 hover:text-white border border-zinc-200 flex items-center justify-center transition-all shadow-sm group"
+                  >
+                    <Instagram className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
 
               {/* Quick Newsletter & Project Updates Form (FormSubmit) */}
@@ -173,6 +215,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
                   Contact
                 </button>
               </li>
+              {onOpenPrivacyPolicy && (
+                <li>
+                  <button
+                    onClick={onOpenPrivacyPolicy}
+                    className="hover:text-emerald-700 text-slate-950 font-semibold transition-colors cursor-pointer flex items-center gap-1.5"
+                  >
+                    <Shield className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Privacy Policy</span>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -251,10 +304,42 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide }) => {
 
         </div>
 
+        {/* Payment Methods & Secure Checkout Matrix */}
+        <div className="border-t border-zinc-200 pt-8 pb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-2 text-slate-950 text-xs font-bold uppercase tracking-wider font-['Montserrat']">
+              <CreditCard className="w-4 h-4 text-emerald-600" />
+              <span>Accepted Payment Methods &amp; Direct Bank Settlement</span>
+            </div>
+            <p className="text-zinc-500 text-xs max-w-xl">
+              All transactions are encrypted with 256-bit SSL protection. We accept Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe, Skrill, Wire Transfer, Amazon Pay, and Venmo.
+            </p>
+          </div>
+          
+          <div className="bg-slate-950 rounded-2xl p-2.5 sm:p-3 border border-zinc-800 shadow-md flex-shrink-0">
+            <img
+              src="/assets/payment-methods.png"
+              alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe, Skrill, Bank Transfer, Amazon Pay, Venmo"
+              className="h-10 sm:h-12 w-auto object-contain max-w-[280px] sm:max-w-xs"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
         {/* Bottom Bar */}
-        <div className="border-t border-zinc-200 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-medium gap-4">
-          <p>© 2026 Texas WebCoders. All Rights Reserved.</p>
-          <div className="flex items-center gap-2 text-slate-900 font-medium">
+        <div className="border-t border-zinc-200 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 font-medium gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4">
+            <p>© 2026 Texas WebCoders. All Rights Reserved.</p>
+            {onOpenPrivacyPolicy && (
+              <button
+                onClick={onOpenPrivacyPolicy}
+                className="underline hover:text-slate-950 transition-colors cursor-pointer"
+              >
+                Privacy Policy
+              </button>
+            )}
+          </div>
+          <div className="flex items-center gap-2 text-slate-950 font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             <span>Accepting New Client Projects • Texas HQ</span>
           </div>

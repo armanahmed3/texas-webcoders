@@ -187,8 +187,8 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isBlack
-              ? 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
-              : 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
+              ? 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
+              : 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
         }`}
       >
         {/* Decorative Background Accents */}

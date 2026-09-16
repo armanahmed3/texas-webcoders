@@ -18,7 +18,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   const heroBgImage = 'https://lh3.googleusercontent.com/aida-public/AB6AXuDczXnEUzCJAyTCdmr7D-8JMKrBLKpy86CaEuUjUu17VtEfzU4YN0cgCVoZXX_o3J11upUyh7yZGTAxsY9C8FE8gKe8h4yM_AFi4bEvuF1IxMnPZyOwE9WLdcJqVLS4huNQ_MrbRRdUqNKuErpnZYYOEKkF9ue1NRSAZ43LbEVEOSyUu8jwotOaBeDaa-KhHEwzrkLxhX_p8lISe0JUij46jKbu4iz6OGkK0qbb_X9MoNocF2zt07US_A';
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-28 pb-12 bg-[#080c14] text-white border-b border-slate-800 font-['Montserrat',sans-serif]">
+    <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden pt-28 pb-12 bg-black text-white border-b border-zinc-800 font-['Montserrat',sans-serif]">
       {/* Background Image / Overlay */}
       <div className="absolute inset-0 z-0">
         <img
@@ -26,8 +26,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           alt="TexasWebCoders Hero Background"
           className="w-full h-full object-cover object-center scale-105 filter brightness-75 transition-transform duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080c14] via-[#080c14]/85 to-slate-950/75" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.16)_0%,transparent_70%)] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-zinc-950/75" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.06)_0%,transparent_70%)] pointer-events-none" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-6">

@@ -122,19 +122,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isWhite
-              ? 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
-              : 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
+              ? 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
+              : 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
         }`}
       >
         {/* Decorative Background Accents */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isNone || isBlack ? 'bg-white/5' : 'bg-slate-200/30'
+            isNone || isBlack ? 'bg-white/5' : 'bg-zinc-200/30'
           }`}
         />
         <div
           className={`absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isNone || isBlack ? 'bg-slate-800/20' : 'bg-slate-200/30'
+            isNone || isBlack ? 'bg-zinc-800/20' : 'bg-zinc-200/30'
           }`}
         />
 
@@ -142,30 +142,30 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           {/* Page Top Header Signature */}
           <div className="text-center mb-10">
             <span className={`text-xs font-medium uppercase tracking-widest block mb-2 font-['Montserrat'] flex items-center justify-center gap-1.5 ${
-              isNone || isBlack ? 'text-slate-300' : 'text-slate-700'
+              isNone || isBlack ? 'text-zinc-400' : 'text-zinc-600'
             }`}>
               <Sparkles className="w-3.5 h-3.5" />
               <span>Direct Engineering Inquiry • TexasWebCoders</span>
             </span>
             <h2 className={`text-2xl sm:text-4xl md:text-5xl font-semibold mb-3 uppercase tracking-tight font-['Montserrat',sans-serif] ${
-              isNone || isBlack ? 'text-white' : 'text-slate-950'
+              isNone || isBlack ? 'text-white' : 'text-zinc-950'
             }`}>
               Get Started Today
             </h2>
             <p className={`text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed ${
-              isNone || isBlack ? 'text-slate-300' : 'text-zinc-600'
+              isNone || isBlack ? 'text-zinc-400' : 'text-zinc-600'
             }`}>
               Ready to bring your project to life? Fill out the form below to receive a custom proposal and architectural plan from our senior Texas engineering team.
             </p>
           </div>
 
           <div className={`rounded-3xl overflow-hidden shadow-xl flex flex-col lg:flex-row border ${
-            isNone || isBlack ? 'bg-slate-950/80 border-slate-800' : 'bg-zinc-50 border-zinc-200'
+            isNone || isBlack ? 'bg-zinc-950 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
           }`}>
             
             {/* Left Form Area */}
             <div className={`lg:w-7/12 p-6 sm:p-10 flex flex-col justify-center ${
-              isNone || isBlack ? 'bg-slate-950/90' : 'bg-white'
+              isNone || isBlack ? 'bg-zinc-950' : 'bg-white'
             }`}>
               <AnimatePresence mode="wait">
                 {!submitted ? (
@@ -189,7 +189,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                          isBlack ? 'text-slate-300' : 'text-zinc-700'
+                          isBlack ? 'text-zinc-400' : 'text-zinc-700'
                         }`}>
                           Your Name *
                         </label>
@@ -202,14 +202,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                           className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
                             isBlack
-                              ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                              : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
+                              ? 'bg-zinc-900 border-zinc-700 text-white focus:border-white'
+                              : 'bg-zinc-50 border-zinc-300 text-zinc-950 focus:border-zinc-950'
                           }`}
                         />
                       </div>
                       <div>
                         <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                          isBlack ? 'text-slate-300' : 'text-zinc-700'
+                          isBlack ? 'text-zinc-400' : 'text-zinc-700'
                         }`}>
                           Your Email *
                         </label>
@@ -222,8 +222,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                           className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
                             isBlack
-                              ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                              : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
+                              ? 'bg-zinc-900 border-zinc-700 text-white focus:border-white'
+                              : 'bg-zinc-50 border-zinc-300 text-zinc-950 focus:border-zinc-950'
                           }`}
                         />
                       </div>
@@ -231,7 +231,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
                     <div>
                       <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                        isBlack ? 'text-slate-300' : 'text-zinc-700'
+                        isBlack ? 'text-zinc-400' : 'text-zinc-700'
                       }`}>
                         Phone Number
                       </label>
@@ -243,15 +243,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
                           isBlack
-                            ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                            : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
+                            ? 'bg-zinc-900 border-zinc-700 text-white focus:border-white'
+                            : 'bg-zinc-50 border-zinc-300 text-zinc-950 focus:border-zinc-950'
                         }`}
                       />
                     </div>
 
                     <div>
                       <label className={`block text-[11px] font-medium uppercase tracking-wider mb-1.5 ${
-                        isBlack ? 'text-slate-300' : 'text-zinc-700'
+                        isBlack ? 'text-zinc-400' : 'text-zinc-700'
                       }`}>
                         Project Details & Goals
                       </label>
@@ -263,8 +263,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         onChange={(e) => setFormData({ ...formData, details: e.target.value })}
                         className={`w-full rounded-xl px-4 py-3 text-sm focus:outline-none transition-colors border ${
                           isBlack
-                            ? 'bg-slate-900 border-slate-700 text-white focus:border-white'
-                            : 'bg-zinc-50 border-zinc-300 text-slate-950 focus:border-slate-950'
+                            ? 'bg-zinc-900 border-zinc-700 text-white focus:border-white'
+                            : 'bg-zinc-50 border-zinc-300 text-zinc-950 focus:border-zinc-950'
                         }`}
                       />
                     </div>
@@ -276,12 +276,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         type="checkbox"
                         required
                         defaultChecked
-                        className="mt-0.5 w-4 h-4 rounded border-zinc-400 text-slate-950 focus:ring-slate-950 cursor-pointer flex-shrink-0 accent-slate-950"
+                        className="mt-0.5 w-4 h-4 rounded border-zinc-400 text-zinc-950 focus:ring-zinc-950 cursor-pointer flex-shrink-0 accent-zinc-950"
                       />
                       <label
                         htmlFor="sms-consent"
                         className={`text-[11px] leading-relaxed cursor-pointer select-none ${
-                          isBlack ? 'text-slate-400' : 'text-zinc-600'
+                          isBlack ? 'text-zinc-400' : 'text-zinc-600'
                         }`}
                       >
                         By providing a telephone number and submitting this form you are consenting to be contacted by SMS text message. Message & data rates may apply. You can reply STOP to opt-out of further messaging.
@@ -292,8 +292,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       type="submit"
                       className={`w-full font-semibold py-4 rounded-xl transition-all duration-300 uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-lg cursor-pointer ${
                         isBlack
-                          ? 'bg-white hover:bg-zinc-200 text-slate-950'
-                          : 'bg-slate-950 hover:bg-zinc-800 text-white'
+                          ? 'bg-white hover:bg-zinc-200 text-zinc-950'
+                          : 'bg-zinc-950 hover:bg-zinc-800 text-white'
                       }`}
                     >
                       <Send className="w-4 h-4" />
@@ -308,7 +308,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                     exit={{ opacity: 0, scale: 0.94, y: 16 }}
                     transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                     className={`p-6 sm:p-8 rounded-2xl text-center space-y-5 border relative overflow-hidden ${
-                      isBlack ? 'bg-slate-900 border-slate-800' : 'bg-zinc-50 border-zinc-200'
+                      isBlack ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
                     }`}
                   >
                     {/* Animated Checkmark Badge */}
@@ -325,8 +325,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       />
                       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mx-auto shadow-xl relative z-10 border ${
                         isBlack
-                          ? 'bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 border-emerald-300/40'
-                          : 'bg-gradient-to-br from-slate-950 to-slate-800 text-white border-slate-700'
+                          ? 'bg-zinc-800 text-emerald-400 border-zinc-700'
+                          : 'bg-zinc-950 text-white border-zinc-800'
                       }`}>
                         <CheckCircle2 className="w-9 h-9" />
                       </div>
@@ -344,12 +344,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         Message Received & Confirmed
                       </span>
                       <h3 className={`text-xl sm:text-2xl font-semibold font-['Montserrat'] uppercase tracking-tight ${
-                        isBlack ? 'text-white' : 'text-slate-950'
+                        isBlack ? 'text-white' : 'text-zinc-950'
                       }`}>
                         Inquiry Successfully Transmitted
                       </h3>
                       <p className={`text-xs leading-relaxed max-w-md mx-auto ${
-                        isBlack ? 'text-slate-300' : 'text-zinc-600'
+                        isBlack ? 'text-zinc-300' : 'text-zinc-600'
                       }`}>
                         Thank you, <span className="font-semibold text-emerald-400">{formData.name}</span>! Our lead engineering team in Texas has logged your inquiry.
                       </p>
@@ -361,33 +361,33 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.35 }}
                       className={`p-4 rounded-xl text-left text-xs space-y-2.5 border shadow-sm ${
-                        isBlack ? 'bg-slate-950/90 border-slate-800 text-slate-300' : 'bg-white border-zinc-200 text-zinc-700'
+                        isBlack ? 'bg-zinc-950 border-zinc-800 text-zinc-300' : 'bg-white border-zinc-200 text-zinc-700'
                       }`}
                     >
-                      <div className="flex items-center justify-between pb-2 border-b border-slate-800/80">
-                        <span className="text-[11px] uppercase tracking-wider text-slate-400 font-mono">Reference Ticket ID</span>
+                      <div className="flex items-center justify-between pb-2 border-b border-zinc-800/80">
+                        <span className="text-[11px] uppercase tracking-wider text-zinc-400 font-mono">Reference Ticket ID</span>
                         <button
                           onClick={handleCopyTicket}
                           type="button"
-                          className="flex items-center gap-1.5 font-mono font-bold text-xs bg-slate-800 hover:bg-slate-700 text-emerald-400 px-2 py-0.5 rounded border border-slate-700 transition-colors cursor-pointer"
+                          className="flex items-center gap-1.5 font-mono font-bold text-xs bg-zinc-800 hover:bg-zinc-700 text-emerald-400 px-2 py-0.5 rounded border border-zinc-700 transition-colors cursor-pointer"
                         >
                           {copiedId ? <Check className="w-3 h-3 text-emerald-300" /> : <Copy className="w-3 h-3" />}
                           <span>{projectId}</span>
-                          <span className="text-[9px] text-slate-400 uppercase font-sans">({copiedId ? 'Copied!' : 'Copy'})</span>
+                          <span className="text-[9px] text-zinc-400 uppercase font-sans">({copiedId ? 'Copied!' : 'Copy'})</span>
                         </button>
                       </div>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                         <div>
-                          <span className="text-slate-400 block text-[10px] uppercase">Client Contact</span>
+                          <span className="text-zinc-400 block text-[10px] uppercase">Client Contact</span>
                           <span className="font-medium truncate block">{formData.email}</span>
                         </div>
                         <div>
-                          <span className="text-slate-400 block text-[10px] uppercase">Estimated Scope</span>
+                          <span className="text-zinc-400 block text-[10px] uppercase">Estimated Scope</span>
                           <span className="font-medium truncate block">{formData.packageSelect}</span>
                         </div>
                       </div>
-                      <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                        <span className="text-slate-400 flex items-center gap-1">
+                      <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs">
+                        <span className="text-zinc-400 flex items-center gap-1">
                           <Clock className="w-3.5 h-3.5 text-emerald-400" />
                           Senior Engineer SLA:
                         </span>
@@ -408,7 +408,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         <button
                           onClick={onOpenAppointmentModal}
                           type="button"
-                          className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-slate-950 font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md cursor-pointer font-['Montserrat']"
+                          className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-semibold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all shadow-md cursor-pointer font-['Montserrat']"
                         >
                           <Calendar className="w-3.5 h-3.5" />
                           <span>Book Discovery Call</span>
@@ -418,7 +418,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                         onClick={() => setSubmitted(false)}
                         type="button"
                         className={`text-xs font-medium underline transition-colors cursor-pointer py-1 ${
-                          isBlack ? 'text-slate-400 hover:text-white' : 'text-zinc-600 hover:text-slate-950'
+                          isBlack ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-950'
                         }`}
                       >
                         Submit Another Inquiry
@@ -431,7 +431,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             {/* Right Direct Contact & SLA Guarantee Hub */}
             <div className={`lg:w-5/12 p-6 sm:p-10 flex flex-col justify-between border-t lg:border-t-0 lg:border-l space-y-6 ${
-              isBlack ? 'bg-slate-900/90 border-slate-800' : 'bg-zinc-100 border-zinc-200'
+              isBlack ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-100 border-zinc-200'
             }`}>
               
               {/* Top SLA Badge */}
@@ -441,12 +441,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <span>Under 2-Hour Response SLA Guarantee</span>
                 </div>
                 <h3 className={`text-2xl font-semibold font-['Montserrat'] uppercase tracking-tight ${
-                  isBlack ? 'text-white' : 'text-slate-950'
+                  isBlack ? 'text-white' : 'text-zinc-950'
                 }`}>
                   Direct Engineering Support
                 </h3>
                 <p className={`text-xs leading-relaxed mt-2 ${
-                  isBlack ? 'text-slate-400' : 'text-zinc-600'
+                  isBlack ? 'text-zinc-400' : 'text-zinc-600'
                 }`}>
                   When you contact TexasWebCoders, you talk directly to lead software engineers in Texas — no sales middlemen or offshore call queues.
                 </p>
@@ -454,27 +454,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Direct Contact Methods List */}
               <div className={`space-y-3 p-5 rounded-2xl border shadow-sm ${
-                isBlack ? 'bg-slate-950 border-slate-800' : 'bg-white border-zinc-200'
+                isBlack ? 'bg-zinc-950 border-zinc-800' : 'bg-white border-zinc-200'
               }`}>
                 <a
                   href="tel:+19032226022"
                   className={`flex items-center gap-3.5 p-3 rounded-xl border transition-all group ${
                     isBlack
-                      ? 'bg-slate-900 border-slate-800 hover:border-white'
-                      : 'bg-zinc-50 border-zinc-200 hover:border-slate-950'
+                      ? 'bg-zinc-900 border-zinc-800 hover:border-white'
+                      : 'bg-zinc-50 border-zinc-200 hover:border-zinc-950'
                   }`}
                 >
                   <div className={`p-2.5 rounded-lg transition-all ${
-                    isBlack ? 'bg-white text-slate-950' : 'bg-slate-950 text-white'
+                    isBlack ? 'bg-white text-zinc-950' : 'bg-zinc-950 text-white'
                   }`}>
                     <Phone className="w-4 h-4" />
                   </div>
                   <div>
                     <div className={`text-[10px] uppercase font-medium ${
-                      isBlack ? 'text-slate-400' : 'text-zinc-500'
+                      isBlack ? 'text-zinc-400' : 'text-zinc-500'
                     }`}>Direct Phone Contact</div>
                     <div className={`text-sm font-medium font-mono transition-colors ${
-                      isBlack ? 'text-white group-hover:text-slate-200' : 'text-slate-950 group-hover:text-black'
+                      isBlack ? 'text-white group-hover:text-zinc-200' : 'text-zinc-950 group-hover:text-black'
                     }`}>
                       +1 9032226022
                     </div>
@@ -485,21 +485,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   href="mailto:info@texaswebcoders.com"
                   className={`flex items-center gap-3.5 p-3 rounded-xl border transition-all group ${
                     isBlack
-                      ? 'bg-slate-900 border-slate-800 hover:border-white'
-                      : 'bg-zinc-50 border-zinc-200 hover:border-slate-950'
+                      ? 'bg-zinc-900 border-zinc-800 hover:border-white'
+                      : 'bg-zinc-50 border-zinc-200 hover:border-zinc-950'
                   }`}
                 >
                   <div className={`p-2.5 rounded-lg transition-all ${
-                    isBlack ? 'bg-white text-slate-950' : 'bg-slate-950 text-white'
+                    isBlack ? 'bg-white text-zinc-950' : 'bg-zinc-950 text-white'
                   }`}>
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
                     <div className={`text-[10px] uppercase font-medium ${
-                      isBlack ? 'text-slate-400' : 'text-zinc-500'
+                      isBlack ? 'text-zinc-400' : 'text-zinc-500'
                     }`}>Engineering Inquiry Email</div>
                     <div className={`text-xs font-medium transition-colors ${
-                      isBlack ? 'text-white group-hover:text-slate-200' : 'text-slate-950 group-hover:text-black'
+                      isBlack ? 'text-white group-hover:text-zinc-200' : 'text-zinc-950 group-hover:text-black'
                     }`}>
                       info@texaswebcoders.com
                     </div>
@@ -512,21 +512,21 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   rel="noopener noreferrer"
                   className={`flex items-center gap-3.5 p-3 rounded-xl border transition-all group ${
                     isBlack
-                      ? 'bg-slate-900 border-slate-800 hover:border-white'
-                      : 'bg-zinc-50 border-zinc-200 hover:border-slate-950'
+                      ? 'bg-zinc-900 border-zinc-800 hover:border-white'
+                      : 'bg-zinc-50 border-zinc-200 hover:border-zinc-950'
                   }`}
                 >
                   <div className={`p-2.5 rounded-lg transition-all ${
-                    isBlack ? 'bg-white text-slate-950' : 'bg-slate-950 text-white'
+                    isBlack ? 'bg-white text-zinc-950' : 'bg-zinc-950 text-white'
                   }`}>
                     <MapPin className="w-4 h-4" />
                   </div>
                   <div>
                     <div className={`text-[10px] uppercase font-medium ${
-                      isBlack ? 'text-slate-400' : 'text-zinc-500'
+                      isBlack ? 'text-zinc-400' : 'text-zinc-500'
                     }`}>USA Headquarters</div>
                     <div className={`text-xs font-medium transition-colors ${
-                      isBlack ? 'text-white group-hover:text-slate-200' : 'text-slate-950 group-hover:text-black'
+                      isBlack ? 'text-white group-hover:text-zinc-200' : 'text-zinc-950 group-hover:text-black'
                     }`}>
                       5221 S Broadway Ave, Tyler, TX 75703, United States
                     </div>
@@ -536,19 +536,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 {/* Direct Office Hours Card */}
                 <div
                   className={`flex items-center gap-3.5 p-3 rounded-xl border transition-all ${
-                    isBlack ? 'bg-slate-900 border-slate-800' : 'bg-zinc-50 border-zinc-200'
+                    isBlack ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
                   }`}
                 >
                   <div className={`p-2.5 rounded-lg ${
-                    isBlack ? 'bg-slate-800 text-emerald-400' : 'bg-zinc-200 text-emerald-600'
+                    isBlack ? 'bg-zinc-800 text-emerald-400' : 'bg-zinc-200 text-emerald-600'
                   }`}>
                     <Clock className="w-4 h-4" />
                   </div>
                   <div>
                     <div className={`text-[10px] uppercase font-medium ${
-                      isBlack ? 'text-slate-400' : 'text-zinc-500'
+                      isBlack ? 'text-zinc-400' : 'text-zinc-500'
                     }`}>Hours of Operation</div>
-                    <div className={`text-xs font-medium ${isBlack ? 'text-white' : 'text-slate-950'}`}>
+                    <div className={`text-xs font-medium ${isBlack ? 'text-white' : 'text-zinc-950'}`}>
                       Mon - Fri: 8:00 AM - 6:00 PM CST
                     </div>
                   </div>
@@ -557,10 +557,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
               {/* Client Protections Matrix */}
               <div className={`grid grid-cols-2 gap-2 text-[10px] font-medium pt-2 border-t ${
-                isBlack ? 'border-slate-800 text-slate-400' : 'border-zinc-300 text-zinc-700'
+                isBlack ? 'border-zinc-800 text-zinc-400' : 'border-zinc-300 text-zinc-700'
               }`}>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className={`w-3.5 h-3.5 flex-shrink-0 ${isBlack ? 'text-white' : 'text-slate-950'}`} />
+                  <CheckCircle2 className={`w-3.5 h-3.5 flex-shrink-0 ${isBlack ? 'text-white' : 'text-zinc-950'}`} />
                   <span>NDA Protected Inquiry</span>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -568,7 +568,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                   <span>100% W3C Validated</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Lock className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" />
+                  <Lock className="w-3.5 h-3.5 flex-shrink-0 text-zinc-400" />
                   <span>1-Year Bug Warranty</span>
                 </div>
                 <div className="flex items-center gap-1.5">

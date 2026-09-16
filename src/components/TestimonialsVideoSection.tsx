@@ -76,17 +76,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (video2Ref.current) video2Ref.current.muted = isMuted2;
   }, [isMuted2]);
 
-  // Initial autoplay attempt
-  useEffect(() => {
-    const v1 = video1Ref.current;
-    if (v1) {
-      v1.muted = true;
-      v1.defaultMuted = true;
-      v1.play().then(() => setIsPlaying1(true)).catch(() => setIsPlaying1(false));
-    }
-  }, []);
-
-  // Intersection observer for section visibility
+  // Intersection observer for section visibility (plays only when user scrolls into view)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -223,8 +213,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isWhite
-              ? 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
-              : 'bg-[#080c14] text-white border border-slate-800 shadow-cyan-950/20'
+              ? 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
+              : 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
         }`}
       >
         {/* Ambient Grid Backdrop */}
@@ -354,10 +344,9 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       poster={avatarV1Img}
                       className="w-full h-full object-cover"
                       playsInline
-                      autoPlay
                       muted={isMuted1}
                       loop
-                      preload="auto"
+                      preload="none"
                       onTimeUpdate={handleTimeUpdate1}
                       onPlay={() => setIsPlaying1(true)}
                       onPause={() => setIsPlaying1(false)}
@@ -631,7 +620,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${
                   isWhite
                     ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50'
-                    : 'bg-zinc-950/90 border-white/20 shadow-cyan-950/30'
+                    : 'bg-zinc-950/90 border-white/20 shadow-black/40'
                 }`}
               >
                 {/* Left Column: Horizontal Widescreen Video Player (4.mp4) + Spec Highlights underneath */}
@@ -649,7 +638,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       playsInline
                       muted={isMuted2}
                       loop
-                      preload="metadata"
+                      preload="none"
                       onTimeUpdate={handleTimeUpdate2}
                       onPlay={() => setIsPlaying2(true)}
                       onPause={() => setIsPlaying2(false)}

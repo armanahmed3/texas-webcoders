@@ -35,7 +35,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'SEO & Growth Engineering',
     readTime: '7 min read',
     date: 'September 15, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Ranking #1 in local Texas markets requires more than keywords. Discover the exact technical SEO framework Texas WebCoders uses to dominate Google Maps and organic SERP.',
     content: [
       "Google's Search Generative Experience (SGE) has fundamentally reshaped how local customers discover service providers. Ranking in the top 3 map pack and organic results now relies on deep schema microdata, zero-latency server responses, and localized topical authority.",
@@ -63,7 +63,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'Cybersecurity & Compliance',
     readTime: '7 min read',
     date: 'September 14, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'In an era of rising cyber threats, robust application security is non-negotiable. Learn how Texas WebCoders bakes bank-grade compliance into every software build.',
     content: [
       'For healthcare clinics, legal firms, and financial organizations, data security is both a legal requirement and a foundation of client trust. Securing modern applications requires multi-layered defense-in-depth architecture.',
@@ -91,7 +91,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'Cloud & DevOps',
     readTime: '6 min read',
     date: 'August 24, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Manual server deployments and late-night outages are things of the past. Discover our modern automated continuous delivery framework.',
     content: [
       'High-velocity development requires continuous integration and automated deployment pipelines. Containerizing applications using Docker ensures consistent execution across local development, staging, and production environments.',
@@ -119,7 +119,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'Web Architecture',
     readTime: '6 min read',
     date: 'August 24, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'In 2026, web application speed directly dictates Google rankings and checkout conversion rates. Discover how Texas WebCoders builds zero-latency edge architectures.',
     content: [
       'Over 53% of mobile users immediately bounce from sites taking longer than 1.8 seconds to load. For enterprise web applications and regional Texas businesses, every 100ms latency reduction converts directly into a 7.4% increase in sales inquiries.',
@@ -140,7 +140,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'Mobile Engineering',
     readTime: '8 min read',
     date: 'August 23, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_2_mobile_architecture.jpg',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Building dual iOS and Android apps historically required separate teams. Discover how modern React Native Fabric & TurboModules achieve native 120Hz performance at 50% lower cost.',
     content: [
       'With the introduction of the Fabric C++ renderer and TurboModules, modern React Native has completely eliminated the legacy asynchronous JavaScript bridge. Native C++ bindings now allow direct synchronous memory sharing with iOS Metal and Android Vulkan graphic layers.',
@@ -161,7 +161,7 @@ export const ARTICLES_LIST: Article[] = [
     category: 'AI & Automation',
     readTime: '7 min read',
     date: 'August 22, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Simple chatbots are obsolete. Explore how modern enterprises deploy self-correcting multi-agent AI networks to automate lead qualification and operations 24/7.',
     content: [
       'The true enterprise power of AI is not isolated chat bubbles—it is proactive multi-agent orchestration. By assigning specialized autonomous agents to customer intake, invoice matching, CRM data enrichment, and calendar scheduling, companies save hundreds of labor hours each month.',
@@ -184,7 +184,7 @@ const TOPIC_TEMPLATES = [
     subtitle: 'Combining instant static shell rendering with dynamic personalized streaming for sub-second page loads.',
     category: 'Web Architecture',
     readTime: '6 min read',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Partial Prerendering (PPR) fuses static site speed with dynamic server capabilities. Discover how Texas WebCoders implements PPR in production builds.',
     content: [
       'The traditional divide between Static Site Generation (SSG) and Server-Side Rendering (SSR) created compromises between speed and personalization. Next.js 15 PPR eliminates this tradeoff by streaming dynamic holes into a statically cached edge shell.',
@@ -203,7 +203,7 @@ const TOPIC_TEMPLATES = [
     subtitle: 'How enterprise brands boost conversion rates by 34% by switching from monolithic themes to custom headless storefronts.',
     category: 'E-Commerce Engineering',
     readTime: '7 min read',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_2_mobile_architecture.jpg',
+    image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Monolithic e-commerce themes often struggle with speed and custom checkout flows. Learn why modern brands transition to headless architectures.',
     content: [
       'Every second of page load delay in e-commerce costs retailers millions in abandoned checkouts. Headless architecture decouples the front-end user experience from the Shopify or custom e-commerce backend.',
@@ -222,7 +222,7 @@ const TOPIC_TEMPLATES = [
     subtitle: 'Engineering photorealistic 60 FPS WebGL experiences without sacrificing mobile performance or battery life.',
     category: '3D & Interactive Web',
     readTime: '8 min read',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Interactive 3D configurators turn passive visitors into engaged buyers. Discover our optimization techniques for WebGL in commercial applications.',
     content: [
       'Modern web browsers equipped with WebGPU and WebGL 2.0 can render complex 3D scenes with real-time lighting and shadows. However, unoptimized meshes and heavy textures can quickly freeze mobile devices.',

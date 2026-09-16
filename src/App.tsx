@@ -13,6 +13,7 @@ import { TestimonialsPage } from './components/TestimonialsPage';
 import { InsightsSection, ARTICLES_LIST, Article } from './components/InsightsSection';
 import { ServiceDetailPage } from './components/ServiceDetailPage';
 import { BlogDetailPage } from './components/BlogDetailPage';
+import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { ReviewsFaqSection } from './components/ReviewsFaqSection';
 import { ContactSection } from './components/ContactSection';
 import { MapLocationSection } from './components/MapLocationSection';
@@ -43,6 +44,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) =
 export default function App() {
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const [isSlideMode, setIsSlideMode] = useState<boolean>(true); // Multi-Page view active by default
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState<boolean>(false);
   const [selectedProject, setSelectedProject] = useState<PortfolioProject | null>(null);
   const [selectedPackage, setSelectedPackage] = useState<PricingPackage | null>(null);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
@@ -139,6 +141,11 @@ export default function App() {
     handleNavigateSlide(9);
   };
 
+  const handleOpenPrivacyPolicy = () => {
+    setShowPrivacyPolicy(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleApplyCustomQuote = (summary: string, total: number) => {
     setSelectedPackage({
       id: 'custom_quote',
@@ -183,7 +190,7 @@ export default function App() {
           }}
         />
         <MapLocationSection variant="black" />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -196,7 +203,7 @@ export default function App() {
           variant="black"
           isHomePage={false}
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -207,7 +214,7 @@ export default function App() {
           onNavigateSlide={handleNavigateSlide}
           variant="black"
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -223,7 +230,7 @@ export default function App() {
           }}
           variant="black"
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -236,7 +243,7 @@ export default function App() {
           onOpenQuoteCalculator={() => setQuoteCalculatorOpen(true)}
           variant="black"
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -247,7 +254,7 @@ export default function App() {
           onNavigateSlide={handleNavigateSlide}
           variant="black"
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -259,7 +266,7 @@ export default function App() {
           onOpenQuoteCalculator={() => setQuoteCalculatorOpen(true)}
           onOpenAppointmentModal={() => setAppointmentModalOpen(true)}
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -274,7 +281,7 @@ export default function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -282,7 +289,7 @@ export default function App() {
     <PageTransition key="8">
       <div className="pt-12">
         <ReviewsFaqSection variant="black" />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>,
 
@@ -296,13 +303,13 @@ export default function App() {
           variant="black"
         />
         <MapLocationSection variant="black" />
-        <Footer onNavigateSlide={handleNavigateSlide} />
+        <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
       </div>
     </PageTransition>
   ];
 
   return (
-    <div className="min-h-screen bg-[#06080d] text-white relative font-['Montserrat',sans-serif] selection:bg-white selection:text-slate-950 overflow-x-hidden scroll-smooth">
+    <div className="min-h-screen bg-black text-white relative font-['Montserrat',sans-serif] selection:bg-white selection:text-zinc-950 overflow-x-hidden scroll-smooth">
       {/* Three.js Interactive 3D Canvas Background */}
       <ThreeBackgroundCanvas activeSlide={activeSlide} />
 
@@ -317,7 +324,16 @@ export default function App() {
       />
 
       {/* Main Multi-Page View Area */}
-      {isSlideMode ? (
+      {showPrivacyPolicy ? (
+        <div className="relative z-20 pt-16 min-h-screen">
+          <PrivacyPolicyPage
+            onBack={() => {
+              setShowPrivacyPolicy(false);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        </div>
+      ) : isSlideMode ? (
         <div className="relative z-10 pt-16 min-h-screen flex flex-col justify-between">
           <AnimatePresence mode="wait">
             {activeServiceDetail ? (
@@ -342,7 +358,7 @@ export default function App() {
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
                 />
-                <Footer onNavigateSlide={handleNavigateSlide} />
+                <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
               </PageTransition>
             ) : activeBlogArticle ? (
               <PageTransition key={`blog-detail-${activeBlogArticle.id}`}>
@@ -362,7 +378,7 @@ export default function App() {
                   }}
                   allArticles={dynamicArticles}
                 />
-                <Footer onNavigateSlide={handleNavigateSlide} />
+                <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
               </PageTransition>
             ) : (
               slides[activeSlide]
@@ -539,7 +555,7 @@ export default function App() {
           </motion.div>
 
           {/* Section 14: Footer */}
-          <Footer onNavigateSlide={handleNavigateSlide} />
+          <Footer onNavigateSlide={handleNavigateSlide} onOpenPrivacyPolicy={handleOpenPrivacyPolicy} />
         </div>
       )}
 

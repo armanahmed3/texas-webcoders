@@ -20,8 +20,8 @@
   max-height: 90%;
 }
 
-/* Animated Dark Blue Backgrounds */
-@keyframes darkBlueShimmer {
+/* Animated Neutral Dark Backgrounds */
+@keyframes darkShimmer {
   0% {
     background-position: 0% 50%;
   }
@@ -34,17 +34,17 @@
 }
 
 .bg-animated-dark-blue {
-  background: linear-gradient(135deg, #051329 0%, #092652 25%, #0e3b79 50%, #082046 75%, #040f21 100%);
+  background: linear-gradient(135deg, #09090b 0%, #18181b 25%, #27272a 50%, #18181b 75%, #000000 100%);
   background-size: 250% 250%;
-  animation: darkBlueShimmer 12s ease infinite;
+  animation: darkShimmer 12s ease infinite;
 }
 
 .bg-animated-dark-blue-glow {
-  background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.18) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.22) 0%, transparent 50%),
-              linear-gradient(145deg, #06152e 0%, #0a254d 50%, #040e21 100%);
+  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+              linear-gradient(145deg, #09090b 0%, #18181b 50%, #000000 100%);
   background-size: 200% 200%;
-  animation: darkBlueShimmer 10s ease infinite;
+  animation: darkShimmer 10s ease infinite;
 }
 
 /* Custom Scrollbar */
@@ -53,21 +53,21 @@
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #080c14;
+  background: #000000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #27272a;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #64748b;
+  background: #52525b;
 }
 
 /* Glassmorphism helpers */
 .glass-panel {
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(9, 9, 11, 0.85);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .glass-panel-light {

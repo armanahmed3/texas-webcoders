@@ -39,14 +39,14 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({ onNavigateSlide,
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isWhite
-              ? 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
-              : 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
+              ? 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
+              : 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
         }`}
       >
         {/* Decorative Background Accents */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isWhite ? 'bg-cyan-400/10' : 'bg-cyan-500/10'
+            isWhite ? 'bg-zinc-200/40' : 'bg-white/5'
           }`}
         />
         <div

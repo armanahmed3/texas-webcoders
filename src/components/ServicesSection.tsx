@@ -38,19 +38,19 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isBlack
-              ? 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
-              : 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
+              ? 'bg-[#09090b] text-white border border-zinc-800 shadow-2xl'
+              : 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
         }`}
       >
         {/* Decorative Background Accents */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isDarkBlue || isBlack ? 'bg-white/5' : 'bg-slate-200/40'
+            isDarkBlue || isBlack ? 'bg-white/5' : 'bg-zinc-200/40'
           }`}
         />
         <div
           className={`absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isDarkBlue || isBlack ? 'bg-slate-800/20' : 'bg-slate-200/30'
+            isDarkBlue || isBlack ? 'bg-zinc-900/40' : 'bg-zinc-200/30'
           }`}
         />
 
@@ -64,12 +64,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             className="text-center md:text-left mb-16"
           >
             <span className={`text-xs font-semibold uppercase tracking-widest mb-2 block font-mono ${
-              isDarkBlue || isBlack ? 'text-zinc-400' : 'text-slate-700'
+              isDarkBlue || isBlack ? 'text-zinc-400' : 'text-zinc-600'
             }`}>
               Our Custom Engineering Services • Texas WebCoders
             </span>
             <h2 className={`text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 uppercase tracking-tight font-['Montserrat',sans-serif] ${
-              isDarkBlue || isBlack ? 'text-white' : 'text-slate-950'
+              isDarkBlue || isBlack ? 'text-white' : 'text-zinc-950'
             }`}>
               Crafting Digital Excellence Across All Channels
             </h2>
@@ -92,8 +92,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 onClick={() => handleOpenSpecs(service)}
                 className={`p-8 rounded-3xl transition-all duration-300 flex flex-col justify-between relative group shadow-lg cursor-pointer ${
                   isDarkBlue || isBlack
-                    ? 'bg-slate-950/90 border border-slate-800 hover:border-white hover:shadow-2xl text-white'
-                    : 'bg-white border border-zinc-200 hover:border-slate-950 hover:shadow-xl text-slate-900'
+                    ? 'bg-zinc-950 border border-zinc-800 hover:border-white hover:shadow-2xl text-white'
+                    : 'bg-white border border-zinc-200 hover:border-zinc-950 hover:shadow-xl text-zinc-900'
                 }`}
               >
                 <div>
@@ -103,8 +103,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                     </div>
                     <span className={`text-[10px] font-mono font-semibold px-3 py-1 rounded-full border uppercase tracking-wider ${
                       isDarkBlue || isBlack
-                        ? 'text-slate-300 bg-slate-900/90 border-slate-700'
-                        : 'text-slate-700 bg-zinc-100 border-zinc-300'
+                        ? 'text-zinc-300 bg-zinc-900 border-zinc-700'
+                        : 'text-zinc-700 bg-zinc-100 border-zinc-300'
                     }`}>
                       Texas WebCoders
                     </span>
@@ -113,13 +113,13 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   <h3 className={`text-xl sm:text-2xl font-bold mb-3 font-['Montserrat'] transition-colors ${
                     isDarkBlue || isBlack
                       ? 'text-white group-hover:text-zinc-200'
-                      : 'text-slate-950 group-hover:text-zinc-800'
+                      : 'text-zinc-950 group-hover:text-zinc-800'
                   }`}>
                     {service.title}
                   </h3>
 
                   <p className={`text-xs sm:text-sm leading-relaxed mb-6 ${
-                    isDarkBlue || isBlack ? 'text-slate-400' : 'text-zinc-600'
+                    isDarkBlue || isBlack ? 'text-zinc-400' : 'text-zinc-600'
                   }`}>
                     {service.description}
                   </p>
@@ -128,7 +128,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 <div>
                   {/* Features tags with White Checkmarks */}
                   <div className={`flex flex-wrap gap-1.5 mb-6 pt-4 border-t ${
-                    isDarkBlue || isBlack ? 'border-slate-800' : 'border-zinc-200'
+                    isDarkBlue || isBlack ? 'border-zinc-800' : 'border-zinc-200'
                   }`}>
                     {service.features.map((feat, i) => (
                       <span

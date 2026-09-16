@@ -174,10 +174,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-              className="fixed top-0 bottom-0 right-0 w-[88vw] max-w-sm sm:max-w-md h-full h-[100dvh] bg-[#080c14] border-l border-slate-800 text-white shadow-2xl flex flex-col justify-between overflow-hidden z-10"
+              className="fixed top-0 bottom-0 right-0 w-[88vw] max-w-sm sm:max-w-md h-full h-[100dvh] bg-zinc-950 border-l border-zinc-800 text-white shadow-2xl flex flex-col justify-between overflow-hidden z-10"
             >
               {/* Drawer Top Header */}
-              <div className="p-4 sm:p-5 border-b border-slate-800/90 flex items-center justify-between bg-slate-950/90">
+              <div className="p-4 sm:p-5 border-b border-zinc-800/90 flex items-center justify-between bg-zinc-900/90">
                 <div className="flex items-center gap-2">
                   <TexasWebcodersLogo size="sm" variant="dark" />
                 </div>
@@ -300,7 +300,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </AnimatePresence>
 
       {/* Mobile Floating Bottom Bar for Ultra-Fast Thumb Navigation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-[#080c14]/95 border-t border-slate-800/90 backdrop-blur-xl px-2 py-2 flex items-center justify-around shadow-2xl">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 bg-zinc-950/95 border-t border-zinc-800/90 backdrop-blur-xl px-2 py-2 flex items-center justify-around shadow-2xl">
         {/* Menu Button - Opens Sidebar Drawer */}
         <button
           onClick={() => setMobileMenuOpen(true)}

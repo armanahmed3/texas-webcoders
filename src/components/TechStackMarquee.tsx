@@ -260,20 +260,20 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
           isNone
             ? 'bg-transparent border-white/10 text-white shadow-none'
             : isWhite
-              ? 'bg-white border-zinc-200 text-slate-900 shadow-zinc-900/5'
-              : 'bg-[#080c14] border-slate-800 text-white shadow-2xl'
+              ? 'bg-white border-zinc-200 text-zinc-900 shadow-zinc-900/5'
+              : 'bg-zinc-950 border-zinc-800 text-white shadow-2xl'
         }`}
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-800/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-zinc-800/20 rounded-full blur-3xl pointer-events-none" />
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-3">
           <div
             className={`inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-medium uppercase tracking-widest font-mono ${
               isWhite
-                ? 'bg-zinc-100 border border-zinc-300 text-slate-900'
-                : 'bg-slate-900 border border-slate-700 text-white'
+                ? 'bg-zinc-100 border border-zinc-300 text-zinc-900'
+                : 'bg-zinc-900 border border-zinc-700 text-white'
             }`}
           >
             <Workflow className="w-4 h-4 text-white" />
@@ -286,7 +286,7 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className={`text-2xl sm:text-4xl font-semibold font-['Montserrat',sans-serif] uppercase tracking-tight ${
-              isWhite ? 'text-slate-950' : 'text-white'
+              isWhite ? 'text-zinc-950' : 'text-white'
             }`}
           >
             Engineered Across All Modern Skills & Technologies
@@ -294,7 +294,7 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
 
           <p
             className={`text-xs sm:text-sm font-normal leading-relaxed ${
-              isWhite ? 'text-zinc-600' : 'text-slate-300'
+              isWhite ? 'text-zinc-600' : 'text-zinc-400'
             }`}
           >
             Every technology skill scrolls continuously in real time. Hover over any skill to pause the animation and interact in 3D.
@@ -308,8 +308,8 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
           className="space-y-4 sm:space-y-6 mb-12 relative overflow-hidden py-2"
         >
           {/* Gradient Edge Masks for Smooth Fade Out */}
-          <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-[#080c14] to-transparent z-10 pointer-events-none" />
-          <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-[#080c14] to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
+          <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
 
           {/* Row 1: Auto-scroll Left */}
           <div className="flex gap-4 sm:gap-5 overflow-hidden w-full">

@@ -74,19 +74,19 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isBlack
-              ? 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
-              : 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
+              ? 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
+              : 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
         }`}
       >
         {/* Decorative Background Glow */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isNone || isBlack ? 'bg-cyan-500/10' : 'bg-cyan-400/15'
+            isNone || isBlack ? 'bg-white/5' : 'bg-zinc-200/40'
           }`}
         />
         <div
           className={`absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isNone || isBlack ? 'bg-blue-600/10' : 'bg-blue-300/20'
+            isNone || isBlack ? 'bg-zinc-800/20' : 'bg-zinc-200/30'
           }`}
         />
 

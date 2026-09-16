@@ -89,13 +89,13 @@ export const TrustIndicatorsSection: React.FC<TrustIndicatorsSectionProps> = ({
           isNone
             ? 'bg-transparent text-white border border-white/10 shadow-none'
             : isBlack
-              ? 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
-              : 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
+              ? 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
+              : 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
         }`}
       >
         {/* Background Subtle Accent */}
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-slate-800/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-zinc-800/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10">
           {/* Top Header Signature */}

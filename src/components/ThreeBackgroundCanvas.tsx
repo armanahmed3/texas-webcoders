@@ -18,24 +18,24 @@ export const ThreeBackgroundCanvas: React.FC<ThreeBackgroundCanvasProps> = ({ ac
   const ringsRef = useRef<THREE.Group | null>(null);
   const cursorLightRef = useRef<THREE.PointLight | null>(null);
 
-  // Target colors for different slides (Sophisticated Monochrome & Silver Tones)
+  // Target colors for different slides (Sophisticated Pure Monochrome & Neutral Silver Tones)
   const slideColors = [
-    { primary: 0xffffff, secondary: 0x94a3b8, bgTint: 0x080c14 }, // Slide 0: Crisp White & Slate
-    { primary: 0xe2e8f0, secondary: 0x64748b, bgTint: 0x060b14 }, // Slide 1: Silver Portfolio
-    { primary: 0xf8fafc, secondary: 0x94a3b8, bgTint: 0x060e18 }, // Slide 2: White Process
-    { primary: 0xe2e8f0, secondary: 0x64748b, bgTint: 0x090b18 }, // Slide 3: Silver Services
-    { primary: 0xffffff, secondary: 0x94a3b8, bgTint: 0x080c18 }, // Slide 4: White Packages
-    { primary: 0xe2e8f0, secondary: 0x475569, bgTint: 0x080e1a }  // Slide 5: Silver Contact
+    { primary: 0xffffff, secondary: 0xa1a1aa, bgTint: 0x000000 }, // Slide 0: Crisp White & Charcoal
+    { primary: 0xf4f4f5, secondary: 0x71717a, bgTint: 0x000000 }, // Slide 1: Silver Portfolio
+    { primary: 0xffffff, secondary: 0xa1a1aa, bgTint: 0x000000 }, // Slide 2: White Process
+    { primary: 0xf4f4f5, secondary: 0x71717a, bgTint: 0x000000 }, // Slide 3: Silver Services
+    { primary: 0xffffff, secondary: 0xa1a1aa, bgTint: 0x000000 }, // Slide 4: White Packages
+    { primary: 0xf4f4f5, secondary: 0x71717a, bgTint: 0x000000 }  // Slide 5: Silver Contact
   ];
 
   useEffect(() => {
     const container = mountRef.current;
     if (!container) return;
 
-    // Scene Setup
+    // Scene Setup - Pure Neutral Black Fog
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    scene.fog = new THREE.FogExp2(0x080c14, 0.015);
+    scene.fog = new THREE.FogExp2(0x000000, 0.008);
 
     // Camera
     const camera = new THREE.PerspectiveCamera(
@@ -46,16 +46,20 @@ export const ThreeBackgroundCanvas: React.FC<ThreeBackgroundCanvasProps> = ({ ac
     );
     camera.position.z = 22;
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    // Optimized High-Performance Renderer
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     rendererRef.current = renderer;
 
     container.appendChild(renderer.domElement);
 
-    // --- Particles Constellation ---
-    const particleCount = 850;
+    // --- Particles Constellation (Optimized Count) ---
+    const particleCount = 450;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);

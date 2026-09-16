@@ -35,7 +35,7 @@ const DEFAULT_BLOGS: BlogArticle[] = [
     category: 'Web Architecture',
     readTime: '6 min read',
     date: 'August 24, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'In 2026, web application speed directly dictates Google rankings and checkout conversion rates. Discover how Texas WebCoders builds zero-latency edge architectures.',
     content: [
       'Over 53% of mobile users immediately bounce from sites taking longer than 1.8 seconds to load. For enterprise web applications and regional Texas businesses, every 100ms latency reduction converts directly into a 7.4% increase in sales inquiries.',
@@ -57,7 +57,7 @@ const DEFAULT_BLOGS: BlogArticle[] = [
     category: 'Mobile Engineering',
     readTime: '8 min read',
     date: 'August 23, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_2_mobile_architecture.jpg',
+    image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Building dual iOS and Android apps historically required separate teams. Discover how modern React Native Fabric & TurboModules achieve native 120Hz performance at 50% lower cost.',
     content: [
       'With the introduction of the Fabric C++ renderer and TurboModules, modern React Native has completely eliminated the legacy asynchronous JavaScript bridge. Native C++ bindings now allow direct synchronous memory sharing with iOS Metal and Android Vulkan graphic layers.',
@@ -79,7 +79,7 @@ const DEFAULT_BLOGS: BlogArticle[] = [
     category: 'AI & Automation',
     readTime: '7 min read',
     date: 'August 22, 2026',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&auto=format&fit=crop&q=80',
     excerpt: 'Simple chatbots are obsolete. Explore how modern enterprises deploy self-correcting multi-agent AI networks to automate lead qualification and operations 24/7.',
     content: [
       'The true enterprise power of AI is not isolated chat bubbles—it is proactive multi-agent orchestration. By assigning specialized autonomous agents to customer intake, invoice matching, CRM data enrichment, and calendar scheduling, companies save hundreds of labor hours each month.',
@@ -102,7 +102,7 @@ const TOPIC_BLUEPRINTS = [
     category: 'SEO & Growth Engineering',
     title: 'High-Intent Local Search Domination: How East Texas Leaders Outrank National Competitors in 2026',
     subtitle: 'Technical schema markup, Core Web Vitals optimization, and geo-targeted landing page architectures that drive measurable phone calls.',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&auto=format&fit=crop&q=80',
     readTime: '7 min read',
     excerpt: 'Ranking #1 in local Texas markets requires more than keywords. Discover the exact technical SEO framework Texas WebCoders uses to dominate Google Maps and organic SERP.',
     content: [
@@ -121,7 +121,7 @@ const TOPIC_BLUEPRINTS = [
     category: 'E-Commerce Engineering',
     title: 'Headless E-Commerce Architecture: Scaling to $10M+ ARR with 300ms Global Checkout Speeds',
     subtitle: 'Transitioning from monolithic store platforms to decoupled Next.js & Shopify Storefront API architectures for maximum checkout conversion.',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_2_mobile_architecture.jpg',
+    image: 'https://images.unsplash.com/photo-1556742049-0a67c5574f73?w=1200&auto=format&fit=crop&q=80',
     readTime: '8 min read',
     excerpt: 'Every second of checkout friction costs e-commerce brands thousands in lost revenue. Learn how headless commerce architectures eliminate cart abandonment.',
     content: [
@@ -140,7 +140,7 @@ const TOPIC_BLUEPRINTS = [
     category: 'Enterprise Software',
     title: 'Custom CRM vs Off-the-Shelf SaaS: The True 5-Year Total Cost of Ownership (TCO) Analysis',
     subtitle: 'Why growing regional enterprises are replacing $50k/year Salesforce licensing fees with proprietary, asset-backed software.',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=1200&auto=format&fit=crop&q=80',
     readTime: '9 min read',
     excerpt: 'Per-user monthly SaaS fees drain corporate budgets while constraining custom workflows. Explore the financial and operational case for proprietary enterprise software.',
     content: [
@@ -159,7 +159,7 @@ const TOPIC_BLUEPRINTS = [
     category: 'Cloud & DevOps',
     title: 'Zero-Downtime Continuous Deployment with Docker Containers & Automated CI/CD Pipelines',
     subtitle: 'How modern engineering teams deploy production code 50+ times per week with automated end-to-end testing and instant rollback capabilities.',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_1_serverless_edge.jpg',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&auto=format&fit=crop&q=80',
     readTime: '6 min read',
     excerpt: 'Manual server deployments and late-night outages are things of the past. Discover our modern automated continuous delivery framework.',
     content: [
@@ -178,7 +178,7 @@ const TOPIC_BLUEPRINTS = [
     category: 'Cybersecurity & Compliance',
     title: 'Securing Modern Web Applications: Essential SOC2, HIPAA & GDPR Architectural Safeguards',
     subtitle: 'A practical security blueprint covering AES-256 data encryption at rest, OAuth2 RBAC, and automated vulnerability audits.',
-    image: '/portfolio-media/texaswebcoders/blogs/blog_3_ai_agents.jpg',
+    image: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&auto=format&fit=crop&q=80',
     readTime: '7 min read',
     excerpt: 'In an era of rising cyber threats, robust application security is non-negotiable. Learn how Texas WebCoders bakes bank-grade compliance into every software build.',
     content: [

@@ -100,14 +100,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
       <div
         className={`max-w-7xl mx-auto w-full rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-10 lg:p-14 relative overflow-hidden transition-colors duration-300 ${
           isBlack
-            ? 'bg-[#080c14] text-white border border-slate-800 shadow-2xl'
-            : 'bg-white text-slate-900 border border-zinc-200 shadow-zinc-900/5'
+            ? 'bg-zinc-950 text-white border border-zinc-800 shadow-2xl'
+            : 'bg-white text-zinc-900 border border-zinc-200 shadow-zinc-900/5'
         }`}
       >
         {/* Decorative Background Glow Accents */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isBlack ? 'bg-white/5' : 'bg-slate-200/30'
+            isBlack ? 'bg-white/5' : 'bg-zinc-200/30'
           }`}
         />
         <div
