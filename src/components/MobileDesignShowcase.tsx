@@ -50,10 +50,10 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
       <div className="absolute -inset-4 bg-gradient-to-r from-white/10 via-zinc-400/10 to-white/10 rounded-3xl blur-2xl opacity-50 animate-pulse pointer-events-none" />
 
       {/* Titanium Frame Smartphone Body */}
-      <div className="relative z-10 w-[280px] sm:w-[320px] h-[540px] bg-slate-950 border-[8px] border-zinc-800 rounded-[48px] shadow-2xl shadow-black ring-1 ring-white/20 overflow-hidden flex flex-col group transition-transform duration-500 hover:scale-[1.02]">
+      <div className="relative z-10 w-[280px] sm:w-[320px] h-[540px] bg-zinc-950 border-[8px] border-zinc-800 rounded-[48px] shadow-2xl shadow-black ring-1 ring-white/20 overflow-hidden flex flex-col group transition-transform duration-500 hover:scale-[1.02]">
         
         {/* Top Speaker & Camera Notch (Dynamic Island) */}
-        <div className="absolute top-0 inset-x-0 h-7 bg-slate-950 z-30 flex items-center justify-center pt-1">
+        <div className="absolute top-0 inset-x-0 h-7 bg-zinc-950 z-30 flex items-center justify-center pt-1">
           <div className="w-24 h-4 bg-black rounded-full flex items-center justify-between px-3 border border-zinc-800">
             <div className="w-2.5 h-2.5 rounded-full bg-zinc-900 ring-1 ring-zinc-700" />
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -61,7 +61,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
         </div>
 
         {/* Mobile Status Bar */}
-        <div className="absolute top-7 inset-x-0 px-6 py-1 flex items-center justify-between text-[10px] text-slate-400 font-mono z-20 bg-slate-950/90 backdrop-blur-sm">
+        <div className="absolute top-7 inset-x-0 px-6 py-1 flex items-center justify-between text-[10px] text-zinc-400 font-mono z-20 bg-zinc-950/90 backdrop-blur-sm">
           <span>09:41</span>
           <div className="flex items-center gap-1.5 text-white font-medium">
             <span className="text-[9px]">5G</span>
@@ -82,7 +82,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
               referrerPolicy="no-referrer"
               className="absolute inset-0 w-full h-full object-cover brightness-90 group-hover:scale-105 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-slate-950/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-950/50 to-black/30" />
 
             {/* Header Badge */}
             <div className="relative z-10 flex items-center justify-between pt-1">
@@ -90,7 +90,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
                 <Video className="w-3 h-3 text-white" />
                 <span>Mobile App Showcase</span>
               </span>
-              <span className="text-[9px] font-medium uppercase text-slate-950 bg-white px-2 py-0.5 rounded font-['Montserrat']">
+              <span className="text-[9px] font-medium uppercase text-black bg-white px-2 py-0.5 rounded font-['Montserrat']">
                 Texas WebCoders
               </span>
             </div>
@@ -108,7 +108,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
                 >
                   <div className="flex items-center gap-2">
                     <span className="text-lg">{videoFeatures[activeVideoIndex].icon}</span>
-                    <span className="text-[9px] font-mono font-medium text-slate-300 uppercase">
+                    <span className="text-[9px] font-mono font-medium text-zinc-300 uppercase">
                       {videoFeatures[activeVideoIndex].tag}
                     </span>
                   </div>
@@ -147,7 +147,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
               <span>{isPlaying ? 'Pause Demo' : 'Play Demo'}</span>
             </button>
 
-            <div className="flex items-center gap-1 text-slate-300 font-mono text-[9px]">
+            <div className="flex items-center gap-1 text-zinc-300 font-mono text-[9px]">
               <Sparkles className="w-3 h-3 text-white" />
               <span>Real Human Demo</span>
             </div>
@@ -171,7 +171,7 @@ export const MobileDesignShowcase: React.FC<MobileDesignShowcaseProps> = ({ clas
         </div>
         <div>
           <span className="block text-[11px] text-white font-medium font-['Montserrat']">Texas WebCoders Apps</span>
-          <span className="block text-[9px] text-slate-400">iOS & Android Custom Native Apps</span>
+          <span className="block text-[9px] text-zinc-400">iOS & Android Custom Native Apps</span>
         </div>
       </motion.div>
     </div>

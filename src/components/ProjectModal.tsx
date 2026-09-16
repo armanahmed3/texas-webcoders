@@ -117,21 +117,21 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-slate-950 border border-slate-800 rounded-3xl max-w-5xl w-full max-h-[94vh] overflow-y-auto shadow-2xl flex flex-col my-auto"
+        className="bg-zinc-950 border border-zinc-800 rounded-3xl max-w-5xl w-full max-h-[94vh] overflow-y-auto shadow-2xl flex flex-col my-auto"
       >
         {/* Header Bar */}
-        <div className="p-5 sm:p-6 border-b border-slate-800 flex items-center justify-between sticky top-0 bg-slate-950/95 backdrop-blur-md z-30">
+        <div className="p-5 sm:p-6 border-b border-zinc-800 flex items-center justify-between sticky top-0 bg-zinc-950/95 backdrop-blur-md z-30">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest bg-slate-900 border border-slate-700 px-2.5 py-0.5 rounded-full font-['Montserrat']">
+              <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-widest bg-zinc-900 border border-zinc-700 px-2.5 py-0.5 rounded-full font-['Montserrat']">
                 {project.category}
               </span>
               {project.subCategory && (
-                <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-slate-800 border border-slate-700 px-2.5 py-0.5 rounded-full font-['Montserrat']">
+                <span className="text-[10px] font-bold text-white uppercase tracking-widest bg-zinc-800 border border-zinc-700 px-2.5 py-0.5 rounded-full font-['Montserrat']">
                   {project.subCategory}
                 </span>
               )}
-              <span className="text-xs text-slate-400 font-mono">
+              <span className="text-xs text-zinc-400 font-mono">
                 {project.year}
               </span>
             </div>
@@ -143,12 +143,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           <div className="flex items-center gap-3">
             {/* Viewport Switcher (for interactive responsive web projects only) */}
             {isWebsiteProject && (
-              <div className="hidden sm:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-slate-800">
+              <div className="hidden sm:flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-zinc-800">
                 <button
                   onClick={() => setDeviceMode('desktop')}
                   title="Desktop Viewport"
                   className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    deviceMode === 'desktop' ? 'bg-white text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
+                    deviceMode === 'desktop' ? 'bg-white text-black font-bold' : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   <Monitor className="w-4 h-4" />
@@ -157,7 +157,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   onClick={() => setDeviceMode('tablet')}
                   title="Tablet Viewport"
                   className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    deviceMode === 'tablet' ? 'bg-white text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
+                    deviceMode === 'tablet' ? 'bg-white text-black font-bold' : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   <Tablet className="w-4 h-4" />
@@ -166,7 +166,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   onClick={() => setDeviceMode('mobile')}
                   title="Mobile Viewport"
                   className={`p-2 rounded-lg transition-colors cursor-pointer ${
-                    deviceMode === 'mobile' ? 'bg-white text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
+                    deviceMode === 'mobile' ? 'bg-white text-black font-bold' : 'text-zinc-400 hover:text-white'
                   }`}
                 >
                   <Smartphone className="w-4 h-4" />
@@ -186,11 +186,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         {/* Content Body */}
         <div className="p-5 sm:p-8 space-y-8">
           {/* Device Mockup Frame / Video Showcase Container */}
-          <div className="bg-slate-900/90 border border-slate-800 rounded-2xl p-3 sm:p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
+          <div className="bg-zinc-900/90 border border-zinc-800 rounded-2xl p-3 sm:p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
             
             {/* Video Player Display */}
             {isVideo ? (
-              <div className="w-full max-w-4xl rounded-xl overflow-hidden bg-black border border-slate-800 shadow-2xl">
+              <div className="w-full max-w-4xl rounded-xl overflow-hidden bg-black border border-zinc-800 shadow-2xl">
                 <video
                   src={project.videoUrl}
                   poster={project.imageUrl}
@@ -207,7 +207,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="w-full flex flex-col items-center">
                 <div 
                   ref={scrollContainerRef}
-                  className={`transition-all duration-300 overflow-y-auto border border-slate-800 rounded-2xl shadow-2xl bg-slate-950 ${deviceDimensions[deviceMode]}`}
+                  className={`transition-all duration-300 overflow-y-auto border border-zinc-800 rounded-2xl shadow-2xl bg-zinc-950 ${deviceDimensions[deviceMode]}`}
                 >
                   <img
                     src={project.imageUrl}
@@ -226,19 +226,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <div className="mt-3 flex items-center gap-3">
                   <button
                     onClick={() => setIsAutoScrollActive(!isAutoScrollActive)}
-                    className="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-700 shadow-md"
+                    className="px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer border border-zinc-700 shadow-md"
                   >
                     {isAutoScrollActive ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                     <span>{isAutoScrollActive ? 'Pause Auto-Scroll' : 'Resume Auto-Scroll'}</span>
                   </button>
-                  <span className="text-xs text-slate-400">
+                  <span className="text-xs text-zinc-400">
                     Scroll mouse wheel inside the frame to inspect manually.
                   </span>
                 </div>
               </div>
             ) : (
               /* Graphic Design, Logo, Book Cover, Typography, Packaging & 3D Render Pristine Full-View */
-              <div className="w-full flex flex-col items-center justify-center p-2 sm:p-5 bg-slate-950/90 rounded-2xl border border-slate-800 shadow-2xl">
+              <div className="w-full flex flex-col items-center justify-center p-2 sm:p-5 bg-zinc-950/90 rounded-2xl border border-zinc-800 shadow-2xl">
                 <img
                   src={project.imageUrl}
                   alt={project.title}
@@ -257,11 +257,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           {/* Stats Bar */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {project.stats.map((stat, i) => (
-              <div key={i} className="glass-panel p-4 rounded-xl border border-slate-800 text-center">
+              <div key={i} className="glass-panel p-4 rounded-xl border border-zinc-800 text-center">
                 <div className="text-2xl font-bold text-white font-['Montserrat']">
                   {stat.value}
                 </div>
-                <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider mt-1">
+                <div className="text-xs text-zinc-400 font-semibold uppercase tracking-wider mt-1">
                   {stat.label}
                 </div>
               </div>
@@ -275,7 +275,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 <h3 className="text-xl font-bold text-white font-['Montserrat'] mb-2">
                   Project Overview
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed">
+                <p className="text-zinc-300 text-sm leading-relaxed">
                   {project.overview || project.description}
                 </p>
               </div>
@@ -287,7 +287,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {project.keyFeatures.map((feat, i) => (
-                    <div key={i} className="flex items-start gap-2.5 bg-slate-900/90 border border-slate-800 p-3.5 rounded-xl text-xs text-slate-200">
+                    <div key={i} className="flex items-start gap-2.5 bg-zinc-900/90 border border-zinc-800 p-3.5 rounded-xl text-xs text-zinc-200">
                       <CheckCircle className="w-4 h-4 text-white shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
@@ -296,10 +296,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </div>
             </div>
 
-            <div className="space-y-6 glass-panel p-6 rounded-2xl border border-slate-800 flex flex-col justify-between">
+            <div className="space-y-6 glass-panel p-6 rounded-2xl border border-zinc-800 flex flex-col justify-between">
               <div className="space-y-5">
                 <div>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-1">
+                  <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block mb-1">
                     Client & Year
                   </span>
                   <p className="text-base font-bold text-white font-['Montserrat']">
@@ -308,12 +308,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
 
                 <div>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">
+                  <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider block mb-2">
                     Tech Stack Applied
                   </span>
                   <div className="flex flex-wrap gap-1.5">
                     {project.techStack.map((tech) => (
-                      <span key={tech} className="px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs font-medium">
+                      <span key={tech} className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-700 text-zinc-200 text-xs font-medium">
                         {tech}
                       </span>
                     ))}
@@ -321,13 +321,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
               </div>
 
-              <div className="pt-5 border-t border-slate-800 space-y-3">
+              <div className="pt-5 border-t border-zinc-800 space-y-3">
                 <button
                   onClick={() => {
                     onOrderSimilar(project);
                     onClose();
                   }}
-                  className="w-full bg-white hover:bg-zinc-200 text-slate-950 font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer transition-all"
+                  className="w-full bg-white hover:bg-zinc-200 text-black font-bold py-3.5 rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer transition-all"
                 >
                   <span>Request Similar Build</span>
                   <ArrowRight className="w-4 h-4" />

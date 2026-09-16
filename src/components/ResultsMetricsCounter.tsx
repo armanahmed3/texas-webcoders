@@ -67,7 +67,7 @@ export const ResultsMetricsCounter: React.FC = () => {
       prefix: '',
       decimals: 0,
       icon: CheckCircle2,
-      color: 'text-slate-950',
+      color: 'text-black',
       description: 'Enterprise web apps, custom portals & mobile tools delivered on schedule.'
     },
     {
@@ -78,7 +78,7 @@ export const ResultsMetricsCounter: React.FC = () => {
       prefix: '+',
       decimals: 0,
       icon: TrendingUp,
-      color: 'text-slate-900',
+      color: 'text-zinc-900',
       description: 'Measurable expansion in organic traffic, user retention & conversion rates.'
     },
     {
@@ -89,7 +89,7 @@ export const ResultsMetricsCounter: React.FC = () => {
       prefix: '',
       decimals: 2,
       icon: Zap,
-      color: 'text-slate-950',
+      color: 'text-black',
       description: 'Sub-second initial paint times verified by Google Lighthouse audit standard.'
     },
     {
@@ -100,7 +100,7 @@ export const ResultsMetricsCounter: React.FC = () => {
       prefix: '',
       decimals: 1,
       icon: Users,
-      color: 'text-slate-900',
+      color: 'text-zinc-900',
       description: 'Long-term ongoing support contracts and repeat enterprise client partnerships.'
     }
   ];
@@ -114,9 +114,9 @@ export const ResultsMetricsCounter: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-slate-950 text-xs font-medium uppercase tracking-wider font-['Montserrat',sans-serif]"
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-black text-xs font-medium uppercase tracking-wider font-['Montserrat',sans-serif]"
           >
-            <BarChart3 className="w-3.5 h-3.5 text-slate-800" />
+            <BarChart3 className="w-3.5 h-3.5 text-zinc-800" />
             <span>Proven Track Record • Verified Performance</span>
           </motion.div>
           <motion.h2
@@ -124,7 +124,7 @@ export const ResultsMetricsCounter: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-medium font-['Montserrat',sans-serif] uppercase tracking-tight text-slate-950"
+            className="text-2xl sm:text-3xl lg:text-4xl font-medium font-['Montserrat',sans-serif] uppercase tracking-tight text-black"
           >
             Results & Performance Metrics
           </motion.h2>
@@ -150,11 +150,11 @@ export const ResultsMetricsCounter: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-zinc-50/80 border border-zinc-200/90 hover:border-slate-950 p-6 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md group flex flex-col justify-between"
+                className="bg-zinc-50/80 border border-zinc-200/90 hover:border-black p-6 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md group flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-xl bg-slate-950 text-white group-hover:scale-110 transition-transform">
+                    <div className="p-2.5 rounded-xl bg-zinc-950 text-white group-hover:scale-110 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
                     <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-widest font-['Montserrat',sans-serif]">
@@ -171,7 +171,7 @@ export const ResultsMetricsCounter: React.FC = () => {
                     />
                   </div>
 
-                  <h3 className="font-medium text-sm sm:text-base text-slate-950 uppercase tracking-wider font-['Montserrat',sans-serif] mb-2">
+                  <h3 className="font-medium text-sm sm:text-base text-black uppercase tracking-wider font-['Montserrat',sans-serif] mb-2">
                     {metric.label}
                   </h3>
                 </div>

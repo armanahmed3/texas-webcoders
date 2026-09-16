@@ -96,16 +96,16 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white border border-zinc-200 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 my-auto text-slate-900"
+        className="bg-white border border-zinc-200 rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 my-auto text-zinc-900"
       >
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-zinc-200 pb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-zinc-100 border border-zinc-200 text-slate-950">
-              <Sliders className="w-5 h-5 text-slate-950" />
+            <div className="p-2.5 rounded-xl bg-zinc-100 border border-zinc-200 text-black">
+              <Sliders className="w-5 h-5 text-black" />
             </div>
             <div>
-              <h2 className="text-xl font-bold font-['Montserrat'] uppercase text-slate-950">
+              <h2 className="text-xl font-bold font-['Montserrat'] uppercase text-black">
                 Custom WebScope Estimator
               </h2>
               <p className="text-xs text-zinc-600">Configure your specific features and calculate real-time pricing.</p>
@@ -113,7 +113,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-slate-950 transition-colors cursor-pointer border border-zinc-200"
+            className="p-2 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-600 hover:text-black transition-colors cursor-pointer border border-zinc-200"
           >
             <X className="w-5 h-5" />
           </button>
@@ -125,7 +125,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
           <div className="bg-zinc-50 p-4 sm:p-5 rounded-2xl border border-zinc-200 space-y-2.5">
             <div className="flex justify-between items-center font-bold">
               <span className="text-zinc-800 font-['Montserrat']">Number of Custom Pages:</span>
-              <span className="text-slate-950 text-base font-bold font-mono bg-white px-3 py-1 rounded-lg border border-zinc-300 shadow-sm">
+              <span className="text-black text-base font-bold font-mono bg-white px-3 py-1 rounded-lg border border-zinc-300 shadow-sm">
                 {options.pagesCount} Pages
               </span>
             </div>
@@ -135,7 +135,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
               max="20"
               value={options.pagesCount}
               onChange={(e) => setOptions({ ...options, pagesCount: parseInt(e.target.value) })}
-              className="w-full accent-slate-950 cursor-pointer"
+              className="w-full accent-black cursor-pointer"
             />
             <div className="flex justify-between text-[11px] text-zinc-500 font-medium">
               <span>1 Page (Landing)</span>
@@ -162,7 +162,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
                     onClick={() => setOptions({ ...options, designStyle: style.id as any })}
                     className={`p-3.5 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between ${
                       isSelected
-                        ? 'bg-slate-950 border-slate-950 text-white shadow-md'
+                        ? 'bg-zinc-950 border-black text-white shadow-md'
                         : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-100'
                     }`}
                   >
@@ -172,7 +172,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
                         {style.desc}
                       </div>
                     </div>
-                    <div className={`text-xs font-mono font-bold mt-2 ${isSelected ? 'text-cyan-300' : 'text-slate-950'}`}>
+                    <div className={`text-xs font-mono font-bold mt-2 ${isSelected ? 'text-white' : 'text-black'}`}>
                       {style.price}
                     </div>
                   </button>
@@ -219,7 +219,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
                         </div>
                       </div>
                     </div>
-                    <span className={`text-xs font-mono font-bold ${isChecked ? 'text-cyan-300' : 'text-slate-950'}`}>
+                    <span className={`text-xs font-mono font-bold ${isChecked ? 'text-white' : 'text-black'}`}>
                       {item.price}
                     </span>
                   </div>
@@ -246,12 +246,12 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
                     onClick={() => setOptions({ ...options, deliverySpeed: sp.id as any })}
                     className={`p-3 rounded-2xl border text-center text-xs font-bold transition-all cursor-pointer ${
                       isSelected
-                        ? 'bg-slate-950 border-slate-950 text-white shadow-md'
+                        ? 'bg-zinc-950 border-black text-white shadow-md'
                         : 'bg-zinc-50 border-zinc-200 text-zinc-700 hover:border-zinc-400 hover:bg-zinc-100'
                     }`}
                   >
                     <div>{sp.label}</div>
-                    <div className={`text-[11px] font-mono mt-0.5 ${isSelected ? 'text-cyan-300' : 'text-slate-950'}`}>
+                    <div className={`text-[11px] font-mono mt-0.5 ${isSelected ? 'text-white' : 'text-black'}`}>
                       {sp.price}
                     </div>
                   </button>
@@ -262,7 +262,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
         </div>
 
         {/* Live Total & Direct FormSubmit Dispatch Form */}
-        <div className="bg-slate-950 p-6 rounded-2xl border border-slate-800 space-y-4 text-white shadow-xl">
+        <div className="bg-zinc-950 p-6 rounded-2xl border border-zinc-800 space-y-4 text-white shadow-xl">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
               <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider block font-['Montserrat']">
@@ -278,7 +278,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
 
             <button
               onClick={handleApply}
-              className="w-full sm:w-auto bg-white hover:bg-zinc-200 text-slate-950 font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all font-['Montserrat']"
+              className="w-full sm:w-auto bg-white hover:bg-zinc-200 text-black font-bold px-6 py-3 rounded-xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all font-['Montserrat']"
             >
               <span>Transfer Quote to Inquiry</span>
               <ArrowRight className="w-4 h-4" />
@@ -322,7 +322,7 @@ export const CustomQuoteCalculatorModal: React.FC<CustomQuoteCalculatorModalProp
                 <button
                   type="submit"
                   disabled={isSendingQuote || !userEmail.trim()}
-                  className="bg-cyan-500 hover:bg-cyan-400 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer flex-shrink-0 disabled:opacity-50"
+                  className="bg-white hover:bg-zinc-200 text-black font-bold text-xs px-4 py-2 rounded-xl transition-all cursor-pointer flex-shrink-0 disabled:opacity-50"
                 >
                   {isSendingQuote ? 'Sending...' : 'Email Quote Spec'}
                 </button>

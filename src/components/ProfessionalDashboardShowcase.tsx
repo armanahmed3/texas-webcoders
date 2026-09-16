@@ -18,15 +18,15 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
       {/* Top Header & Status Bar */}
       <div className="flex items-center justify-between border-b border-zinc-200/80 pb-4 mb-5">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-slate-950 text-cyan-400 flex items-center justify-center font-medium shadow-sm">
-            <Award className="w-5 h-5 text-cyan-400" />
+          <div className="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-medium shadow-sm">
+            <Award className="w-5 h-5 text-white" />
           </div>
           <div>
-            <div className="text-xs font-medium uppercase text-slate-950 font-['Montserrat'] tracking-wider">
+            <div className="text-xs font-medium uppercase text-black font-['Montserrat'] tracking-wider">
               Texas WebCoders
             </div>
             <div className="text-[11px] text-zinc-500 font-medium flex items-center gap-1">
-              <MapPin className="w-3 h-3 text-cyan-600" />
+              <MapPin className="w-3 h-3 text-black" />
               <span>Texas • USA</span>
             </div>
           </div>
@@ -43,10 +43,10 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
       {/* Main Card Heading */}
       <div className="space-y-2 mb-5">
         <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-zinc-100 text-zinc-800 text-[10px] font-mono font-medium uppercase tracking-wider">
-          <Sparkles className="w-3 h-3 text-cyan-600" />
+          <Sparkles className="w-3 h-3 text-black" />
           <span>Full-Stack Web & Mobile Engineering</span>
         </div>
-        <h3 className="text-xl font-medium text-slate-950 uppercase font-['Montserrat'] tracking-tight">
+        <h3 className="text-xl font-medium text-black uppercase font-['Montserrat'] tracking-tight">
           Executive Engineering Standards
         </h3>
         <p className="text-xs text-zinc-600 leading-relaxed font-normal">
@@ -56,8 +56,8 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
 
       {/* 4 Pillar Highlights Grid */}
       <div className="grid grid-cols-2 gap-3 mb-5">
-        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-slate-950 transition-colors">
-          <div className="flex items-center gap-2 mb-1 text-slate-950 font-medium text-xs uppercase font-['Montserrat']">
+        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-black transition-colors">
+          <div className="flex items-center gap-2 mb-1 text-black font-medium text-xs uppercase font-['Montserrat']">
             <Zap className="w-4 h-4 text-amber-500" />
             <span>Sub-0.5s Speed</span>
           </div>
@@ -66,8 +66,8 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
           </p>
         </div>
 
-        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-slate-950 transition-colors">
-          <div className="flex items-center gap-2 mb-1 text-slate-950 font-medium text-xs uppercase font-['Montserrat']">
+        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-black transition-colors">
+          <div className="flex items-center gap-2 mb-1 text-black font-medium text-xs uppercase font-['Montserrat']">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" />
             <span>100% Hand-Coded</span>
           </div>
@@ -76,9 +76,9 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
           </p>
         </div>
 
-        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-slate-950 transition-colors">
-          <div className="flex items-center gap-2 mb-1 text-slate-950 font-medium text-xs uppercase font-['Montserrat']">
-            <ShieldCheck className="w-4 h-4 text-cyan-600" />
+        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-black transition-colors">
+          <div className="flex items-center gap-2 mb-1 text-black font-medium text-xs uppercase font-['Montserrat']">
+            <ShieldCheck className="w-4 h-4 text-black" />
             <span>Bank Security</span>
           </div>
           <p className="text-[11px] text-zinc-600 font-normal leading-snug">
@@ -86,8 +86,8 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
           </p>
         </div>
 
-        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-slate-950 transition-colors">
-          <div className="flex items-center gap-2 mb-1 text-slate-950 font-medium text-xs uppercase font-['Montserrat']">
+        <div className="bg-zinc-50/90 border border-zinc-200/80 p-3.5 rounded-xl hover:border-black transition-colors">
+          <div className="flex items-center gap-2 mb-1 text-black font-medium text-xs uppercase font-['Montserrat']">
             <Star className="w-4 h-4 text-yellow-500" />
             <span>5.0 Client Rating</span>
           </div>
@@ -98,9 +98,9 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
       </div>
 
       {/* Lead Action Card Callout */}
-      <div className="bg-slate-950 text-white p-4.5 rounded-xl shadow-lg mb-4 space-y-3">
+      <div className="bg-zinc-950 text-white p-4.5 rounded-xl shadow-lg mb-4 space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-medium uppercase tracking-wider text-cyan-400 font-['Montserrat'] flex items-center gap-1.5">
+          <span className="text-xs font-medium uppercase tracking-wider text-white font-['Montserrat'] flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5" />
             <span>Free 15-Min Strategy Consultation</span>
           </span>
@@ -116,9 +116,9 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
         <div className="flex items-center gap-2 pt-1">
           <button
             onClick={onOpenAppointmentModal}
-            className="flex-1 bg-white hover:bg-zinc-200 text-slate-950 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase font-['Montserrat'] cursor-pointer"
+            className="flex-1 bg-white hover:bg-zinc-200 text-black text-xs font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase font-['Montserrat'] cursor-pointer"
           >
-            <Calendar className="w-3.5 h-3.5 text-cyan-600" />
+            <Calendar className="w-3.5 h-3.5 text-black" />
             <span>Book Meeting</span>
           </button>
 
@@ -126,7 +126,7 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
             onClick={onOpenQuoteCalculator}
             className="bg-white/10 hover:bg-white/20 text-white border border-white/20 text-xs font-medium py-2.5 px-3 rounded-lg transition-colors flex items-center justify-center gap-1.5 uppercase font-['Montserrat'] cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <Sparkles className="w-3.5 h-3.5 text-white" />
             <span>Estimate Price</span>
           </button>
         </div>
@@ -135,14 +135,14 @@ export const ProfessionalDashboardShowcase: React.FC<ProfessionalDashboardShowca
       {/* Direct Contact Footer Link */}
       <div className="flex items-center justify-between text-xs text-zinc-600 font-medium pt-1">
         <div className="flex items-center gap-1.5">
-          <Phone className="w-3.5 h-3.5 text-cyan-600" />
-          <a href="tel:+19032226022" className="font-medium text-slate-950 hover:text-cyan-600 transition-colors font-mono">
+          <Phone className="w-3.5 h-3.5 text-black" />
+          <a href="tel:+19032226022" className="font-medium text-black hover:text-white transition-colors font-mono">
             +1 9032226022
           </a>
         </div>
         <a
           href="mailto:info@texaswebcoders.com"
-          className="text-xs font-medium text-slate-950 hover:text-cyan-600 transition-colors"
+          className="text-xs font-medium text-black hover:text-white transition-colors"
         >
           info@texaswebcoders.com
         </a>

@@ -152,7 +152,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
           opacity: [0.1, 0.25, 0.1]
         }}
         transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -bottom-12 -left-12 w-80 h-80 bg-slate-400/10 rounded-full blur-3xl pointer-events-none"
+        className="absolute -bottom-12 -left-12 w-80 h-80 bg-zinc-400/10 rounded-full blur-3xl pointer-events-none"
       />
 
       {/* Interactive 3D Tilted Laptop Wrapper */}
@@ -165,15 +165,15 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
         className="relative z-10 w-full flex flex-col items-center font-['Montserrat',sans-serif]"
       >
         {/* ================= SLEEK HIGH-TECH SCREEN DISPLAY ================= */}
-        <div className="relative w-full bg-gradient-to-b from-slate-800 via-slate-900 to-slate-950 p-2.5 sm:p-3.5 rounded-3xl border border-slate-700/80 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group">
+        <div className="relative w-full bg-gradient-to-b from-zinc-800 via-zinc-900 to-black p-2.5 sm:p-3.5 rounded-3xl border border-zinc-700/80 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden group">
           {/* Top Camera Notch & Glossy Aluminum Edge */}
           <div className="absolute top-1.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 z-30">
-            <span className="w-1.5 h-1.5 rounded-full bg-slate-950 border border-slate-800 inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full bg-zinc-950 border border-zinc-800 inline-block" />
             <span className="w-1 h-1 rounded-full bg-emerald-500/80 inline-block animate-pulse" />
           </div>
 
           {/* Glowing Glass Screen Display Inner Box */}
-          <div className="relative w-full aspect-[16/10] bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-inner flex flex-col justify-between">
+          <div className="relative w-full aspect-[16/10] bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 shadow-inner flex flex-col justify-between">
             {/* Laptop Screen Active Portfolio Media Render */}
             <div className="relative flex-1 overflow-hidden group/screen bg-black">
               <AnimatePresence mode="wait">
@@ -201,14 +201,14 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                           e.stopPropagation();
                           setIsMuted(!isMuted);
                         }}
-                        className="absolute bottom-16 right-3 z-30 p-1.5 rounded-full bg-slate-950/80 text-white hover:bg-white hover:text-slate-950 transition-all border border-slate-700"
+                        className="absolute bottom-16 right-3 z-30 p-1.5 rounded-full bg-zinc-950/80 text-white hover:bg-white hover:text-black transition-all border border-zinc-700"
                         title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
                       >
                         {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
                       </button>
                     </div>
                   ) : activeProject.mediaType === 'auto-scroll' ? (
-                    <div className="relative w-full h-full overflow-hidden bg-slate-950">
+                    <div className="relative w-full h-full overflow-hidden bg-zinc-950">
                       <div className="w-full h-auto animate-auto-scroll">
                         <img
                           src={activeProject.imageUrl}
@@ -221,7 +221,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="relative w-full h-full overflow-hidden bg-slate-900 flex items-center justify-center">
+                    <div className="relative w-full h-full overflow-hidden bg-zinc-900 flex items-center justify-center">
                       <img
                         src={activeProject.imageUrl}
                         alt={activeProject.title}
@@ -234,13 +234,13 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                   )}
 
                   {/* Gradient bottom shade */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-950/40 to-transparent pointer-events-none" />
                 </motion.div>
               </AnimatePresence>
 
               {/* Overlay Badge Top Left */}
               <div className="absolute top-2.5 left-2.5 z-20 flex items-center gap-2">
-                <span className="px-2.5 py-1 rounded-md bg-slate-950/90 border border-slate-700 text-white text-[10px] font-bold font-['Montserrat',sans-serif] tracking-wider uppercase backdrop-blur-md shadow-lg">
+                <span className="px-2.5 py-1 rounded-md bg-zinc-950/90 border border-zinc-700 text-white text-[10px] font-bold font-['Montserrat',sans-serif] tracking-wider uppercase backdrop-blur-md shadow-lg">
                   {activeProject.badge}
                 </span>
               </div>
@@ -250,22 +250,22 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                 <span className="px-2 py-0.5 rounded bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-['Montserrat',sans-serif] font-bold backdrop-blur-md">
                   ⚡ {activeProject.speed}
                 </span>
-                <span className="px-2 py-0.5 rounded bg-slate-800 border border-slate-700 text-white text-[10px] font-['Montserrat',sans-serif] font-bold backdrop-blur-md">
+                <span className="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-white text-[10px] font-['Montserrat',sans-serif] font-bold backdrop-blur-md">
                   {activeProject.rating}
                 </span>
               </div>
 
               {/* Screen Bottom Details Overlay */}
-              <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent flex flex-col justify-end">
+              <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 z-20 bg-gradient-to-t from-black via-zinc-950/90 to-transparent flex flex-col justify-end">
                 <div className="flex items-end justify-between gap-2">
                   <div>
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block font-['Montserrat',sans-serif] mb-0.5">
+                    <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-['Montserrat',sans-serif] mb-0.5">
                       {activeProject.category}
                     </span>
                     <h3 className="text-sm sm:text-base font-extrabold text-white leading-tight font-['Montserrat',sans-serif] uppercase tracking-wide">
                       {activeProject.title}
                     </h3>
-                    <p className="text-[11px] text-slate-300 line-clamp-1 mt-0.5 font-['Montserrat',sans-serif]">
+                    <p className="text-[11px] text-zinc-300 line-clamp-1 mt-0.5 font-['Montserrat',sans-serif]">
                       {activeProject.subtitle}
                     </p>
                   </div>
@@ -274,7 +274,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                   <div className="flex items-center gap-1.5 flex-shrink-0">
                     <button
                       onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                      className="p-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-white hover:bg-white hover:text-slate-950 transition-all cursor-pointer"
+                      className="p-1.5 rounded-lg bg-zinc-900/90 border border-zinc-700 text-white hover:bg-white hover:text-black transition-all cursor-pointer"
                       title={isAutoPlaying ? 'Pause Slideshow' : 'Start Slideshow'}
                     >
                       {isAutoPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
@@ -285,7 +285,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                           (prev) => (prev - 1 + laptopProjects.length) % laptopProjects.length
                         )
                       }
-                      className="p-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-white hover:bg-white hover:text-slate-950 transition-all cursor-pointer"
+                      className="p-1.5 rounded-lg bg-zinc-900/90 border border-zinc-700 text-white hover:bg-white hover:text-black transition-all cursor-pointer"
                       title="Previous Uploaded Project"
                     >
                       <ChevronLeft className="w-3.5 h-3.5" />
@@ -294,7 +294,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                       onClick={() =>
                         setCurrentProjectIndex((prev) => (prev + 1) % laptopProjects.length)
                       }
-                      className="p-1.5 rounded-lg bg-slate-900/90 border border-slate-700 text-white hover:bg-white hover:text-slate-950 transition-all cursor-pointer"
+                      className="p-1.5 rounded-lg bg-zinc-900/90 border border-zinc-700 text-white hover:bg-white hover:text-black transition-all cursor-pointer"
                       title="Next Uploaded Project"
                     >
                       <ChevronRight className="w-3.5 h-3.5" />

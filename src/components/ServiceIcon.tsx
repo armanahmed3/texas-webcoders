@@ -106,8 +106,8 @@ export const ServiceIcon: React.FC<ServiceIconProps> = ({
   };
 
   const themeClasses = isLight
-    ? 'bg-zinc-100 border border-zinc-300 text-slate-950 group-hover:bg-slate-950 group-hover:text-white group-hover:border-slate-950 shadow-sm'
-    : 'bg-slate-900 border border-slate-700 text-white group-hover:bg-white group-hover:text-slate-950 group-hover:border-white shadow-md';
+    ? 'bg-zinc-100 border border-zinc-300 text-black group-hover:bg-black group-hover:text-white group-hover:border-black shadow-sm'
+    : 'bg-zinc-900 border border-zinc-800 text-white group-hover:bg-white group-hover:text-black group-hover:border-white shadow-md';
 
   return (
     <div

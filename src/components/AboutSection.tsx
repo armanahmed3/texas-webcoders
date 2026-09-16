@@ -88,12 +88,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
         {/* Decorative background glow */}
         <div
           className={`absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isWhite ? 'bg-slate-200/40' : 'bg-white/5'
+            isWhite ? 'bg-zinc-200/40' : 'bg-white/5'
           }`}
         />
         <div
           className={`absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isWhite ? 'bg-slate-200/30' : 'bg-slate-800/20'
+            isWhite ? 'bg-zinc-200/30' : 'bg-zinc-800/20'
           }`}
         />
 
@@ -105,7 +105,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className={`text-xs font-semibold uppercase tracking-widest mb-2 block font-['Montserrat'] ${
-                isWhite ? 'text-slate-600' : 'text-slate-300'
+                isWhite ? 'text-zinc-600' : 'text-zinc-300'
               }`}
             >
               Texas Engineering Firm • 5221 S Broadway Ave, Tyler, TX 75703
@@ -117,7 +117,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`text-2xl sm:text-4xl md:text-5xl font-semibold mb-4 uppercase tracking-tight font-['Montserrat',sans-serif] max-w-4xl mx-auto ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}
             >
               Engineering Reliable Digital Platforms for Texas Leaders
@@ -129,7 +129,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
               className={`max-w-3xl mx-auto text-sm sm:text-base leading-relaxed ${
-                isWhite ? 'text-zinc-600' : 'text-slate-300'
+                isWhite ? 'text-zinc-600' : 'text-zinc-300'
               }`}
             >
               Based at 5221 S Broadway Ave, Tyler, TX 75703, TexasWebCoders delivers tailored software engineering, conversion-focused web development, and localized search optimization. We partner directly with medical practices, legal counsel, commercial contractors, logistics companies, and retail operators across Smith County, Longview, and surrounding East Texas communities to build dependable digital systems that drive measurable client acquisition.
@@ -144,15 +144,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className={`p-6 rounded-2xl text-center border shadow-sm ${
-                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-slate-950/80 border-slate-800'
+                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-zinc-950/80 border-zinc-800'
               }`}
             >
               <div className={`text-3xl sm:text-4xl font-semibold font-mono tracking-tight ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 <StatCounter value={400} suffix="+" duration={2.2} />
               </div>
-              <div className="text-xs uppercase font-semibold tracking-wider text-slate-400 mt-1">Satisfied Clients</div>
+              <div className="text-xs uppercase font-semibold tracking-wider text-zinc-400 mt-1">Satisfied Clients</div>
             </motion.div>
 
             <motion.div
@@ -161,15 +161,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.15 }}
               className={`p-6 rounded-2xl text-center border shadow-sm ${
-                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-slate-950/80 border-slate-800'
+                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-zinc-950/80 border-zinc-800'
               }`}
             >
               <div className={`text-3xl sm:text-4xl font-semibold font-mono tracking-tight ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 <StatCounter value={500} suffix="+" duration={2.2} />
               </div>
-              <div className="text-xs uppercase font-semibold tracking-wider text-slate-400 mt-1">Projects Completed</div>
+              <div className="text-xs uppercase font-semibold tracking-wider text-zinc-400 mt-1">Projects Completed</div>
             </motion.div>
 
             <motion.div
@@ -178,15 +178,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.25 }}
               className={`p-6 rounded-2xl text-center border shadow-sm ${
-                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-slate-950/80 border-slate-800'
+                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-zinc-950/80 border-zinc-800'
               }`}
             >
               <div className={`text-3xl sm:text-4xl font-semibold font-mono tracking-tight ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 <StatCounter value={100} suffix="%" duration={2.0} />
               </div>
-              <div className="text-xs uppercase font-semibold tracking-wider text-slate-400 mt-1">Code & IP Ownership</div>
+              <div className="text-xs uppercase font-semibold tracking-wider text-zinc-400 mt-1">Code & IP Ownership</div>
             </motion.div>
 
             <motion.div
@@ -195,15 +195,15 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.35 }}
               className={`p-6 rounded-2xl text-center border shadow-sm ${
-                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-slate-950/80 border-slate-800'
+                isWhite ? 'bg-zinc-50 border-zinc-200' : 'bg-zinc-950/80 border-zinc-800'
               }`}
             >
               <div className={`text-3xl sm:text-4xl font-semibold font-mono tracking-tight ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 <StatCounter value={10} suffix="+" duration={1.8} />
               </div>
-              <div className="text-xs uppercase font-semibold tracking-wider text-slate-400 mt-1">Years Local Experience</div>
+              <div className="text-xs uppercase font-semibold tracking-wider text-zinc-400 mt-1">Years Local Experience</div>
             </motion.div>
           </div>
 
@@ -216,22 +216,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               transition={{ duration: 0.5 }}
               className={`p-8 rounded-2xl space-y-4 group transition-all shadow-sm border ${
                 isWhite
-                  ? 'bg-zinc-50 border-zinc-200 hover:border-slate-950 text-slate-900'
-                  : 'bg-slate-950/80 border-slate-800 hover:border-white/60 text-white'
+                  ? 'bg-zinc-50 border-zinc-200 hover:border-black text-zinc-900'
+                  : 'bg-zinc-950/80 border-zinc-800 hover:border-white/60 text-white'
               }`}
             >
               <div className={`p-3 w-fit rounded-xl group-hover:scale-110 transition-transform shadow-sm border ${
-                isWhite ? 'bg-white border-zinc-200 text-slate-950' : 'bg-slate-900 border-slate-700 text-white'
+                isWhite ? 'bg-white border-zinc-200 text-black' : 'bg-zinc-900 border-zinc-700 text-white'
               }`}>
                 <Code2 className="w-6 h-6" />
               </div>
               <h3 className={`text-xl font-semibold font-['Montserrat'] ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 High-Converting Web Design & Texas SEO
               </h3>
               <p className={`text-xs sm:text-sm leading-relaxed ${
-                isWhite ? 'text-zinc-600' : 'text-slate-400'
+                isWhite ? 'text-zinc-600' : 'text-zinc-400'
               }`}>
                 We build high-performance WordPress systems, custom React applications, and WooCommerce storefronts architected to rank #1 across Texas and regional search queries, converting local traffic into booked consultations.
               </p>
@@ -244,22 +244,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               transition={{ duration: 0.5, delay: 0.15 }}
               className={`p-8 rounded-2xl space-y-4 group transition-all shadow-sm border ${
                 isWhite
-                  ? 'bg-zinc-50 border-zinc-200 hover:border-slate-950 text-slate-900'
-                  : 'bg-slate-950/80 border-slate-800 hover:border-white/60 text-white'
+                  ? 'bg-zinc-50 border-zinc-200 hover:border-black text-zinc-900'
+                  : 'bg-zinc-950/80 border-zinc-800 hover:border-white/60 text-white'
               }`}
             >
               <div className={`p-3 w-fit rounded-xl group-hover:scale-110 transition-transform shadow-sm border ${
-                isWhite ? 'bg-white border-zinc-200 text-slate-950' : 'bg-slate-900 border-slate-700 text-white'
+                isWhite ? 'bg-white border-zinc-200 text-black' : 'bg-zinc-900 border-zinc-700 text-white'
               }`}>
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className={`text-xl font-semibold font-['Montserrat'] ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 Custom iOS & Android Mobile Apps
               </h3>
               <p className={`text-xs sm:text-sm leading-relaxed ${
-                isWhite ? 'text-zinc-600' : 'text-slate-400'
+                isWhite ? 'text-zinc-600' : 'text-zinc-400'
               }`}>
                 From contractor dispatch and quoting software to patient check-in portals and internal CRM pipelines, we build custom web and mobile applications that automate administrative workloads and scale business operations.
               </p>
@@ -272,22 +272,22 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               transition={{ duration: 0.5, delay: 0.3 }}
               className={`p-8 rounded-2xl space-y-4 group transition-all shadow-sm border ${
                 isWhite
-                  ? 'bg-zinc-50 border-zinc-200 hover:border-slate-950 text-slate-900'
-                  : 'bg-slate-950/80 border-slate-800 hover:border-white/60 text-white'
+                  ? 'bg-zinc-50 border-zinc-200 hover:border-black text-zinc-900'
+                  : 'bg-zinc-950/80 border-zinc-800 hover:border-white/60 text-white'
               }`}
             >
               <div className={`p-3 w-fit rounded-xl group-hover:scale-110 transition-transform shadow-sm border ${
-                isWhite ? 'bg-white border-zinc-200 text-slate-950' : 'bg-slate-900 border-slate-700 text-white'
+                isWhite ? 'bg-white border-zinc-200 text-black' : 'bg-zinc-900 border-zinc-700 text-white'
               }`}>
                 <Shield className="w-6 h-6" />
               </div>
               <h3 className={`text-xl font-semibold font-['Montserrat'] ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}>
                 Direct Texas Developer Access & Security
               </h3>
               <p className={`text-xs sm:text-sm leading-relaxed ${
-                isWhite ? 'text-zinc-600' : 'text-slate-400'
+                isWhite ? 'text-zinc-600' : 'text-zinc-400'
               }`}>
                 Work directly with senior Texas software engineers without middle managers. Every client receives 100% intellectual property ownership, strict NDA coverage, transparent milestone billing, and local support.
               </p>
@@ -297,7 +297,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
           {/* Local Industry Specialization Strip */}
           <div className="mb-14 text-center">
             <span className={`text-[11px] font-semibold uppercase tracking-widest mb-3 block ${
-              isWhite ? 'text-slate-500' : 'text-slate-400'
+              isWhite ? 'text-zinc-500' : 'text-zinc-400'
             }`}>
               Specialized Software Engineering For East Texas Industries
             </span>
@@ -307,8 +307,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
                   key={idx}
                   className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border ${
                     isWhite
-                      ? 'bg-zinc-100 border-zinc-300 text-slate-800'
-                      : 'bg-slate-900/90 border-slate-800 text-slate-300'
+                      ? 'bg-zinc-100 border-zinc-300 text-zinc-800'
+                      : 'bg-zinc-900/90 border-zinc-800 text-zinc-300'
                   }`}
                 >
                   {sector}
@@ -319,7 +319,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
 
           {/* Bottom Consultation CTA */}
           <div className={`rounded-2xl p-8 border flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl ${
-            isWhite ? 'bg-zinc-50 border-zinc-200 text-slate-950' : 'bg-slate-950 border-slate-800 text-white'
+            isWhite ? 'bg-zinc-50 border-zinc-200 text-black' : 'bg-zinc-950 border-zinc-800 text-white'
           }`}>
             <div className="flex items-center gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center shrink-0">
@@ -327,12 +327,12 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               </div>
               <div>
                 <h4 className={`text-base font-bold font-['Montserrat'] uppercase ${
-                  isWhite ? 'text-slate-950' : 'text-white'
+                  isWhite ? 'text-black' : 'text-white'
                 }`}>
                   Ready to Modernize Your Business Technology?
                 </h4>
                 <p className={`text-xs mt-0.5 ${
-                  isWhite ? 'text-zinc-600' : 'text-slate-400'
+                  isWhite ? 'text-zinc-600' : 'text-zinc-400'
                 }`}>
                   Partner with TexasWebCoders for high-speed custom software, mobile apps, and 3D web systems.
                 </p>
@@ -342,8 +342,8 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ onNavigateSlide, var
               onClick={() => onNavigateSlide(9)}
               className={`px-7 py-3 rounded-xl text-xs font-bold font-['Montserrat'] uppercase tracking-wider transition-all cursor-pointer shadow-lg shrink-0 ${
                 isWhite
-                  ? 'bg-slate-950 text-white hover:bg-slate-800'
-                  : 'bg-white text-slate-950 hover:bg-zinc-200'
+                  ? 'bg-zinc-950 text-white hover:bg-zinc-800'
+                  : 'bg-white text-black hover:bg-zinc-200'
               }`}
             >
               Schedule Technical Consultation

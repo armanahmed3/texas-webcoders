@@ -121,16 +121,16 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-zinc-950/80 backdrop-blur-md overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.3 }}
-          className="relative bg-slate-900 border border-white/30 rounded-3xl max-w-3xl w-full text-white shadow-2xl overflow-hidden my-8"
+          className="relative bg-zinc-900 border border-white/30 rounded-3xl max-w-3xl w-full text-white shadow-2xl overflow-hidden my-8"
         >
           {/* Top Banner Header */}
-          <div className="bg-gradient-to-r from-zinc-900 via-slate-900 to-zinc-900 p-6 sm:p-8 border-b border-slate-800 flex items-start justify-between gap-4">
+          <div className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-900 p-6 sm:p-8 border-b border-zinc-800 flex items-start justify-between gap-4">
             <div className="flex items-start gap-4">
               <ServiceIcon serviceId={service.id} size="lg" />
               <div>
@@ -140,7 +140,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 <h3 className="text-2xl sm:text-3xl font-medium text-white font-['Montserrat']">
                   {service.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 font-medium mt-1">
+                <p className="text-xs sm:text-sm text-zinc-300 font-medium mt-1">
                   {details.subtitle}
                 </p>
               </div>
@@ -148,7 +148,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-700 transition-colors cursor-pointer"
+              className="p-2 rounded-full bg-zinc-800/80 border border-zinc-700 text-zinc-400 hover:text-white hover:bg-zinc-700 transition-colors cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -162,19 +162,19 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 <Sparkles className="w-4 h-4 text-white" />
                 <span>Service Overview & Value</span>
               </h4>
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+              <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed bg-zinc-950/60 p-4 rounded-xl border border-zinc-800">
                 {details.overview}
               </p>
             </div>
 
             {/* Key Deliverables & Features Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div className="bg-zinc-950/80 p-5 rounded-2xl border border-zinc-800 space-y-3">
                 <h5 className="text-xs font-medium text-white font-['Montserrat'] uppercase tracking-wider flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-white" />
                   <span>Key Features & Capabilities</span>
                 </h5>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-zinc-300">
                   {service.features.map((feat, i) => (
                     <li key={i} className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
@@ -184,12 +184,12 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                 </ul>
               </div>
 
-              <div className="bg-slate-950/80 p-5 rounded-2xl border border-slate-800 space-y-3">
+              <div className="bg-zinc-950/80 p-5 rounded-2xl border border-zinc-800 space-y-3">
                 <h5 className="text-xs font-medium text-white font-['Montserrat'] uppercase tracking-wider flex items-center gap-2">
                   <Wrench className="w-4 h-4 text-white" />
                   <span>Master Deliverables Included</span>
                 </h5>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-zinc-300">
                   {service.deliverables.map((del, i) => (
                     <li key={i} className="flex items-center gap-2">
                       <span className="w-1.5 h-1.5 rounded-full bg-white flex-shrink-0" />
@@ -208,28 +208,28 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {details.processTimeline.map((item, idx) => (
-                  <div key={idx} className="bg-slate-950/90 p-4 rounded-xl border border-slate-800 space-y-1">
+                  <div key={idx} className="bg-zinc-950/90 p-4 rounded-xl border border-zinc-800 space-y-1">
                     <div className="flex items-center justify-between text-xs">
                       <span className="font-medium text-white font-['Montserrat']">{item.title}</span>
                       <span className="text-[10px] bg-white/10 text-white px-2 py-0.5 rounded font-mono font-medium">
                         Phase {item.step}
                       </span>
                     </div>
-                    <p className="text-[11px] text-slate-400">{item.desc}</p>
+                    <p className="text-[11px] text-zinc-400">{item.desc}</p>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Tech Stack & Guarantees Bar */}
-            <div className="bg-gradient-to-r from-zinc-900 via-slate-950 to-zinc-900 p-5 rounded-2xl border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+            <div className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-zinc-900 p-5 rounded-2xl border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
               <div>
-                <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block mb-1">
+                <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider block mb-1">
                   Technologies & Industry Tools Used
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {details.techStackTools.map((tool, tIdx) => (
-                    <span key={tIdx} className="px-2.5 py-1 rounded-md bg-slate-800 text-white text-[11px] font-medium border border-slate-700">
+                    <span key={tIdx} className="px-2.5 py-1 rounded-md bg-zinc-800 text-white text-[11px] font-medium border border-zinc-700">
                       {tool}
                     </span>
                   ))}
@@ -237,7 +237,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
               </div>
 
               <div className="text-right sm:text-right w-full sm:w-auto">
-                <span className="text-[10px] font-medium text-slate-400 uppercase tracking-wider block">
+                <span className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider block">
                   Starting Price Investment
                 </span>
                 <span className="text-2xl font-medium text-white font-['Montserrat']">
@@ -248,8 +248,8 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
           </div>
 
           {/* Bottom Action Footer */}
-          <div className="p-6 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs text-slate-300">
+          <div className="p-6 bg-zinc-950 border-t border-zinc-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-xs text-zinc-300">
               <Shield className="w-4 h-4 text-white" />
               <span>Back by 100% Satisfaction & Speed Guarantee</span>
             </div>
@@ -257,7 +257,7 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <button
                 onClick={onClose}
-                className="px-5 py-3 rounded-lg border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-medium uppercase tracking-wider cursor-pointer transition-colors"
+                className="px-5 py-3 rounded-lg border border-zinc-700 hover:border-zinc-500 text-zinc-300 text-xs font-medium uppercase tracking-wider cursor-pointer transition-colors"
               >
                 Close
               </button>
@@ -267,10 +267,10 @@ export const ServiceDetailModal: React.FC<ServiceDetailModalProps> = ({
                   onInquire(service);
                   onClose();
                 }}
-                className="bg-white hover:bg-zinc-200 text-slate-950 font-medium px-6 py-3 rounded-lg text-xs uppercase tracking-wider shadow-lg shadow-white/10 flex items-center justify-center gap-2 cursor-pointer transition-all"
+                className="bg-white hover:bg-zinc-200 text-black font-medium px-6 py-3 rounded-lg text-xs uppercase tracking-wider shadow-lg shadow-white/10 flex items-center justify-center gap-2 cursor-pointer transition-all"
               >
                 <span>Book This Service</span>
-                <ArrowRight className="w-4 h-4 text-slate-950" />
+                <ArrowRight className="w-4 h-4 text-black" />
               </button>
             </div>
           </div>

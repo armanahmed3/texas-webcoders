@@ -33,7 +33,7 @@ export const SlideControls: React.FC<SlideControlsProps> = ({
         <button
           disabled={activeSlide === 0}
           onClick={() => onNavigateSlide(Math.max(0, activeSlide - 1))}
-          className={`p-2 rounded-full bg-slate-950/80 border border-slate-800 text-white hover:border-white/50 transition-all ${
+          className={`p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-white hover:border-white/50 transition-all ${
             activeSlide === 0 ? 'opacity-30 cursor-not-allowed' : 'hover:scale-110 cursor-pointer'
           }`}
         >
@@ -42,7 +42,7 @@ export const SlideControls: React.FC<SlideControlsProps> = ({
       )}
 
       {/* Dots Indicator */}
-      <div className="glass-panel py-3 px-2 rounded-full flex flex-col gap-2.5 border border-slate-800 shadow-xl">
+      <div className="glass-panel py-3 px-2 rounded-full flex flex-col gap-2.5 border border-zinc-800 shadow-xl">
         {Array.from({ length: totalSlides }).map((_, i) => {
           const isActive = activeSlide === i;
           return (
@@ -52,7 +52,7 @@ export const SlideControls: React.FC<SlideControlsProps> = ({
               className="group relative flex items-center justify-center p-1 cursor-pointer"
             >
               {/* Tooltip on hover */}
-              <span className="absolute right-8 px-2.5 py-1 rounded bg-slate-950/90 text-[10px] font-medium text-white border border-white/30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-['Montserrat'] shadow-lg">
+              <span className="absolute right-8 px-2.5 py-1 rounded bg-zinc-950/90 text-[10px] font-medium text-white border border-white/30 whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none font-['Montserrat'] shadow-lg">
                 0{i + 1} • {slideTitles[i]}
               </span>
 
@@ -61,7 +61,7 @@ export const SlideControls: React.FC<SlideControlsProps> = ({
                 className={`transition-all duration-300 rounded-full ${
                   isActive
                     ? 'w-3 h-3 bg-white shadow-md shadow-white/50 ring-2 ring-white/30'
-                    : 'w-2 h-2 bg-slate-600 hover:bg-slate-400'
+                    : 'w-2 h-2 bg-zinc-600 hover:bg-zinc-400'
                 }`}
               />
             </button>
@@ -74,7 +74,7 @@ export const SlideControls: React.FC<SlideControlsProps> = ({
         <button
           disabled={activeSlide === totalSlides - 1}
           onClick={() => onNavigateSlide(Math.min(totalSlides - 1, activeSlide + 1))}
-          className={`p-2 rounded-full bg-slate-950/80 border border-slate-800 text-white hover:border-white/50 transition-all ${
+          className={`p-2 rounded-full bg-zinc-950/80 border border-zinc-800 text-white hover:border-white/50 transition-all ${
             activeSlide === totalSlides - 1 ? 'opacity-30 cursor-not-allowed' : 'hover:scale-110 cursor-pointer'
           }`}
         >

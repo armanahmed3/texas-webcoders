@@ -59,19 +59,19 @@ const TechCard: React.FC<TechCardProps> = ({ tech, isLight = false }) => {
       style={{ perspective: 1000, transformStyle: 'preserve-3d' }}
       className={`relative w-[280px] sm:w-[320px] p-5 rounded-2xl transition-all duration-300 group cursor-pointer flex-shrink-0 select-none border ${
         isLight
-          ? 'bg-white border-zinc-200 hover:border-slate-950 hover:shadow-2xl text-slate-900'
-          : 'bg-slate-950/90 border-slate-800/90 hover:bg-slate-900 hover:border-white/60 hover:shadow-[0_15px_35px_rgba(255,255,255,0.15)] text-white'
+          ? 'bg-white border-zinc-200 hover:border-black hover:shadow-2xl text-zinc-900'
+          : 'bg-zinc-950/90 border-zinc-800/90 hover:bg-zinc-900 hover:border-white/60 hover:shadow-[0_15px_35px_rgba(255,255,255,0.15)] text-white'
       }`}
     >
       {/* Glow Hover Accent */}
-      <div className="absolute -top-10 -right-10 w-28 h-28 bg-white/5 rounded-full blur-xl group-hover:bg-slate-300/20 transition-all pointer-events-none" />
+      <div className="absolute -top-10 -right-10 w-28 h-28 bg-white/5 rounded-full blur-xl group-hover:bg-white/10 transition-all pointer-events-none" />
 
       <div className="flex items-center justify-between gap-2 mb-3">
         <div
           className={`p-2.5 rounded-xl border shadow-md transition-colors ${
             isLight
-              ? 'bg-zinc-100 border-zinc-300 text-slate-900 group-hover:bg-slate-950 group-hover:text-white group-hover:border-slate-950'
-              : 'bg-slate-900 border-slate-700/80 text-white group-hover:bg-white group-hover:text-slate-950 group-hover:border-white'
+              ? 'bg-zinc-100 border-zinc-300 text-zinc-900 group-hover:bg-black group-hover:text-white group-hover:border-black'
+              : 'bg-zinc-900 border-zinc-700/80 text-white group-hover:bg-white group-hover:text-black group-hover:border-white'
           }`}
         >
           <Icon className="w-5 h-5" />
@@ -80,8 +80,8 @@ const TechCard: React.FC<TechCardProps> = ({ tech, isLight = false }) => {
         <span
           className={`px-2 py-0.5 rounded text-[10px] font-mono font-medium border transition-colors ${
             isLight
-              ? 'bg-zinc-100 border-zinc-200 text-slate-800'
-              : 'bg-slate-900 border-slate-800 text-slate-300 group-hover:bg-white group-hover:text-slate-950'
+              ? 'bg-zinc-100 border-zinc-200 text-zinc-800'
+              : 'bg-zinc-900 border-zinc-800 text-zinc-300 group-hover:bg-white group-hover:text-black'
           }`}
         >
           {tech.badge}
@@ -92,16 +92,16 @@ const TechCard: React.FC<TechCardProps> = ({ tech, isLight = false }) => {
         <h4 className="font-semibold text-sm font-['Montserrat'] tracking-tight">
           {tech.name}
         </h4>
-        <span className="block text-[11px] text-slate-400 group-hover:text-slate-300 font-medium font-mono">
+        <span className="block text-[11px] text-zinc-400 group-hover:text-zinc-300 font-medium font-mono">
           {tech.category}
         </span>
       </div>
 
-      <p className="text-xs leading-relaxed mt-2 text-slate-400 group-hover:text-slate-200 font-normal">
+      <p className="text-xs leading-relaxed mt-2 text-zinc-400 group-hover:text-zinc-200 font-normal">
         {tech.desc}
       </p>
 
-      <div className="mt-3.5 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 font-mono">
+      <div className="mt-3.5 pt-2.5 border-t border-zinc-800/80 flex items-center justify-between text-[10px] text-zinc-500 font-mono">
         <span>Continuous Auto-Scroll</span>
         <span className="text-white group-hover:translate-x-1 transition-transform font-medium">
           Active Skill ✦
@@ -361,21 +361,21 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
         </div>
 
         {/* Guarantees Matrix */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-slate-800/80">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-zinc-800/80">
           {guarantees.map((g, idx) => (
             <div key={idx} className="flex items-start gap-3">
               <CheckCircle2 className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
               <div>
                 <h4 className="font-semibold text-xs text-white font-['Montserrat']">{g.title}</h4>
-                <p className="text-slate-400 text-xs mt-0.5 leading-normal">{g.desc}</p>
+                <p className="text-zinc-400 text-xs mt-0.5 leading-normal">{g.desc}</p>
               </div>
             </div>
           ))}
         </div>
 
         {/* CTA Teaser */}
-        <div className="mt-8 pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-4 bg-slate-950/60 p-4 sm:p-6 rounded-2xl">
-          <div className="text-xs text-slate-300">
+        <div className="mt-8 pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-4 bg-zinc-950/60 p-4 sm:p-6 rounded-2xl">
+          <div className="text-xs text-zinc-300">
             <span className="text-white font-semibold block sm:inline">
               Need a custom architecture recommendation?
             </span>{' '}
@@ -383,7 +383,7 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
           </div>
           <button
             onClick={() => onNavigateSlide(3)}
-            className="bg-white hover:bg-zinc-200 text-slate-950 px-5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-lg font-['Montserrat',sans-serif]"
+            className="bg-white hover:bg-zinc-200 text-black px-5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer shadow-lg font-['Montserrat',sans-serif]"
           >
             Explore Custom Services & Architecture →
           </button>

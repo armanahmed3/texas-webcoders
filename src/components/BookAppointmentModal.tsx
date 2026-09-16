@@ -199,23 +199,23 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
         initial={{ opacity: 0, scale: 0.95, y: 10 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-        className="bg-white border border-zinc-200 rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 my-auto text-slate-900 relative"
+        className="bg-white border border-zinc-200 rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl p-6 sm:p-8 space-y-6 my-auto text-zinc-900 relative"
       >
         {/* Modal Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 hover:text-slate-950 hover:bg-zinc-200 transition-colors cursor-pointer"
+          className="absolute top-5 right-5 p-2 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-600 hover:text-black hover:bg-zinc-200 transition-colors cursor-pointer"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Modal Header */}
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-300 text-slate-900 text-xs font-semibold uppercase tracking-wider mb-2 font-['Montserrat']">
-            <Sparkles className="w-3.5 h-3.5 text-slate-900" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs font-semibold uppercase tracking-wider mb-2 font-['Montserrat']">
+            <Sparkles className="w-3.5 h-3.5 text-zinc-900" />
             <span>Direct Lead Engineer Booking</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold font-['Montserrat'] uppercase tracking-tight text-slate-950">
+          <h2 className="text-2xl sm:text-3xl font-bold font-['Montserrat'] uppercase tracking-tight text-black">
             Book 1-On-1 Technical Consultation
           </h2>
           <p className="text-zinc-600 text-xs sm:text-sm mt-1">
@@ -225,18 +225,18 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
         {/* Progress Tracker Steps */}
         <div className="flex items-center justify-between border-y border-zinc-200 py-3 text-xs font-semibold">
-          <div className={`flex items-center gap-1.5 ${step === 'service' ? 'text-slate-950' : 'text-zinc-400'}`}>
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'service' ? 'bg-slate-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>1</span>
+          <div className={`flex items-center gap-1.5 ${step === 'service' ? 'text-black' : 'text-zinc-400'}`}>
+            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'service' ? 'bg-zinc-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>1</span>
             <span>Session Type</span>
           </div>
           <div className="w-6 h-px bg-zinc-200" />
-          <div className={`flex items-center gap-1.5 ${step === 'datetime' ? 'text-slate-950' : 'text-zinc-400'}`}>
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'datetime' ? 'bg-slate-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>2</span>
+          <div className={`flex items-center gap-1.5 ${step === 'datetime' ? 'text-black' : 'text-zinc-400'}`}>
+            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'datetime' ? 'bg-zinc-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>2</span>
             <span>Date & Time</span>
           </div>
           <div className="w-6 h-px bg-zinc-200" />
-          <div className={`flex items-center gap-1.5 ${step === 'details' ? 'text-slate-950' : 'text-zinc-400'}`}>
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'details' ? 'bg-slate-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>3</span>
+          <div className={`flex items-center gap-1.5 ${step === 'details' ? 'text-black' : 'text-zinc-400'}`}>
+            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] ${step === 'details' ? 'bg-zinc-950 text-white font-bold' : 'bg-zinc-100 text-zinc-500'}`}>3</span>
             <span>Your Info</span>
           </div>
         </div>
@@ -257,26 +257,26 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                     onClick={() => setSelectedType(type.id)}
                     className={`p-4 rounded-2xl border transition-all cursor-pointer flex items-start gap-4 ${
                       isSelected
-                        ? 'bg-slate-950 text-white border-slate-950 shadow-xl'
-                        : 'bg-zinc-50 border-zinc-200 hover:border-zinc-400 hover:bg-zinc-100 text-slate-900'
+                        ? 'bg-zinc-950 text-white border-black shadow-xl'
+                        : 'bg-zinc-50 border-zinc-200 hover:border-zinc-400 hover:bg-zinc-100 text-zinc-900'
                     }`}
                   >
                     <div className={`text-2xl p-2.5 rounded-xl border ${
-                      isSelected ? 'bg-slate-900 border-slate-800' : 'bg-white border-zinc-200'
+                      isSelected ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-200'
                     }`}>
                       {type.icon}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
                         <h3 className={`font-bold text-sm font-['Montserrat'] ${
-                          isSelected ? 'text-white' : 'text-slate-950'
+                          isSelected ? 'text-white' : 'text-black'
                         }`}>
                           {type.title}
                         </h3>
                         <span className={`px-2.5 py-0.5 rounded text-[10px] font-bold ${
                           isSelected
                             ? 'bg-white/20 text-white border border-white/30'
-                            : 'bg-zinc-200 text-slate-900 border border-zinc-300'
+                            : 'bg-zinc-200 text-zinc-900 border border-zinc-300'
                         }`}>
                           {type.duration} • Free
                         </span>
@@ -295,7 +295,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="pt-4 flex justify-end">
               <button
                 onClick={() => setStep('datetime')}
-                className="bg-slate-950 hover:bg-slate-800 text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg font-['Montserrat']"
+                className="bg-zinc-950 hover:bg-zinc-800 text-white px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-lg font-['Montserrat']"
               >
                 <span>Select Date & Time</span>
                 <ArrowRight className="w-4 h-4" />
@@ -310,7 +310,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             {/* Date Selection */}
             <div>
               <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 font-['Montserrat']">
-                <Calendar className="w-3.5 h-3.5 text-slate-950" />
+                <Calendar className="w-3.5 h-3.5 text-black" />
                 <span>1. Choose Available Date (Upcoming Weekdays):</span>
               </label>
 
@@ -323,8 +323,8 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                       onClick={() => setSelectedDate(d.fullDate)}
                       className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-slate-950 text-white border-slate-950 font-bold shadow-md scale-105'
-                          : 'bg-zinc-50 border-zinc-200 text-slate-800 hover:border-zinc-400 hover:bg-zinc-100'
+                          ? 'bg-zinc-950 text-white border-black font-bold shadow-md scale-105'
+                          : 'bg-zinc-50 border-zinc-200 text-zinc-800 hover:border-zinc-400 hover:bg-zinc-100'
                       }`}
                     >
                       <div className="text-[10px] uppercase font-bold tracking-wider">{d.dayName}</div>
@@ -338,7 +338,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             {/* Time Slot Selection */}
             <div>
               <label className="block text-xs font-bold text-zinc-700 uppercase tracking-wider mb-2.5 flex items-center gap-1.5 font-['Montserrat']">
-                <Clock className="w-3.5 h-3.5 text-slate-950" />
+                <Clock className="w-3.5 h-3.5 text-black" />
                 <span>2. Select Preferred Time Slot:</span>
               </label>
 
@@ -351,8 +351,8 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                       onClick={() => setSelectedTimeSlot(slot)}
                       className={`py-2 px-3 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer ${
                         isSelected
-                          ? 'bg-slate-950 text-white border-slate-950 shadow-md scale-105'
-                          : 'bg-zinc-50 border-zinc-200 text-slate-800 hover:border-zinc-400 hover:bg-zinc-100'
+                          ? 'bg-zinc-950 text-white border-black shadow-md scale-105'
+                          : 'bg-zinc-50 border-zinc-200 text-zinc-800 hover:border-zinc-400 hover:bg-zinc-100'
                       }`}
                     >
                       {slot}
@@ -366,13 +366,13 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <Globe className="w-3 h-3 text-slate-950" />
+                  <Globe className="w-3 h-3 text-black" />
                   <span>Your Timezone</span>
                 </label>
                 <select
                   value={timeZone}
                   onChange={(e) => setTimeZone(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 >
                   <option value="CST (Texas HQ)">Central Time (CST/CDT) - Texas HQ</option>
                   <option value="EST">Eastern Time (EST/EDT)</option>
@@ -384,13 +384,13 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
 
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <Video className="w-3 h-3 text-slate-950" />
+                  <Video className="w-3 h-3 text-black" />
                   <span>Meeting Platform</span>
                 </label>
                 <select
                   value={meetingPlatform}
                   onChange={(e) => setMeetingPlatform(e.target.value)}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3 py-2 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 >
                   <option value="Google Meet">Google Meet Video Link</option>
                   <option value="Zoom">Zoom Video Conference</option>
@@ -402,7 +402,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="pt-4 flex justify-between items-center border-t border-zinc-200">
               <button
                 onClick={() => setStep('service')}
-                className="text-zinc-600 hover:text-slate-950 text-xs font-bold cursor-pointer font-['Montserrat']"
+                className="text-zinc-600 hover:text-black text-xs font-bold cursor-pointer font-['Montserrat']"
               >
                 ← Back
               </button>
@@ -411,7 +411,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 onClick={() => setStep('details')}
                 className={`px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer font-['Montserrat'] ${
                   selectedDate && selectedTimeSlot
-                    ? 'bg-slate-950 hover:bg-slate-800 text-white shadow-lg'
+                    ? 'bg-zinc-950 hover:bg-zinc-800 text-white shadow-lg'
                     : 'bg-zinc-200 text-zinc-400 cursor-not-allowed'
                 }`}
               >
@@ -442,12 +442,12 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 text-xs flex items-center justify-between">
               <div>
                 <span className="text-zinc-500 font-medium">Scheduled Time: </span>
-                <span className="font-bold text-slate-950">{selectedDate} at {selectedTimeSlot} ({timeZone})</span>
+                <span className="font-bold text-black">{selectedDate} at {selectedTimeSlot} ({timeZone})</span>
               </div>
               <button
                 type="button"
                 onClick={() => setStep('datetime')}
-                className="text-slate-950 underline font-bold text-[10px] cursor-pointer"
+                className="text-black underline font-bold text-[10px] cursor-pointer"
               >
                 Change
               </button>
@@ -456,7 +456,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <User className="w-3 h-3 text-slate-950" />
+                  <User className="w-3 h-3 text-black" />
                   <span>Full Name *</span>
                 </label>
                 <input
@@ -466,13 +466,13 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                   placeholder="e.g. Marcus Vance"
                   value={clientInfo.name}
                   onChange={(e) => setClientInfo({ ...clientInfo, name: e.target.value })}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 />
               </div>
 
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <Mail className="w-3 h-3 text-slate-950" />
+                  <Mail className="w-3 h-3 text-black" />
                   <span>Email Address *</span>
                 </label>
                 <input
@@ -482,7 +482,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                   placeholder="e.g. marcus@company.com"
                   value={clientInfo.email}
                   onChange={(e) => setClientInfo({ ...clientInfo, email: e.target.value })}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 />
               </div>
             </div>
@@ -490,7 +490,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <Phone className="w-3 h-3 text-slate-950" />
+                  <Phone className="w-3 h-3 text-black" />
                   <span>Phone Number</span>
                 </label>
                 <input
@@ -499,13 +499,13 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                   placeholder="+1 (555) 000-0000"
                   value={clientInfo.phone}
                   onChange={(e) => setClientInfo({ ...clientInfo, phone: e.target.value })}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 />
               </div>
 
               <div>
                 <label className="block text-[11px] font-bold text-zinc-700 uppercase tracking-wider mb-1 flex items-center gap-1 font-['Montserrat']">
-                  <Building2 className="w-3 h-3 text-slate-950" />
+                  <Building2 className="w-3 h-3 text-black" />
                   <span>Company / Organization</span>
                 </label>
                 <input
@@ -514,7 +514,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                   placeholder="e.g. Apex Innovations"
                   value={clientInfo.company}
                   onChange={(e) => setClientInfo({ ...clientInfo, company: e.target.value })}
-                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                  className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2.5 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
                 />
               </div>
             </div>
@@ -529,7 +529,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                 placeholder="What web application or redesign features would you like to discuss on the call?"
                 value={clientInfo.notes}
                 onChange={(e) => setClientInfo({ ...clientInfo, notes: e.target.value })}
-                className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-slate-900 focus:outline-none focus:border-slate-950 font-medium"
+                className="w-full bg-zinc-50 border border-zinc-300 rounded-xl px-3.5 py-2 text-xs text-zinc-900 focus:outline-none focus:border-black font-medium"
               />
             </div>
 
@@ -537,14 +537,14 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
               <button
                 type="button"
                 onClick={() => setStep('datetime')}
-                className="text-zinc-600 hover:text-slate-950 text-xs font-bold cursor-pointer font-['Montserrat']"
+                className="text-zinc-600 hover:text-black text-xs font-bold cursor-pointer font-['Montserrat']"
               >
                 ← Back
               </button>
 
               <button
                 type="submit"
-                className="bg-slate-950 hover:bg-slate-800 text-white px-7 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xl font-['Montserrat']"
+                className="bg-zinc-950 hover:bg-zinc-800 text-white px-7 py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer shadow-xl font-['Montserrat']"
               >
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>Confirm & Lock Appointment</span>
@@ -556,36 +556,36 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
         {/* STEP 4: CONFIRMED SCREEN */}
         {step === 'confirmed' && (
           <div className="text-center space-y-5 py-2">
-            <div className="w-16 h-16 bg-slate-950 rounded-full flex items-center justify-center text-white mx-auto shadow-xl">
+            <div className="w-16 h-16 bg-zinc-950 rounded-full flex items-center justify-center text-white mx-auto shadow-xl">
               <CheckCircle2 className="w-10 h-10 text-emerald-400" />
             </div>
 
             <div>
-              <span className="text-xs font-mono font-bold text-slate-950 bg-zinc-100 px-3 py-1 rounded-full border border-zinc-300">
+              <span className="text-xs font-mono font-bold text-black bg-zinc-100 px-3 py-1 rounded-full border border-zinc-300">
                 BOOKING CONFIRMED #{bookingId}
               </span>
-              <h3 className="text-2xl font-bold text-slate-950 font-['Montserrat'] uppercase tracking-tight mt-3">
+              <h3 className="text-2xl font-bold text-black font-['Montserrat'] uppercase tracking-tight mt-3">
                 Appointment Scheduled!
               </h3>
               <p className="text-zinc-600 text-xs sm:text-sm max-w-md mx-auto leading-relaxed mt-1">
-                Thank you <span className="text-slate-950 font-bold">{clientInfo.name}</span>! Calendar invitation has been dispatched to <span className="text-slate-950 font-bold">{clientInfo.email}</span>.
+                Thank you <span className="text-black font-bold">{clientInfo.name}</span>! Calendar invitation has been dispatched to <span className="text-black font-bold">{clientInfo.email}</span>.
               </p>
             </div>
 
             {/* Details Box */}
-            <div className="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 text-left text-xs space-y-2.5 max-w-lg mx-auto text-slate-900">
+            <div className="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 text-left text-xs space-y-2.5 max-w-lg mx-auto text-zinc-900">
               <div className="flex justify-between border-b border-zinc-200 pb-2">
                 <span className="text-zinc-500 font-medium">Date & Time:</span>
-                <span className="text-slate-950 font-bold">{selectedDate} @ {selectedTimeSlot} ({timeZone})</span>
+                <span className="text-black font-bold">{selectedDate} @ {selectedTimeSlot} ({timeZone})</span>
               </div>
               <div className="flex justify-between border-b border-zinc-200 pb-2">
                 <span className="text-zinc-500 font-medium">Lead Consultant:</span>
-                <span className="text-slate-950 font-bold">Austin Vance (Principal Architect)</span>
+                <span className="text-black font-bold">Austin Vance (Principal Architect)</span>
               </div>
               <div className="flex justify-between border-b border-zinc-200 pb-2">
                 <span className="text-zinc-500 font-medium">Meeting Platform:</span>
-                <span className="text-slate-950 font-bold flex items-center gap-1">
-                  <Video className="w-3.5 h-3.5 text-slate-950" />
+                <span className="text-black font-bold flex items-center gap-1">
+                  <Video className="w-3.5 h-3.5 text-black" />
                   {meetingPlatform}
                 </span>
               </div>
@@ -595,7 +595,7 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
                   href={`https://meet.google.com/twc-${bookingId.toLowerCase()}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-slate-950 font-mono font-bold hover:underline flex items-center gap-1"
+                  className="text-black font-mono font-bold hover:underline flex items-center gap-1"
                 >
                   <span>meet.google.com/twc-{bookingId.toLowerCase()}</span>
                   <ExternalLink className="w-3 h-3" />
@@ -607,15 +607,15 @@ export const BookAppointmentModal: React.FC<BookAppointmentModalProps> = ({
             <div className="flex flex-wrap justify-center gap-3 pt-2">
               <button
                 onClick={handleDownloadICS}
-                className="bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-slate-900 px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer font-['Montserrat']"
+                className="bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900 px-5 py-2.5 rounded-xl font-bold text-xs flex items-center gap-2 cursor-pointer font-['Montserrat']"
               >
-                <Download className="w-4 h-4 text-slate-950" />
+                <Download className="w-4 h-4 text-black" />
                 <span>Download .ICS Calendar File</span>
               </button>
 
               <button
                 onClick={onClose}
-                className="bg-slate-950 hover:bg-slate-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider cursor-pointer shadow-lg font-['Montserrat']"
+                className="bg-zinc-950 hover:bg-zinc-800 text-white font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider cursor-pointer shadow-lg font-['Montserrat']"
               >
                 Done
               </button>

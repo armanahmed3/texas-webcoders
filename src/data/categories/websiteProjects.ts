@@ -150,43 +150,6 @@ export const WEBSITE_PROJECTS: PortfolioProject[] = [
     ]
   },
   {
-    id: "web_brew_haven_coffee",
-    title: "Brew Haven - Artisanal Coffee Roastery & Café Web Portal",
-    category: "Website Development",
-    subtitle: "Warm espresso aesthetic, bean origin storytelling & online café ordering",
-    description: "Rich dark-roast coffee and café e-commerce website featuring bean blend discovery, tasting notes hierarchy, interactive beverage menu with cart checkout, and roastery subscription plans.",
-    imageUrl: "/portfolio-media/texaswebcoders/Website/website_brew_haven_coffee_roastery.png",
-    mediaType: "image",
-    isAutoScroll: true,
-    isUserUploaded: true,
-    clientName: "Brew Haven Coffee Co.",
-    year: "2025",
-    techStack: [
-      "React 19",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Stripe SDK"
-    ],
-    stats: [
-      {
-        label: "Bean Quality",
-        value: "100% Single Origin"
-      },
-      {
-        label: "Free Delivery",
-        value: "Orders ₹249+"
-      }
-    ],
-    overview: "Warm artisanal coffee roasting website with steaming latte art hero photography, roastery heritage story section, signature popular picks, and newsletter incentives.",
-    keyFeatures: [
-      "Atmospheric Espresso Steam Hero Visual with Tasting Badges",
-      "Brand Heritage Roastery Story with Siphon & Bean Blends",
-      "Signature Popular Picks Grid (Iced Caramel Latte, Cappuccino, Mocha, Espresso)",
-      "Service Guarantees Bar (Fresh & Fast, Secure Payment, Loyalty Rewards)"
-    ]
-  },
-  {
     id: "web_1",
     title: "All County Staffing Dade",
     category: "Website Development",

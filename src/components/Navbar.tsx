@@ -126,8 +126,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onClick={(e) => handleLinkClick(e, link.slideIndex)}
                       className={`px-3 py-1.5 xl:px-3.5 xl:py-1.5 rounded-full font-['Montserrat',sans-serif] text-[11px] xl:text-xs font-semibold tracking-wider uppercase transition-all duration-200 whitespace-nowrap ${
                         isActive
-                          ? 'bg-slate-950 text-white shadow-sm font-semibold'
-                          : 'text-zinc-600 hover:text-slate-950 hover:bg-zinc-200/80'
+                          ? 'bg-zinc-950 text-white shadow-sm font-semibold'
+                          : 'text-zinc-600 hover:text-black hover:bg-zinc-200/80'
                       }`}
                     >
                       {link.label}
@@ -144,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 id="mobile-sidebar-toggle-btn"
                 onClick={() => setMobileMenuOpen(true)}
                 aria-label="Open Mobile Navigation Menu"
-                className="lg:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-950 hover:bg-slate-900 active:scale-95 text-white border border-slate-800 transition-all cursor-pointer shadow-md min-h-[40px]"
+                className="lg:hidden flex items-center gap-1.5 px-3 py-2 rounded-xl bg-zinc-950 hover:bg-zinc-900 active:scale-95 text-white border border-zinc-800 transition-all cursor-pointer shadow-md min-h-[40px]"
               >
                 <Menu className="w-5 h-5 text-white" />
                 <span className="text-xs font-bold uppercase tracking-wider font-['Montserrat']">Menu</span>
@@ -185,24 +185,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                   id="mobile-sidebar-close-btn"
                   onClick={() => setMobileMenuOpen(false)}
                   aria-label="Close navigation sidebar"
-                  className="p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95"
+                  className="p-2.5 rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center active:scale-95"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               {/* Drawer Location & HQ Pill */}
-              <div className="px-4 sm:px-5 py-2.5 bg-slate-900/60 border-b border-slate-800/60 flex items-center justify-between text-[11px] text-slate-300">
+              <div className="px-4 sm:px-5 py-2.5 bg-zinc-900/60 border-b border-zinc-800/60 flex items-center justify-between text-[11px] text-zinc-300">
                 <div className="flex items-center gap-1.5 font-medium">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span>Texas Headquarters</span>
                 </div>
-                <span className="text-slate-400 font-mono">Mon–Fri 8am–6pm</span>
+                <span className="text-zinc-400 font-mono">Mon–Fri 8am–6pm</span>
               </div>
 
               {/* Navigation Links Scrollable Area */}
               <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-1.5 custom-scrollbar">
-                <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 px-3 py-1">
+                <div className="text-[10px] font-semibold uppercase tracking-widest text-zinc-400 px-3 py-1">
                   Main Navigation
                 </div>
                 {allNavLinks.map((link) => {
@@ -214,16 +214,16 @@ export const Navbar: React.FC<NavbarProps> = ({
                       onClick={(e) => handleLinkClick(e, link.slideIndex)}
                       className={`w-full text-left p-3 rounded-xl transition-all duration-200 flex items-center justify-between group cursor-pointer border ${
                         isActive
-                          ? 'bg-slate-800 border-white/30 text-white shadow-md'
-                          : 'bg-slate-950/40 hover:bg-slate-900 border-slate-800/70 text-slate-300 hover:text-white'
+                          ? 'bg-zinc-800 border-white/30 text-white shadow-md'
+                          : 'bg-zinc-950/40 hover:bg-zinc-900 border-zinc-800/70 text-zinc-300 hover:text-white'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div
                           className={`p-2 rounded-lg border ${
                             isActive
-                              ? 'bg-white text-slate-950 border-white'
-                              : 'bg-slate-900 border-slate-800 text-slate-300 group-hover:text-white group-hover:border-slate-700'
+                              ? 'bg-white text-black border-white'
+                              : 'bg-zinc-900 border-zinc-800 text-zinc-300 group-hover:text-white group-hover:border-zinc-700'
                           }`}
                         >
                           <Icon className="w-4 h-4" />
@@ -232,14 +232,14 @@ export const Navbar: React.FC<NavbarProps> = ({
                           <div className="text-sm font-semibold tracking-wide">
                             {link.label}
                           </div>
-                          <div className="text-[10px] text-slate-400 font-medium">
+                          <div className="text-[10px] text-zinc-400 font-medium">
                             {link.desc}
                           </div>
                         </div>
                       </div>
                       <ChevronRight
                         className={`w-4 h-4 transition-transform ${
-                          isActive ? 'text-white translate-x-0.5' : 'text-slate-400 group-hover:translate-x-1'
+                          isActive ? 'text-white translate-x-0.5' : 'text-zinc-400 group-hover:translate-x-1'
                         }`}
                       />
                     </button>
@@ -248,7 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               </div>
 
               {/* Drawer Bottom Actions & Direct Contact */}
-              <div className="p-3 sm:p-4 bg-slate-950 border-t border-slate-800 space-y-3">
+              <div className="p-3 sm:p-4 bg-zinc-950 border-t border-zinc-800 space-y-3">
                 {/* Fast Action Buttons */}
                 <div className="grid grid-cols-2 gap-2">
                   <button
@@ -262,15 +262,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                       }
                       setMobileMenuOpen(false);
                     }}
-                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-200 text-slate-950 text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-all active:scale-95"
+                    className="p-2.5 rounded-xl bg-white hover:bg-zinc-200 text-black text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-all active:scale-95"
                   >
-                    <FileText className="w-3.5 h-3.5 text-slate-950" />
+                    <FileText className="w-3.5 h-3.5 text-black" />
                     <span>Get a Quote</span>
                   </button>
 
                   <a
                     href="tel:+19032226022"
-                    className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-95"
+                    className="p-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer transition-all active:scale-95"
                   >
                     <Phone className="w-3.5 h-3.5 text-emerald-400" />
                     <span>Call Us</span>
@@ -278,18 +278,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 {/* Direct Phone & Location Information */}
-                <div className="pt-2 border-t border-slate-800/80 space-y-1.5 text-xs text-slate-300">
+                <div className="pt-2 border-t border-zinc-800/80 space-y-1.5 text-xs text-zinc-300">
                   <a
                     href="tel:+19032226022"
-                    className="flex items-center gap-2 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-900 border border-slate-800 transition-colors"
+                    className="flex items-center gap-2 p-2 rounded-lg bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800 transition-colors"
                   >
                     <Phone className="w-3.5 h-3.5 text-emerald-400 flex-shrink-0" />
                     <span className="font-semibold text-white">(903) 222-6022</span>
-                    <span className="text-[10px] text-slate-400 ml-auto">Direct Office</span>
+                    <span className="text-[10px] text-zinc-400 ml-auto">Direct Office</span>
                   </a>
 
-                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-slate-400">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400 flex-shrink-0" />
+                  <div className="flex items-center gap-2 px-2 py-1 text-[11px] text-zinc-400">
+                    <MapPin className="w-3.5 h-3.5 text-zinc-400 flex-shrink-0" />
                     <span className="truncate">5221 S Broadway Ave, Tyler, TX 75703</span>
                   </div>
                 </div>
@@ -314,7 +314,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={(e) => handleLinkClick(e, 1)}
           className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg transition-colors cursor-pointer active:scale-95 ${
-            activeSlide === 1 ? 'text-white font-bold' : 'text-slate-400 hover:text-white'
+            activeSlide === 1 ? 'text-white font-bold' : 'text-zinc-400 hover:text-white'
           }`}
         >
           <Briefcase className="w-5 h-5" />
@@ -325,7 +325,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={(e) => handleLinkClick(e, 3)}
           className={`flex flex-col items-center justify-center py-1 px-2.5 rounded-lg transition-colors cursor-pointer active:scale-95 ${
-            activeSlide === 3 ? 'text-white font-bold' : 'text-slate-400 hover:text-white'
+            activeSlide === 3 ? 'text-white font-bold' : 'text-zinc-400 hover:text-white'
           }`}
         >
           <Cpu className="w-5 h-5" />
@@ -344,7 +344,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Call Office Button */}
         <a
           href="tel:+19032226022"
-          className="flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-slate-300 hover:text-white transition-colors cursor-pointer active:scale-95"
+          className="flex flex-col items-center justify-center py-1 px-2.5 rounded-lg text-zinc-300 hover:text-white transition-colors cursor-pointer active:scale-95"
         >
           <Phone className="w-5 h-5" />
           <span className="text-[10px] font-semibold tracking-wider uppercase mt-0.5">Call</span>

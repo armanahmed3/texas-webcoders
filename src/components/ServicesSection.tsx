@@ -22,7 +22,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
   const isBlack = variant === 'black';
   const isWhite = variant === 'white';
   const isNone = variant === 'none' || variant === 'transparent' || variant === 'light-blue';
-  const isDarkBlue = isNone;
+  const isDarkBlue = false;
 
   const handleOpenSpecs = (service: ServiceItem) => {
     if (onSelectServiceDetail) {
@@ -135,7 +135,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                         key={i}
                         className={`px-2.5 py-1 rounded-lg text-[11px] font-medium flex items-center gap-1.5 border shadow-sm ${
                           isDarkBlue || isBlack
-                            ? 'bg-slate-900 text-slate-300 border-slate-700'
+                            ? 'bg-zinc-900 text-zinc-300 border-zinc-700'
                             : 'bg-white text-zinc-800 border-zinc-200'
                         }`}
                       >
@@ -154,8 +154,8 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       }}
                       className={`h-11 px-3 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer transition-all duration-200 border shadow-sm ${
                         isDarkBlue || isBlack
-                          ? 'bg-slate-900 border-slate-700 text-slate-200 hover:text-white hover:border-white hover:bg-slate-800'
-                          : 'bg-zinc-100 border-zinc-300 text-slate-900 hover:bg-zinc-200 hover:border-slate-400'
+                          ? 'bg-zinc-900 border-zinc-700 text-zinc-200 hover:text-white hover:border-white hover:bg-zinc-800'
+                          : 'bg-zinc-100 border-zinc-300 text-zinc-900 hover:bg-zinc-200 hover:border-zinc-400'
                       }`}
                     >
                       <Info className="w-3.5 h-3.5 text-white" />
@@ -170,12 +170,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                       }}
                       className={`h-11 px-3 rounded-xl text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer transition-all duration-200 shadow-md ${
                         isDarkBlue || isBlack
-                          ? 'bg-white text-slate-950 hover:bg-zinc-200'
-                          : 'bg-slate-950 text-white hover:bg-zinc-800'
+                          ? 'bg-white text-black hover:bg-zinc-200'
+                          : 'bg-black text-white hover:bg-zinc-800'
                       }`}
                     >
                       <span>Inquire Now</span>
-                      <ArrowUpRight className={`w-3.5 h-3.5 ${isDarkBlue || isBlack ? 'text-slate-950' : 'text-white'}`} />
+                      <ArrowUpRight className={`w-3.5 h-3.5 ${isDarkBlue || isBlack ? 'text-black' : 'text-white'}`} />
                     </button>
                   </div>
                 </div>

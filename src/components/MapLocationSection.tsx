@@ -112,7 +112,7 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
         />
         <div
           className={`absolute bottom-0 left-0 w-96 h-96 rounded-full blur-3xl pointer-events-none ${
-            isBlack ? 'bg-slate-800/20' : 'bg-slate-200/30'
+            isBlack ? 'bg-zinc-800/20' : 'bg-zinc-200/30'
           }`}
         />
 
@@ -127,7 +127,7 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
           >
             <span
               className={`text-xs font-semibold uppercase tracking-widest mb-2 block font-['Montserrat'] flex items-center justify-center gap-1.5 ${
-                isBlack ? 'text-slate-300' : 'text-slate-700'
+                isBlack ? 'text-zinc-300' : 'text-zinc-700'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
@@ -135,14 +135,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
             </span>
             <h2
               className={`text-2xl sm:text-4xl md:text-5xl font-semibold mb-3 tracking-tight uppercase font-['Montserrat',sans-serif] ${
-                isBlack ? 'text-white' : 'text-slate-950'
+                isBlack ? 'text-white' : 'text-black'
               }`}
             >
               Our Texas Office
             </h2>
             <p
               className={`max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed ${
-                isBlack ? 'text-slate-300' : 'text-zinc-600'
+                isBlack ? 'text-zinc-300' : 'text-zinc-600'
               }`}
             >
               Based in Texas, we serve ambitious startups and enterprise brands with top-tier web, mobile app, and custom software engineering.
@@ -152,10 +152,10 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
           {/* Map & Office Information Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             {/* Google Maps Embed Card */}
-            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-slate-700/60 shadow-xl bg-slate-950/80 relative min-h-[380px] sm:min-h-[440px] flex flex-col">
+            <div className="lg:col-span-7 rounded-3xl overflow-hidden border border-zinc-700/60 shadow-xl bg-zinc-950/80 relative min-h-[380px] sm:min-h-[440px] flex flex-col">
               {/* Map Floating Header Tag */}
               <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between pointer-events-none">
-                <div className="bg-slate-950/90 border border-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-2 pointer-events-auto">
+                <div className="bg-zinc-950/90 border border-white/20 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-2 pointer-events-auto">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className="text-[11px] font-semibold text-white font-['Montserrat']">Texas WebCoders</span>
                 </div>
@@ -163,9 +163,9 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                   href="https://maps.google.com/?q=5221+S+Broadway+Ave,+Tyler,+TX+75703,+United+States"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-white hover:bg-zinc-200 text-slate-950 px-3 py-1.5 rounded-xl text-[11px] font-semibold shadow-lg flex items-center gap-1.5 transition-all pointer-events-auto cursor-pointer"
+                  className="bg-white hover:bg-zinc-200 text-black px-3 py-1.5 rounded-xl text-[11px] font-semibold shadow-lg flex items-center gap-1.5 transition-all pointer-events-auto cursor-pointer"
                 >
-                  <Navigation className="w-3 h-3 text-slate-950" />
+                  <Navigation className="w-3 h-3 text-black" />
                   <span>Get Directions</span>
                 </a>
               </div>
@@ -185,8 +185,8 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
               </div>
 
               {/* Bottom Quick Bar */}
-              <div className="bg-slate-950/95 border-t border-slate-800 p-3 px-4 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
-                <span className="flex items-center gap-1.5 text-[11px] font-medium text-slate-300">
+              <div className="bg-zinc-950/95 border-t border-zinc-800 p-3 px-4 flex flex-wrap items-center justify-between text-xs text-zinc-400 gap-2">
+                <span className="flex items-center gap-1.5 text-[11px] font-medium text-zinc-300">
                   <MapPin className="w-3.5 h-3.5 text-white" />
                   <span>5221 S Broadway Ave, Tyler, TX 75703, United States</span>
                 </span>
@@ -201,26 +201,26 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
               {/* Primary Address & Direct Hub Card */}
               <div
                 className={`p-6 rounded-3xl border shadow-lg space-y-4 flex-1 ${
-                  isBlack ? 'bg-slate-950/90 border-slate-800' : 'bg-zinc-50 border-zinc-200'
+                  isBlack ? 'bg-zinc-950/90 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold uppercase tracking-wider text-slate-200">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold uppercase tracking-wider text-zinc-200">
                     <ShieldCheck className="w-3.5 h-3.5 text-white" />
                     <span>Verified Texas Business</span>
                   </span>
-                  <span className="text-xs font-mono text-slate-400">Tyler, TX 75703</span>
+                  <span className="text-xs font-mono text-zinc-400">Tyler, TX 75703</span>
                 </div>
 
                 <div>
                   <h3
                     className={`text-xl font-semibold uppercase font-['Montserrat'] tracking-tight ${
-                      isBlack ? 'text-white' : 'text-slate-950'
+                      isBlack ? 'text-white' : 'text-black'
                     }`}
                   >
                     Texas WebCoders
                   </h3>
-                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                  <p className="text-xs text-zinc-400 mt-1 leading-relaxed">
                     Custom Web & Mobile App Development • SEO & Digital Systems
                   </p>
                 </div>
@@ -233,14 +233,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                     target="_blank"
                     rel="noopener noreferrer"
                     className={`p-3 rounded-2xl border flex items-start gap-3 transition-colors ${
-                      isBlack ? 'bg-slate-900/90 border-slate-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-slate-950'
+                      isBlack ? 'bg-zinc-900/90 border-zinc-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-black'
                     }`}
                   >
                     <div className="p-2 rounded-xl bg-white/10 text-white flex-shrink-0 mt-0.5">
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div className="text-xs">
-                      <div className="text-[10px] uppercase font-semibold text-slate-400">Headquarters Address</div>
+                      <div className="text-[10px] uppercase font-semibold text-zinc-400">Headquarters Address</div>
                       <div className="font-semibold text-white mt-0.5">5221 S Broadway Ave, Tyler, TX 75703, United States</div>
                     </div>
                   </a>
@@ -249,14 +249,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                   <a
                     href="tel:+19032226022"
                     className={`p-3 rounded-2xl border flex items-center gap-3 transition-colors ${
-                      isBlack ? 'bg-slate-900/90 border-slate-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-slate-950'
+                      isBlack ? 'bg-zinc-900/90 border-zinc-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-black'
                     }`}
                   >
                     <div className="p-2 rounded-xl bg-white/10 text-white flex-shrink-0">
                       <Phone className="w-4 h-4" />
                     </div>
                     <div className="text-xs">
-                      <div className="text-[10px] uppercase font-semibold text-slate-400">Call Us Directly</div>
+                      <div className="text-[10px] uppercase font-semibold text-zinc-400">Call Us Directly</div>
                       <div className="font-mono font-semibold text-white text-sm">+1 9032226022</div>
                     </div>
                   </a>
@@ -265,14 +265,14 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                   <a
                     href="mailto:info@texaswebcoders.com"
                     className={`p-3 rounded-2xl border flex items-center gap-3 transition-colors ${
-                      isBlack ? 'bg-slate-900/90 border-slate-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-slate-950'
+                      isBlack ? 'bg-zinc-900/90 border-zinc-800 hover:border-white' : 'bg-white border-zinc-200 hover:border-black'
                     }`}
                   >
                     <div className="p-2 rounded-xl bg-white/10 text-white flex-shrink-0">
                       <Mail className="w-4 h-4" />
                     </div>
                     <div className="text-xs">
-                      <div className="text-[10px] uppercase font-semibold text-slate-400">Official Inquiries</div>
+                      <div className="text-[10px] uppercase font-semibold text-zinc-400">Official Inquiries</div>
                       <div className="font-semibold text-white">info@texaswebcoders.com</div>
                     </div>
                   </a>
@@ -282,7 +282,7 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
                 <div className="pt-2">
                   <a
                     href="tel:+19032226022"
-                    className="w-full bg-white hover:bg-zinc-200 text-slate-950 font-semibold py-3.5 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer font-['Montserrat']"
+                    className="w-full bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 px-4 rounded-2xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all cursor-pointer font-['Montserrat']"
                   >
                     <Phone className="w-4 h-4" />
                     <span>Call +1 (903) 222-6022</span>
@@ -291,9 +291,9 @@ export const MapLocationSection: React.FC<MapLocationSectionProps> = ({
               </div>
 
               {/* SMS Disclaimer Box */}
-              <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80 text-[11px] text-slate-400 leading-relaxed space-y-1">
-                <div className="font-semibold text-slate-300 text-[10px] uppercase tracking-wider flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+              <div className="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800/80 text-[11px] text-zinc-400 leading-relaxed space-y-1">
+                <div className="font-semibold text-zinc-300 text-[10px] uppercase tracking-wider flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-zinc-400" />
                   <span>SMS Consent & Communications</span>
                 </div>
                 <p>

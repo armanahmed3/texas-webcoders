@@ -10,7 +10,7 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
   const isBlack = variant === 'black';
   const isWhite = variant === 'white';
   const isNone = variant === 'none' || variant === 'transparent' || variant === 'light-blue';
-  const isDarkBlue = isNone;
+  const isDarkBlue = false;
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
   const reviews = [
@@ -101,12 +101,12 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
               className="text-center mb-12"
             >
               <span className={`text-xs font-medium uppercase tracking-widest block mb-2 font-['Montserrat'] ${
-                isNone || isBlack ? 'text-cyan-400' : 'text-cyan-600'
+                isNone || isBlack ? 'text-white' : 'text-zinc-900'
               }`}>
                 Client Testimonials & Reviews
               </span>
               <h2 className={`text-2xl sm:text-4xl md:text-5xl font-semibold uppercase tracking-tight font-['Montserrat',sans-serif] ${
-                isNone || isBlack ? 'text-white' : 'text-slate-950'
+                isNone || isBlack ? 'text-white' : 'text-black'
               }`}>
                 Trusted By Industry Leaders Across USA
               </h2>
@@ -122,12 +122,12 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
                   whileHover={{ y: -6, scale: 1.02 }}
                   className={`p-6 rounded-2xl flex flex-col justify-between space-y-4 relative shadow-lg border transition-all ${
                     isDarkBlue || isBlack
-                      ? 'bg-slate-950/80 border-slate-800 hover:border-cyan-400 text-white'
-                      : 'bg-white border-cyan-200 hover:border-cyan-400 text-slate-900'
+                      ? 'bg-zinc-950/80 border-zinc-800 hover:border-white text-white'
+                      : 'bg-white border-zinc-200 hover:border-white text-zinc-900'
                   }`}
                 >
                   <Quote className={`absolute top-6 right-6 w-8 h-8 pointer-events-none ${
-                    isDarkBlue || isBlack ? 'text-cyan-400/20' : 'text-cyan-600/10'
+                    isDarkBlue || isBlack ? 'text-white/20' : 'text-zinc-900/10'
                   }`} />
                   
                   <div className="space-y-3">
@@ -137,29 +137,29 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
                       ))}
                     </div>
                     <p className={`text-xs sm:text-sm leading-relaxed italic ${
-                      isDarkBlue || isBlack ? 'text-slate-300' : 'text-zinc-700'
+                      isDarkBlue || isBlack ? 'text-zinc-300' : 'text-zinc-700'
                     }`}>
                       &quot;{rev.comment}&quot;
                     </p>
                   </div>
 
                   <div className={`flex items-center gap-3 pt-4 border-t ${
-                    isDarkBlue || isBlack ? 'border-slate-800' : 'border-zinc-200'
+                    isDarkBlue || isBlack ? 'border-zinc-800' : 'border-zinc-200'
                   }`}>
                     <img
                       src={rev.avatar}
                       alt={rev.name}
-                      className="w-10 h-10 rounded-full object-cover ring-2 ring-cyan-500/40"
+                      className="w-10 h-10 rounded-full object-cover ring-2 ring-white/40"
                     />
                     <div>
                       <h4 className={`font-semibold text-sm font-['Montserrat'] ${
-                        isDarkBlue || isBlack ? 'text-white' : 'text-slate-950'
+                        isDarkBlue || isBlack ? 'text-white' : 'text-black'
                       }`}>{rev.name}</h4>
                       <p className={`text-[11px] ${
-                        isDarkBlue || isBlack ? 'text-slate-400' : 'text-zinc-500'
+                        isDarkBlue || isBlack ? 'text-zinc-400' : 'text-zinc-500'
                       }`}>{rev.role}</p>
                       <span className={`inline-flex items-center gap-1 text-[10px] font-medium mt-0.5 ${
-                        isDarkBlue || isBlack ? 'text-cyan-400' : 'text-cyan-600'
+                        isDarkBlue || isBlack ? 'text-white' : 'text-zinc-900'
                       }`}>
                         <ShieldCheck className="w-3 h-3" />
                         <span>{rev.project}</span>
@@ -182,14 +182,14 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
             >
               <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium uppercase tracking-wider mb-3 border ${
                 isDarkBlue || isBlack
-                  ? 'bg-slate-900 border-slate-700 text-cyan-300'
-                  : 'bg-white border-cyan-200 text-cyan-700 shadow-sm'
+                  ? 'bg-zinc-900 border-zinc-700 text-white'
+                  : 'bg-white border-zinc-200 text-black shadow-sm'
               }`}>
-                <HelpCircle className="w-4 h-4 text-cyan-400" />
+                <HelpCircle className="w-4 h-4 text-white" />
                 <span>Got Questions? We Have Answers</span>
               </div>
               <h3 className={`text-2xl sm:text-4xl font-semibold font-['Montserrat',sans-serif] uppercase tracking-tight ${
-                isDarkBlue || isBlack ? 'text-white' : 'text-slate-950'
+                isDarkBlue || isBlack ? 'text-white' : 'text-black'
               }`}>
                 Frequently Asked Questions
               </h3>
@@ -203,22 +203,22 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
                     key={idx}
                     className={`rounded-xl overflow-hidden transition-all duration-200 border shadow-sm ${
                       isDarkBlue || isBlack
-                        ? 'bg-slate-950/80 border-slate-800'
-                        : 'bg-white border-cyan-200'
+                        ? 'bg-zinc-950/80 border-zinc-800'
+                        : 'bg-white border-zinc-200'
                     }`}
                   >
                     <button
                       onClick={() => setActiveFaq(isOpen ? null : idx)}
                       className={`w-full px-6 py-4 text-left flex items-center justify-between font-medium text-sm sm:text-base font-['Montserrat'] transition-colors cursor-pointer ${
                         isDarkBlue || isBlack
-                          ? 'text-white hover:text-cyan-300'
-                          : 'text-slate-950 hover:text-cyan-700'
+                          ? 'text-white hover:text-white'
+                          : 'text-black hover:text-white'
                       }`}
                     >
                       <span>{faq.question}</span>
                       <ChevronDown
                         className={`w-5 h-5 transition-transform duration-300 flex-shrink-0 ${
-                          isDarkBlue || isBlack ? 'text-cyan-400' : 'text-cyan-600'
+                          isDarkBlue || isBlack ? 'text-white' : 'text-zinc-900'
                         } ${isOpen ? 'rotate-180' : ''}`}
                       />
                     </button>
@@ -232,13 +232,13 @@ export const ReviewsFaqSection: React.FC<ReviewsFaqSectionProps> = ({ variant = 
                           transition={{ duration: 0.3 }}
                           className={`px-6 pb-5 text-xs sm:text-sm leading-relaxed border-t pt-3 ${
                             isDarkBlue || isBlack
-                              ? 'text-slate-300 border-slate-800/60'
+                              ? 'text-zinc-300 border-zinc-800/60'
                               : 'text-zinc-700 border-zinc-200'
                           }`}
                         >
                           <div className="flex items-start gap-2">
                             <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-0.5 ${
-                              isDarkBlue || isBlack ? 'text-cyan-400' : 'text-cyan-600'
+                              isDarkBlue || isBlack ? 'text-white' : 'text-zinc-900'
                             }`} />
                             <span>{faq.answer}</span>
                           </div>

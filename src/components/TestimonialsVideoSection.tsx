@@ -235,11 +235,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               viewport={{ once: true }}
               className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] font-medium uppercase tracking-widest font-['Montserrat'] shadow-sm ${
                 isWhite
-                  ? 'bg-zinc-100 border border-zinc-300 text-slate-900'
+                  ? 'bg-zinc-100 border border-zinc-300 text-zinc-900'
                   : 'bg-zinc-900/90 border border-white/20 text-white'
               }`}
             >
-              <Video className={`w-3.5 h-3.5 ${isWhite ? 'text-slate-900' : 'text-cyan-400'}`} />
+              <Video className={`w-3.5 h-3.5 ${isWhite ? 'text-zinc-900' : 'text-white'}`} />
               <span>Verified Client Video Reviews • Texas WebCoders</span>
             </motion.div>
 
@@ -249,7 +249,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className={`text-2xl sm:text-4xl md:text-5xl font-semibold uppercase tracking-tight font-['Montserrat',sans-serif] ${
-                isWhite ? 'text-slate-950' : 'text-white'
+                isWhite ? 'text-black' : 'text-white'
               }`}
             >
               What Our Verified Clients Say
@@ -257,7 +257,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
 
             <p
               className={`text-xs sm:text-sm max-w-2xl mx-auto font-normal leading-relaxed ${
-                isWhite ? 'text-zinc-600' : 'text-slate-300'
+                isWhite ? 'text-zinc-600' : 'text-zinc-300'
               }`}
             >
               Real clients sharing their authentic video reviews and personal experience partnering with Texas WebCoders.
@@ -271,8 +271,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'all'
                     ? isWhite
-                      ? 'bg-slate-950 text-white shadow-md'
-                      : 'bg-white text-slate-950 shadow-md'
+                      ? 'bg-zinc-950 text-white shadow-md'
+                      : 'bg-white text-black shadow-md'
                     : isWhite
                       ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
                       : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
@@ -287,8 +287,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'video-1'
                     ? isWhite
-                      ? 'bg-slate-950 text-white shadow-md'
-                      : 'bg-white text-slate-950 shadow-md'
+                      ? 'bg-zinc-950 text-white shadow-md'
+                      : 'bg-white text-black shadow-md'
                     : isWhite
                       ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
                       : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
@@ -304,8 +304,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
                   activeTab === 'video-4'
                     ? isWhite
-                      ? 'bg-slate-950 text-white shadow-md'
-                      : 'bg-white text-slate-950 shadow-md'
+                      ? 'bg-zinc-950 text-white shadow-md'
+                      : 'bg-white text-black shadow-md'
                     : isWhite
                       ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
                       : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
@@ -328,7 +328,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${
                   isWhite
                     ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50'
-                    : 'bg-zinc-950/90 border-white/20 shadow-cyan-950/30'
+                    : 'bg-zinc-950/90 border-white/20 shadow-black/50'
                 }`}
               >
                 {/* Left Column: Vertical Video Player (1.mp4) */}
@@ -379,7 +379,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         <button
                           type="button"
                           onClick={toggleMute1}
-                          className="p-1.5 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-slate-950 transition-colors border border-white/15 cursor-pointer shadow-lg"
+                          className="p-1.5 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors border border-white/15 cursor-pointer shadow-lg"
                           title={isMuted1 ? 'Unmute Audio (Hear Emily)' : 'Mute Audio'}
                         >
                           {isMuted1 ? (
@@ -407,11 +407,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         isPlaying1 ? 'opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100' : 'opacity-100 scale-100'
                       }`}
                     >
-                      <div className="w-14 h-14 rounded-full bg-white text-slate-950 flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                      <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
                         {isPlaying1 ? (
-                          <Pause className="w-6 h-6 text-slate-950 fill-slate-950" />
+                          <Pause className="w-6 h-6 text-black fill-black" />
                         ) : (
-                          <Play className="w-6 h-6 text-slate-950 fill-slate-950 ml-1" />
+                          <Play className="w-6 h-6 text-black fill-black ml-1" />
                         )}
                       </div>
                     </div>
@@ -455,13 +455,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         src={avatarV1Img}
                         alt="Emily Watson"
                         className={`w-13 h-13 sm:w-14 sm:h-14 rounded-xl object-cover shadow-md ${
-                          isWhite ? 'ring-2 ring-slate-950/20' : 'ring-2 ring-white/60'
+                          isWhite ? 'ring-2 ring-black/20' : 'ring-2 ring-white/60'
                         }`}
                       />
                       <div>
                         <h3
                           className={`text-lg sm:text-xl font-bold font-['Montserrat'] flex items-center gap-2 ${
-                            isWhite ? 'text-slate-950' : 'text-white'
+                            isWhite ? 'text-black' : 'text-white'
                           }`}
                         >
                           <span>Emily Watson</span>
@@ -470,7 +470,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         <p className={`text-xs font-semibold ${isWhite ? 'text-zinc-700' : 'text-zinc-200'}`}>
                           Freelance Journalist & Author
                         </p>
-                        <p className={`text-[11px] ${isWhite ? 'text-zinc-500' : 'text-slate-400'}`}>
+                        <p className={`text-[11px] ${isWhite ? 'text-zinc-500' : 'text-zinc-400'}`}>
                           Independent Author & Media • Dallas, TX
                         </p>
                       </div>
@@ -483,7 +483,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                           <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
                         ))}
                       </div>
-                      <span className={`text-xs font-bold font-mono ml-0.5 ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-bold font-mono ml-0.5 ${isWhite ? 'text-black' : 'text-white'}`}>
                         5.0
                       </span>
                     </div>
@@ -493,13 +493,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                   <div
                     className={`p-4 sm:p-5 rounded-2xl border space-y-2.5 relative overflow-hidden ${
                       isWhite
-                        ? 'bg-white border-zinc-200 text-slate-900 shadow-md'
+                        ? 'bg-white border-zinc-200 text-zinc-900 shadow-md'
                         : 'bg-zinc-900/95 border-zinc-800 text-white shadow-xl'
                     }`}
                   >
                     <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider font-['Montserrat']">
-                      <span className={`flex items-center gap-2 ${isWhite ? 'text-slate-950' : 'text-white'}`}>
-                        <Quote className="w-4 h-4 text-slate-800" />
+                      <span className={`flex items-center gap-2 ${isWhite ? 'text-black' : 'text-white'}`}>
+                        <Quote className="w-4 h-4 text-zinc-800" />
                         <span className="font-bold">Spoken Client Testimonial</span>
                       </span>
                       <span className="text-emerald-500 font-mono text-[10px] font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
@@ -509,7 +509,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
 
                     <blockquote
                       className={`text-xs sm:text-[13px] leading-relaxed italic font-normal pt-0.5 ${
-                        isWhite ? 'text-zinc-800' : 'text-slate-200'
+                        isWhite ? 'text-zinc-800' : 'text-zinc-200'
                       }`}
                     >
                       &ldquo;I&apos;m a freelance journalist and author, and I hired Texas WebCoders to redesign my website and also to maintain it, and the process was really great!&rdquo;
@@ -544,7 +544,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       >
                         Project Scope
                       </span>
-                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
                         Website Redesign & Ongoing Maintenance
                       </span>
                     </div>
@@ -561,7 +561,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       >
                         Execution Speed
                       </span>
-                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
                         Rapid Delivery & 100% Bug-Free Launch
                       </span>
                     </div>
@@ -590,7 +590,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       <button
                         type="button"
                         onClick={onOpenQuoteCalculator}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-slate-950 hover:bg-zinc-200 transition-all shadow-md cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-all shadow-md cursor-pointer"
                       >
                         <span>Get a Free Quote</span>
                         <ArrowRight className="w-3 h-3" />
@@ -671,7 +671,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         <button
                           type="button"
                           onClick={toggleMute2}
-                          className="p-2 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-slate-950 transition-colors border border-white/15 cursor-pointer shadow-lg"
+                          className="p-2 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors border border-white/15 cursor-pointer shadow-lg"
                           title={isMuted2 ? 'Unmute Audio (Hear David)' : 'Mute Audio'}
                         >
                           {isMuted2 ? (
@@ -699,11 +699,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         isPlaying2 ? 'opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100' : 'opacity-100 scale-100'
                       }`}
                     >
-                      <div className="w-16 h-16 rounded-full bg-white text-slate-950 flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                      <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
                         {isPlaying2 ? (
-                          <Pause className="w-7 h-7 text-slate-950 fill-slate-950" />
+                          <Pause className="w-7 h-7 text-black fill-black" />
                         ) : (
-                          <Play className="w-7 h-7 text-slate-950 fill-slate-950 ml-1" />
+                          <Play className="w-7 h-7 text-black fill-black ml-1" />
                         )}
                       </div>
                     </div>
@@ -751,7 +751,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       >
                         Project Scope
                       </span>
-                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
                         Enterprise Cloud & Custom Platform
                       </span>
                     </div>
@@ -768,7 +768,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       >
                         Execution Speed
                       </span>
-                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-semibold leading-snug block ${isWhite ? 'text-black' : 'text-white'}`}>
                         Sub-Second Streaming & Zero Downtime
                       </span>
                     </div>
@@ -801,13 +801,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         src={avatarDavidV4Img}
                         alt="David C. Vance"
                         className={`w-14 h-14 rounded-2xl object-cover shadow-lg ${
-                          isWhite ? 'ring-2 ring-slate-950/20' : 'ring-2 ring-white/60'
+                          isWhite ? 'ring-2 ring-black/20' : 'ring-2 ring-white/60'
                         }`}
                       />
                       <div>
                         <h3
                           className={`text-lg sm:text-xl font-bold font-['Montserrat'] flex items-center gap-2 ${
-                            isWhite ? 'text-slate-950' : 'text-white'
+                            isWhite ? 'text-black' : 'text-white'
                           }`}
                         >
                           <span>David C. Vance</span>
@@ -816,7 +816,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         <p className={`text-xs font-semibold ${isWhite ? 'text-zinc-700' : 'text-zinc-200'}`}>
                           Founder & Chief Executive Officer
                         </p>
-                        <p className={`text-[11px] ${isWhite ? 'text-zinc-500' : 'text-slate-400'}`}>
+                        <p className={`text-[11px] ${isWhite ? 'text-zinc-500' : 'text-zinc-400'}`}>
                           Vance Global Enterprise • Austin, TX
                         </p>
                       </div>
@@ -829,7 +829,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                           <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
                         ))}
                       </div>
-                      <span className={`text-xs font-bold font-mono ml-0.5 ${isWhite ? 'text-slate-950' : 'text-white'}`}>
+                      <span className={`text-xs font-bold font-mono ml-0.5 ${isWhite ? 'text-black' : 'text-white'}`}>
                         5.0
                       </span>
                     </div>
@@ -839,13 +839,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                   <div
                     className={`p-5 sm:p-6 rounded-2xl border space-y-3 relative overflow-hidden flex-1 flex flex-col justify-between ${
                       isWhite
-                        ? 'bg-white border-zinc-200 text-slate-900 shadow-md'
+                        ? 'bg-white border-zinc-200 text-zinc-900 shadow-md'
                         : 'bg-zinc-900/95 border-zinc-800 text-white shadow-xl'
                     }`}
                   >
                     <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider font-['Montserrat']">
-                      <span className={`flex items-center gap-2 ${isWhite ? 'text-slate-950' : 'text-white'}`}>
-                        <Quote className="w-4 h-4 text-slate-800" />
+                      <span className={`flex items-center gap-2 ${isWhite ? 'text-black' : 'text-white'}`}>
+                        <Quote className="w-4 h-4 text-zinc-800" />
                         <span className="font-bold">Spoken Client Testimonial</span>
                       </span>
                       <span className="text-emerald-500 font-mono text-[10px] font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
@@ -855,7 +855,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
 
                     <blockquote
                       className={`text-xs sm:text-[13px] leading-relaxed italic font-normal pt-1 ${
-                        isWhite ? 'text-zinc-800' : 'text-slate-200'
+                        isWhite ? 'text-zinc-800' : 'text-zinc-200'
                       }`}
                     >
                       &ldquo;Texas WebCoders architected our mission-critical enterprise portal with sub-second data streaming and bank-grade security. Conversions jumped 320% within the first 60 days. If you want an enterprise platform or bespoke web application that performs at Silicon Valley standards right here in Texas, Texas WebCoders is completely unmatched.&rdquo;
@@ -882,7 +882,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       <button
                         type="button"
                         onClick={onOpenQuoteCalculator}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-slate-950 hover:bg-zinc-200 transition-all shadow-lg hover:shadow-white/20 cursor-pointer"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-all shadow-lg hover:shadow-white/20 cursor-pointer"
                       >
                         <span>Get a Free Quote</span>
                         <ArrowRight className="w-3.5 h-3.5" />

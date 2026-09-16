@@ -40,7 +40,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: -16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-white/20 text-white text-xs sm:text-sm font-semibold uppercase tracking-wider font-['Montserrat',sans-serif] backdrop-blur-md shadow-lg shadow-white/5"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-white/20 text-white text-xs sm:text-sm font-semibold uppercase tracking-wider font-['Montserrat',sans-serif] backdrop-blur-md shadow-lg shadow-white/5"
             >
               <Sparkles className="w-3.5 h-3.5 text-white" />
               <span>Texas Custom Software & Web Engineering Agency</span>
@@ -58,7 +58,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 & Business Software
               </span>{' '}
               <br />
-              <span className="font-bebas text-slate-300 text-2xl sm:text-3xl md:text-4xl font-normal block mt-1 tracking-wide">
+              <span className="font-bebas text-zinc-300 text-2xl sm:text-3xl md:text-4xl font-normal block mt-1 tracking-wide">
                 Engineered in Texas for Regional Leaders
               </span>
             </motion.h1>
@@ -68,7 +68,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="text-sm sm:text-base text-slate-300 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed font-['Montserrat',sans-serif]"
+              className="text-sm sm:text-base text-zinc-300 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed font-['Montserrat',sans-serif]"
             >
               TexasWebCoders partners with East Texas medical clinics, legal practices, contractors, logistics providers, and growing enterprises to build lightning-fast websites, custom client portals, iOS/Android mobile apps, and dominant local SEO systems that generate qualified client leads.
             </motion.p>
@@ -78,17 +78,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs sm:text-sm text-slate-300 font-semibold font-['Montserrat',sans-serif]"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 text-xs sm:text-sm text-zinc-300 font-semibold font-['Montserrat',sans-serif]"
             >
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-white/10">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-white/10">
                 <Zap className="w-3.5 h-3.5 text-amber-400" />
                 <span>Rapid 7–14 Day Delivery</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-white/10">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-white/10">
                 <ShieldCheck className="w-3.5 h-3.5 text-white" />
                 <span>100% Code & IP Ownership</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/80 border border-white/10">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/80 border border-white/10">
                 <Award className="w-3.5 h-3.5 text-emerald-400" />
                 <span>Texas Software Developers</span>
               </div>

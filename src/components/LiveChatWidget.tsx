@@ -524,7 +524,7 @@ Would you like to schedule an instant video consultation or explore our packages
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-3 w-[94vw] sm:w-[380px] bg-slate-950/98 border border-zinc-700 rounded-3xl shadow-2xl overflow-hidden backdrop-blur-2xl flex flex-col text-white h-[500px] max-h-[75vh]"
+            className="mb-3 w-[94vw] sm:w-[380px] bg-zinc-950/98 border border-zinc-700 rounded-3xl shadow-2xl overflow-hidden backdrop-blur-2xl flex flex-col text-white h-[500px] max-h-[75vh]"
           >
             {/* Header: Pure Typography & Live Support Badge */}
             <div className="bg-gradient-to-r from-zinc-950 via-zinc-900 to-black px-4 py-3.5 border-b border-zinc-800 flex items-center justify-between">
@@ -588,7 +588,7 @@ Would you like to schedule an instant video consultation or explore our packages
               >
                 <div className="flex items-center justify-between mb-2">
                   <span className="font-bold text-white flex items-center gap-1.5 text-[11px]">
-                    <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                    <Mail className="w-3.5 h-3.5 text-white" />
                     Send Discussion to info@texaswebcoders.com
                   </span>
                   <button
@@ -637,7 +637,7 @@ Would you like to schedule an instant video consultation or explore our packages
                   />
 
                   {statusMessage && (
-                    <div className="text-[10px] text-cyan-400 font-medium py-0.5">
+                    <div className="text-[10px] text-white font-medium py-0.5">
                       {statusMessage}
                     </div>
                   )}
@@ -745,7 +745,7 @@ Would you like to schedule an instant video consultation or explore our packages
               </button>
               <button
                 onClick={() => setShowEmailCapture(true)}
-                className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-cyan-300 font-medium transition-all flex-shrink-0 cursor-pointer flex items-center gap-1"
+                className="px-2.5 py-1 rounded-full bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-[10px] text-white font-medium transition-all flex-shrink-0 cursor-pointer flex items-center gap-1"
               >
                 <Mail className="w-3 h-3" />
                 <span>Email Transcript</span>
