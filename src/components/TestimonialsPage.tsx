@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Star,
   ShieldCheck,
-  ArrowRight
+  ArrowRight,
+  Clock,
+  Flame,
+  CalendarCheck
 } from 'lucide-react';
 import { TESTIMONIALS } from '../data/portfolioData';
 
@@ -13,11 +16,125 @@ interface TestimonialsPageProps {
   onOpenAppointmentModal: () => void;
 }
 
+// Live Countdown Hook - guarantees continuous ticking countdown with zero stalling
+const useLiveCountdown = () => {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 2,
+    hours: 14,
+    minutes: 36,
+    seconds: 48
+  });
+
+  useEffect(() => {
+    // 3-day recurring client intake window countdown
+    const getTargetTime = () => {
+      try {
+        const stored = localStorage.getItem('twc_intake_countdown_target');
+        const now = Date.now();
+        if (stored) {
+          const parsed = parseInt(stored, 10);
+          if (parsed > now) return parsed;
+        }
+        // Target: 2 days, 16 hours, 45 minutes from first load
+        const newTarget = now + (2 * 24 * 3600 + 16 * 3600 + 45 * 60) * 1000;
+        localStorage.setItem('twc_intake_countdown_target', newTarget.toString());
+        return newTarget;
+      } catch {
+        return Date.now() + (2 * 24 * 3600 + 16 * 3600 + 45 * 60) * 1000;
+      }
+    };
+
+    let targetTime = getTargetTime();
+
+    const updateTimer = () => {
+      const now = Date.now();
+      let diff = targetTime - now;
+
+      if (diff <= 0) {
+        // Automatically rollover to next 3-day development sprint cycle
+        targetTime = now + (3 * 24 * 3600) * 1000;
+        try {
+          localStorage.setItem('twc_intake_countdown_target', targetTime.toString());
+        } catch {}
+        diff = targetTime - now;
+      }
+
+      const days = Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)));
+      const hours = Math.max(0, Math.floor((diff / (1000 * 60 * 60)) % 24));
+      const minutes = Math.max(0, Math.floor((diff / (1000 * 60)) % 60));
+      const seconds = Math.max(0, Math.floor((diff / 1000) % 60));
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return timeLeft;
+};
+
+// High-Performance Animated Statistic Counter
+const StatCounter: React.FC<{
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  duration?: number;
+}> = ({
+  value,
+  suffix = '',
+  prefix = '',
+  decimals = 0,
+  duration = 1.8
+}) => {
+  const [count, setCount] = useState<number>(0);
+
+  useEffect(() => {
+    let animationFrameId: number;
+    let startTime: number | null = null;
+    const durationMs = duration * 1000;
+
+    const tick = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / durationMs, 1);
+      // Smooth cubic out easing
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+      const current = decimals > 0 
+        ? parseFloat((value * easeProgress).toFixed(decimals))
+        : Math.round(value * easeProgress);
+
+      setCount(current);
+
+      if (progress < 1) {
+        animationFrameId = requestAnimationFrame(tick);
+      } else {
+        setCount(value);
+      }
+    };
+
+    animationFrameId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [value, duration, decimals]);
+
+  return (
+    <span className="font-mono tracking-tight">
+      {prefix}
+      {decimals > 0 ? count.toFixed(decimals) : count.toLocaleString()}
+      {suffix}
+    </span>
+  );
+};
+
 export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
   onNavigateSlide,
   onOpenQuoteCalculator,
   onOpenAppointmentModal
 }) => {
+  const countdown = useLiveCountdown();
+
   // Helper function to render monochrome stars with fractional support
   const renderStars = (rating: number) => {
     const fullStars = Math.floor(rating);
@@ -52,18 +169,40 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-white/[0.04] rounded-full blur-[140px] pointer-events-none" />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto">
-          {/* Top Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 backdrop-blur-md shadow-xl mb-6 text-xs text-zinc-300"
-          >
-            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold text-white">250+ Verified Client Reviews</span>
-            <span className="text-zinc-600">•</span>
-            <span className="text-zinc-200 font-mono font-bold">100% Authentic Feedback</span>
-          </motion.div>
+          {/* Top Badges & Live Countdown Pill */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-6">
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 backdrop-blur-md shadow-xl text-xs text-zinc-300"
+            >
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              <span className="font-semibold text-white">250+ Verified Client Reviews</span>
+              <span className="text-zinc-600">•</span>
+              <span className="text-zinc-200 font-mono font-bold">100% Authentic Feedback</span>
+            </motion.div>
+
+            {/* Live Countdown Badge in Hero */}
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 bg-zinc-950 border border-zinc-800 px-3.5 py-1.5 rounded-full shadow-xl backdrop-blur-md font-mono text-xs"
+            >
+              <Clock className="w-3.5 h-3.5 text-white animate-pulse" />
+              <span className="text-zinc-400 uppercase text-[10px] tracking-wider font-semibold">Intake Closes In:</span>
+              <div className="flex items-center gap-1 text-white font-bold">
+                <span className="bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800">{String(countdown.days)}d</span>
+                <span>:</span>
+                <span className="bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800">{String(countdown.hours).padStart(2, '0')}h</span>
+                <span>:</span>
+                <span className="bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800">{String(countdown.minutes).padStart(2, '0')}m</span>
+                <span>:</span>
+                <span className="bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800 text-white animate-pulse">{String(countdown.seconds).padStart(2, '0')}s</span>
+              </div>
+            </motion.div>
+          </div>
 
           {/* Heading */}
           <motion.h1
@@ -88,7 +227,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
             Discover why healthcare networks, venture-backed startups, luxury brands, and enterprise leaders choose Texas WebCoders for high-performance digital engineering.
           </motion.p>
 
-          {/* Trust Stat Metrics (250+ Projects, 1M+ Revenue) */}
+          {/* Dynamic Animated Statistics Counters (250+ Projects, 99.4%, $1M+, 4.8★) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -96,17 +235,33 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
             className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto"
           >
             {[
-              { value: '250+', label: 'Projects Completed', sub: 'Across US & Global' },
-              { value: '99.4%', label: 'Client Satisfaction', sub: 'Verified Client Score' },
-              { value: '$1M+', label: 'Revenue Generated', sub: 'For Client Businesses' },
-              { value: '4.8 ★', label: 'Average Rating', sub: 'Verified Reviews' }
+              {
+                component: <StatCounter value={250} suffix="+" duration={2.0} />,
+                label: 'Projects Completed',
+                sub: 'Across US & Global'
+              },
+              {
+                component: <StatCounter value={99.4} decimals={1} suffix="%" duration={2.0} />,
+                label: 'Client Satisfaction',
+                sub: 'Verified Client Score'
+              },
+              {
+                component: <StatCounter value={1} prefix="$" suffix="M+" duration={1.8} />,
+                label: 'Revenue Generated',
+                sub: 'For Client Businesses'
+              },
+              {
+                component: <StatCounter value={4.8} decimals={1} suffix=" ★" duration={1.8} />,
+                label: 'Average Rating',
+                sub: 'Verified Reviews'
+              }
             ].map((stat, idx) => (
               <div
                 key={idx}
                 className="bg-zinc-950 border border-zinc-800 p-4 rounded-2xl backdrop-blur-md text-center hover:border-zinc-700 transition-colors"
               >
                 <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-mono">
-                  {stat.value}
+                  {stat.component}
                 </div>
                 <div className="text-xs font-bold text-zinc-300 mt-1 uppercase">
                   {stat.label}
@@ -120,7 +275,67 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
         </div>
       </section>
 
-      {/* 2. MAIN TESTIMONIALS DIRECTORY (Monochrome Black & White) */}
+      {/* 2. PRIORITY INTAKE LIVE COUNTDOWN BANNER (Monochrome Black & White) */}
+      <section className="py-6 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div className="bg-zinc-950 border border-zinc-800 rounded-3xl p-6 sm:p-8 relative overflow-hidden shadow-2xl">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+            <div className="text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-xs text-zinc-300 font-mono mb-2">
+                <Clock className="w-3.5 h-3.5 text-white animate-spin" style={{ animationDuration: '8s' }} />
+                <span>LIMITED CLIENT INTAKE WINDOW</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-extrabold text-white uppercase tracking-tight">
+                Current Sprint Kickoff Closes In
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-400 mt-1 max-w-md">
+                To guarantee 100% engineering fidelity, we onboard a maximum of 3 custom development projects per sprint cycle.
+              </p>
+            </div>
+
+            {/* Countdown Digital Clocks */}
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <div className="flex items-center gap-2 sm:gap-2.5 font-mono">
+                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    {String(countdown.days).padStart(2, '0')}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Days</span>
+                </div>
+                <span className="text-xl font-bold text-zinc-600">:</span>
+                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    {String(countdown.hours).padStart(2, '0')}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Hours</span>
+                </div>
+                <span className="text-xl font-bold text-zinc-600">:</span>
+                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    {String(countdown.minutes).padStart(2, '0')}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Mins</span>
+                </div>
+                <span className="text-xl font-bold text-zinc-600">:</span>
+                <div className="flex flex-col items-center bg-black border border-zinc-800 px-3 py-2 rounded-xl min-w-[58px]">
+                  <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight animate-pulse">
+                    {String(countdown.seconds).padStart(2, '0')}
+                  </span>
+                  <span className="text-[9px] uppercase tracking-wider text-zinc-500 font-bold mt-0.5">Secs</span>
+                </div>
+              </div>
+
+              <button
+                onClick={onOpenAppointmentModal}
+                className="px-4 py-2.5 rounded-xl bg-white text-black text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-md shrink-0 cursor-pointer"
+              >
+                Claim Slot
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. MAIN TESTIMONIALS DIRECTORY (Monochrome Black & White) */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         
         {/* Section Header */}
@@ -205,7 +420,7 @@ export const TestimonialsPage: React.FC<TestimonialsPageProps> = ({
 
       </section>
 
-      {/* 3. CALL TO ACTION BANNER (Monochrome Black & White) */}
+      {/* 4. CALL TO ACTION BANNER (Monochrome Black & White) */}
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center">
         <div className="bg-zinc-950 border border-zinc-800 p-8 sm:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
           <div className="relative z-10 max-w-2xl mx-auto">
