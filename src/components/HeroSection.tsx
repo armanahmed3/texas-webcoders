@@ -24,6 +24,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         <img
           src={heroBgImage}
           alt="TexasWebCoders Hero Background"
+          width="1920"
+          height="1080"
+          // @ts-ignore
+          fetchpriority="high"
+          decoding="sync"
           className="w-full h-full object-cover object-center scale-105 filter brightness-75 transition-transform duration-1000"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/85 to-zinc-950/75" />

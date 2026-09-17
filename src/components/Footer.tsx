@@ -10,7 +10,7 @@ import {
   Smartphone,
   Boxes,
   Film,
-  Box,
+  PhoneCall,
   PenTool,
   Palette,
   Facebook,
@@ -34,7 +34,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
           
           {/* Brand & Contact Column */}
           <div className="md:col-span-2 space-y-4">
-            <TexasWebcodersLogo size="lg" variant="light" />
+            <a
+              href="#home"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigateSlide(0);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="inline-block cursor-pointer group"
+              aria-label="Texas WebCoders Home"
+            >
+              <TexasWebcodersLogo
+                size="lg"
+                variant="light"
+                onClick={() => {
+                  onNavigateSlide(0);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+              />
+            </a>
 
             <p className="text-zinc-600 text-sm max-w-sm leading-relaxed font-normal">
               Let&apos;s Build Something Extraordinary Together. High-performance, custom web and mobile app solutions built for maximum conversions and brand authority.
@@ -277,9 +295,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
               <li>
                 <button onClick={() => onNavigateSlide(3)} className="hover:text-black transition-colors cursor-pointer flex items-center gap-2 group text-left">
                   <span className="w-6 h-6 rounded-md bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-900 group-hover:bg-black group-hover:text-white transition-colors flex-shrink-0">
-                    <Box className="w-3.5 h-3.5" />
+                    <PhoneCall className="w-3.5 h-3.5" />
                   </span>
-                  <span>3D Architectural Renders & Floor Plans</span>
+                  <span>AI Calling Agents & Voice Telephony</span>
                 </button>
               </li>
               <li>

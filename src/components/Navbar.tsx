@@ -179,7 +179,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Drawer Top Header */}
               <div className="p-4 sm:p-5 border-b border-zinc-800/90 flex items-center justify-between bg-zinc-900/90">
                 <div className="flex items-center gap-2">
-                  <TexasWebcodersLogo size="sm" variant="dark" />
+                  <a
+                    href="#home"
+                    onClick={(e) => handleLinkClick(e, 0)}
+                    className="flex items-center group cursor-pointer"
+                    aria-label="Texas WebCoders Home"
+                  >
+                    <TexasWebcodersLogo size="sm" variant="dark" onClick={(e) => handleLinkClick(e, 0)} />
+                  </a>
                 </div>
                 <button
                   id="mobile-sidebar-close-btn"

@@ -76,7 +76,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (video2Ref.current) video2Ref.current.muted = isMuted2;
   }, [isMuted2]);
 
-  // Intersection observer for section visibility (plays only when user scrolls into view)
+  // Intersection observer for section visibility (auto-plays when scrolled into view, stops when scrolled away)
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -86,9 +86,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
         const v1 = video1Ref.current;
         const v2 = video2Ref.current;
         if (entry.isIntersecting) {
-          if (v1 && !userPaused1Ref.current && (activeTab === 'all' || activeTab === 'video-1')) {
-            v1.muted = isMuted1;
+          if (v1 && !userPaused1Ref.current) {
+            v1.muted = true;
             v1.play().then(() => setIsPlaying1(true)).catch(() => {});
+          }
+          if (v2 && !userPaused2Ref.current) {
+            v2.muted = true;
+            v2.play().then(() => setIsPlaying2(true)).catch(() => {});
           }
         } else {
           if (v1 && !v1.paused) {
@@ -101,12 +105,12 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
           }
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.25 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [isMuted1, isMuted2, activeTab]);
+  }, []);
 
   // Controls for Video 1 (Emily Watson)
   const togglePlay1 = (e?: React.MouseEvent) => {
@@ -262,59 +266,6 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
             >
               Real clients sharing their authentic video reviews and personal experience partnering with Texas WebCoders.
             </p>
-
-            {/* Filter / Selector Tab Buttons */}
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab('all')}
-                className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                  activeTab === 'all'
-                    ? isWhite
-                      ? 'bg-zinc-950 text-white shadow-md'
-                      : 'bg-white text-black shadow-md'
-                    : isWhite
-                      ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
-                      : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
-                }`}
-              >
-                All Videos (2)
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('video-1')}
-                className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                  activeTab === 'video-1'
-                    ? isWhite
-                      ? 'bg-zinc-950 text-white shadow-md'
-                      : 'bg-white text-black shadow-md'
-                    : isWhite
-                      ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
-                      : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
-                }`}
-              >
-                <img src={avatarV1Img} alt="Emily Watson" className="w-4 h-4 rounded-full object-cover" />
-                <span>Emily Watson</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setActiveTab('video-4')}
-                className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer ${
-                  activeTab === 'video-4'
-                    ? isWhite
-                      ? 'bg-zinc-950 text-white shadow-md'
-                      : 'bg-white text-black shadow-md'
-                    : isWhite
-                      ? 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 border border-zinc-200'
-                      : 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 border border-zinc-800'
-                }`}
-              >
-                <img src={avatarDavidV4Img} alt="David C. Vance" className="w-4 h-4 rounded-full object-cover" />
-                <span>David C. Vance</span>
-              </button>
-            </div>
           </div>
 
           {/* Videos Container */}
@@ -344,9 +295,9 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       poster={avatarV1Img}
                       className="w-full h-full object-cover"
                       playsInline
-                      muted={isMuted1}
+                      muted
                       loop
-                      preload="none"
+                      preload="metadata"
                       onTimeUpdate={handleTimeUpdate1}
                       onPlay={() => setIsPlaying1(true)}
                       onPause={() => setIsPlaying1(false)}
@@ -356,82 +307,27 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
 
                     {/* Gradient Overlay */}
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none transition-opacity duration-300 ${
-                        isPlaying1 ? 'opacity-40' : 'opacity-70'
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${
+                        isPlaying1 ? 'opacity-30' : 'opacity-60'
                       }`}
                     />
 
-                    {/* Top Control Bar: Live Badge & Audio Toggle */}
-                    <div
-                      className="absolute top-3.5 inset-x-3.5 flex items-center justify-between z-20"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <div className="flex items-center gap-2 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-medium text-white border border-white/15 shadow-sm">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>VERIFIED REVIEW</span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className="bg-black/75 backdrop-blur-md text-white text-[10px] font-mono px-2.5 py-1 rounded-full font-medium border border-white/15">
-                          {time1} / {dur1}
-                        </span>
-
-                        <button
-                          type="button"
-                          onClick={toggleMute1}
-                          className="p-1.5 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors border border-white/15 cursor-pointer shadow-lg"
-                          title={isMuted1 ? 'Unmute Audio (Hear Emily)' : 'Mute Audio'}
-                        >
-                          {isMuted1 ? (
-                            <VolumeX className="w-3.5 h-3.5 text-rose-400" />
-                          ) : (
-                            <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Sound Prompt Overlay (if muted) */}
-                    {isMuted1 && isPlaying1 && (
-                      <div className="absolute top-14 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-                        <span className="bg-black/85 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5 shadow-lg">
-                          <VolumeX className="w-3 h-3 text-amber-400" />
-                          <span>Tap speaker icon to hear audio</span>
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Center Play/Pause Button Overlay */}
-                    <div
-                      className={`absolute inset-0 flex items-center justify-center z-20 transition-all duration-300 pointer-events-none ${
-                        isPlaying1 ? 'opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100' : 'opacity-100 scale-100'
-                      }`}
-                    >
-                      <div className="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                    {/* Center Play/Pause Button Overlay - Just pause/play button shown */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                      <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                         {isPlaying1 ? (
-                          <Pause className="w-6 h-6 text-black fill-black" />
+                          <Pause className="w-7 h-7 text-black fill-black" />
                         ) : (
-                          <Play className="w-6 h-6 text-black fill-black ml-1" />
+                          <Play className="w-7 h-7 text-black fill-black ml-1" />
                         )}
                       </div>
                     </div>
 
-                    {/* Bottom Video Progress & Name Banner */}
+                    {/* Bottom Scrubbable Progress Bar */}
                     <div
-                      className="absolute bottom-3 inset-x-3 z-20 space-y-1.5"
+                      className="absolute bottom-3 inset-x-3 z-20"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <div className="flex items-center justify-between text-xs text-white font-medium">
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-['Montserrat'] font-semibold text-[11px]">Emily Watson</span>
-                          <CheckCircle2 className="w-3 h-3 text-emerald-400" />
-                        </div>
-                        <span className="text-[10px] font-mono text-zinc-300">
-                          {isPlaying1 ? 'Click to pause' : 'Click to play'}
-                        </span>
-                      </div>
-
-                      {/* Scrubbable Progress Bar */}
                       <div
                         className="w-full h-1.5 bg-zinc-800/80 rounded-full overflow-hidden cursor-pointer hover:h-2 transition-all"
                         onClick={handleSeek1}
@@ -636,9 +532,9 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       poster={video4ThumbImg}
                       className="w-full h-full object-cover"
                       playsInline
-                      muted={isMuted2}
+                      muted
                       loop
-                      preload="none"
+                      preload="metadata"
                       onTimeUpdate={handleTimeUpdate2}
                       onPlay={() => setIsPlaying2(true)}
                       onPause={() => setIsPlaying2(false)}
@@ -648,58 +544,14 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
 
                     {/* Gradient Overlay */}
                     <div
-                      className={`absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/40 pointer-events-none transition-opacity duration-300 ${
-                        isPlaying2 ? 'opacity-40' : 'opacity-70'
+                      className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${
+                        isPlaying2 ? 'opacity-30' : 'opacity-60'
                       }`}
                     />
 
-                    {/* Top Control Bar: Live Badge & Audio Toggle */}
-                    <div
-                      className="absolute top-4 inset-x-4 flex items-center justify-between z-20"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <div className="flex items-center gap-2 bg-black/75 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-medium text-white border border-white/15 shadow-sm">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                        <span>VERIFIED REVIEW</span>
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <span className="bg-black/75 backdrop-blur-md text-white text-[10px] font-mono px-2.5 py-1 rounded-full font-medium border border-white/15">
-                          {time2} / {dur2}
-                        </span>
-
-                        <button
-                          type="button"
-                          onClick={toggleMute2}
-                          className="p-2 rounded-full bg-black/80 backdrop-blur-md text-white hover:bg-white hover:text-black transition-colors border border-white/15 cursor-pointer shadow-lg"
-                          title={isMuted2 ? 'Unmute Audio (Hear David)' : 'Mute Audio'}
-                        >
-                          {isMuted2 ? (
-                            <VolumeX className="w-3.5 h-3.5 text-rose-400" />
-                          ) : (
-                            <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-
-                    {/* Sound Prompt Overlay (if muted) */}
-                    {isMuted2 && isPlaying2 && (
-                      <div className="absolute top-16 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-                        <span className="bg-black/85 backdrop-blur-md text-white text-[10px] px-3 py-1 rounded-full border border-white/20 flex items-center gap-1.5 shadow-lg">
-                          <VolumeX className="w-3 h-3 text-amber-400" />
-                          <span>Tap speaker icon to hear audio</span>
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Center Play/Pause Button Overlay */}
-                    <div
-                      className={`absolute inset-0 flex items-center justify-center z-20 transition-all duration-300 pointer-events-none ${
-                        isPlaying2 ? 'opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100' : 'opacity-100 scale-100'
-                      }`}
-                    >
-                      <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-transform group-hover:scale-110 border-2 border-white">
+                    {/* Center Play/Pause Button Overlay - Just pause/play button shown */}
+                    <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
+                      <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                         {isPlaying2 ? (
                           <Pause className="w-7 h-7 text-black fill-black" />
                         ) : (
@@ -708,22 +560,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       </div>
                     </div>
 
-                    {/* Bottom Video Progress & Name Banner */}
+                    {/* Bottom Scrubbable Progress Bar */}
                     <div
-                      className="absolute bottom-4 inset-x-4 z-20 space-y-2"
+                      className="absolute bottom-4 inset-x-4 z-20"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <div className="flex items-center justify-between text-xs text-white font-medium">
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-['Montserrat'] font-semibold">David C. Vance</span>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        </div>
-                        <span className="text-[10px] font-mono text-zinc-300">
-                          {isPlaying2 ? 'Click to pause' : 'Click to play'}
-                        </span>
-                      </div>
-
-                      {/* Scrubbable Progress Bar */}
                       <div
                         className="w-full h-1.5 bg-zinc-800/80 rounded-full overflow-hidden cursor-pointer hover:h-2 transition-all"
                         onClick={handleSeek2}

@@ -203,12 +203,22 @@ export const ThreeBackgroundCanvas: React.FC<ThreeBackgroundCanvasProps> = ({ ac
       }
     });
 
-    // Animation Loop
+    // Animation Loop with visibility and frame-rate optimization
     let animationFrameId: number;
     let clock = new THREE.Clock();
+    let lastRenderTime = 0;
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const fpsInterval = 1000 / (isMobile ? 30 : 60);
 
-    const animate = () => {
+    const animate = (time: number) => {
       animationFrameId = requestAnimationFrame(animate);
+
+      if (typeof document !== 'undefined' && document.hidden) return;
+
+      const delta = time - lastRenderTime;
+      if (delta < fpsInterval) return;
+      lastRenderTime = time - (delta % fpsInterval);
+
       const elapsedTime = clock.getElapsedTime();
 
       // Smooth lerp mouse tracking
@@ -243,7 +253,7 @@ export const ThreeBackgroundCanvas: React.FC<ThreeBackgroundCanvasProps> = ({ ac
       renderer.render(scene, camera);
     };
 
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     // Resize handler
     const handleResize = () => {

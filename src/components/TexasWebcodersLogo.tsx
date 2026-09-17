@@ -5,12 +5,14 @@ interface TexasWebcodersLogoProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'light' | 'dark' | 'auto';
   showTagline?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 export const TexasWebcodersLogo: React.FC<TexasWebcodersLogoProps> = ({
   className = '',
   size = 'md',
-  variant = 'light'
+  variant = 'light',
+  onClick
 }) => {
   // Exact proportional height scaling
   const heightClasses = {
@@ -25,14 +27,18 @@ export const TexasWebcodersLogo: React.FC<TexasWebcodersLogoProps> = ({
 
   return (
     <div
+      onClick={onClick}
       className={`inline-flex items-center justify-start select-none flex-shrink-0 group cursor-pointer ${heightClasses[size]} ${className}`}
     >
       <img
         src={isDark ? '/assets/texas-webcoders-logo-exact-white.png' : '/assets/texas-webcoders-logo-exact.png'}
         alt="Texas Webcoders - Software . Innovation . Transformation"
+        width="299"
+        height="54"
         style={{ maxHeight: '90%' }}
         className="h-full w-auto max-h-[90%] object-contain transition-transform duration-300 group-hover:scale-[1.02] drop-shadow-sm"
         loading="eager"
+        decoding="sync"
       />
     </div>
   );

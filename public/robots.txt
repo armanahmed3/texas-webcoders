@@ -1,0 +1,11 @@
+# Texas WebCoders robots.txt
+# https://texaswebcoders.com/
+User-agent: *
+Allow: /
+
+# Disallow internal or system paths if any
+Disallow: /api/
+
+# Host & Sitemaps
+Host: https://texaswebcoders.com
+Sitemap: https://texaswebcoders.com/sitemap.xml

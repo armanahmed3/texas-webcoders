@@ -107,8 +107,11 @@ export default function App() {
 
   // Navigate to specific standalone page or scroll to section
   const handleNavigateSlide = (slideIndex: number) => {
+    setShowPrivacyPolicy(false);
     setActiveServiceDetail(null);
     setActiveBlogArticle(null);
+    setSelectedProject(null);
+    setSelectedPackage(null);
     setActiveSlide(slideIndex);
 
     const targetHash = `#/${sectionIds[slideIndex]}`;

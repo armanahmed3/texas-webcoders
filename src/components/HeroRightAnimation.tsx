@@ -25,6 +25,17 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
   // Directly showcases user-uploaded verified projects from /portfolio-media/texaswebcoders/
   const laptopProjects = [
     {
+      id: 'web_solex_footwear',
+      title: 'SOLEX Premium Sneaker & Footwear Marketplace',
+      category: 'Website Development',
+      subtitle: 'Direct-to-consumer shoe marketplace with 3D product zoom & instant checkout.',
+      imageUrl: '/portfolio-media/texaswebcoders/Website/website_solex_sneaker_store.png',
+      mediaType: 'auto-scroll' as const,
+      speed: '0.22s TTFB',
+      rating: '99/100 Speed',
+      badge: 'Live Website • Auto-Scroll'
+    },
+    {
       id: 'anim_1',
       title: 'Kinetic 3D Typography & Brand Reveal',
       category: '3D Video Animation',
@@ -35,17 +46,6 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
       speed: '4K Ultra-HD',
       rating: '60 FPS Master',
       badge: '3D Motion Animation'
-    },
-    {
-      id: 'web_solex_footwear',
-      title: 'SOLEX Premium Sneaker & Footwear Marketplace',
-      category: 'Website Development',
-      subtitle: 'Direct-to-consumer shoe marketplace with 3D product zoom & instant checkout.',
-      imageUrl: '/portfolio-media/texaswebcoders/Website/website_solex_sneaker_store.png',
-      mediaType: 'auto-scroll' as const,
-      speed: '0.22s TTFB',
-      rating: '99/100 Speed',
-      badge: 'Live Website • Auto-Scroll'
     },
     {
       id: 'anim_10',
@@ -190,6 +190,8 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                     <div className="relative w-full h-full bg-black flex items-center justify-center">
                       <video
                         src={activeProject.videoUrl}
+                        poster={activeProject.imageUrl}
+                        preload="metadata"
                         autoPlay
                         loop
                         muted={isMuted}

@@ -413,9 +413,9 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({
             ))}
           </div>
 
-          {/* Search Input & AI Trigger Button */}
+          {/* Search Input */}
           <div className="flex items-center gap-2 w-full md:w-auto">
-            <div className="relative flex-1 md:w-60">
+            <div className="relative flex-1 md:w-72">
               <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
               <input
                 type="text"
@@ -425,42 +425,8 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({
                 className="w-full bg-zinc-900 border border-zinc-800 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 transition-colors"
               />
             </div>
-
-            {/* Autonomous AI Blog Generation Button */}
-            <button
-              onClick={handleGenerateDailyArticle}
-              disabled={isGenerating}
-              title="Trigger AI to synthesize and upload a fresh technical guide with photorealistic image"
-              className="px-3.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-white text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer flex-shrink-0 disabled:opacity-50"
-            >
-              <Sparkles className={`w-3.5 h-3.5 text-amber-400 ${isGenerating ? 'animate-spin' : ''}`} />
-              <span>{isGenerating ? 'Synthesizing...' : 'Auto-Generate AI Blog'}</span>
-            </button>
           </div>
         </div>
-
-        {/* Live Generation Feedback Toast */}
-        <AnimatePresence>
-          {generationNotice && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="mb-6 p-3 bg-zinc-900 border border-zinc-700 rounded-xl text-xs text-zinc-200 flex items-center justify-between shadow-lg"
-            >
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                <span>{generationNotice}</span>
-              </div>
-              <button
-                onClick={() => setGenerationNotice(null)}
-                className="text-zinc-500 hover:text-white text-xs ml-4"
-              >
-                Dismiss
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Articles Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

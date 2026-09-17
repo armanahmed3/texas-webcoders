@@ -1,0 +1,32 @@
+# Texas WebCoders
+
+> Premier Texas software engineering agency specializing in custom website design, mobile application development (iOS & Android), AI calling agent services, enterprise software, and SEO optimization located at 5221 S Broadway Ave, Tyler, TX 75703, United States.
+
+Texas WebCoders engineers high-performance web applications, native cross-platform mobile apps, autonomous AI voice and calling systems, and custom CRM software for Texas businesses and high-growth brands nationwide.
+
+## Core Engineering Services
+- [Custom Web Development](https://texaswebcoders.com/#services): Sub-second TTFB React 19, Next.js 15, and TypeScript web applications.
+- [Mobile App Development](https://texaswebcoders.com/#services): 120Hz native iOS and Android applications built with React Native, Swift, and Kotlin.
+- [AI Calling Agent Services](https://texaswebcoders.com/#services): Autonomous voice AI agents, 24/7 smart receptionists, and telephony CRM integrations.
+- [Enterprise Software & CRM](https://texaswebcoders.com/#services): Tailored business automation software, relational PostgreSQL databases, and custom ERPs.
+- [WordPress & Headless CMS](https://texaswebcoders.com/#services): Enterprise WordPress, custom Gutenberg block systems, and headless architectures.
+- [3D Motion Animation & VFX](https://texaswebcoders.com/#services): Photorealistic 4K 60FPS product reveals, mechanical visualizations, and ray-traced motion graphics.
+- [Graphic Design & Branding](https://texaswebcoders.com/#services): Comprehensive brand identity, vector logos, stationery, and packaging design.
+
+## Agency Overview & Navigation
+- [Home Page](https://texaswebcoders.com/#home): Texas WebCoders homepage, hero showcase, and key value propositions.
+- [About Us](https://texaswebcoders.com/#about): Meet our Texas-based senior software engineering team and engineering philosophy.
+- [Portfolio Showcase](https://texaswebcoders.com/#portfolio): 500+ delivered projects across web apps, mobile apps, SaaS, and motion design.
+- [4-Step Agile Process](https://texaswebcoders.com/#process): Rapid 7–14 day delivery framework from architecture to cloud launch.
+- [Pricing Packages](https://texaswebcoders.com/#packages): Transparent, milestone-based pricing with zero hidden fees and 100% IP code transfer.
+- [Client Testimonials](https://texaswebcoders.com/#testimonials): Verified client reviews and authentic video testimonials.
+- [Technical Blog & Guides](https://texaswebcoders.com/#blog): Architecture blueprints, SEO playbooks, and full-stack benchmarks.
+- [Reviews & FAQ](https://texaswebcoders.com/#faq): Frequently asked questions regarding timelines, code ownership, and warranties.
+- [Contact & Quote](https://texaswebcoders.com/#contact): Direct engineering intake form, instant phone contact (+1-903-222-6022), and office location.
+
+## Contact & Location
+- Address: 5221 S Broadway Ave, Tyler, TX 75703, United States
+- Phone: +1-903-222-6022
+- Email: info@texaswebcoders.com
+- Hours: Monday - Friday, 08:00 - 18:00 CST
+- Extended Documentation: [LLMS Full Specification](https://texaswebcoders.com/llms-full.txt)

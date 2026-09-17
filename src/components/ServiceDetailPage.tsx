@@ -118,6 +118,19 @@ export const ServiceDetailPage: React.FC<ServiceDetailPageProps> = ({
       techStackTools: ['Python', 'FastAPI', 'LangChain', 'LlamaIndex', 'Pinecone / Qdrant', 'PostgreSQL (pgvector)', 'OpenAI / Claude APIs', 'Docker'],
       guarantees: ['Zero Training On Customer Data', 'Sub-1.2s Average Token Response', '100% Full Source Code Transfer', 'Deterministic Tool Calling Accuracy'],
       startingPrice: '$899'
+    },
+    ai_calling_agents: {
+      subtitle: 'Autonomous AI Voice Calling Agents, Smart Telephony & 24/7 Receptionist Systems',
+      overview: 'We design, train, and deploy enterprise-grade AI Calling Agents that handle high-concurrency inbound customer calls, qualify outbound sales leads, book calendar appointments, and sync data directly into your CRM with sub-second response times.',
+      processTimeline: [
+        { step: '01', title: 'Script Architecture & Logic Trees', desc: 'Mapping objection handling trees, dynamic qualification flows, and telephony guardrails.' },
+        { step: '02', title: 'Neural Voice & Telephony Setup', desc: 'Configuring ultra-realistic voice models, Twilio/Telnyx SIP trunks, and sub-500ms WebSockets.' },
+        { step: '03', title: 'CRM & Calendar Integration', desc: 'Connecting tool-calling actions to Google Calendar, Outlook, HubSpot, Salesforce, and databases.' },
+        { step: '04', title: 'Live Stress-Testing & SLA Handoff', desc: 'Simulating concurrent voice loads, latency tuning, TCPA compliance validation, and team training.' }
+      ],
+      techStackTools: ['Twilio / Telnyx', 'LiveKit WebSockets', 'Python FastAPI', 'Deepgram / ElevenLabs', 'OpenAI Realtime API', 'PostgreSQL', 'HubSpot / GoHighLevel'],
+      guarantees: ['Sub-500ms Conversational Speech Latency', 'Zero Dropped Telephony Calls', '100% Booking & CRM Data Accuracy', 'Full Custom Voice Model IP Ownership'],
+      startingPrice: '$799'
     }
   };
 

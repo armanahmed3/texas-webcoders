@@ -20,7 +20,8 @@ import {
   Binary,
   Layers,
   Search,
-  Server
+  Server,
+  PhoneCall
 } from 'lucide-react';
 
 interface ServiceIconProps {
@@ -47,6 +48,9 @@ export const getServiceIconElement = (serviceId: string, className = "w-6 h-6") 
   }
   if (id.includes('ecommerce') || id.includes('store') || id.includes('shop')) {
     return <ShoppingBag className={className} />;
+  }
+  if (id.includes('calling') || id.includes('voice') || id.includes('telephony') || id.includes('phone')) {
+    return <PhoneCall className={className} />;
   }
   if (id.includes('automation') || id.includes('agent') || id.includes('bot')) {
     return <Bot className={className} />;

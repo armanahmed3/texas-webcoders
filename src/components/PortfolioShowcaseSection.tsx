@@ -232,7 +232,7 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
             }`}>
               {isHomePage
                 ? 'A curated selection of our top flagship projects across Web, WordPress, Mobile Apps, Video Animation, Custom CRM, and Graphic Design.'
-                : 'Featuring high-resolution auto-scrolling website mockups, 4K 3D video animations, mobile apps, CRM systems, and architectural renders.'}
+                : 'Featuring high-resolution auto-scrolling website mockups, 4K 3D video animations, mobile apps, CRM systems, and AI calling agents.'}
             </p>
 
             {/* Filter Category Pills - Only on Dedicated Portfolio Page */}

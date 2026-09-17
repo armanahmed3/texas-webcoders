@@ -1,0 +1,23 @@
+# Texas WebCoders - Comprehensive Technical Documentation for LLM Agents
+
+> Texas WebCoders is a premier software engineering agency located at 5221 S Broadway Ave, Tyler, TX 75703, United States. Contact: +1-903-222-6022 | info@texaswebcoders.com | https://texaswebcoders.com
+
+## Table of Contents
+1. [Overview & Capabilities](https://texaswebcoders.com/#home)
+2. [Custom Web Engineering](https://texaswebcoders.com/#services)
+3. [Mobile Application Engineering](https://texaswebcoders.com/#services)
+4. [AI Calling Agents & Voice Telephony](https://texaswebcoders.com/#services)
+5. [Enterprise Software & CRM Development](https://texaswebcoders.com/#services)
+6. [WordPress & Headless CMS Engineering](https://texaswebcoders.com/#services)
+7. [3D Animation & Motion VFX](https://texaswebcoders.com/#services)
+8. [Graphic Design & Brand Collateral](https://texaswebcoders.com/#services)
+9. [Portfolio Archive](https://texaswebcoders.com/#portfolio)
+10. [Client Testimonials](https://texaswebcoders.com/#testimonials)
+11. [Pricing & SLA](https://texaswebcoders.com/#packages)
+12. [Contact & Intake Protocols](https://texaswebcoders.com/#contact)
+
+## Technical Architecture & Performance Guarantees
+- Sub-0.3s TTFB Google Core Web Vitals optimization.
+- 100% full Intellectual Property (IP) and source code ownership transferred upon project milestone completion.
+- Zero recurring proprietary licensing locks.
+- Secure SSL/TLS encryption, SOC2 and HIPAA compliant architecture safeguards.

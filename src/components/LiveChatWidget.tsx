@@ -122,7 +122,7 @@ We build ultra-fast, zero-bloat custom WordPress platforms and Headless CMS inte
 3. **iOS & Android Mobile Apps:** Fluid cross-platform mobile apps with offline sync.
 4. **WordPress & Headless CMS:** Scalable, lightweight content management systems.
 5. **3D Animation & Motion VFX:** High-end motion graphics and video sequences.
-6. **3D Architectural Renders:** Exterior, interior photorealism, and 3D floor plans.
+6. **AI Calling Agent Services:** Inbound/outbound conversational voice agents, smart receptionists, and CRM sync.
 7. **Logo & Brand Identity:** Vector logos, typography systems, and brand style guides.
 8. **Graphic Design & Collateral:** High-converting marketing pitch decks and print collateral.`,
       actions: [

@@ -301,20 +301,20 @@ export const SERVICES_LIST: ServiceItem[] = [
     videoUrl: '/portfolio-media/texaswebcoders/animation/animation1.mp4'
   },
   {
-    id: 'interior_exterior_renders',
-    title: '3D Architectural Visualizations, BIM & Floor Plans',
-    description: 'Photorealistic 8K architectural renderings, interior design staging, exterior commercial visualizations, and interactive 3D floor plans for real estate developers and general contractors.',
-    icon: '📐',
+    id: 'ai_calling_agents',
+    title: 'Autonomous AI Calling Agents & Smart Voice Telephony',
+    description: 'Conversational voice AI agents, autonomous inbound & outbound phone calling systems, sub-second speech synthesis, CRM integrations, and 24/7 automated appointment booking.',
+    icon: '📞',
     features: [
-      '8K Ultra-High Definition Exterior & Interior Renders',
-      'Day/Night & Dynamic Seasonal Environmental Lighting',
-      'Accurate Material & Finish Representation from CAD/BIM',
-      'Interactive 3D Virtual Tour & Panoramas (360° VR)',
-      'Drone Photo-Matching & Exact Geographic Compositing',
-      'Fast Turnaround for Commercial Real Estate Presentations'
+      'Sub-500ms Ultra-Low Latency Conversational Voice Synthesis',
+      'Autonomous Inbound 24/7 Call Handling & Smart Voice Receptionist',
+      'High-Velocity Outbound Lead Qualification & Meeting Booking',
+      'Multi-Language Voice Support with Emotion & Tone Adaptation',
+      'Real-Time Two-Way CRM Data Synchronization (HubSpot, Salesforce, GHL)',
+      'Automated Call Recordings, Live AI Transcripts & Sentiment Summaries'
     ],
-    deliverables: ['8K Still Render Package', '360° Virtual Tour Link', 'Print-Ready Pitch Deck Graphics', 'BIM Asset Library'],
-    imageUrl: '/portfolio-media/texaswebcoders/interior/interiorexterior3drendersfloorplans1.jpg'
+    deliverables: ['Custom Trained Voice Agent', 'Twilio / Telnyx Telephony Integration', 'Real-Time CRM Webhook Hooks', 'Full Voice Script System'],
+    imageUrl: '/portfolio-media/texaswebcoders/Website/website_solex_sneaker_store.png'
   },
   {
     id: 'ui_ux_product_design',
