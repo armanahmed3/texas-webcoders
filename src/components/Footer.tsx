@@ -302,14 +302,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
 
             {/* Accepted Payment Methods - Down of Core Engineering Services & Right Side of Newsletter */}
             <div className="pt-6">
-              <p className="text-[10px] font-bold text-black uppercase tracking-wider mb-2 font-['Montserrat']">
+              <p className="text-[11px] font-bold text-black uppercase tracking-wider mb-2 font-['Montserrat']">
                 Accepted Payment Methods
               </p>
-              <div className="bg-white rounded-xl p-2.5 border border-zinc-200 shadow-sm inline-flex items-center justify-center">
+              <div className="bg-white rounded-2xl p-3 sm:p-4 border border-zinc-200 shadow-sm inline-flex items-center justify-center">
                 <img
                   src="/assets/payment-methods.png"
                   alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe"
-                  className="h-8 sm:h-9 w-auto object-contain scale-95"
+                  className="h-16 sm:h-20 md:h-24 w-auto object-contain"
                   loading="lazy"
                 />
               </div>
