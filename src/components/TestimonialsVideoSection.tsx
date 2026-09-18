@@ -178,9 +178,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // When user enters the review video section, play
             playVideoSafe(video1Ref.current, setIsPlaying1);
-            playVideoSafe(video2Ref.current, setIsPlaying2);
           } else {
+            // When user leaves the section, auto stop both videos
             if (video1Ref.current && !video1Ref.current.paused) {
               video1Ref.current.pause();
               setIsPlaying1(false);
@@ -192,11 +193,44 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05, rootMargin: '50px 0px 50px 0px' }
     );
 
     observer.observe(section);
-    return () => observer.disconnect();
+
+    // Backup scroll & visibility listener for instant stop on fast scroll or tab switch
+    const handleScrollOrVisibility = () => {
+      if (document.hidden) {
+        video1Ref.current?.pause();
+        video2Ref.current?.pause();
+        setIsPlaying1(false);
+        setIsPlaying2(false);
+        return;
+      }
+      const sec = sectionRef.current;
+      if (!sec) return;
+      const rect = sec.getBoundingClientRect();
+      const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!isVisible) {
+        if (video1Ref.current && !video1Ref.current.paused) {
+          video1Ref.current.pause();
+          setIsPlaying1(false);
+        }
+        if (video2Ref.current && !video2Ref.current.paused) {
+          video2Ref.current.pause();
+          setIsPlaying2(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollOrVisibility, { passive: true });
+    document.addEventListener('visibilitychange', handleScrollOrVisibility);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScrollOrVisibility);
+      document.removeEventListener('visibilitychange', handleScrollOrVisibility);
+    };
   }, []);
 
   void toggleMute1; void toggleMute2; void formatTime;

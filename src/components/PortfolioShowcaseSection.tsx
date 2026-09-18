@@ -168,9 +168,33 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
   const [selectedGraphicSubCategory, setSelectedGraphicSubCategory] = useState<string>('All Graphic Design');
   const [currentSlidePage, setCurrentSlidePage] = useState<number>(0);
   const [slideDirection, setSlideDirection] = useState<number>(1);
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+  // Auto-slide disabled so user can manually slide at their own pace
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [mutedVideos, setMutedVideos] = useState<Record<string, boolean>>({});
+
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const diffX = touchStartX.current - e.changedTouches[0].clientX;
+    const diffY = touchStartY.current - e.changedTouches[0].clientY;
+    if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) {
+        handleNextSlide();
+      } else {
+        handlePrevSlide();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   const categories = [
     'All',
@@ -233,14 +257,14 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
   const CARDS_PER_SLIDE = 6;
   const totalPages = Math.ceil(filteredProjects.length / CARDS_PER_SLIDE) || 1;
 
-  // Auto-play interval timer for moving slides
+  // Auto-play interval timer for moving slides (disabled by default)
   useEffect(() => {
     if (!isAutoPlaying || isHovered || totalPages <= 1) return;
 
     const timer = setInterval(() => {
       setSlideDirection(1);
       setCurrentSlidePage((prev) => (prev + 1) % totalPages);
-    }, 6000); // Advances slides every 6 seconds
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isAutoPlaying, isHovered, totalPages]);
@@ -396,12 +420,34 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
             )}
           </motion.div>
 
-          {/* Animated 6-Card Slide View Grid with Big Media & Auto-Scroll Images */}
+          {/* Animated 6-Card Slide View Grid with Big Media & Touch/Swipe Controls */}
           <div
             className="relative min-h-[600px]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
+            {/* Desktop Left Side Slide Arrow */}
+            <button
+              onClick={handlePrevSlide}
+              className="hidden lg:flex absolute -left-5 xl:-left-7 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-zinc-900/90 border border-white/20 text-white items-center justify-center hover:bg-white hover:text-black hover:scale-110 shadow-2xl transition-all cursor-pointer"
+              title="Previous Slide"
+              aria-label="Previous Slide"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Desktop Right Side Slide Arrow */}
+            <button
+              onClick={handleNextSlide}
+              className="hidden lg:flex absolute -right-5 xl:-right-7 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-zinc-900/90 border border-white/20 text-white items-center justify-center hover:bg-white hover:text-black hover:scale-110 shadow-2xl transition-all cursor-pointer"
+              title="Next Slide"
+              aria-label="Next Slide"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
             <AnimatePresence mode="wait" initial={false} custom={slideDirection}>
               <motion.div
                 key={`${selectedCategory}-${currentSlidePage}`}

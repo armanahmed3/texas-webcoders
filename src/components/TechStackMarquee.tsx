@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion } from 'motion/react';
 import {
   Cpu,
@@ -20,7 +20,9 @@ import {
   Palette,
   Search,
   Lock,
-  Workflow
+  Workflow,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 interface TechItem {
@@ -124,6 +126,20 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
   const isBlack = variant === 'black';
   const isNone = variant === 'none' || variant === 'transparent' || variant === 'light-blue';
   const [isPaused, setIsPaused] = useState(false);
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+
+  const handleSwapBack = () => {
+    setIsPaused(true);
+    if (row1Ref.current) row1Ref.current.scrollBy({ left: -360, behavior: 'smooth' });
+    if (row2Ref.current) row2Ref.current.scrollBy({ left: -360, behavior: 'smooth' });
+  };
+
+  const handleSwapForward = () => {
+    setIsPaused(true);
+    if (row1Ref.current) row1Ref.current.scrollBy({ left: 360, behavior: 'smooth' });
+    if (row2Ref.current) row2Ref.current.scrollBy({ left: 360, behavior: 'smooth' });
+  };
 
   // Skill row 1: Frontend, Full-Stack & Creative Engineering
   const skillsRow1: TechItem[] = [
@@ -301,30 +317,93 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
           </p>
         </div>
 
+        {/* Interactive Controls Bar: Swap Back, Pause/Resume, Swap Forward */}
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-6 px-2">
+          <div className="flex items-center gap-2 text-xs text-zinc-400">
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Continuous Auto-Slide • Hover cursor to freeze &amp; inspect</span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleSwapBack}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-md active:scale-95 ${
+                isWhite
+                  ? 'bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900'
+                  : 'bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-white'
+              }`}
+              title="Slide / Swap Technologies Back"
+            >
+              <ChevronLeft className="w-4 h-4" />
+              <span>Swap Back</span>
+            </button>
+
+            <button
+              onClick={() => setIsPaused(!isPaused)}
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+                isWhite
+                  ? 'bg-zinc-100 border border-zinc-300 text-zinc-700'
+                  : 'bg-zinc-900/80 border border-zinc-700/80 text-zinc-300 hover:text-white'
+              }`}
+            >
+              {isPaused ? '▶ Resume Auto-Slide' : '⏸ Pause'}
+            </button>
+
+            <button
+              onClick={handleSwapForward}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer shadow-md active:scale-95 ${
+                isWhite
+                  ? 'bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-900'
+                  : 'bg-zinc-900 hover:bg-white hover:text-black border border-zinc-700 text-white'
+              }`}
+              title="Slide / Swap Technologies Forward"
+            >
+              <span>Swap Forward</span>
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
         {/* Auto-Scrolling Skills Tracks with Pause-on-Hover */}
         <div
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           className="space-y-4 sm:space-y-6 mb-12 relative overflow-hidden py-2"
         >
+          {/* Inject pure CSS keyframe styles for rock-solid freeze-on-hover & resume */}
+          <style>{`
+            @keyframes twcMarqueeLeft {
+              0% { transform: translateX(0%); }
+              100% { transform: translateX(-50%); }
+            }
+            @keyframes twcMarqueeRight {
+              0% { transform: translateX(-50%); }
+              100% { transform: translateX(0%); }
+            }
+            .twc-track-left {
+              animation: twcMarqueeLeft 36s linear infinite;
+            }
+            .twc-track-right {
+              animation: twcMarqueeRight 40s linear infinite;
+            }
+            .twc-paused {
+              animation-play-state: paused !important;
+            }
+          `}</style>
+
           {/* Gradient Edge Masks for Smooth Fade Out */}
           <div className="absolute top-0 bottom-0 left-0 w-8 sm:w-16 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none" />
           <div className="absolute top-0 bottom-0 right-0 w-8 sm:w-16 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none" />
 
-          {/* Row 1: Auto-scroll Left */}
-          <div className="flex gap-4 sm:gap-5 overflow-hidden w-full">
-            <motion.div
-              animate={{
-                x: isPaused ? undefined : ['0%', '-50%']
-              }}
-              transition={{
-                repeat: Infinity,
-                ease: 'linear',
-                duration: 28
-              }}
-              className="flex gap-4 sm:gap-5 flex-nowrap shrink-0"
+          {/* Row 1: Auto-scroll Left + Scrollable/Draggable */}
+          <div
+            ref={row1Ref}
+            className="flex overflow-x-auto no-scrollbar w-full py-1 cursor-grab active:cursor-grabbing"
+          >
+            <div
+              className={`flex gap-4 sm:gap-5 flex-nowrap shrink-0 twc-track-left ${isPaused ? 'twc-paused' : ''}`}
             >
-              {[...skillsRow1, ...skillsRow1].map((tech, idx) => (
+              {[...skillsRow1, ...skillsRow1, ...skillsRow1].map((tech, idx) => (
                 <TechCard
                   key={`r1-${tech.name}-${idx}`}
                   tech={tech}
@@ -332,23 +411,18 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
                   isLight={isWhite}
                 />
               ))}
-            </motion.div>
+            </div>
           </div>
 
-          {/* Row 2: Auto-scroll Right (Counter-Directional Flow) */}
-          <div className="flex gap-4 sm:gap-5 overflow-hidden w-full">
-            <motion.div
-              animate={{
-                x: isPaused ? undefined : ['-50%', '0%']
-              }}
-              transition={{
-                repeat: Infinity,
-                ease: 'linear',
-                duration: 32
-              }}
-              className="flex gap-4 sm:gap-5 flex-nowrap shrink-0"
+          {/* Row 2: Auto-scroll Right + Scrollable/Draggable */}
+          <div
+            ref={row2Ref}
+            className="flex overflow-x-auto no-scrollbar w-full py-1 cursor-grab active:cursor-grabbing"
+          >
+            <div
+              className={`flex gap-4 sm:gap-5 flex-nowrap shrink-0 twc-track-right ${isPaused ? 'twc-paused' : ''}`}
             >
-              {[...skillsRow2, ...skillsRow2].map((tech, idx) => (
+              {[...skillsRow2, ...skillsRow2, ...skillsRow2].map((tech, idx) => (
                 <TechCard
                   key={`r2-${tech.name}-${idx}`}
                   tech={tech}
@@ -356,7 +430,7 @@ export const TechStackMarquee: React.FC<TechStackMarqueeProps> = ({
                   isLight={isWhite}
                 />
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
 
