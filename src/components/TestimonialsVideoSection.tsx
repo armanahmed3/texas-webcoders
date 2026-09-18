@@ -201,11 +201,9 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/50'}`}>
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay1}>
-                  <video ref={video1Ref} poster={avatarV1Img}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto" autoPlay
-                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}>
-                    <source src="/videos/1.mp4" type="video/mp4" />
-                  </video>
+                  <video ref={video1Ref} src="/videos/1.mp4" poster={avatarV1Img}
+                    className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
+                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)} />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
@@ -270,11 +268,9 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/40'}`}>
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay2}>
-                  <video ref={video2Ref} poster={video4ThumbImg}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto" autoPlay
-                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}>
-                    <source src="/videos/4.mp4" type="video/mp4" />
-                  </video>
+                  <video ref={video2Ref} src="/videos/4.mp4" poster={video4ThumbImg}
+                    className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
+                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)} />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
