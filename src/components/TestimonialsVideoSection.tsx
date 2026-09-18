@@ -118,52 +118,42 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       return rect.top < window.innerHeight && rect.bottom > 0;
     };
 
-    const tryAutoPlay = () => {
-      if (destroyed) return;
-      if (!isSectionVisible()) return;
-
-      const v1 = video1Ref.current;
-      const v2 = video2Ref.current;
-
-      [v1, v2].forEach((v) => {
-        if (!v || !v.paused) return;
-        v.muted = true;
-        v.defaultMuted = true;
-        v.play()
-          .then(() => {
-            if (v === v1) setIsPlaying1(true);
-            if (v === v2) setIsPlaying2(true);
-          })
-          .catch(() => {});
+    const pauseAll = () => {
+      [video1Ref.current, video2Ref.current].forEach((v) => {
+        if (v && !v.paused) {
+          v.pause();
+          if (v === video1Ref.current) setIsPlaying1(false);
+          if (v === video2Ref.current) setIsPlaying2(false);
+        }
       });
     };
 
-    const tryAutoPause = () => {
-      const v1 = video1Ref.current;
-      const v2 = video2Ref.current;
-      [v1, v2].forEach((v) => {
-        if (v && !v.paused) {
-          v.pause();
-          if (v === v1) setIsPlaying1(false);
-          if (v === v2) setIsPlaying2(false);
+    const playAll = () => {
+      [video1Ref.current, video2Ref.current].forEach((v) => {
+        if (!v) return;
+        v.muted = true;
+        v.defaultMuted = true;
+        if (v.paused) {
+          v.play().then(() => {
+            if (v === video1Ref.current) setIsPlaying1(true);
+            if (v === video2Ref.current) setIsPlaying2(true);
+          }).catch(() => {});
         }
       });
     };
 
     const onScroll = () => {
-      if (isSectionVisible()) {
-        tryAutoPlay();
-      } else {
-        tryAutoPause();
-      }
+      if (destroyed) return;
+      if (isSectionVisible()) playAll();
+      else pauseAll();
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
     const interval = setInterval(() => {
-      onScroll();
-    }, 500);
+      if (!destroyed) onScroll();
+    }, 800);
 
     onScroll();
 
@@ -212,7 +202,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay1}>
                   <video ref={video1Ref} poster={avatarV1Img}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto"
+                    className="w-full h-full object-cover" playsInline muted loop preload="auto" autoPlay
                     onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}>
                     <source src="/videos/1.mp4" type="video/mp4" />
                   </video>
@@ -281,7 +271,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay2}>
                   <video ref={video2Ref} poster={video4ThumbImg}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto"
+                    className="w-full h-full object-cover" playsInline muted loop preload="auto" autoPlay
                     onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}>
                     <source src="/videos/4.mp4" type="video/mp4" />
                   </video>
