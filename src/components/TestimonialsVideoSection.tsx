@@ -20,6 +20,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const isWhite = variant === 'white';
   const isNone = variant === 'none' || variant === 'transparent' || variant === 'light-blue';
 
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const video1Ref = useRef<HTMLVideoElement | null>(null);
+  const video2Ref = useRef<HTMLVideoElement | null>(null);
+
   const [isPlaying1, setIsPlaying1] = useState<boolean>(false);
   const [isMuted1, setIsMuted1] = useState<boolean>(true);
   const [progress1, setProgress1] = useState<number>(0);
@@ -27,9 +31,6 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const [isPlaying2, setIsPlaying2] = useState<boolean>(false);
   const [isMuted2, setIsMuted2] = useState<boolean>(true);
   const [progress2, setProgress2] = useState<number>(0);
-
-  const video1Ref = useRef<HTMLVideoElement | null>(null);
-  const video2Ref = useRef<HTMLVideoElement | null>(null);
 
   const formatTime = (t: number) => {
     if (isNaN(t)) return '0:00';
@@ -46,7 +47,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       if (video2Ref.current && !video2Ref.current.paused) { video2Ref.current.pause(); setIsPlaying2(false); }
       v.muted = true;
       v.play().then(() => setIsPlaying1(true)).catch(() => {});
-    } else { v.pause(); setIsPlaying1(false); }
+    } else {
+      v.pause();
+      setIsPlaying1(false);
+    }
   };
 
   const toggleMute1 = (e: React.MouseEvent) => {
@@ -77,7 +81,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       if (video1Ref.current && !video1Ref.current.paused) { video1Ref.current.pause(); setIsPlaying1(false); }
       v.muted = true;
       v.play().then(() => setIsPlaying2(true)).catch(() => {});
-    } else { v.pause(); setIsPlaying2(false); }
+    } else {
+      v.pause();
+      setIsPlaying2(false);
+    }
   };
 
   const toggleMute2 = (e: React.MouseEvent) => {
@@ -101,58 +108,77 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   };
 
   useEffect(() => {
-    const tryPlay = (v: HTMLVideoElement | null) => {
-      if (!v) return;
-      v.muted = true;
-      v.defaultMuted = true;
-      if (!v.paused) return;
-      v.play().catch(() => {});
-    };
+    const section = sectionRef.current;
+    if (!section) return;
 
-    const tryPause = (v: HTMLVideoElement | null) => {
-      if (v && !v.paused) v.pause();
-    };
+    let destroyed = false;
 
-    const checkVisibility = () => {
-      const section = document.getElementById('testimonials');
-      if (!section) return false;
+    const isSectionVisible = () => {
       const rect = section.getBoundingClientRect();
       return rect.top < window.innerHeight && rect.bottom > 0;
     };
 
-    const handleScroll = () => {
-      const inView = checkVisibility();
-      if (inView) {
-        tryPlay(video1Ref.current);
-        tryPlay(video2Ref.current);
+    const tryAutoPlay = () => {
+      if (destroyed) return;
+      if (!isSectionVisible()) return;
+
+      const v1 = video1Ref.current;
+      const v2 = video2Ref.current;
+
+      [v1, v2].forEach((v) => {
+        if (!v || !v.paused) return;
+        v.muted = true;
+        v.defaultMuted = true;
+        v.play()
+          .then(() => {
+            if (v === v1) setIsPlaying1(true);
+            if (v === v2) setIsPlaying2(true);
+          })
+          .catch(() => {});
+      });
+    };
+
+    const tryAutoPause = () => {
+      const v1 = video1Ref.current;
+      const v2 = video2Ref.current;
+      [v1, v2].forEach((v) => {
+        if (v && !v.paused) {
+          v.pause();
+          if (v === v1) setIsPlaying1(false);
+          if (v === v2) setIsPlaying2(false);
+        }
+      });
+    };
+
+    const onScroll = () => {
+      if (isSectionVisible()) {
+        tryAutoPlay();
       } else {
-        tryPause(video1Ref.current);
-        tryPause(video2Ref.current);
+        tryAutoPause();
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
 
-    handleScroll();
+    const interval = setInterval(() => {
+      onScroll();
+    }, 500);
 
-    const retryInterval = setInterval(() => {
-      handleScroll();
-    }, 1000);
-
-    handleScroll();
+    onScroll();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      clearInterval(retryInterval);
+      destroyed = true;
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+      clearInterval(interval);
     };
   }, []);
 
   void toggleMute1; void toggleMute2; void formatTime;
 
   return (
-    <section id="testimonials" className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="testimonials" ref={sectionRef} className="py-8 sm:py-12 px-4 sm:px-6 lg:px-8 relative z-10">
       <div
         className={`max-w-7xl mx-auto rounded-[2.5rem] sm:rounded-[3rem] p-6 sm:p-10 lg:p-14 relative overflow-hidden transition-colors duration-300 ${
           isNone ? 'bg-transparent text-white border border-white/10 shadow-none'
@@ -184,11 +210,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }}
               className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/50'}`}>
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
-                <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay1()}>
+                <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay1}>
                   <video ref={video1Ref} poster={avatarV1Img}
                     className="w-full h-full object-cover" playsInline muted loop preload="auto"
                     onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}>
-                    <source src="/videos/2.mp4" type="video/mp4" />
+                    <source src="/videos/1.mp4" type="video/mp4" />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
@@ -253,11 +279,11 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: 0.1 }}
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/40'}`}>
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
-                <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay2()}>
+                <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay2}>
                   <video ref={video2Ref} poster={video4ThumbImg}
                     className="w-full h-full object-cover" playsInline muted loop preload="auto"
                     onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}>
-                    <source src="/videos/3.mp4" type="video/mp4" />
+                    <source src="/videos/4.mp4" type="video/mp4" />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
