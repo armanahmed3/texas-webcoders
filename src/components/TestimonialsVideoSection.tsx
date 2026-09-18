@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
+﻿import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Play, Pause, Star, CheckCircle2, Sparkles, Quote, Video, ArrowRight } from 'lucide-react';
 
@@ -21,55 +21,19 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const isNone = variant === 'none' || variant === 'transparent' || variant === 'light-blue';
 
   const sectionRef = useRef<HTMLElement | null>(null);
-  const video1Ref = useRef<HTMLVideoElement | null>(null);
-  const video2Ref = useRef<HTMLVideoElement | null>(null);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const [isPlaying1, setIsPlaying1] = useState<boolean>(false);
   const [isMuted1, setIsMuted1] = useState<boolean>(true);
   const [progress1, setProgress1] = useState<number>(0);
+  const [video1Ready, setVideo1Ready] = useState<boolean>(false);
 
   const [isPlaying2, setIsPlaying2] = useState<boolean>(false);
   const [isMuted2, setIsMuted2] = useState<boolean>(true);
   const [progress2, setProgress2] = useState<number>(0);
+  const [video2Ready, setVideo2Ready] = useState<boolean>(false);
 
-  const isVisible = useCallback(() => {
-    const section = sectionRef.current;
-    if (!section) return false;
-    const rect = section.getBoundingClientRect();
-    return rect.top < window.innerHeight && rect.bottom > 0;
-  }, []);
-
-  useEffect(() => {
-    const safePlay = (v: HTMLVideoElement | null) => {
-      if (!v || !v.paused) return;
-      v.muted = true;
-      v.defaultMuted = true;
-      v.play().catch(() => {});
-    };
-
-    const safePause = (v: HTMLVideoElement | null) => {
-      if (v && !v.paused) v.pause();
-    };
-
-    const tick = () => {
-      const inView = isVisible();
-      if (inView) {
-        safePlay(video1Ref.current);
-        safePlay(video2Ref.current);
-      } else {
-        safePause(video1Ref.current);
-        safePause(video2Ref.current);
-      }
-    };
-
-    intervalRef.current = setInterval(tick, 500);
-    tick();
-
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isVisible]);
+  const video1Ref = useRef<HTMLVideoElement | null>(null);
+  const video2Ref = useRef<HTMLVideoElement | null>(null);
 
   const formatTime = (t: number) => {
     if (isNaN(t)) return '0:00';
@@ -140,6 +104,45 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     v.currentTime = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * v.duration;
   };
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const isSectionVisible = () => {
+      const rect = section.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
+    const handleScroll = () => {
+      const visible = isSectionVisible();
+      const v1 = video1Ref.current;
+      const v2 = video2Ref.current;
+
+      if (visible) {
+        if (v1 && v1.paused && video1Ready) {
+          v1.muted = true;
+          v1.play().then(() => setIsPlaying1(true)).catch(() => {});
+        }
+        if (v2 && v2.paused && video2Ready) {
+          v2.muted = true;
+          v2.play().then(() => setIsPlaying2(true)).catch(() => {});
+        }
+      } else {
+        if (v1 && !v1.paused) { v1.pause(); setIsPlaying1(false); }
+        if (v2 && !v2.paused) { v2.pause(); setIsPlaying2(false); }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [video1Ready, video2Ready]);
+
   void toggleMute1; void toggleMute2; void formatTime;
 
   return (
@@ -176,11 +179,19 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/50'}`}>
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay1()}>
-                  <video ref={video1Ref} poster={avatarV1Img}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}>
-                    <source src="/videos/1.mp4" type="video/mp4" />
-                  </video>
+                  <video
+                    ref={(el) => { video1Ref.current = el; if (el) { el.onloadeddata = () => setVideo1Ready(true); } }}
+                    src="/videos/1.mp4"
+                    poster={avatarV1Img}
+                    className="w-full h-full object-cover"
+                    playsInline
+                    muted
+                    loop
+                    preload="auto"
+                    onTimeUpdate={handleTimeUpdate1}
+                    onPlay={() => setIsPlaying1(true)}
+                    onPause={() => setIsPlaying1(false)}
+                  />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
@@ -245,11 +256,19 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/40'}`}>
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay2()}>
-                  <video ref={video2Ref} poster={video4ThumbImg}
-                    className="w-full h-full object-cover" playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}>
-                    <source src="/videos/4.mp4" type="video/mp4" />
-                  </video>
+                  <video
+                    ref={(el) => { video2Ref.current = el; if (el) { el.onloadeddata = () => setVideo2Ready(true); } }}
+                    src="/videos/4.mp4"
+                    poster={video4ThumbImg}
+                    className="w-full h-full object-cover"
+                    playsInline
+                    muted
+                    loop
+                    preload="auto"
+                    onTimeUpdate={handleTimeUpdate2}
+                    onPlay={() => setIsPlaying2(true)}
+                    onPause={() => setIsPlaying2(false)}
+                  />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
