@@ -32,6 +32,19 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const [isMuted2, setIsMuted2] = useState<boolean>(true);
   const [progress2, setProgress2] = useState<number>(0);
 
+  const playVideoSafe = (v: HTMLVideoElement | null, setPlaying: (b: boolean) => void) => {
+    if (!v) return;
+    v.muted = true;
+    v.defaultMuted = true;
+    const p = v.play();
+    if (p !== undefined) {
+      p.then(() => setPlaying(true)).catch(() => {
+        v.muted = true;
+        v.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
+      });
+    }
+  };
+
   const formatTime = (t: number) => {
     if (isNaN(t)) return '0:00';
     const m = Math.floor(t / 60);
@@ -45,8 +58,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (!v) return;
     if (v.paused) {
       if (video2Ref.current && !video2Ref.current.paused) { video2Ref.current.pause(); setIsPlaying2(false); }
-      v.muted = true;
-      v.play().then(() => setIsPlaying1(true)).catch(() => {});
+      playVideoSafe(v, setIsPlaying1);
     } else {
       v.pause();
       setIsPlaying1(false);
@@ -79,8 +91,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (!v) return;
     if (v.paused) {
       if (video1Ref.current && !video1Ref.current.paused) { video1Ref.current.pause(); setIsPlaying1(false); }
-      v.muted = true;
-      v.play().then(() => setIsPlaying2(true)).catch(() => {});
+      playVideoSafe(v, setIsPlaying2);
     } else {
       v.pause();
       setIsPlaying2(false);
@@ -129,17 +140,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     };
 
     const playAll = () => {
-      [video1Ref.current, video2Ref.current].forEach((v) => {
-        if (!v) return;
-        v.muted = true;
-        v.defaultMuted = true;
-        if (v.paused) {
-          v.play().then(() => {
-            if (v === video1Ref.current) setIsPlaying1(true);
-            if (v === video2Ref.current) setIsPlaying2(true);
-          }).catch(() => {});
-        }
-      });
+      playVideoSafe(video1Ref.current, setIsPlaying1);
+      playVideoSafe(video2Ref.current, setIsPlaying2);
     };
 
     const onScroll = () => {
@@ -203,7 +205,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay1}>
                   <video ref={video1Ref} src="/videos/1.mp4" poster={avatarV1Img}
                     className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)} />
+                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}
+                    onLoadedData={() => playVideoSafe(video1Ref.current, setIsPlaying1)} />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
@@ -270,7 +273,8 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay2}>
                   <video ref={video2Ref} src="/videos/4.mp4" poster={video4ThumbImg}
                     className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)} />
+                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}
+                    onLoadedData={() => playVideoSafe(video2Ref.current, setIsPlaying2)} />
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                     <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
