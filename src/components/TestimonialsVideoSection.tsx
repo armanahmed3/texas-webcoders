@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { Play, Pause, Star, CheckCircle2, Sparkles, Quote, Video, ArrowRight } from 'lucide-react';
 
@@ -36,6 +36,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (!v) return;
     v.muted = true;
     v.defaultMuted = true;
+    v.playsInline = true;
+    v.setAttribute('muted', '');
+    v.setAttribute('playsinline', '');
+    v.setAttribute('webkit-playsinline', '');
     const p = v.play();
     if (p !== undefined) {
       p.then(() => setPlaying(true)).catch(() => {
@@ -122,49 +126,41 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     const section = sectionRef.current;
     if (!section) return;
 
-    let destroyed = false;
+    // Set mobile & iOS autoplay properties immediately
+    [video1Ref.current, video2Ref.current].forEach((v) => {
+      if (v) {
+        v.muted = true;
+        v.defaultMuted = true;
+        v.playsInline = true;
+        v.setAttribute('muted', '');
+        v.setAttribute('playsinline', '');
+        v.setAttribute('webkit-playsinline', '');
+      }
+    });
 
-    const isSectionVisible = () => {
-      const rect = section.getBoundingClientRect();
-      return rect.top < window.innerHeight && rect.bottom > 0;
-    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playVideoSafe(video1Ref.current, setIsPlaying1);
+            playVideoSafe(video2Ref.current, setIsPlaying2);
+          } else {
+            if (video1Ref.current && !video1Ref.current.paused) {
+              video1Ref.current.pause();
+              setIsPlaying1(false);
+            }
+            if (video2Ref.current && !video2Ref.current.paused) {
+              video2Ref.current.pause();
+              setIsPlaying2(false);
+            }
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
 
-    const pauseAll = () => {
-      [video1Ref.current, video2Ref.current].forEach((v) => {
-        if (v && !v.paused) {
-          v.pause();
-          if (v === video1Ref.current) setIsPlaying1(false);
-          if (v === video2Ref.current) setIsPlaying2(false);
-        }
-      });
-    };
-
-    const playAll = () => {
-      playVideoSafe(video1Ref.current, setIsPlaying1);
-      playVideoSafe(video2Ref.current, setIsPlaying2);
-    };
-
-    const onScroll = () => {
-      if (destroyed) return;
-      if (isSectionVisible()) playAll();
-      else pauseAll();
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-
-    const interval = setInterval(() => {
-      if (!destroyed) onScroll();
-    }, 800);
-
-    onScroll();
-
-    return () => {
-      destroyed = true;
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      clearInterval(interval);
-    };
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   void toggleMute1; void toggleMute2; void formatTime;
@@ -203,13 +199,27 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/50'}`}>
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay1}>
-                  <video ref={video1Ref} src="/videos/client_review_1.mp4" poster={avatarV1Img}
-                    className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}
-                    onLoadedData={() => playVideoSafe(video1Ref.current, setIsPlaying1)} />
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
-                  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
+                  <video
+                    ref={video1Ref}
+                    src="/videos/client_review_1.mp4"
+                    poster={avatarV1Img}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    playsInline
+                    muted
+                    loop
+                    preload="auto"
+                    onTimeUpdate={handleTimeUpdate1}
+                    onPlay={() => setIsPlaying1(true)}
+                    onPause={() => setIsPlaying1(false)}
+                    onLoadedData={() => playVideoSafe(video1Ref.current, setIsPlaying1)}
+                  >
+                    <source src="/videos/client_review_1.mp4" type="video/mp4" />
+                    <track kind="captions" srcLang="en" label="English" default />
+                  </video>
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-20' : 'opacity-60'}`} />
+                  <div className={`absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+                    <div className="w-16 h-16 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                       {isPlaying1 ? <Pause className="w-7 h-7 text-black fill-black" /> : <Play className="w-7 h-7 text-black fill-black ml-1" />}
                     </div>
                   </div>
@@ -271,13 +281,27 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/40'}`}>
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={togglePlay2}>
-                  <video ref={video2Ref} src="/videos/client_review_2.mp4" poster={video4ThumbImg}
-                    className="w-full h-full object-cover" autoPlay playsInline muted loop preload="auto"
-                    onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}
-                    onLoadedData={() => playVideoSafe(video2Ref.current, setIsPlaying2)} />
-                  <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
-                  <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                    <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
+                  <video
+                    ref={video2Ref}
+                    src="/videos/client_review_2.mp4"
+                    poster={video4ThumbImg}
+                    className="w-full h-full object-cover"
+                    autoPlay
+                    playsInline
+                    muted
+                    loop
+                    preload="auto"
+                    onTimeUpdate={handleTimeUpdate2}
+                    onPlay={() => setIsPlaying2(true)}
+                    onPause={() => setIsPlaying2(false)}
+                    onLoadedData={() => playVideoSafe(video2Ref.current, setIsPlaying2)}
+                  >
+                    <source src="/videos/client_review_2.mp4" type="video/mp4" />
+                    <track kind="captions" srcLang="en" label="English" default />
+                  </video>
+                  <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-20' : 'opacity-60'}`} />
+                  <div className={`absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
+                    <div className="w-16 h-16 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                       {isPlaying2 ? <Pause className="w-7 h-7 text-black fill-black" /> : <Play className="w-7 h-7 text-black fill-black ml-1" />}
                     </div>
                   </div>
