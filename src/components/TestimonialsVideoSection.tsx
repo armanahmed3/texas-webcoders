@@ -36,18 +36,16 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     const section = sectionRef.current;
     if (!section) return;
 
+    const tryPlay = (v: HTMLVideoElement, setPlaying: (b: boolean) => void) => {
+      if (!v) return;
+      v.muted = true;
+      v.defaultMuted = true;
+      v.play().then(() => setPlaying(true)).catch(() => {});
+    };
+
     const playAllVideos = () => {
-      [video1Ref.current, video2Ref.current].forEach((v) => {
-        if (!v) return;
-        v.muted = true;
-        v.defaultMuted = true;
-        v.play()
-          .then(() => {
-            if (v === video1Ref.current) setIsPlaying1(true);
-            else setIsPlaying2(true);
-          })
-          .catch(() => {});
-      });
+      if (video1Ref.current) tryPlay(video1Ref.current, setIsPlaying1);
+      if (video2Ref.current) tryPlay(video2Ref.current, setIsPlaying2);
     };
 
     const pauseAllVideos = () => {
@@ -59,19 +57,32 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
       });
     };
 
+    const isSectionInView = () => {
+      const rect = section.getBoundingClientRect();
+      return rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
+    const onScroll = () => {
+      if (isSectionInView()) playAllVideos();
+      else pauseAllVideos();
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          playAllVideos();
-        } else {
-          pauseAllVideos();
-        }
+        if (entry.isIntersecting) playAllVideos();
+        else pauseAllVideos();
       },
-      { threshold: 0.1 }
+      { threshold: 0 }
     );
 
     observer.observe(section);
-    return () => observer.disconnect();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   const formatTime = (t: number) => {
