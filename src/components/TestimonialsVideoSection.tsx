@@ -67,37 +67,21 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   };
 
-  // Sync mute states to video elements
-  useEffect(() => {
-    if (video1Ref.current) {
-      video1Ref.current.muted = isMuted1;
-      video1Ref.current.defaultMuted = true;
-    }
-  }, [isMuted1]);
-
-  useEffect(() => {
-    if (video2Ref.current) {
-      video2Ref.current.muted = isMuted2;
-      video2Ref.current.defaultMuted = true;
-    }
-  }, [isMuted2]);
-
-  // Robust play helper
-  const tryPlayVideo = (video: HTMLVideoElement | null, setIsPlaying: (val: boolean) => void) => {
+  // Robust play helper with muted guarantee for cross-browser autoplay
+  const playVideo = (video: HTMLVideoElement | null, setIsPlaying: (val: boolean) => void) => {
     if (!video) return;
     video.muted = true;
     video.defaultMuted = true;
     const p = video.play();
     if (p !== undefined) {
       p.then(() => setIsPlaying(true)).catch(() => {
-        // Retry muted
         video.muted = true;
         video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
       });
     }
   };
 
-  // Intersection observer for section visibility (auto-plays when scrolled into view, stops when scrolled away)
+  // Intersection observer: automatically plays when entering the section, automatically stops when leaving
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -107,14 +91,19 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
         entries.forEach((entry) => {
           const v1 = video1Ref.current;
           const v2 = video2Ref.current;
+
           if (entry.isIntersecting) {
-            if (v1 && !userPaused1Ref.current) {
-              tryPlayVideo(v1, setIsPlaying1);
+            // When user enters this section -> video automatically opens and starts playing
+            if (v1) {
+              userPaused1Ref.current = false;
+              playVideo(v1, setIsPlaying1);
             }
-            if (v2 && !userPaused2Ref.current) {
-              tryPlayVideo(v2, setIsPlaying2);
+            if (v2) {
+              userPaused2Ref.current = false;
+              playVideo(v2, setIsPlaying2);
             }
           } else {
+            // When user leaves this section -> video automatically pauses/stops
             if (v1 && !v1.paused) {
               v1.pause();
               setIsPlaying1(false);
@@ -126,7 +115,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 } // Triggers immediately as soon as section enters viewport
     );
 
     observer.observe(el);
@@ -316,16 +305,15 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       poster={avatarV1Img}
                       className="w-full h-full object-cover"
                       playsInline
-                      muted={isMuted1}
+                      muted
                       loop
                       preload="auto"
                       onTimeUpdate={handleTimeUpdate1}
                       onPlay={() => setIsPlaying1(true)}
                       onPause={() => setIsPlaying1(false)}
-                      onLoadedData={(e) => {
-                        const v = e.currentTarget;
-                        v.muted = true;
-                        v.play().then(() => setIsPlaying1(true)).catch(() => {});
+                      onLoadedData={() => {
+                        const v = video1Ref.current;
+                        if (v) playVideo(v, setIsPlaying1);
                       }}
                     >
                       <source src="/videos/1.mp4" type="video/mp4" />
@@ -339,7 +327,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       }`}
                     />
 
-                    {/* Center Play/Pause Button Overlay - Just pause/play button shown */}
+                    {/* Center Play/Pause Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                       <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                         {isPlaying1 ? (
@@ -349,16 +337,6 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         )}
                       </div>
                     </div>
-
-                    {/* Sound Toggle Button */}
-                    <button
-                      type="button"
-                      onClick={toggleMute1}
-                      className="absolute top-3 right-3 z-30 p-2 rounded-full bg-black/75 hover:bg-white text-white hover:text-black transition-all border border-white/20 shadow-lg cursor-pointer"
-                      title={isMuted1 ? 'Unmute Audio' : 'Mute Audio'}
-                    >
-                      {isMuted1 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                    </button>
 
                     {/* Bottom Scrubbable Progress Bar */}
                     <div
@@ -569,16 +547,15 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       poster={video4ThumbImg}
                       className="w-full h-full object-cover"
                       playsInline
-                      muted={isMuted2}
+                      muted
                       loop
                       preload="auto"
                       onTimeUpdate={handleTimeUpdate2}
                       onPlay={() => setIsPlaying2(true)}
                       onPause={() => setIsPlaying2(false)}
-                      onLoadedData={(e) => {
-                        const v = e.currentTarget;
-                        v.muted = true;
-                        v.play().then(() => setIsPlaying2(true)).catch(() => {});
+                      onLoadedData={() => {
+                        const v = video2Ref.current;
+                        if (v) playVideo(v, setIsPlaying2);
                       }}
                     >
                       <source src="/videos/4.mp4" type="video/mp4" />
@@ -592,7 +569,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       }`}
                     />
 
-                    {/* Center Play/Pause Button Overlay - Just pause/play button shown */}
+                    {/* Center Play/Pause Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
                       <div className="w-16 h-16 rounded-full bg-white text-black flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                         {isPlaying2 ? (
@@ -602,16 +579,6 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                         )}
                       </div>
                     </div>
-
-                    {/* Sound Toggle Button */}
-                    <button
-                      type="button"
-                      onClick={toggleMute2}
-                      className="absolute top-4 right-4 z-30 p-2 rounded-full bg-black/75 hover:bg-white text-white hover:text-black transition-all border border-white/20 shadow-lg cursor-pointer"
-                      title={isMuted2 ? 'Unmute Audio' : 'Mute Audio'}
-                    >
-                      {isMuted2 ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                    </button>
 
                     {/* Bottom Scrubbable Progress Bar */}
                     <div

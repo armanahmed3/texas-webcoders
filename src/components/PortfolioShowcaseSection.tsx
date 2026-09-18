@@ -47,38 +47,60 @@ const HOME_FEATURED_PROJECTS: PortfolioProject[] = [
 interface VideoCardItemProps {
   videoUrl: string;
   posterUrl?: string;
-  isMuted: boolean;
-  onToggleMute: (e: React.MouseEvent) => void;
+  isMuted?: boolean;
 }
 
 const VideoCardItem: React.FC<VideoCardItemProps> = ({
   videoUrl,
   posterUrl,
-  isMuted,
-  onToggleMute
+  isMuted
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
 
-  // Sync mute state and ensure autoplay
-  useEffect(() => {
+  // Play video safely (always muted for cross-browser autoplay compliance)
+  const playVideo = () => {
     const video = videoRef.current;
     if (!video) return;
-
-    video.muted = isMuted;
+    video.muted = true;
     video.defaultMuted = true;
-
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          // If unmuted autoplay blocked, fallback to muted autoplay
-          video.muted = true;
-          video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
-        });
+    const p = video.play();
+    if (p !== undefined) {
+      p.then(() => setIsPlaying(true)).catch(() => {
+        video.muted = true;
+        video.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      });
     }
-  }, [videoUrl, isMuted]);
+  };
+
+  // IntersectionObserver: Plays when card is in view, pauses when leaving view
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = videoRef.current;
+          if (!video) return;
+
+          if (entry.isIntersecting) {
+            playVideo();
+          } else {
+            if (!video.paused) {
+              video.pause();
+              setIsPlaying(false);
+            }
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [videoUrl]);
 
   const handleTogglePlay = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -86,7 +108,7 @@ const VideoCardItem: React.FC<VideoCardItemProps> = ({
     if (!video) return;
 
     if (video.paused) {
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      playVideo();
     } else {
       video.pause();
       setIsPlaying(false);
@@ -94,27 +116,20 @@ const VideoCardItem: React.FC<VideoCardItemProps> = ({
   };
 
   return (
-    <div className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden group/vid">
+    <div ref={containerRef} className="relative w-full h-full bg-black flex items-center justify-center overflow-hidden group/vid">
       <video
         ref={videoRef}
         src={videoUrl}
         poster={posterUrl}
         autoPlay
         loop
-        muted={isMuted}
+        muted
         playsInline
         preload="auto"
         className="w-full h-full object-cover"
         onPlay={() => setIsPlaying(true)}
         onPause={() => setIsPlaying(false)}
-        onLoadedData={(e) => {
-          const v = e.currentTarget;
-          v.muted = isMuted;
-          v.play().catch(() => {
-            v.muted = true;
-            v.play().catch(() => {});
-          });
-        }}
+        onLoadedData={() => playVideo()}
       >
         <track kind="captions" srcLang="en" label="English" default />
       </video>
@@ -122,19 +137,10 @@ const VideoCardItem: React.FC<VideoCardItemProps> = ({
       {/* Manual Play / Pause overlay on hover */}
       <button
         onClick={handleTogglePlay}
-        className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover/vid:opacity-100 transition-opacity duration-200 hover:scale-110 z-20 border border-white/20"
+        className="absolute inset-0 m-auto w-12 h-12 rounded-full bg-black/60 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover/vid:opacity-100 transition-opacity duration-200 hover:scale-110 z-20 border border-white/20 cursor-pointer"
         title={isPlaying ? 'Pause' : 'Play'}
       >
         {isPlaying ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white ml-0.5" />}
-      </button>
-
-      {/* Video Sound Toggle Button */}
-      <button
-        onClick={onToggleMute}
-        className="absolute bottom-3 right-3 z-30 p-2 rounded-full bg-zinc-950/80 hover:bg-white text-white hover:text-black border border-zinc-700 transition-all cursor-pointer shadow-lg"
-        title={isMuted ? 'Unmute Video Audio' : 'Mute Video Audio'}
-      >
-        {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
       </button>
     </div>
   );
@@ -483,8 +489,6 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
                           <VideoCardItem
                             videoUrl={project.videoUrl!}
                             posterUrl={project.imageUrl}
-                            isMuted={isMuted}
-                            onToggleMute={(e) => toggleVideoMute(project.id, e)}
                           />
                         ) : isAutoScroll ? (
                           /* Auto-Scrolling Tall Full-Page Website Mockup */
