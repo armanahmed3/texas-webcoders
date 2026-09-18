@@ -191,12 +191,20 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                       <video
                         src={activeProject.videoUrl}
                         poster={activeProject.imageUrl}
-                        preload="none"
+                        preload="auto"
                         autoPlay
                         loop
                         muted={isMuted}
                         playsInline
                         className="w-full h-full object-cover"
+                        onLoadedData={(e) => {
+                          const v = e.currentTarget;
+                          v.muted = isMuted;
+                          v.play().catch(() => {
+                            v.muted = true;
+                            v.play().catch(() => {});
+                          });
+                        }}
                       >
                         <track kind="captions" srcLang="en" label="English" default />
                       </video>

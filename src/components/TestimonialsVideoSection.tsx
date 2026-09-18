@@ -297,7 +297,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       playsInline
                       muted
                       loop
-                      preload="none"
+                      preload="auto"
                       onTimeUpdate={handleTimeUpdate1}
                       onPlay={() => setIsPlaying1(true)}
                       onPause={() => setIsPlaying1(false)}
@@ -535,7 +535,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       playsInline
                       muted
                       loop
-                      preload="none"
+                      preload="auto"
                       onTimeUpdate={handleTimeUpdate2}
                       onPlay={() => setIsPlaying2(true)}
                       onPause={() => setIsPlaying2(false)}

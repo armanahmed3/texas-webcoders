@@ -198,8 +198,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                   autoPlay
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="auto"
                   className="w-full max-h-[500px] object-contain mx-auto bg-black"
+                  onLoadedData={(e) => {
+                    e.currentTarget.play().catch(() => {
+                      // Browser policy may require muted for autoplay
+                      e.currentTarget.muted = true;
+                      e.currentTarget.play().catch(() => {});
+                    });
+                  }}
                 />
               </div>
             ) : isWebsiteProject ? (
