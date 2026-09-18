@@ -29,6 +29,11 @@ export const ThreeBackgroundCanvas: React.FC<ThreeBackgroundCanvasProps> = ({ ac
   ];
 
   useEffect(() => {
+    // On mobile devices, bypass heavy WebGL calculations to maximize battery, frame rate and initial load speed
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return;
+    }
+
     const container = mountRef.current;
     if (!container) return;
 

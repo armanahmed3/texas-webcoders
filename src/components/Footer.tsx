@@ -327,6 +327,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigateSlide, onOpenPrivacyPo
                 <img
                   src="/assets/payment-methods.png"
                   alt="Accepted Payment Methods: Visa, PayPal, Mastercard, AMEX, Zelle, Apple Pay, Google Pay, Stripe"
+                  width="274"
+                  height="148"
                   className="h-16 sm:h-20 md:h-24 w-auto object-contain"
                   loading="lazy"
                 />

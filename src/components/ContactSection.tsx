@@ -82,24 +82,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       message: formData.details || 'No additional details provided'
     }).catch(err => console.error('FormSubmit inquiry error:', err));
 
-    // 2. Also notify local backend if running
-    try {
-      fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          projectId: generatedId,
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          service: formData.serviceType || formData.packageSelect,
-          budget: formData.budget,
-          message: formData.details
-        })
-      }).catch(() => {});
-    } catch {
-      // Ignore static hosting fetch errors
-    }
+    // Dispatched to info@texaswebcoders.com via FormSubmit
+    // 2. Fire confetti celebration
 
     // Fire confetti celebration
     try {
@@ -376,14 +360,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                           <span className="text-[9px] text-zinc-400 uppercase font-sans">({copiedId ? 'Copied!' : 'Copy'})</span>
                         </button>
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <div className="text-xs">
                         <div>
                           <span className="text-zinc-400 block text-[10px] uppercase">Client Contact</span>
                           <span className="font-medium truncate block">{formData.email}</span>
-                        </div>
-                        <div>
-                          <span className="text-zinc-400 block text-[10px] uppercase">Requested Service</span>
-                          <span className="font-medium truncate block">{formData.serviceType || formData.packageSelect || 'Web Engineering'}</span>
                         </div>
                       </div>
                       <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs">

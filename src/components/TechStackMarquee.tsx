@@ -89,9 +89,9 @@ const TechCard: React.FC<TechCardProps> = ({ tech, isLight = false }) => {
       </div>
 
       <div className="space-y-1">
-        <h4 className="font-semibold text-sm font-['Montserrat'] tracking-tight">
+        <h3 className="font-semibold text-sm font-['Montserrat'] tracking-tight">
           {tech.name}
-        </h4>
+        </h3>
         <span className="block text-[11px] text-zinc-400 group-hover:text-zinc-300 font-medium font-mono">
           {tech.category}
         </span>

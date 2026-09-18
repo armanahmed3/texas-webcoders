@@ -28,13 +28,13 @@ import { BackToTopButton } from './components/BackToTopButton';
 import { PortfolioProject, PricingPackage, ServiceItem } from './types';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Framer Motion Page Transition Wrapper for Multi-Page View
+// Framer Motion Page Transition Wrapper for Multi-Page View - 100% GPU-Composited (No Filter Blur)
 const PageTransition: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <motion.div
-    initial={{ opacity: 0, y: 30, filter: 'blur(8px)', scale: 0.98 }}
-    animate={{ opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }}
-    exit={{ opacity: 0, y: -30, filter: 'blur(8px)', scale: 0.98 }}
-    transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    exit={{ opacity: 0, y: -16 }}
+    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     className="w-full flex-1"
   >
     {children}
@@ -54,16 +54,17 @@ export default function App() {
   const [quoteCalculatorOpen, setQuoteCalculatorOpen] = useState<boolean>(false);
   const [appointmentModalOpen, setAppointmentModalOpen] = useState<boolean>(false);
 
-  // Sync live published blog articles
+  // Sync live published blog articles from client cache
   useEffect(() => {
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && Array.isArray(data.blogs) && data.blogs.length > 0) {
-          setDynamicArticles(data.blogs);
+    try {
+      const stored = localStorage.getItem('twc_dynamic_blogs');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setDynamicArticles(parsed);
         }
-      })
-      .catch(() => {});
+      }
+    } catch {}
   }, [activeBlogArticle]);
 
   const totalSlides = 10;
@@ -406,30 +407,30 @@ export default function App() {
 
           {/* Section 2: Trust Badges (White) */}
           <motion.div
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <TrustIndicatorsSection variant="white" />
           </motion.div>
 
           {/* Section 3: AI Video Testimonials (None) */}
           <motion.div
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <TestimonialsVideoSection variant="none" />
           </motion.div>
 
           {/* Section 4: Tech Stack Marquee (Black) */}
           <motion.div
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <TechStackMarquee onNavigateSlide={handleNavigateSlide} variant="black" />
           </motion.div>
@@ -437,10 +438,10 @@ export default function App() {
           {/* Section 5: Portfolio Showcase (White) */}
           <motion.div
             id="portfolio"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <PortfolioShowcaseSection
               onSelectProject={(proj) => setSelectedProject(proj)}
@@ -452,10 +453,10 @@ export default function App() {
           {/* Section 6: Process (None) */}
           <motion.div
             id="process"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <ProcessSection
               onNavigateSlide={handleNavigateSlide}
@@ -466,10 +467,10 @@ export default function App() {
           {/* Section 7: Core Engineering Services (Black) */}
           <motion.div
             id="services"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <ServicesSection
               onNavigateSlide={handleNavigateSlide}
@@ -481,10 +482,10 @@ export default function App() {
           {/* Section 8: Packages & Pricing (White) */}
           <motion.div
             id="packages"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <PricingSection
               onSelectPackage={(pkg) => setSelectedPackage(pkg)}
@@ -497,10 +498,10 @@ export default function App() {
           {/* Section 9: About TexasWebCoders (None) */}
           <motion.div
             id="about"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <AboutSection
               onNavigateSlide={handleNavigateSlide}
@@ -511,10 +512,10 @@ export default function App() {
           {/* Section 10: Engineering Insights & Industry Articles (Black) */}
           <motion.div
             id="insights"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <InsightsSection variant="black" />
           </motion.div>
@@ -522,10 +523,10 @@ export default function App() {
           {/* Section 11: Reviews & FAQ (White) */}
           <motion.div
             id="faq"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <ReviewsFaqSection variant="white" />
           </motion.div>
@@ -533,10 +534,10 @@ export default function App() {
           {/* Section 12: Contact Form (None) */}
           <motion.div
             id="contact"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <ContactSection
               selectedPackage={selectedPackage}
@@ -549,10 +550,10 @@ export default function App() {
           {/* Section 13: Texas Office Google Maps Location */}
           <motion.div
             id="location-map"
-            initial={{ opacity: 0, y: 35, filter: 'blur(4px)' }}
-            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
             <MapLocationSection variant="black" />
           </motion.div>

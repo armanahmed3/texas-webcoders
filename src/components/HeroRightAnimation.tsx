@@ -40,7 +40,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
       title: 'Kinetic 3D Typography & Brand Reveal',
       category: '3D Video Animation',
       subtitle: 'Dynamic 3D typography, volumetric lighting & brand reveal.',
-      videoUrl: '/portfolio-media/texaswebcoders/animation/animation1.mp4',
+      videoUrl: '/portfolio-media/texaswebcoders/animation/animation_cvjury_resumes_reel.mp4',
       imageUrl: '/portfolio-media/texaswebcoders/animation/animation1.jpeg',
       mediaType: 'video' as const,
       speed: '4K Ultra-HD',
@@ -52,7 +52,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
       title: 'Cyberpunk Holographic Interface VFX',
       category: '3D Video Animation',
       subtitle: 'Futuristic sci-fi UI viewport and volumetric hologram animation.',
-      videoUrl: '/portfolio-media/texaswebcoders/animation/animation10.mp4',
+      videoUrl: '/portfolio-media/texaswebcoders/animation/animation_stoic_philosophy_motion.mp4',
       imageUrl: '/portfolio-media/texaswebcoders/animation/animation10.jpeg',
       mediaType: 'video' as const,
       speed: 'Ray-Traced Octane',
@@ -75,7 +75,7 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
       title: 'Abstract 3D Fluid Simulation & Morphing',
       category: '3D Video Animation',
       subtitle: 'Organic fluid dynamics and refractive glass motion simulation.',
-      videoUrl: '/portfolio-media/texaswebcoders/animation/animation3.mp4',
+      videoUrl: '/portfolio-media/texaswebcoders/animation/animation_firman_solutions_promo.mp4',
       imageUrl: '/portfolio-media/texaswebcoders/animation/animation3.jpeg',
       mediaType: 'video' as const,
       speed: 'Cinema 4D',
@@ -191,13 +191,15 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                       <video
                         src={activeProject.videoUrl}
                         poster={activeProject.imageUrl}
-                        preload="metadata"
+                        preload="none"
                         autoPlay
                         loop
                         muted={isMuted}
                         playsInline
                         className="w-full h-full object-cover"
-                      />
+                      >
+                        <track kind="captions" srcLang="en" label="English" default />
+                      </video>
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
@@ -264,9 +266,9 @@ export const HeroRightAnimation: React.FC<HeroRightAnimationProps> = () => {
                     <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest block font-['Montserrat',sans-serif] mb-0.5">
                       {activeProject.category}
                     </span>
-                    <h3 className="text-sm sm:text-base font-extrabold text-white leading-tight font-['Montserrat',sans-serif] uppercase tracking-wide">
+                    <div className="text-sm sm:text-base font-extrabold text-white leading-tight font-['Montserrat',sans-serif] uppercase tracking-wide">
                       {activeProject.title}
-                    </h3>
+                    </div>
                     <p className="text-[11px] text-zinc-300 line-clamp-1 mt-0.5 font-['Montserrat',sans-serif]">
                       {activeProject.subtitle}
                     </p>

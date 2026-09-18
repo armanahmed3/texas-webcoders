@@ -392,9 +392,11 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
                               loop
                               muted={isMuted}
                               playsInline
-                              preload="metadata"
+                              preload="none"
                               className="w-full h-full object-cover"
-                            />
+                            >
+                              <track kind="captions" srcLang="en" label="English" default />
+                            </video>
                             {/* Video Sound Toggle Button */}
                             <button
                               onClick={(e) => toggleVideoMute(project.id, e)}
@@ -411,6 +413,8 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
                               <img
                                 src={project.imageUrl}
                                 alt={project.title}
+                                width="682"
+                                height="1024"
                                 className="w-full h-auto object-cover block"
                                 loading="lazy"
                                 onError={(e) => {
@@ -435,6 +439,8 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
                             <img
                               src={project.imageUrl}
                               alt={project.title}
+                              width="800"
+                              height="600"
                               className="w-full h-full object-contain object-center transform group-hover:scale-105 transition-transform duration-500 ease-out"
                               loading="lazy"
                               onError={(e) => {
@@ -553,7 +559,7 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
               <ChevronLeft className="w-4 h-4" />
             </button>
 
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
+            <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-zinc-900/60 border border-zinc-800/80 backdrop-blur-md">
               {Array.from({ length: totalPages }).map((_, dotIdx) => (
                 <button
                   key={dotIdx}
@@ -561,17 +567,22 @@ export const PortfolioShowcaseSection: React.FC<PortfolioShowcaseSectionProps> =
                     setSlideDirection(dotIdx > currentSlidePage ? 1 : -1);
                     setCurrentSlidePage(dotIdx);
                   }}
-                  className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    currentSlidePage === dotIdx
-                      ? isDarkBlue || isBlack
-                        ? 'w-7 bg-white shadow-md'
-                        : 'w-7 bg-zinc-950 shadow-md'
-                      : isDarkBlue || isBlack
-                        ? 'w-2 bg-zinc-700 hover:bg-zinc-500'
-                        : 'w-2 bg-zinc-300 hover:bg-black'
-                  }`}
+                  className="min-h-[44px] min-w-[32px] p-2 flex items-center justify-center cursor-pointer transition-transform hover:scale-105"
+                  aria-label={`Jump to Project Slide ${dotIdx + 1}`}
                   title={`Jump to Slide ${dotIdx + 1}`}
-                />
+                >
+                  <span
+                    className={`h-2 rounded-full transition-all duration-300 block ${
+                      currentSlidePage === dotIdx
+                        ? isDarkBlue || isBlack
+                          ? 'w-7 bg-white shadow-md'
+                          : 'w-7 bg-zinc-950 shadow-md'
+                        : isDarkBlue || isBlack
+                          ? 'w-2 bg-zinc-700 hover:bg-zinc-500'
+                          : 'w-2 bg-zinc-300 hover:bg-black'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 

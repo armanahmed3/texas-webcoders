@@ -297,12 +297,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       playsInline
                       muted
                       loop
-                      preload="metadata"
+                      preload="none"
                       onTimeUpdate={handleTimeUpdate1}
                       onPlay={() => setIsPlaying1(true)}
                       onPause={() => setIsPlaying1(false)}
                     >
                       <source src="/videos/1.mp4" type="video/mp4" />
+                      <track kind="captions" srcLang="en" label="English" default />
                     </video>
 
                     {/* Gradient Overlay */}
@@ -534,12 +535,13 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                       playsInline
                       muted
                       loop
-                      preload="metadata"
+                      preload="none"
                       onTimeUpdate={handleTimeUpdate2}
                       onPlay={() => setIsPlaying2(true)}
                       onPause={() => setIsPlaying2(false)}
                     >
                       <source src="/videos/4.mp4" type="video/mp4" />
+                      <track kind="captions" srcLang="en" label="English" default />
                     </video>
 
                     {/* Gradient Overlay */}

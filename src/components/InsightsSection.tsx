@@ -268,24 +268,19 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [generationNotice, setGenerationNotice] = useState<string | null>(null);
 
-  // Fetch live published blogs if backend is active, or sync
+  // Sync live published blogs from local cache
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await fetch('/api/blogs');
-        if (res.ok) {
-          const data = await res.json();
-          if (data.success && Array.isArray(data.blogs) && data.blogs.length > 0) {
-            setArticles(data.blogs);
-            localStorage.setItem('twc_dynamic_blogs', JSON.stringify(data.blogs));
-          }
+    try {
+      const cached = localStorage.getItem('twc_dynamic_blogs');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setArticles(parsed);
         }
-      } catch {
-        // Static hosting mode: uses local articles
       }
-    };
-
-    fetchBlogs();
+    } catch {
+      // Uses standard static articles
+    }
   }, []);
 
   // Compute dynamic category list
@@ -492,7 +487,7 @@ export const InsightsSection: React.FC<InsightsSectionProps> = ({
                   <span>Read Technical Guide</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </span>
-                <span className="text-[10px] text-zinc-600 font-mono">Verified Guide</span>
+                <span className="text-[10px] text-zinc-300 font-mono font-medium">Verified Guide</span>
               </div>
             </div>
           ))}

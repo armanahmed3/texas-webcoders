@@ -51,11 +51,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <span>Texas Custom Software & Web Engineering Agency</span>
             </motion.div>
 
-            {/* Main Headline in Bebas Neue Font */}
+            {/* Main Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-normal text-white leading-[1.05] tracking-wide uppercase"
             >
               Custom Websites, Apps <br />
@@ -70,9 +70,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             {/* Subtitle in Montserrat */}
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="text-sm sm:text-base text-zinc-300 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed font-['Montserrat',sans-serif]"
             >
               TexasWebCoders partners with East Texas medical clinics, legal practices, contractors, logistics providers, and growing enterprises to build lightning-fast websites, custom client portals, iOS/Android mobile apps, and dominant local SEO systems that generate qualified client leads.
