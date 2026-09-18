@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { Play, Pause, Star, CheckCircle2, Sparkles, Quote, Video, ArrowRight } from 'lucide-react';
+import { Play, Pause, Star, CheckCircle2, Sparkles, Quote, Video, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 
 import avatarV1Img from '../assets/images/client_avatar_v1.png';
 import video4ThumbImg from '../assets/images/video_4_thumbnail.jpg';
@@ -61,19 +61,37 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     const v = video1Ref.current;
     if (!v) return;
     if (v.paused) {
-      if (video2Ref.current && !video2Ref.current.paused) { video2Ref.current.pause(); setIsPlaying2(false); }
-      playVideoSafe(v, setIsPlaying1);
+      if (video2Ref.current && !video2Ref.current.paused) {
+        video2Ref.current.pause();
+        setIsPlaying2(false);
+      }
+      // On user interaction, unmute so audio is loud and clear!
+      v.muted = false;
+      setIsMuted1(false);
+      const p = v.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying1(true)).catch(() => {
+          v.muted = true;
+          setIsMuted1(true);
+          v.play().then(() => setIsPlaying1(true));
+        });
+      }
     } else {
       v.pause();
       setIsPlaying1(false);
     }
   };
 
-  const toggleMute1 = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const toggleMute1 = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const v = video1Ref.current;
+    if (!v) return;
     const next = !isMuted1;
+    v.muted = next;
     setIsMuted1(next);
-    if (video1Ref.current) video1Ref.current.muted = next;
+    if (!next && v.paused) {
+      v.play().then(() => setIsPlaying1(true)).catch(() => {});
+    }
   };
 
   const handleTimeUpdate1 = () => {
@@ -94,19 +112,37 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     const v = video2Ref.current;
     if (!v) return;
     if (v.paused) {
-      if (video1Ref.current && !video1Ref.current.paused) { video1Ref.current.pause(); setIsPlaying1(false); }
-      playVideoSafe(v, setIsPlaying2);
+      if (video1Ref.current && !video1Ref.current.paused) {
+        video1Ref.current.pause();
+        setIsPlaying1(false);
+      }
+      // On user interaction, unmute so audio is loud and clear!
+      v.muted = false;
+      setIsMuted2(false);
+      const p = v.play();
+      if (p !== undefined) {
+        p.then(() => setIsPlaying2(true)).catch(() => {
+          v.muted = true;
+          setIsMuted2(true);
+          v.play().then(() => setIsPlaying2(true));
+        });
+      }
     } else {
       v.pause();
       setIsPlaying2(false);
     }
   };
 
-  const toggleMute2 = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const toggleMute2 = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    const v = video2Ref.current;
+    if (!v) return;
     const next = !isMuted2;
+    v.muted = next;
     setIsMuted2(next);
-    if (video2Ref.current) video2Ref.current.muted = next;
+    if (!next && v.paused) {
+      v.play().then(() => setIsPlaying2(true)).catch(() => {});
+    }
   };
 
   const handleTimeUpdate2 = () => {
@@ -218,6 +254,27 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                     <track kind="captions" srcLang="en" label="English" default />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-20' : 'opacity-60'}`} />
+
+                  {/* Floating Sound Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={toggleMute1}
+                    className="absolute top-3 right-3 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 hover:bg-black text-white border border-white/20 shadow-2xl transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-md"
+                    title={isMuted1 ? "Unmute Audio" : "Mute Audio"}
+                  >
+                    {isMuted1 ? (
+                      <>
+                        <VolumeX className="w-3.5 h-3.5 text-red-400" />
+                        <span className="text-[10px] font-bold font-['Montserrat'] tracking-wide">Unmute</span>
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                        <span className="text-[10px] font-bold font-['Montserrat'] tracking-wide text-emerald-400">Audio On</span>
+                      </>
+                    )}
+                  </button>
+
                   <div className={`absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
                     <div className="w-16 h-16 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                       {isPlaying1 ? <Pause className="w-7 h-7 text-black fill-black" /> : <Play className="w-7 h-7 text-black fill-black ml-1" />}
@@ -251,7 +308,15 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 <div className={`p-4 sm:p-5 rounded-2xl border space-y-2.5 ${isWhite ? 'bg-white border-zinc-200 text-zinc-900 shadow-md' : 'bg-zinc-900/95 border-zinc-800 text-white shadow-xl'}`}>
                   <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider font-['Montserrat']">
                     <span className={`flex items-center gap-2 ${isWhite ? 'text-black' : 'text-white'}`}><Quote className="w-4 h-4 text-zinc-800" /><span className="font-bold">Spoken Client Testimonial</span></span>
-                    <span className="text-emerald-500 font-mono text-[10px] font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">100% Authentic Audio</span>
+                    <button
+                      type="button"
+                      onClick={toggleMute1}
+                      className={`font-mono text-[10px] font-bold px-2.5 py-1 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 ${isMuted1 ? 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/25' : 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'}`}
+                      title="Toggle sound"
+                    >
+                      {isMuted1 ? <VolumeX className="w-3 h-3 text-amber-400" /> : <Volume2 className="w-3 h-3 text-emerald-400 animate-pulse" />}
+                      <span>{isMuted1 ? "Click to Hear Voice 🔊" : "100% Authentic Audio"}</span>
+                    </button>
                   </div>
                   <blockquote className={`text-xs sm:text-[13px] leading-relaxed italic pt-0.5 ${isWhite ? 'text-zinc-800' : 'text-zinc-200'}`}>
                     &ldquo;I&apos;m a freelance journalist and author, and I hired Texas WebCoders to redesign my website and also to maintain it, and the process was really great!&rdquo;
@@ -300,6 +365,27 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                     <track kind="captions" srcLang="en" label="English" default />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-20' : 'opacity-60'}`} />
+
+                  {/* Floating Sound Toggle Button */}
+                  <button
+                    type="button"
+                    onClick={toggleMute2}
+                    className="absolute top-3 right-3 z-30 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 hover:bg-black text-white border border-white/20 shadow-2xl transition-all duration-200 hover:scale-105 cursor-pointer backdrop-blur-md"
+                    title={isMuted2 ? "Unmute Audio" : "Mute Audio"}
+                  >
+                    {isMuted2 ? (
+                      <>
+                        <VolumeX className="w-3.5 h-3.5 text-red-400" />
+                        <span className="text-[10px] font-bold font-['Montserrat'] tracking-wide">Unmute</span>
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+                        <span className="text-[10px] font-bold font-['Montserrat'] tracking-wide text-emerald-400">Audio On</span>
+                      </>
+                    )}
+                  </button>
+
                   <div className={`absolute inset-0 flex items-center justify-center z-20 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
                     <div className="w-16 h-16 rounded-full bg-white/95 backdrop-blur-sm flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white">
                       {isPlaying2 ? <Pause className="w-7 h-7 text-black fill-black" /> : <Play className="w-7 h-7 text-black fill-black ml-1" />}
@@ -341,7 +427,15 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                 <div className={`p-5 sm:p-6 rounded-2xl border space-y-3 flex-1 flex flex-col justify-between ${isWhite ? 'bg-white border-zinc-200 text-zinc-900 shadow-md' : 'bg-zinc-900/95 border-zinc-800 text-white shadow-xl'}`}>
                   <div className="flex items-center justify-between text-xs font-medium uppercase tracking-wider font-['Montserrat']">
                     <span className={`flex items-center gap-2 ${isWhite ? 'text-black' : 'text-white'}`}><Quote className="w-4 h-4 text-zinc-800" /><span className="font-bold">Spoken Client Testimonial</span></span>
-                    <span className="text-emerald-500 font-mono text-[10px] font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">100% Authentic Audio</span>
+                    <button
+                      type="button"
+                      onClick={toggleMute2}
+                      className={`font-mono text-[10px] font-bold px-2.5 py-1 rounded-full border transition-all cursor-pointer flex items-center gap-1.5 ${isMuted2 ? 'bg-amber-500/15 text-amber-400 border-amber-500/30 hover:bg-amber-500/25' : 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'}`}
+                      title="Toggle sound"
+                    >
+                      {isMuted2 ? <VolumeX className="w-3 h-3 text-amber-400" /> : <Volume2 className="w-3 h-3 text-emerald-400 animate-pulse" />}
+                      <span>{isMuted2 ? "Click to Hear Voice 🔊" : "100% Authentic Audio"}</span>
+                    </button>
                   </div>
                   <blockquote className={`text-xs sm:text-[13px] leading-relaxed italic pt-1 ${isWhite ? 'text-zinc-800' : 'text-zinc-200'}`}>
                     &ldquo;I built my application with Texas WebCoders. They&apos;re doing a fantastic job, helped me solve my problems, and their support has been excellent. I highly recommend them.&rdquo;
