@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from 'react';
+﻿import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion } from 'motion/react';
 import { Play, Pause, Star, CheckCircle2, Sparkles, Quote, Video, ArrowRight } from 'lucide-react';
 
@@ -23,6 +23,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const sectionRef = useRef<HTMLElement | null>(null);
   const video1Ref = useRef<HTMLVideoElement | null>(null);
   const video2Ref = useRef<HTMLVideoElement | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const [isPlaying1, setIsPlaying1] = useState<boolean>(false);
   const [isMuted1, setIsMuted1] = useState<boolean>(true);
@@ -32,58 +33,43 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
   const [isMuted2, setIsMuted2] = useState<boolean>(true);
   const [progress2, setProgress2] = useState<number>(0);
 
-  useEffect(() => {
+  const isVisible = useCallback(() => {
     const section = sectionRef.current;
-    if (!section) return;
+    if (!section) return false;
+    const rect = section.getBoundingClientRect();
+    return rect.top < window.innerHeight && rect.bottom > 0;
+  }, []);
 
-    const tryPlay = (v: HTMLVideoElement, setPlaying: (b: boolean) => void) => {
-      if (!v) return;
+  useEffect(() => {
+    const safePlay = (v: HTMLVideoElement | null) => {
+      if (!v || !v.paused) return;
       v.muted = true;
       v.defaultMuted = true;
-      v.play().then(() => setPlaying(true)).catch(() => {});
+      v.play().catch(() => {});
     };
 
-    const playAllVideos = () => {
-      if (video1Ref.current) tryPlay(video1Ref.current, setIsPlaying1);
-      if (video2Ref.current) tryPlay(video2Ref.current, setIsPlaying2);
+    const safePause = (v: HTMLVideoElement | null) => {
+      if (v && !v.paused) v.pause();
     };
 
-    const pauseAllVideos = () => {
-      [video1Ref.current, video2Ref.current].forEach((v) => {
-        if (!v || v.paused) return;
-        v.pause();
-        if (v === video1Ref.current) setIsPlaying1(false);
-        else setIsPlaying2(false);
-      });
+    const tick = () => {
+      const inView = isVisible();
+      if (inView) {
+        safePlay(video1Ref.current);
+        safePlay(video2Ref.current);
+      } else {
+        safePause(video1Ref.current);
+        safePause(video2Ref.current);
+      }
     };
 
-    const isSectionInView = () => {
-      const rect = section.getBoundingClientRect();
-      return rect.top < window.innerHeight && rect.bottom > 0;
-    };
-
-    const onScroll = () => {
-      if (isSectionInView()) playAllVideos();
-      else pauseAllVideos();
-    };
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) playAllVideos();
-        else pauseAllVideos();
-      },
-      { threshold: 0 }
-    );
-
-    observer.observe(section);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    intervalRef.current = setInterval(tick, 500);
+    tick();
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener('scroll', onScroll);
+      if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, []);
+  }, [isVisible]);
 
   const formatTime = (t: number) => {
     if (isNaN(t)) return '0:00';
@@ -98,6 +84,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (!v) return;
     if (v.paused) {
       if (video2Ref.current && !video2Ref.current.paused) { video2Ref.current.pause(); setIsPlaying2(false); }
+      v.muted = true;
       v.play().then(() => setIsPlaying1(true)).catch(() => {});
     } else { v.pause(); setIsPlaying1(false); }
   };
@@ -128,6 +115,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
     if (!v) return;
     if (v.paused) {
       if (video1Ref.current && !video1Ref.current.paused) { video1Ref.current.pause(); setIsPlaying1(false); }
+      v.muted = true;
       v.play().then(() => setIsPlaying2(true)).catch(() => {});
     } else { v.pause(); setIsPlaying2(false); }
   };
@@ -188,11 +176,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center rounded-3xl p-5 sm:p-6 lg:p-7 border shadow-xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/50'}`}>
               <div className="lg:col-span-4 w-full max-w-[260px] sm:max-w-[280px] mx-auto">
                 <div className="relative aspect-[9/15] rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay1()}>
-                  <video ref={video1Ref} src="/videos/1.mp4" poster={avatarV1Img}
+                  <video ref={video1Ref} poster={avatarV1Img}
                     className="w-full h-full object-cover" playsInline muted loop preload="auto"
                     onTimeUpdate={handleTimeUpdate1} onPlay={() => setIsPlaying1(true)} onPause={() => setIsPlaying1(false)}>
                     <source src="/videos/1.mp4" type="video/mp4" />
-                    <track kind="captions" srcLang="en" label="English" default />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying1 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
@@ -258,11 +245,10 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
               className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch rounded-3xl p-6 sm:p-8 lg:p-10 border shadow-2xl transition-all duration-300 ${isWhite ? 'bg-zinc-50/90 border-zinc-200 shadow-zinc-200/50' : 'bg-zinc-950/90 border-white/20 shadow-black/40'}`}>
               <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-zinc-800 shadow-2xl group cursor-pointer" onClick={() => togglePlay2()}>
-                  <video ref={video2Ref} src="/videos/4.mp4" poster={video4ThumbImg}
+                  <video ref={video2Ref} poster={video4ThumbImg}
                     className="w-full h-full object-cover" playsInline muted loop preload="auto"
                     onTimeUpdate={handleTimeUpdate2} onPlay={() => setIsPlaying2(true)} onPause={() => setIsPlaying2(false)}>
                     <source src="/videos/4.mp4" type="video/mp4" />
-                    <track kind="captions" srcLang="en" label="English" default />
                   </video>
                   <div className={`absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none transition-opacity duration-300 ${isPlaying2 ? 'opacity-30' : 'opacity-60'}`} />
                   <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
@@ -317,7 +303,7 @@ export const TestimonialsVideoSection: React.FC<TestimonialsVideoSectionProps> =
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 pt-1">
-                  {onOpenQuoteCalculator && <button type="button" onClick={onOpenQuoteCalculator} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-all shadow-lg cursor-pointer"><span>Get a Free Quote</span><ArrowRight className="w-3.5 h-3.5" /></button>}
+                  {onOpenQuoteCalculator && <button type="button" onClick={onOpenQuoteCalculator} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black hover:bg-zinc-200 transition-all shadow-lg cursor-pointer"><span>Get a Free Quote</span><ArrowRight className="w-3 h-3.5" /></button>}
                   {onOpenAppointmentModal && <button type="button" onClick={onOpenAppointmentModal} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-900 text-white hover:bg-zinc-800 border border-zinc-700 transition-all cursor-pointer"><span>Schedule a Consultation</span></button>}
                 </div>
               </div>
