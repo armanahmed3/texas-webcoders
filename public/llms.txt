@@ -1,32 +1,78 @@
 # Texas WebCoders
 
-> Premier Texas software engineering agency specializing in custom website design, mobile application development (iOS & Android), AI calling agent services, enterprise software, and SEO optimization located at 5221 S Broadway Ave, Tyler, TX 75703, United States.
+> Texas custom software & web engineering agency specialising in AI calling agents, custom websites, mobile apps and business software. Based at 5221 S Broadway Ave, Tyler, TX 75703, United States. Phone +1 (903) 222-6022. Email info@texaswebcoders.com.
 
-Texas WebCoders engineers high-performance web applications, native cross-platform mobile apps, autonomous AI voice and calling systems, and custom CRM software for Texas businesses and high-growth brands nationwide.
+Texas WebCoders is a Texas-based digital design and development agency. Its lead offering is AI calling agents and voice AI: 24/7 AI receptionists that answer calls, qualify leads and book appointments for local businesses. It also builds custom websites, iOS & Android mobile apps, WordPress sites, e-commerce stores, logos and brand identities.
 
-## Core Engineering Services
-- [Custom Web Development](https://texaswebcoders.com/#services): Sub-second TTFB React 19, Next.js 15, and TypeScript web applications.
-- [Mobile App Development](https://texaswebcoders.com/#services): 120Hz native iOS and Android applications built with React Native, Swift, and Kotlin.
-- [AI Calling Agent Services](https://texaswebcoders.com/#services): Autonomous voice AI agents, 24/7 smart receptionists, and telephony CRM integrations.
-- [Enterprise Software & CRM](https://texaswebcoders.com/#services): Tailored business automation software, relational PostgreSQL databases, and custom ERPs.
-- [WordPress & Headless CMS](https://texaswebcoders.com/#services): Enterprise WordPress, custom Gutenberg block systems, and headless architectures.
-- [3D Motion Animation & VFX](https://texaswebcoders.com/#services): Photorealistic 4K 60FPS product reveals, mechanical visualizations, and ray-traced motion graphics.
-- [Graphic Design & Branding](https://texaswebcoders.com/#services): Comprehensive brand identity, vector logos, stationery, and packaging design.
+## AI Services (lead offering)
 
-## Agency Overview & Navigation
-- [Home Page](https://texaswebcoders.com/#home): Texas WebCoders homepage, hero showcase, and key value propositions.
-- [About Us](https://texaswebcoders.com/#about): Meet our Texas-based senior software engineering team and engineering philosophy.
-- [Portfolio Showcase](https://texaswebcoders.com/#portfolio): 500+ delivered projects across web apps, mobile apps, SaaS, and motion design.
-- [4-Step Agile Process](https://texaswebcoders.com/#process): Rapid 7–14 day delivery framework from architecture to cloud launch.
-- [Pricing Packages](https://texaswebcoders.com/#packages): Transparent, milestone-based pricing with zero hidden fees and 100% IP code transfer.
-- [Client Testimonials](https://texaswebcoders.com/#testimonials): Verified client reviews and authentic video testimonials.
-- [Technical Blog & Guides](https://texaswebcoders.com/#blog): Architecture blueprints, SEO playbooks, and full-stack benchmarks.
-- [Reviews & FAQ](https://texaswebcoders.com/#faq): Frequently asked questions regarding timelines, code ownership, and warranties.
-- [Contact & Quote](https://texaswebcoders.com/#contact): Direct engineering intake form, instant phone contact (+1-903-222-6022), and office location.
+- [AI Calling Agents & Voice Telephony](https://texaswebcoders.com/#services): autonomous voice AI agents built on ElevenLabs, Twilio and OpenAI. 24/7 AI receptionists that answer every call, qualify callers and book appointments straight into the client's calendar.
+- [Business Automation & CRM Software](https://texaswebcoders.com/#services): custom CRMs and workflow automation that connect the AI agents to the client's sales pipeline.
 
-## Contact & Location
+## All Services (12)
+
+1. AI Calling Agents & Voice Telephony (ElevenLabs, Twilio, OpenAI)
+2. Custom Web Applications & Dynamic Portals (React 19, Next.js)
+3. iOS & Android Mobile Apps (Swift, Kotlin, React Native)
+4. WordPress & Headless CMS (WP 6.7, WooCommerce, ACF Pro)
+5. Enterprise Software & Custom CRM
+6. 3D Animation & Motion VFX (Blender, Three.js)
+7. Logo Designing & Brand Identity
+8. Graphic Design & Marketing Collateral
+9. SEO (local SEO, Map Pack)
+10. UI/UX Design & Prototyping (Figma)
+11. Cloud Hosting & DevOps (AWS, Docker, Cloudflare)
+12. Maintenance & Support Plans
+
+## Verified Track Record (from texaswebcoders.com)
+
+- 285+ Projects Delivered
+- +340% Client ROI Average
+- 0.38s Page Load Benchmark
+- 98.6% Client Retention Rate
+- 400+ Satisfied Clients
+- 10+ Years Local Experience
+- 100% Code & IP Ownership
+- Guarantees: sub-400ms page loads, SEO score 95+, 1-year bug warranty, under 2-hour response SLA
+- Rapid 7–14 Day Delivery
+
+## Real Client Testimonials
+
+- "Conversion rates jumped by 320% within the first two months." — Sophia Lauren, Co-Founder, Aura Health & Wellness, Austin TX (5.0)
+- "Processed over $45M in transactions with zero downtime." — Robert C. Montgomery, Montgomery Capital Advisors, Austin TX (5.0)
+- "Dispatchers save over 40 administrative hours every single week." — Thomas R. Bradley, Lone Star Freight, Dallas TX (5.0)
+- "Delivered ahead of deadline... saved our team hundreds of hours." — Dr. Charlotte Sterling, Sterling & Crown Global Capital, Dallas TX (5.0)
+
+## Pricing (USD, from texaswebcoders.com)
+
+- Websites: Launch $349 / Business $799 (best value) / Enterprise $1499
+- Logo & Brand Identity: $199 / $449 (best value) / $899
+- E-commerce: $799 / $1499 / $2899
+
+## Industries Served
+
+Medical & healthcare, contractors & trades, legal & financial, logistics & energy, retail & e-commerce.
+
+## Site Map
+
+- [Home](https://texaswebcoders.com/#home): hero, value propositions, AI calling agent demos
+- [Services](https://texaswebcoders.com/#services): all 12 services with detail
+- [About](https://texaswebcoders.com/#about): the Texas-based team and engineering philosophy
+- [Portfolio](https://texaswebcoders.com/#portfolio): delivered projects across web, mobile, SaaS and motion design
+- [Process](https://texaswebcoders.com/#process): 4-step agile delivery framework
+- [Pricing](https://texaswebcoders.com/#packages): transparent milestone-based packages
+- [Testimonials](https://texaswebcoders.com/#testimonials): verified client reviews
+- [FAQ](https://texaswebcoders.com/#faq): timelines, code ownership, warranties
+- [Contact](https://texaswebcoders.com/#contact): intake form, phone +1 (903) 222-6022
+
+## Contact & Social
+
+- Website: https://texaswebcoders.com
 - Address: 5221 S Broadway Ave, Tyler, TX 75703, United States
-- Phone: +1-903-222-6022
+- Phone: +1 (903) 222-6022
 - Email: info@texaswebcoders.com
-- Hours: Monday - Friday, 08:00 - 18:00 CST
-- Extended Documentation: [LLMS Full Specification](https://texaswebcoders.com/llms-full.txt)
+- Hours: Monday–Friday, 8:00 AM–6:00 PM CST
+- LinkedIn: https://www.linkedin.com/company/texas-web-coders/
+- Instagram: https://www.instagram.com/texaswebcoders/
+- Facebook: https://www.facebook.com/texaswebcoders
+- Full specification: https://texaswebcoders.com/llms-full.txt
