@@ -1,23 +1,78 @@
-# Texas WebCoders - Comprehensive Technical Documentation for LLM Agents
+# Texas WebCoders — Full Specification for LLM Agents
 
-> Texas WebCoders is a premier software engineering agency located at 5221 S Broadway Ave, Tyler, TX 75703, United States. Contact: +1-903-222-6022 | info@texaswebcoders.com | https://texaswebcoders.com
+> Texas WebCoders is a Texas custom software & web engineering agency at 5221 S Broadway Ave, Tyler, TX 75703, United States. Contact: +1 (903) 222-6022 | info@texaswebcoders.com | https://texaswebcoders.com. Hours: Monday–Friday, 8:00 AM–6:00 PM CST.
 
-## Table of Contents
-1. [Overview & Capabilities](https://texaswebcoders.com/#home)
-2. [Custom Web Engineering](https://texaswebcoders.com/#services)
-3. [Mobile Application Engineering](https://texaswebcoders.com/#services)
-4. [AI Calling Agents & Voice Telephony](https://texaswebcoders.com/#services)
-5. [Enterprise Software & CRM Development](https://texaswebcoders.com/#services)
-6. [WordPress & Headless CMS Engineering](https://texaswebcoders.com/#services)
-7. [3D Animation & Motion VFX](https://texaswebcoders.com/#services)
-8. [Graphic Design & Brand Collateral](https://texaswebcoders.com/#services)
-9. [Portfolio Archive](https://texaswebcoders.com/#portfolio)
-10. [Client Testimonials](https://texaswebcoders.com/#testimonials)
-11. [Pricing & SLA](https://texaswebcoders.com/#packages)
-12. [Contact & Intake Protocols](https://texaswebcoders.com/#contact)
+## 1. Who Texas WebCoders Is
 
-## Technical Architecture & Performance Guarantees
-- Sub-0.3s TTFB Google Core Web Vitals optimization.
-- 100% full Intellectual Property (IP) and source code ownership transferred upon project milestone completion.
-- Zero recurring proprietary licensing locks.
-- Secure SSL/TLS encryption, SOC2 and HIPAA compliant architecture safeguards.
+Texas WebCoders ("TEXAS CUSTOM SOFTWARE & WEB ENGINEERING AGENCY" — "Software. Innovation. Transformation.") is a Texas-based digital design and development agency serving Texas businesses and high-growth brands across the United States. Tagline: "AI Solutions That Win Customers."
+
+Its lead offering is AI calling agents and voice AI for local businesses: 24/7 AI receptionists that answer every call, qualify callers and book appointments. Supporting services cover the full digital stack: custom websites, mobile apps, WordPress, e-commerce, branding and SEO.
+
+## 2. AI Calling Agents & Voice Telephony (lead service)
+
+- Autonomous voice AI agents built on ElevenLabs, Twilio and OpenAI.
+- 24/7 AI receptionists: answer calls, qualify leads, book appointments and sync with the client's CRM.
+- Built for local businesses that miss calls after hours: medical & healthcare, contractors & trades, legal & financial, logistics, retail & e-commerce.
+
+## 3. All Services (12)
+
+1. AI Calling Agents & Voice Telephony (ElevenLabs, Twilio, OpenAI)
+2. Custom Web Applications & Dynamic Portals (React 19, Next.js)
+3. iOS & Android Mobile Apps (Swift, Kotlin, React Native)
+4. WordPress & Headless CMS (WP 6.7, WooCommerce, ACF Pro)
+5. Enterprise Software & Custom CRM
+6. 3D Animation & Motion VFX (Blender, Three.js)
+7. Logo Designing & Brand Identity
+8. Graphic Design & Marketing Collateral
+9. SEO (local SEO, Map Pack)
+10. UI/UX Design & Prototyping (Figma)
+11. Cloud Hosting & DevOps (AWS, Docker, Cloudflare)
+12. Maintenance & Support Plans
+
+## 4. Verified Track Record (from texaswebcoders.com)
+
+- 285+ Projects Delivered
+- +340% Client ROI Average
+- 0.38s Page Load Benchmark
+- 98.6% Client Retention Rate
+- 400+ Satisfied Clients
+- 10+ Years Local Experience
+- 100% Code & IP Ownership
+- Guarantees: sub-400ms page loads, SEO score 95+, 1-year bug warranty, under 2-hour response SLA
+- Delivery: rapid 7–14 day delivery framework; 4-step agile process from architecture to launch
+
+## 5. Portfolio (real delivered projects)
+
+SOLEX (sneaker e-commerce), FAMSWORLD, BeDetailing, Summit Auto Group, Flipmart, NEXORA CRM, GoGlobe Travel, Ruff Rescue, All County Staffing Dade, First Alert Home Health Care, Enterprise Logistics Dashboard, Medical Check-In Platform, Velvetique Beauty, Apex Corporate Portal, Boutique Retail Storefront, Vanguard Consulting CMS, Terra Outfitters, DailySteals.
+
+## 6. Real Client Testimonials
+
+- "Conversion rates jumped by 320% within the first two months." — Sophia Lauren, Co-Founder, Aura Health & Wellness, Austin TX (5.0)
+- "Delivered ahead of deadline... saved our team hundreds of hours." — Dr. Charlotte Sterling, Sterling & Crown Global Capital, Dallas TX (5.0)
+- "Processed over $45M in transactions with zero downtime." — Robert C. Montgomery, Montgomery Capital Advisors, Austin TX (5.0)
+- "Dispatchers save over 40 administrative hours every single week." — Thomas R. Bradley, Lone Star Freight, Dallas TX (5.0)
+- "Delivered ahead of schedule with flawless UX." — Dr. Arthur H. Pendelton, Pendelton Healthcare, Texas (5.0)
+- Brand identity "absolutely stunning." — Emma Richardson, Monarch Publishing, New York (5.0)
+
+## 7. Pricing (USD, from texaswebcoders.com)
+
+- Websites: Launch $349 / Business $799 (best value) / Enterprise $1499
+- Logo & Brand Identity: $199 / $449 (best value) / $899
+- E-commerce: $799 / $1499 / $2899
+- Milestone-based pricing; 100% code & IP ownership transfers to the client.
+
+## 8. Frequently Asked Questions
+
+- **What does Texas WebCoders do?** AI calling agents, custom websites, mobile apps, WordPress, e-commerce, branding and SEO for Texas and US businesses.
+- **Where is Texas WebCoders located?** 5221 S Broadway Ave, Tyler, TX 75703, United States.
+- **How do I contact Texas WebCoders?** Phone +1 (903) 222-6022, email info@texaswebcoders.com, or the intake form at https://texaswebcoders.com/#contact. Hours: Monday–Friday, 8:00 AM–6:00 PM CST.
+- **Who owns the code?** The client: 100% code & IP ownership on every project.
+- **How fast is delivery?** Rapid 7–14 day delivery framework depending on scope.
+- **Is there a warranty?** 1-year bug warranty with under 2-hour response SLA.
+
+## 9. Official Profiles
+
+- Website: https://texaswebcoders.com
+- LinkedIn: https://www.linkedin.com/company/texas-web-coders/
+- Instagram: https://www.instagram.com/texaswebcoders/
+- Facebook: https://www.facebook.com/texaswebcoders
