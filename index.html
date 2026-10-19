@@ -190,7 +190,56 @@
     <noscript>
       <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     </noscript>
-  </head>
+      <!-- FAQPage Schema.org JSON-LD (matches visible #faq section) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How fast can Texas WebCoders build and launch my website?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Standard website packages are delivered in as little as 5 to 7 business days. Custom complex portals and mobile applications typically take 2 to 3 weeks depending on requirements."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your websites 100% custom or built with generic templates?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every website and mobile application we build is 100% custom-designed and custom-engineered using modern React, TypeScript, and Tailwind CSS. We never use restrictive pre-bought templates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you provide mobile design optimization and responsive support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! All of our builds are mobile-first optimized for all smartphone screens, tablets, laptops, and ultra-wide desktop displays with 60 FPS touch animations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is domain registration, free SSL, and high-speed hosting included?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely. Every package comes standard with free SSL security certificates, global Cloudflare CDN integration, and zero-maintenance hosting options."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens after launch? Do you offer ongoing maintenance?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer full post-launch support and monthly care plans that cover continuous backups, security monitoring, SEO updates, and feature additions."
+          }
+        }
+      ]
+    }
+    </script>
+</head>
   <body class="bg-black text-gray-100 font-['Montserrat',sans-serif] antialiased selection:bg-white selection:text-zinc-950">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
