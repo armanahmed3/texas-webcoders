@@ -520,19 +520,21 @@ function heroIntro() {
   window.particleIntro && particleIntro();
   if (!hasGSAP) return;
   const tl = gsap.timeline({defaults:{ease:'expo.out'}});
-  tl.from('#callcard', {opacity:0, rotateY:-40, rotateX:20, z:-300, x:80, transformPerspective:1200, duration:1.8}, .35);
+  tl.from('.hero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.11})
+    .from('.h-in', {y:30, opacity:0, filter:'blur(8px)', duration:1.2, stagger:.08}, .25)
+    .from('#callcard', {opacity:0, rotateY:-40, rotateX:20, z:-300, x:80, transformPerspective:1200, duration:1.8}, .35);
 }
 if (!reduce) {
   const ld = document.createElement('div');
   ld.className = 'loader'; ld.setAttribute('aria-hidden', 'true');
   ld.innerHTML = '<div class="half t"></div><div class="half b"></div><div class="mid"><div><img class="ld-mark" src="assets/logo-mark-orange.png" alt=""><img class="ld-logo" src="assets/logo-white.png" alt=""><span class="count" id="ldc">000</span></div></div>';
   document.body.appendChild(ld);
-  if (hasGSAP) gsap.set('#callcard', {opacity:0});
+  if (hasGSAP) gsap.set(['.hero h1 .ln > span', '.h-in', '#callcard'], {opacity:0});
   const cnt = ld.querySelector('#ldc'), t0 = performance.now();
   (function tick(now) { const p = Math.min(1, (now - t0) / 1300); cnt.textContent = String(Math.round(p * 100)).padStart(3, '0'); if (p < 1) requestAnimationFrame(tick); })(t0);
   setTimeout(() => {
     ld.classList.add('out');
-    if (hasGSAP) gsap.set('#callcard', {opacity:1});
+    if (hasGSAP) gsap.set(['.hero h1 .ln > span', '.h-in', '#callcard'], {opacity:1});
     heroIntro();
   }, 1500);
   setTimeout(() => ld.remove(), 2700);
@@ -716,18 +718,25 @@ counters.forEach(c => cio.observe(c));
 
 /* ---------- GSAP scroll choreography ---------- */
 if (hasGSAP) {
+  // 3D word reveals on every section heading
+  document.querySelectorAll('.split').forEach(h => {
+    const ws = splitWords(h);
+    gsap.from(ws, {yPercent:110, rotateX:-85, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.3, ease:'expo.out', stagger:.045, scrollTrigger:{trigger:h, start:'top 86%'}});
+  });
   // generic 3D rise for leads, tags, cards
-  gsap.utils.toArray('.post, .ind a, .step, .form').forEach(el => {
+  gsap.utils.toArray('.head .lead, .tag:not(.h-in), .post, .ind a, .step, .q, .cinfo > *, .form').forEach(el => {
     gsap.from(el, {y:50, rotateX:10, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}});
   });
 
   // hero exit: content drifts up and blurs as you leave
+  gsap.fromTo('.hero-inner', {filter:'blur(0px)'}, {yPercent:-12, opacity:0, filter:'blur(6px)', ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
   gsap.to('#callcard', {rotateY:-35, rotateX:12, z:120, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
 
   // marquee speeds up and skews with scroll velocity
   const mq = gsap.to('#mq', {xPercent:-50, repeat:-1, duration:34, ease:'none'});
-  ScrollTrigger.create({onUpdate: self => { const v = self.getVelocity(); mq.timeScale(gsap.utils.clamp(1, 6, 1 + Math.abs(v) / 300)); }});
-  ScrollTrigger.addEventListener('scrollEnd', () => { gsap.to(mq, {timeScale:1, duration:1}); });
+  const skew = gsap.quickTo('#mq', 'skewX', {duration:.5, ease:'power3'});
+  ScrollTrigger.create({onUpdate: self => { const v = self.getVelocity(); mq.timeScale(gsap.utils.clamp(1, 6, 1 + Math.abs(v) / 300)); skew(gsap.utils.clamp(-10, 10, v / -250)); }});
+  ScrollTrigger.addEventListener('scrollEnd', () => { gsap.to(mq, {timeScale:1, duration:1}); skew(0); });
 
   // sections tilt up out of the depth as they arrive (3D camera push)
   gsap.utils.toArray('.plans, .posts, .ind, .roi-stage, .cyl-stage').forEach(el => {
@@ -786,8 +795,11 @@ if (hasGSAP) {
   gsap.utils.toArray('.w-col').forEach(c => gsap.fromTo(c, {yPercent: c.dataset.dir * 12}, {yPercent: c.dataset.dir * -18, ease:'none', scrollTrigger:{trigger:'#work', start:'top bottom', end:'bottom top', scrub:true}}));
 
   // CTA headline scales in with depth
+  gsap.from('.cta h2', {scale:.86, z:-200, transformPerspective:1000, opacity:.2, ease:'none', scrollTrigger:{trigger:'.cta', start:'top bottom', end:'center center', scrub:true}});
 
   // footer giant wordmark letters rise
+  const gw = splitWords(document.getElementById('giant'));
+  gsap.from(gw, {yPercent:100, rotateX:-60, transformPerspective:800, duration:1.4, ease:'expo.out', stagger:.08, scrollTrigger:{trigger:'#giant', start:'top 95%'}});
 
   addEventListener('load', () => ScrollTrigger.refresh());
 }

@@ -61,10 +61,22 @@
 
   /* ---------- page hero intro ---------- */
   if (hasGSAP) {
-    if ($('.phero .p-card')) gsap.from('.phero .p-card', {opacity:0, rotateY:-40, rotateX:18, z:-300, x:60, transformPerspective:1200, duration:1.8, delay:.45, ease:'expo.out'});
+    const tl = gsap.timeline({delay:.45, defaults:{ease:'expo.out'}});
+    tl.from('.phero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.1})
+      .from('.phero .p-in', {y:30, opacity:0, filter:'blur(8px)', duration:1.2, stagger:.08}, .2);
+    if ($('.phero .p-card')) tl.from('.phero .p-card', {opacity:0, rotateY:-40, rotateX:18, z:-300, x:60, transformPerspective:1200, duration:1.8}, .3);
+    // headings without line wrappers (e.g. blog posts) rise in as a whole
+    $$('.phero h1').forEach(h => { if (!h.querySelector('.ln')) gsap.from(h, {y:40, opacity:0, rotateX:-30, transformPerspective:800, duration:1.3, delay:.45, ease:'expo.out'}); });
+    gsap.to('.phero .wrap', {yPercent:-10, opacity:.15, ease:'none', scrollTrigger:{trigger:'.phero', start:'top top', end:'bottom top', scrub:true}});
 
-    // 3D entrance for cards only (text stays static)
-    $$('.value, .form, .office, .srv-media').forEach(el => gsap.from(el, {y:60, rotateX:12, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}}));
+    // 3D word reveals on section headings
+    $$('.split').forEach(h => {
+      const ws = splitWords(h);
+      gsap.from(ws, {yPercent:110, rotateX:-85, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.3, ease:'expo.out', stagger:.045, scrollTrigger:{trigger:h, start:'top 86%'}});
+    });
+    $$('.rise, .value, .form, .office, .srv-media').forEach(el => gsap.from(el, {y:60, rotateX:12, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}}));
+    const gw = $('#giant') ? splitWords($('#giant')) : [];
+    if (gw.length) gsap.from(gw, {yPercent:100, rotateX:-60, transformPerspective:800, duration:1.4, ease:'expo.out', stagger:.08, scrollTrigger:{trigger:'#giant', start:'top 95%'}});
     $$('.cin').forEach(el => gsap.fromTo(el, {rotateX:16, z:-160, opacity:.35, transformPerspective:1400, transformOrigin:'50% 0%'}, {rotateX:0, z:0, opacity:1, ease:'none', scrollTrigger:{trigger:el, start:'top bottom', end:'top 55%', scrub:true}}));
     if ($('.band')) gsap.fromTo('.band', {clipPath:'inset(10% 6% 10% 6% round 48px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', scrollTrigger:{trigger:'.band', start:'top 95%', end:'top 25%', scrub:true}});
     if ($('#stepline')) {

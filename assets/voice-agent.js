@@ -62,13 +62,36 @@ if (fab && configured) {
     vapi.on('speech-start', () => fab.classList.add('speaking'));
     vapi.on('speech-end', () => fab.classList.remove('speaking'));
     vapi.on('volume-level', v => bars.forEach((b, i) => { b.style.transform = `scaleY(${.25 + Math.min(1, v * (1.6 - Math.abs(i - 2) * .25))})`; }));
-    vapi.on('error', err => { console.error('Vapi error', err); fail(); });
+    // while connecting, start() decides what to do with errors; once live, an error ends the call
+    vapi.on('error', err => { lastError = err; console.error('Vapi error', err); if (state === 'live') fail(err); });
   }
+  let lastError = null;
 
-  function fail() {
+  const describe = err => {
+    const e = err && (err.error || err);
+    return [err && err.type, e && e.status, e && (e.message && (e.message.message || e.message)), e && e.name]
+      .filter(Boolean).map(String).join(' · ').slice(0, 160) || 'unknown error';
+  };
+
+  function fail(err) {
     clearInterval(timer);
     setState('idle');
-    say(`<b>We couldn’t start the call</b>Check that your microphone is allowed, or call us at ${phoneLink}.`, 9000);
+    const micBlocked = /NotAllowed|Permission|denied/i.test(describe(err));
+    say(micBlocked
+      ? `<b>Microphone is blocked</b>Allow the microphone in your browser’s address bar, then tap the button again. Or call us at ${phoneLink}.`
+      : `<b>We couldn’t start the call</b>Please try again, or call us at ${phoneLink}.<small class="va-err">${describe(err)}</small>`, 12000);
+  }
+
+  // website-call context for Sarah (see vapi-agent/system-prompt.txt)
+  const WEBSITE_OVERRIDES = {
+    firstMessage: 'Hi! I’m Sarah, the AI assistant for Texas WebCoders. What brings you to our site today?',
+    variableValues: { call_type: 'website_visitor' }
+  };
+
+  async function tryStart(overrides) {
+    lastError = null;
+    try { return overrides ? await vapi.start(VAPI_CONFIG.assistantId, overrides) : await vapi.start(VAPI_CONFIG.assistantId); }
+    catch (err) { lastError = err; console.error('Vapi start failed', err); return null; }
   }
 
   fab.addEventListener('click', async e => {
@@ -76,17 +99,14 @@ if (fab && configured) {
     if (state === 'connecting') return;
     if (state === 'live') { vapi && vapi.stop(); return; }
     setState('connecting');
-    try {
-      if (!vapi) await load();
-      // tell Sarah this is an inbound website call (see vapi-agent/system-prompt.txt)
-      await vapi.start(VAPI_CONFIG.assistantId, {
-        firstMessage: 'Hi! I’m Sarah, the AI assistant for Texas WebCoders. What brings you to our site today?',
-        variableValues: { call_type: 'website_visitor', first_name: '', business_name: '', business_type: '', city: '' }
-      });
-    } catch (err) {
-      console.error('Vapi start failed', err);
-      fail();
+    try { if (!vapi) await load(); } catch (err) { console.error('Vapi SDK failed to load', err); return fail(err); }
+    let call = await tryStart(WEBSITE_OVERRIDES);
+    // if the assistant rejects the overrides, fall back to its plain dashboard settings
+    if (!call && state === 'connecting' && !/NotAllowed|Permission|denied/i.test(describe(lastError))) {
+      console.warn('Retrying Vapi call without website overrides');
+      call = await tryStart(null);
     }
+    if (!call && state === 'connecting') fail(lastError);
   });
   addEventListener('keydown', e => { if (e.key === 'Escape' && state === 'live') vapi && vapi.stop(); });
   addEventListener('pagehide', () => { if (state === 'live') vapi && vapi.stop(); });
