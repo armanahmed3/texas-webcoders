@@ -1,6 +1,6 @@
 # Texas WebCoders
 
-> Texas WebCoders (also written Texas Web Coders) is an AI and software studio serving businesses across Texas. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
+> Texas WebCoders (also written Texas Web Coders) is an AI agency in Texas serving businesses across the state. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
 
 - Phone: +1 (903) 222-6022
 - Email: info@texaswebcoders.com
