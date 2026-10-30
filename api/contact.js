@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     }).catch(err => console.error('Booking confirmation failed', err.message));
     return send(res, 200, { ok: true });
   } catch (err) {
-    console.error('SMTP send failed', err.message);
-    return send(res, 502, { error: 'Email could not be sent', fallback: true });
+    console.error('SMTP send failed', err.code, err.responseCode, err.message);
+    return send(res, 502, { error: 'Email could not be sent', fallback: true, code: err.code, smtp: err.responseCode });
   }
 };
