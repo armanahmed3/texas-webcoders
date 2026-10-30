@@ -24,6 +24,10 @@
 - [HVAC and contractors](https://texaswebcoders.com/ai-receptionist-hvac-contractors)
 - [Real estate agents](https://texaswebcoders.com/ai-receptionist-real-estate)
 - [Restaurants](https://texaswebcoders.com/ai-receptionist-restaurants)
+- [Auto repair shops](https://texaswebcoders.com/ai-receptionist-auto-repair)
+- [Insurance agents](https://texaswebcoders.com/ai-receptionist-insurance-agents)
+- [Medical offices](https://texaswebcoders.com/ai-receptionist-medical-office)
+- [Accountants and CPAs](https://texaswebcoders.com/ai-receptionist-accountants)
 
 ## Guides
 
