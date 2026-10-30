@@ -87,7 +87,7 @@
 </div>
 
 <!-- ROI CALCULATOR -->
-<section class="block roi" id="roi" aria-labelledby="roi-h" data-shape="sphere" data-x="-3.7" data-y="0.4" data-s="0.75" data-op="0.5">
+<section class="block roi" id="roi" aria-labelledby="roi-h" data-shape="sphere" data-x="-3.7" data-y="0.4" data-s="0.75" data-op="0.38">
   <div class="wrap roi-grid">
     <div>
       <span class="tag">Missed-call calculator</span>
@@ -114,7 +114,7 @@
 </section>
 
 <!-- AI RECEPTIONIST -->
-<section class="recep" id="receptionist" aria-labelledby="rc-h" data-shape="wave" data-x="0" data-y="-2.1" data-s="1" data-op="0.5">
+<section class="recep" id="receptionist" aria-labelledby="rc-h" data-shape="wave" data-x="0" data-y="-2.1" data-s="1" data-op="0.32">
   <div class="wrap recep-grid">
     <div>
       <span class="tag">Flagship · AI Receptionist</span>
@@ -751,13 +751,13 @@ if (hasGSAP) {
   mm.add('(min-width: 901px)', () => {
     // AI receptionist: pinned scene, the call plays out as you scroll
     const msgs = gsap.utils.toArray('.msg');
-    gsap.set(msgs, {opacity:0, y:24, scale:.94});
-    gsap.set('.booked', {opacity:0, y:30, scale:.9});
+    gsap.set(msgs, {opacity:0, y:70, z:-320, rotateX:-48, transformPerspective:800, transformOrigin:'50% 100%'});
+    gsap.set('.booked', {opacity:0, y:60, z:-260, rotateX:60, transformPerspective:800});
     const tl = gsap.timeline({scrollTrigger:{trigger:'#receptionist', start:'top top', end:'+=2200', pin:true, scrub:1, anticipatePin:1}});
     tl.fromTo('#phone', {rotateY:-32, rotateX:14, rotateZ:-4, y:80, scale:.9}, {rotateY:0, rotateX:0, rotateZ:0, y:0, scale:1, duration:1.2, ease:'power2.out'})
       .from('.feat li', {opacity:.25, x:-20, stagger:.25, duration:.6}, 0)
-      .to(msgs, {opacity:1, y:0, scale:1, stagger:.55, duration:.5, ease:'back.out(1.6)'}, .9)
-      .to('.booked', {opacity:1, y:0, scale:1, duration:.6, ease:'back.out(1.8)'})
+      .to(msgs, {opacity:1, y:0, z:0, rotateX:0, stagger:.55, duration:.6, ease:'back.out(1.4)'}, .9)
+      .to('.booked', {opacity:1, y:0, z:0, rotateX:0, duration:.7, ease:'back.out(1.6)'})
       .to('#phone', {rotateY:16, rotateX:-4, duration:1, ease:'power1.inOut'});
 
     // services: pinned horizontal 3D carousel

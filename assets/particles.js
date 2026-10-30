@@ -45,6 +45,19 @@
   const cloud = new THREE.Points(geo, mat);
   scene.add(cloud);
 
+  // thin orbit rings with moons around the cloud
+  const orbits = new THREE.Group();
+  const rings = [[2.95, .5, .2, acc], [3.45, -.75, .55, ink], [3.95, 1.15, -.4, acc]].map(([r, tx, tz, color], n) => {
+    const pts = new Float32Array(120 * 3);
+    for (let i = 0; i < 120; i++) { const a = i / 120 * Math.PI * 2; pts[i*3] = Math.cos(a) * r; pts[i*3+1] = Math.sin(a) * r; }
+    const ringGeo = new THREE.BufferGeometry(); ringGeo.setAttribute('position', new THREE.BufferAttribute(pts, 3));
+    const line = new THREE.LineLoop(ringGeo, new THREE.LineBasicMaterial({color, transparent:true, depthWrite:false}));
+    const moon = new THREE.Mesh(new THREE.SphereGeometry(.07 + n * .02, 14, 14), new THREE.MeshBasicMaterial({color, transparent:true}));
+    const holder = new THREE.Group(); holder.rotation.set(tx, 0, tz); holder.add(line, moon); orbits.add(holder);
+    return {r, line, moon, speed:.5 - n * .13};
+  });
+  scene.add(orbits);
+
   // keyframes come from sections marked with data-shape
   let keys = [];
   const readKeys = () => {
@@ -109,6 +122,13 @@
     cloud.rotation.x = my * .3 + (1 - intro) * .6;
     cloud.rotation.z = morph * .35 + warp * .25;
     mat.opacity = lerp(a.op, b.op) * (small ? .18 : 1) * Math.min(1, intro * 1.5);
+    orbits.position.copy(cloud.position);
+    orbits.scale.setScalar(cloud.scale.x * (1 + morph * .55));
+    orbits.rotation.set(my * .4 + warp * .5, t * .12 + mx * .7, 0);
+    rings.forEach(o => {
+      const a = t * o.speed; o.moon.position.set(Math.cos(a) * o.r, Math.sin(a) * o.r, 0);
+      o.line.material.opacity = mat.opacity * .4; o.moon.material.opacity = mat.opacity * .9;
+    });
     camera.position.z = 9 - morph * 2.4; // the camera dollies through the cloud between shapes
     camera.fov = 45 + Math.abs(warp) * 16;
     camera.updateProjectionMatrix();

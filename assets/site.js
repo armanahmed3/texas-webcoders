@@ -44,7 +44,10 @@
   curtain.setAttribute('aria-hidden', 'true');
   curtain.innerHTML = Array.from({length:7}, (_, i) => `<b style="--i:${i}"></b>`).join('') + '<img src="assets/logo-mark-orange.png" alt="">';
   document.body.appendChild(curtain);
-  if (!isHome && !reduce) setTimeout(() => curtain.classList.add('pt-out'), 120);
+  // folded slats stay partly visible through the perspective, so the closed curtain must be hidden outright
+  const hideCurtain = ms => setTimeout(() => { if (curtain.classList.contains('pt-out')) curtain.style.visibility = 'hidden'; }, ms);
+  if (isHome || reduce) hideCurtain(0);
+  else { setTimeout(() => curtain.classList.add('pt-out'), 120); hideCurtain(1000); }
   // fetch the next page on hover so it opens as the slats finish
   const prefetched = new Set();
   if (finePointer) document.addEventListener('pointerover', e => {
@@ -59,13 +62,14 @@
     const url = new URL(a.href); // a.href is already resolved against <base>, which blog posts use
     if (url.origin !== location.origin || url.pathname === location.pathname || !/(\.html|\/)$/.test(url.pathname)) return;
     e.preventDefault();
+    curtain.style.visibility = '';
     curtain.classList.remove('pt-instant', 'pt-out');
     const main = $('main');
     if (main) { main.style.transformOrigin = `50% ${scrollY + innerHeight / 2}px`; main.classList.add('pt-leave'); }
     window.lenis && lenis.stop();
     setTimeout(() => { location.href = url.href; }, 640);
   });
-  addEventListener('pageshow', e => { if (e.persisted) { curtain.classList.add('pt-out'); const main = $('main'); main && main.classList.remove('pt-leave'); window.lenis && lenis.start(); } });
+  addEventListener('pageshow', e => { if (e.persisted) { curtain.classList.add('pt-out'); hideCurtain(1000); const main = $('main'); main && main.classList.remove('pt-leave'); window.lenis && lenis.start(); } });
 
   /* ---------- text: paragraphs light up word by word with the scroll ---------- */
   const wordSpans = el => {
@@ -102,6 +106,15 @@
     roll.className = 'roll'; roll.dataset.t = text; roll.innerHTML = '<span></span>'; roll.firstChild.textContent = text;
     n.replaceWith(roll);
   }, {passive:true});
+
+  /* ---------- big headings lean toward the pointer ---------- */
+  if (hasGSAP && finePointer) addEventListener('load', () => {
+    const heads = $$('.hero h1, .phero h1');
+    if (!heads.length) return;
+    gsap.set(heads, {transformPerspective:1100, transformStyle:'preserve-3d'});
+    const ry = heads.map(h => gsap.quickTo(h, 'rotateY', {duration:.9, ease:'power3'})), rx = heads.map(h => gsap.quickTo(h, 'rotateX', {duration:.9, ease:'power3'}));
+    addEventListener('pointermove', e => { const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5; ry.forEach(f => f(x * 9)); rx.forEach(f => f(y * -7)); }, {passive:true});
+  });
 
   /* ---------- sections sink back in 3D as the next one arrives (desktop; skips pinned and sticky sections) ---------- */
   if (hasGSAP) addEventListener('load', () => gsap.matchMedia().add('(min-width: 901px)', () => {
@@ -181,12 +194,12 @@
     mm.add('(min-width: 901px)', () => {
       if (!$('#phone') || !$('.recep')) return;
       const msgs = $$('.msg');
-      gsap.set(msgs, {opacity:0, y:24, scale:.94});
-      gsap.set('.booked', {opacity:0, y:30, scale:.9});
+      gsap.set(msgs, {opacity:0, y:70, z:-320, rotateX:-48, transformPerspective:800, transformOrigin:'50% 100%'});
+      gsap.set('.booked', {opacity:0, y:60, z:-260, rotateX:60, transformPerspective:800});
       gsap.timeline({scrollTrigger:{trigger:'.recep', start:'top top', end:'+=2000', pin:true, scrub:1, anticipatePin:1}})
         .fromTo('#phone', {rotateY:-32, rotateX:14, rotateZ:-4, y:80, scale:.9}, {rotateY:0, rotateX:0, rotateZ:0, y:0, scale:1, duration:1.2, ease:'power2.out'})
-        .to(msgs, {opacity:1, y:0, scale:1, stagger:.55, duration:.5, ease:'back.out(1.6)'}, .9)
-        .to('.booked', {opacity:1, y:0, scale:1, duration:.6, ease:'back.out(1.8)'})
+        .to(msgs, {opacity:1, y:0, z:0, rotateX:0, stagger:.55, duration:.6, ease:'back.out(1.4)'}, .9)
+        .to('.booked', {opacity:1, y:0, z:0, rotateX:0, duration:.7, ease:'back.out(1.6)'})
         .to('#phone', {rotateY:16, rotateX:-4, duration:1, ease:'power1.inOut'});
     });
     addEventListener('load', () => ScrollTrigger.refresh());
