@@ -704,6 +704,14 @@ footer .brand .logo{height:48px}
 .fp-txt p{color:var(--ink-2);margin-top:14px}
 .fp-txt .rd{margin-top:auto;padding-top:22px;font-weight:700;display:flex;align-items:center;gap:8px}
 .blog-list{margin-top:6px}
+.legal-nav{display:grid;gap:4px;padding:20px;border:1px solid var(--line);border-radius:22px;background:#fff}
+.legal-nav .tag{margin-bottom:8px}
+.legal-nav a{padding:10px 12px;border-radius:12px;font-weight:600;color:var(--ink-2);transition:background .2s,color .2s}
+.legal-nav a:hover{background:var(--paper);color:var(--ink)}
+.legal-nav a[aria-current="page"]{background:var(--ink);color:#fff}
+.prose.legal h2{font-size:clamp(1.3rem,2vw,1.6rem);margin-top:1.8em}
+.legal-links{display:inline-flex;flex-wrap:wrap;gap:14px;margin-left:10px}
+.legal-links a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 @media (max-width:900px){
   .post-grid,.feat-post{grid-template-columns:1fr}
   .post-aside{position:static}
