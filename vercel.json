@@ -6,6 +6,9 @@
   "buildCommand": "echo static site, nothing to build",
   "outputDirectory": ".",
   "cleanUrls": true,
+  "functions": {
+    "api/checkout.js": { "includeFiles": "assets/plans.js" }
+  },
   "headers": [
     {
       "source": "/(.*)",

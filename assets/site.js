@@ -10,6 +10,27 @@
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
 
+  /* ---------- Stripe checkout for fixed-price plans (api/checkout.js); falls back to the plan's contact link ---------- */
+  document.addEventListener('click', async e => {
+    const a = e.target.closest('[data-checkout]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+    e.preventDefault();
+    e.stopImmediatePropagation(); // keep the page-transition handler below from navigating away
+    if (a.classList.contains('busy')) return;
+    a.classList.add('busy'); a.setAttribute('aria-busy', 'true');
+    const [tab, name] = a.dataset.checkout.split('|');
+    try {
+      const r = await fetch('/api/checkout', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({tab, name})});
+      const d = await r.json();
+      if (r.ok && d.url) { location.href = d.url; return; }
+      throw new Error(d.error || r.status);
+    } catch (err) {
+      console.warn('Online checkout unavailable, opening the contact form instead', err);
+      a.classList.remove('busy'); a.removeAttribute('aria-busy');
+      location.href = a.href;
+    }
+  });
+
   /* ---------- page transitions: curtain lifts on load, drops before leaving ---------- */
   const curtain = document.createElement('div');
   curtain.className = 'pt' + (isHome || reduce ? ' pt-out pt-instant' : '');
@@ -166,7 +187,8 @@
     const planHTML = (p, i, key) => {
       const label = `${tabLabel(key)} – ${p.name}`;
       const href = hasForm ? '#quote' : `contact.html?plan=${encodeURIComponent(label)}`;
-      return `<article class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="${href}" data-plan="${label}">${p.custom ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></article>`;
+      const buy = window.PLAN_BUYABLE && PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : '';
+      return `<article class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="${href}" data-plan="${label}"${buy}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></article>`;
     };
     const render = (key, animate) => {
       const draw = () => {

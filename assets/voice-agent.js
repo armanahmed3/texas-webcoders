@@ -4,7 +4,8 @@ const VAPI_CONFIG = {
   publicKey: '8ad28e50-594c-442a-9bea-a3eeaf7fcee8',   // Vapi public key (safe for websites; restrict allowed origins in the Vapi dashboard)
   assistantId: '24c99079-1889-4491-a9c2-d808f8e57a96', // Vapi assistant: Texas WebCoders calling agent
 };
-const SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.7.1/+esm';
+// 3.0.1 bundles daily-js 0.94; 2.7.1's daily-js 0.87 is retired by Daily and calls fail with it
+const SDK_URL = 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@3.0.1/+esm';
 const PHONE = { href: 'tel:+19032226022', label: '(903) 222-6022' };
 
 const fab = document.querySelector('.fab');
@@ -64,8 +65,9 @@ if (fab && configured) {
     vapi.on('volume-level', v => bars.forEach((b, i) => { b.style.transform = `scaleY(${.25 + Math.min(1, v * (1.6 - Math.abs(i - 2) * .25))})`; }));
     // while connecting, start() decides what to do with errors; once live, an error ends the call
     vapi.on('error', err => { lastError = err; console.error('Vapi error', err); if (state === 'live') fail(err); });
+    vapi.on('call-start-failed', err => { lastError = err; console.error('Vapi call-start-failed', err); });
   }
-  let lastError = null;
+  let lastError = null, attemptId = 0;
 
   const describe = err => {
     const e = err && (err.error || err);
@@ -100,6 +102,9 @@ if (fab && configured) {
     if (state === 'live') { vapi && vapi.stop(); return; }
     setState('connecting');
     try { if (!vapi) await load(); } catch (err) { console.error('Vapi SDK failed to load', err); return fail(err); }
+    // never leave the button stuck on "Connecting…"
+    const attempt = ++attemptId;
+    setTimeout(() => { if (state === 'connecting' && attempt === attemptId) { try { vapi.stop(); } catch {} fail(lastError || { type: 'timeout', message: 'No answer from the voice service after 25 seconds' }); } }, 25000);
     let call = await tryStart(WEBSITE_OVERRIDES);
     // if the assistant rejects the overrides, fall back to its plain dashboard settings
     if (!call && state === 'connecting' && !/NotAllowed|Permission|denied/i.test(describe(lastError))) {

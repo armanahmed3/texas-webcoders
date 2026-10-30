@@ -1,17 +1,19 @@
 /* Texas WebCoders pricing data, shared by index.html, pricing.html and ai-receptionist.html.
    REAL prices (from texaswebcoders.com): web, ecom, brand.
    MARKET-BASED prices (set Oct 2026 from US market research, positioned as an affordable Texas studio): recep, chat, auto, saas, app, graphic, video, grow.
-   Fields: price, per ('/mo'), from (shows "From"), was (crossed-out price, real packages only), note, best, custom. */
+   Fields: price, per ('/mo'), from (shows "From"), was (crossed-out price, real packages only), note, best, custom,
+   setup (one-time setup fee added to the first Stripe payment), quote (not sold online).
+   A plan is sold online through Stripe (api/checkout.js) unless it has from, custom or quote. */
 window.PLANS = {
   recep:[
-    {name:'Starter', per:'/mo', note:'+ $299 one-time setup', desc:'Never miss a call again. Perfect for a single location.', price:149, items:['Answers calls 24/7 in a natural voice','Custom greeting & script','Takes messages, texts you summaries','Up to 250 call minutes / month','Email support']},
-    {name:'Business', per:'/mo', best:true, note:'+ $499 one-time setup', desc:'Books appointments and qualifies leads for you.', price:299, items:['Everything in Starter','Books into Google or Outlook calendar','Lead qualification & urgent call transfer','Up to 800 call minutes / month','CRM integration','Monthly script tuning']},
-    {name:'Enterprise', per:'/mo', note:'+ custom setup', desc:'For multi-location teams and high call volume.', price:599, items:['Multiple locations & phone numbers','Unlimited call flows','Up to 2,000 call minutes / month','HIPAA-aware workflows for clinics','Dedicated AI engineer']}
+    {name:'Starter', per:'/mo', setup:299, note:'+ $299 one-time setup', desc:'Never miss a call again. Perfect for a single location.', price:149, items:['Answers calls 24/7 in a natural voice','Custom greeting & script','Takes messages, texts you summaries','Up to 250 call minutes / month','Email support']},
+    {name:'Business', per:'/mo', best:true, setup:499, note:'+ $499 one-time setup', desc:'Books appointments and qualifies leads for you.', price:299, items:['Everything in Starter','Books into Google or Outlook calendar','Lead qualification & urgent call transfer','Up to 800 call minutes / month','CRM integration','Monthly script tuning']},
+    {name:'Enterprise', per:'/mo', quote:true, note:'+ custom setup', desc:'For multi-location teams and high call volume.', price:599, items:['Multiple locations & phone numbers','Unlimited call flows','Up to 2,000 call minutes / month','HIPAA-aware workflows for clinics','Dedicated AI engineer']}
   ],
   chat:[
-    {name:'Website Chatbot', per:'/mo', note:'+ $299 one-time setup', desc:'Answer visitors and capture leads on your website.', price:99, items:['Trained on your website & FAQs','Lead capture to email or CRM','Answers 24/7 in seconds','Hand-off to a real person','Monthly conversation report']},
-    {name:'Omnichannel Chatbot', per:'/mo', best:true, note:'+ $599 one-time setup', desc:'One AI assistant across every channel your customers use.', price:249, items:['Website, WhatsApp, SMS & Instagram','Bookings & order lookups','CRM sync','Replies in multiple languages','Weekly tuning']},
-    {name:'Enterprise Assistant', per:'/mo', note:'+ setup from $1,500', desc:'Private AI for customers and your internal team.', price:599, items:['Private knowledge base (RAG)','Internal team assistant','Single sign-on & role access','Analytics dashboard','Dedicated AI engineer']}
+    {name:'Website Chatbot', per:'/mo', setup:299, note:'+ $299 one-time setup', desc:'Answer visitors and capture leads on your website.', price:99, items:['Trained on your website & FAQs','Lead capture to email or CRM','Answers 24/7 in seconds','Hand-off to a real person','Monthly conversation report']},
+    {name:'Omnichannel Chatbot', per:'/mo', best:true, setup:599, note:'+ $599 one-time setup', desc:'One AI assistant across every channel your customers use.', price:249, items:['Website, WhatsApp, SMS & Instagram','Bookings & order lookups','CRM sync','Replies in multiple languages','Weekly tuning']},
+    {name:'Enterprise Assistant', per:'/mo', quote:true, note:'+ setup from $1,500', desc:'Private AI for customers and your internal team.', price:599, items:['Private knowledge base (RAG)','Internal team assistant','Single sign-on & role access','Analytics dashboard','Dedicated AI engineer']}
   ],
   auto:[
     {name:'Workflow Starter', from:true, desc:'Automate your three most time-consuming tasks.', price:1499, items:['3 automated workflows','Email, CRM & spreadsheet integrations','AI lead scoring','30 days of support','Full workflow ownership']},
@@ -59,3 +61,4 @@ window.PLANS = {
     {name:'Full-Funnel Growth', per:'/mo', note:'Ad spend billed separately', desc:'Ads, SEO, social and AI email follow-up as one engine.', price:2499, items:['Ads, SEO & social combined','AI email & SMS follow-up','CRM & lead nurturing','Short-form video reels','Dedicated growth manager']}
   ]
 };
+window.PLAN_BUYABLE = p => typeof p.price === 'number' && !p.from && !p.custom && !p.quote;

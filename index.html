@@ -807,10 +807,10 @@ if (hasGSAP) {
 const plans = window.PLANS;
 const plansEl = document.getElementById('plans');
 const money = n => '$' + n.toLocaleString();
-const planHTML = (p, i) => `<article class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}">${p.custom ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></article>`;
+const planHTML = (p, i, key) => `<article class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}"${PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : ''}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></article>`;
 function renderPlans(key, animate) {
   const draw = () => {
-    plansEl.innerHTML = plans[key].map(planHTML).join('');
+    plansEl.innerHTML = plans[key].map((p, i) => planHTML(p, i, key)).join('');
     if (animate && !reduce) { const cs = [...plansEl.children]; cs.forEach(c => c.classList.add('flipout')); requestAnimationFrame(() => requestAnimationFrame(() => cs.forEach(c => c.classList.remove('flipout')))); }
   };
   if (!animate || reduce) return draw();

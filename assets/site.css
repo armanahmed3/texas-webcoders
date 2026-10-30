@@ -825,3 +825,6 @@ footer .brand .logo{height:48px}
   .values{grid-template-columns:1fr}
   .pgrid{columns:1}
 }
+
+/* Stripe checkout button while the session is being created */
+.btn.busy{opacity:.6;cursor:progress;pointer-events:none}
