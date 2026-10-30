@@ -2,17 +2,26 @@
   "version": 2,
   "name": "texas-webcoders",
   "framework": null,
-  "installCommand": "echo static site, nothing to install",
+  "installCommand": "npm install --omit=dev --no-audit --no-fund",
   "buildCommand": "echo static site, nothing to build",
   "outputDirectory": ".",
   "cleanUrls": true,
   "functions": {
-    "api/checkout.js": { "includeFiles": "assets/plans.js" }
+    "api/checkout.js": { "includeFiles": "assets/plans.js" },
+    "api/chat.js": { "includeFiles": "assets/{plans,chat-knowledge}.js" }
   },
+  "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/(.*)",
-      "headers": [
+      "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
+  "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
@@ -22,11 +31,19 @@
     },
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
+      "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
+  "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400" }]
     },
     {
       "source": "/portfolio-media/(.*)",
-      "headers": [
+      "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
+  "headers": [
         { "key": "Accept-Ranges", "value": "bytes" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
@@ -34,11 +51,19 @@
     },
     {
       "source": "/sitemap.xml",
-      "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }]
+      "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
+  "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }]
     },
     {
       "source": "/feed.xml",
-      "headers": [{ "key": "Content-Type", "value": "application/rss+xml; charset=utf-8" }]
+      "redirects": [
+    { "source": "/node_modules/:path*", "destination": "/", "permanent": false },
+    { "source": "/package(-lock)?.json", "destination": "/", "permanent": false }
+  ],
+  "headers": [{ "key": "Content-Type", "value": "application/rss+xml; charset=utf-8" }]
     }
   ]
 }

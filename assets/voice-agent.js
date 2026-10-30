@@ -113,6 +113,7 @@ if (fab && configured) {
     }
     if (!call && state === 'connecting') fail(lastError);
   });
+  document.addEventListener('click', e => { if (e.target.closest('[data-talk]')) { e.preventDefault(); fab.click(); } });
   addEventListener('keydown', e => { if (e.key === 'Escape' && state === 'live') vapi && vapi.stop(); });
   addEventListener('pagehide', () => { if (state === 'live') vapi && vapi.stop(); });
 }

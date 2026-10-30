@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{if(sessionStorage.twcNav){document.documentElement.classList.add("nav-in");setTimeout(function(){document.documentElement.classList.remove("nav-in")},3000)}}catch(e){}</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy | Texas WebCoders</title>
@@ -65,13 +66,16 @@
 
 <h2>1. Information you give us</h2>
 <ul>
-<li><strong>Contact details</strong> such as your name, business name, email address and phone number, when you contact us, request a quote or book a consultation. Our website contact form opens your own email app, so your message reaches us as a normal email.</li>
+<li><strong>Contact details</strong> such as your name, business name, email address and phone number, when you contact us, request a quote or book a consultation. Messages you send through our website forms and chatbot are delivered to us by email through our email and form delivery providers.</li>
 <li><strong>Project information</strong> you share with us, such as content, files, logins and business details.</li>
 <li><strong>Payment information</strong>, which is entered directly with our payment processor (such as Stripe). We don’t see or store your full card number.</li>
 </ul>
 
 <h2>2. Calls with our AI voice assistant</h2>
 <p>When you tap “Talk to our AI” on our website or speak with Sarah, our AI assistant, by phone, your voice is processed by our voice AI provider so the assistant can understand and answer you. These conversations may be recorded and transcribed, and we use the transcripts to follow up with you, book appointments and improve the assistant. Your browser will ask for permission before using your microphone. If you’d rather not talk to an AI assistant, call us at (903) 222-6022 during business hours.</p>
+
+<h2>Website chatbot</h2>
+<p>Our website chatbot is an AI assistant. What you type may be processed by our AI provider to generate replies, and chats during a booking are sent to our team with your request. Please don't share sensitive information such as card numbers or passwords in the chat.</p>
 
 <h2>3. Text messages (SMS)</h2>
 <p>If you give us your phone number and agree to receive text messages, we may text you about your inquiry, appointments and projects. Message frequency varies, and message and data rates may apply. Reply <strong>STOP</strong> to opt out at any time, or <strong>HELP</strong> for help. We do not share or sell your mobile number or SMS consent with third parties for their marketing purposes.</p>
@@ -160,6 +164,7 @@
 <script src="assets/particles.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/site.js"></script>
+<script src="assets/chat-widget.js" defer></script>
 <script type="module" src="assets/voice-agent.js"></script>
 </body>
 </html>

@@ -64,6 +64,68 @@
   };
   if (hasGSAP) addEventListener('load', () => $$('.tag').forEach(el => { if (!el.closest('.hero')) ScrollTrigger.create({trigger:el, start:'top 92%', once:true, onEnter:() => scrambleText(el)}); }));
 
+  /* ---------- leads: our SMTP function first, FormSubmit (the old site's service) when SMTP isn't available ---------- */
+  window.sendLead = async data => {
+    const lead = {...data, page: location.pathname};
+    try {
+      const r = await fetch('/api/contact', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(lead)});
+      if (r.ok) return {ok:true};
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 400 || r.status === 429) return {ok:false, error:d.error};
+    } catch {}
+    const subject = lead.type === 'booking' ? `New meeting request: ${lead.name}, ${lead.date} ${lead.time}` : lead.type === 'newsletter' ? `New newsletter subscriber: ${lead.email}` : `New inquiry: ${lead.service || 'General'} from ${lead.name}`;
+    try {
+      const r = await fetch('https://formsubmit.co/ajax/info@texaswebcoders.com', {method:'POST', headers:{'Content-Type':'application/json', Accept:'application/json'}, body:JSON.stringify({...lead, _subject:subject, _replyto:lead.email, _template:'table', _captcha:'false'})});
+      const d = await r.json().catch(() => ({}));
+      if (r.ok && String(d.success) === 'true') return {ok:true};
+      console.warn('FormSubmit did not accept the message', d);
+    } catch (err) { console.warn('FormSubmit unreachable', err); }
+    return {ok:false};
+  };
+
+  /* ---------- forms ---------- */
+  const quote = $('#quote');
+  if (quote) {
+    const params = new URLSearchParams(location.search);
+    const plan = params.get('plan'), service = params.get('service');
+    if (plan) $('#f-msg').value = `I'm interested in the ${plan} plan.`;
+    if (service) [...$('#f-service').options].forEach(o => { if (o.text.toLowerCase().includes(service.toLowerCase())) o.selected = true; });
+    const status = document.createElement('p');
+    status.className = 'form-status'; status.setAttribute('role', 'status');
+    quote.querySelector('.form-foot').after(status);
+    quote.addEventListener('submit', async e => {
+      e.preventDefault();
+      const f = e.target, btn = f.querySelector('button[type="submit"]'), checks = [
+        ['f-name', v => v.trim().length > 1, 'Enter your name.'],
+        ['f-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), 'Enter a valid email, like you@company.com.'],
+        ['f-msg', v => v.trim().length > 9, 'Tell us a little more (at least 10 characters).']
+      ];
+      let first = null;
+      checks.forEach(([id, ok, m]) => { const el = document.getElementById(id), wrap = el.closest('.field'), bad = !ok(el.value); wrap.classList.toggle('bad', bad); wrap.querySelector('.err').textContent = bad ? m : ''; el.setAttribute('aria-invalid', bad); if (bad && !first) first = el; });
+      if (first) return first.focus();
+      btn.disabled = true; status.className = 'form-status'; status.textContent = 'Sending…';
+      const res = await window.sendLead({type:'contact', name:f.name.value, email:f.email.value, phone:f.phone.value, service:f.service.value, budget:f.budget ? f.budget.value : '', message:f.message.value, website:f.website ? f.website.value : ''});
+      btn.disabled = false;
+      if (res.ok) { f.reset(); status.className = 'form-status ok'; status.textContent = 'Thanks! Your message is in. We’ll reply within 1 business day.'; }
+      else { status.className = 'form-status bad'; status.innerHTML = res.error ? res.error : 'Sorry, that didn’t send. Please email <a href="mailto:info@texaswebcoders.com">info@texaswebcoders.com</a> or call <a href="tel:+19032226022">(903) 222-6022</a>.'; }
+    });
+  }
+  const sub = $('#subForm');
+  sub && sub.addEventListener('submit', async e => {
+    e.preventDefault();
+    const v = $('#email').value.trim(), m = $('#subMsg');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { m.style.color = '#FF8A6B'; m.textContent = 'Enter a valid email, like you@company.com.'; return; }
+    m.style.color = ''; m.textContent = 'Subscribing…';
+    const res = await window.sendLead({type:'newsletter', email:v});
+    if (res.ok) sub.reset();
+    m.style.color = res.ok ? '' : '#FF8A6B';
+    m.textContent = res.ok ? 'Thanks, you’re subscribed.' : 'That didn’t go through. Please try again.';
+  });
+
+  // links from the old site used hash routes like /#/portfolio
+  const oldRoute = location.hash.match(/^#\/(portfolio|pricing|services|about|contact|blog|privacy|terms)\b/);
+  if (oldRoute) location.replace(`${oldRoute[1]}.html`);
+
   /* ---------- smooth scrolling; ScrollTrigger reads the same position, so scrubs stay locked to it ---------- */
   if (hasGSAP && window.Lenis) {
     const lenis = window.lenis = new Lenis({lerp:.1, wheelMultiplier:1, anchors:{offset:-90}});
@@ -72,15 +134,24 @@
   }
 
   /* ---------- page transitions: 3D slats fold shut before leaving and fold open on load ---------- */
+  // the head script marks arrivals from another page, so the dark curtain shows before anything else paints
+  const arriving = window.navArrival = root.classList.contains('nav-in');
+  let navLabel = '';
+  try { navLabel = (sessionStorage.twcNav || '').trim(); sessionStorage.removeItem('twcNav'); } catch {}
+  const startClosed = !reduce && (arriving || !isHome);
   const curtain = document.createElement('div');
-  curtain.className = 'pt' + (isHome || reduce ? ' pt-out pt-instant' : '');
+  curtain.className = 'pt' + (startClosed ? '' : ' pt-out pt-instant');
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = Array.from({length:7}, (_, i) => `<b style="--i:${i}"></b>`).join('') + '<img src="assets/logo-mark-orange.png" alt="">';
+  curtain.innerHTML = Array.from({length:7}, (_, i) => `<b style="--d:${i}"></b>`).join('') + '<div class="pt-c"><div class="pt-mk"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="48"/></svg><img src="assets/logo-mark-orange.png" alt=""></div><div class="pt-t"></div></div>';
   document.body.appendChild(curtain);
+  root.classList.remove('nav-in');
+  const slats = [...curtain.querySelectorAll('b')], ptTitle = curtain.querySelector('.pt-t');
+  const slatOrder = fn => slats.forEach((b, i) => b.style.setProperty('--d', fn(i)));
+  ptTitle.textContent = navLabel;
   // folded slats stay partly visible through the perspective, so the closed curtain must be hidden outright
   const hideCurtain = ms => setTimeout(() => { if (curtain.classList.contains('pt-out')) curtain.style.visibility = 'hidden'; }, ms);
-  if (isHome || reduce) hideCurtain(0);
-  else { setTimeout(() => curtain.classList.add('pt-out'), 120); hideCurtain(1000); }
+  if (!startClosed) hideCurtain(0);
+  else { const wait = arriving ? 440 : 120; slatOrder(i => Math.abs(i - 3)); setTimeout(() => curtain.classList.add('pt-out'), wait); hideCurtain(wait + 900); }
   // fetch the next page on hover so it opens as the slats finish
   const prefetched = new Set();
   if (finePointer) document.addEventListener('pointerover', e => {
@@ -93,14 +164,19 @@
     const a = e.target.closest('a[href]');
     if (!a || reduce || a.target || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
     const url = new URL(a.href); // a.href is already resolved against <base>, which blog posts use
-    if (url.origin !== location.origin || url.pathname === location.pathname || !/(\.html|\/)$/.test(url.pathname)) return;
+    const bare = p => p.replace(/\.html$/, '').replace(/\/index$/, '/');
+    if (url.origin !== location.origin || bare(url.pathname) === bare(location.pathname) || !/(\.html|\/)$/.test(url.pathname)) return;
     e.preventDefault();
+    const label = a.textContent.replace(/\s+/g, ' ').trim();
+    ptTitle.textContent = label.length <= 26 ? label : '';
+    try { sessionStorage.twcNav = ptTitle.textContent || ' '; } catch {}
+    slatOrder(i => i);
     curtain.style.visibility = '';
     curtain.classList.remove('pt-instant', 'pt-out');
     const main = $('main');
     if (main) { main.style.transformOrigin = `50% ${scrollY + innerHeight / 2}px`; main.classList.add('pt-leave'); }
     window.lenis && lenis.stop();
-    setTimeout(() => { location.href = url.href; }, 640);
+    setTimeout(() => { location.href = url.href; }, 860);
   });
   addEventListener('pageshow', e => { if (e.persisted) { curtain.classList.add('pt-out'); hideCurtain(1000); const main = $('main'); main && main.classList.remove('pt-leave'); window.lenis && lenis.start(); } });
 
@@ -152,7 +228,7 @@
   /* ---------- sections sink back in 3D as the next one arrives (desktop; skips pinned and sticky sections) ---------- */
   if (hasGSAP) addEventListener('load', () => gsap.matchMedia().add('(min-width: 901px)', () => {
     $$('main > section').forEach(sec => {
-      if (sec.matches('.hero, .phero, .band, .cta, [id="band"]') || sec.querySelector('.pin-spacer, .scard')) return;
+      if (sec.matches('.hero, .phero, .band, .cta, .work, [id="band"]') || sec.querySelector('.pin-spacer, .scard')) return;
       if (sec.closest('.pin-spacer') || sec.offsetHeight < innerHeight * .5) return;
       gsap.to(sec, {rotateX:7, z:-140, opacity:.55, transformPerspective:1700, transformOrigin:'50% 100%', ease:'none', scrollTrigger:{trigger:sec, start:'bottom 62%', end:'bottom 8%', scrub:true}});
     });
@@ -386,33 +462,4 @@
     rb.style.transform = `scaleX(${Math.max(0, Math.min(1, (innerHeight * .4 - r.top) / r.height))})`;
   }, {passive:true});
 
-  /* ---------- quote form: validate, then open the email app ---------- */
-  const quote = $('#quote');
-  if (quote) {
-    const params = new URLSearchParams(location.search);
-    const plan = params.get('plan'), service = params.get('service');
-    if (plan) $('#f-msg').value = `I'm interested in the ${plan} plan.`;
-    if (service) [...$('#f-service').options].forEach(o => { if (o.text.toLowerCase().includes(service.toLowerCase())) o.selected = true; });
-    quote.addEventListener('submit', e => {
-      e.preventDefault();
-      const f = e.target, checks = [
-        ['f-name', v => v.trim().length > 1, 'Enter your name.'],
-        ['f-email', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), 'Enter a valid email, like you@company.com.'],
-        ['f-msg', v => v.trim().length > 9, 'Tell us a little more (at least 10 characters).']
-      ];
-      let first = null;
-      checks.forEach(([id, ok, m]) => { const el = document.getElementById(id), wrap = el.closest('.field'), bad = !ok(el.value); wrap.classList.toggle('bad', bad); wrap.querySelector('.err').textContent = bad ? m : ''; el.setAttribute('aria-invalid', bad); if (bad && !first) first = el; });
-      if (first) return first.focus();
-      const extra = f.budget ? `\nBudget: ${f.budget.value}` : '';
-      const body = `Name: ${f.name.value}\nEmail: ${f.email.value}\nPhone: ${f.phone.value || '-'}\nInterested in: ${f.service.value}${extra}\n\n${f.message.value}`;
-      location.href = `mailto:info@texaswebcoders.com?subject=${encodeURIComponent('Project inquiry: ' + f.service.value)}&body=${encodeURIComponent(body)}`;
-    });
-  }
-  const sub = $('#subForm');
-  sub && sub.addEventListener('submit', e => {
-    e.preventDefault();
-    const v = $('#email').value.trim(), m = $('#subMsg'), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-    m.style.color = ok ? '' : '#FF8A6B';
-    m.textContent = ok ? 'Thanks, you’re subscribed.' : 'Enter a valid email, like you@company.com.';
-  });
 })();
