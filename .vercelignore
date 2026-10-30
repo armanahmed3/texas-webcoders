@@ -1,4 +1,3 @@
-node_modules
-.git
-.vercel
-*.log
+blog/build.ps1
+blog/_template.html
+blog/posts/

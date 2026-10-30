@@ -1,0 +1,38 @@
+[
+    {
+        "slug":  "how-fast-should-a-business-website-load",
+        "title":  "How Fast Should a Business Website Load? Core Web Vitals Explained",
+        "description":  "What Google’s Core Web Vitals measure, the targets your website should hit, and the most common fixes for a slow small-business site.",
+        "category":  "Websites",
+        "date":  "2026-10-30",
+        "readMins":  6,
+        "url":  "blog/how-fast-should-a-business-website-load.html"
+    },
+    {
+        "slug":  "ai-chatbot-vs-live-chat",
+        "title":  "AI Chatbot vs. Live Chat: Which Is Right for Your Website?",
+        "description":  "A practical comparison of AI chatbots and human live chat, including costs, coverage and the hybrid setup most small businesses end up choosing.",
+        "category":  "AI Chatbots",
+        "date":  "2026-10-29",
+        "readMins":  5,
+        "url":  "blog/ai-chatbot-vs-live-chat.html"
+    },
+    {
+        "slug":  "stop-losing-customers-to-missed-calls",
+        "title":  "Missed Calls Are Costing You Customers. Here’s How to Fix It",
+        "description":  "Why missed calls quietly drain revenue for local businesses, how to measure the problem, and five practical ways to make sure every caller gets an answer.",
+        "category":  "AI Receptionist",
+        "date":  "2026-10-28",
+        "readMins":  5,
+        "url":  "blog/stop-losing-customers-to-missed-calls.html"
+    },
+    {
+        "slug":  "what-is-an-ai-receptionist",
+        "title":  "What Is an AI Receptionist? A Plain-English Guide for Small Businesses",
+        "description":  "What an AI receptionist actually does, how it books appointments and handles callers, and how to tell if your business is ready for one.",
+        "category":  "AI Receptionist",
+        "date":  "2026-10-27",
+        "readMins":  6,
+        "url":  "blog/what-is-an-ai-receptionist.html"
+    }
+]
