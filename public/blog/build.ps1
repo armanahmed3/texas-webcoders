@@ -123,7 +123,7 @@ if ($homeHtml -match $pattern) {
 }
 
 # ---------- sitemap + RSS ----------
-$pages = '','ai-receptionist','ai-receptionist-dental-office','ai-receptionist-law-firm','ai-receptionist-hvac-contractors','ai-receptionist-real-estate','ai-receptionist-restaurants','services','portfolio','pricing','blog','news','about','contact','terms','privacy','refund'
+$pages = '','ai-receptionist','ai-receptionist-dental-office','ai-receptionist-law-firm','ai-receptionist-hvac-contractors','ai-receptionist-real-estate','ai-receptionist-restaurants','ai-receptionist-auto-repair','ai-receptionist-insurance-agents','ai-receptionist-medical-office','ai-receptionist-accountants','services','portfolio','pricing','blog','news','about','contact','terms','privacy','refund'
 $urls = ($pages | ForEach-Object { "  <url><loc>$site/$_</loc><lastmod>$($today.ToString('yyyy-MM-dd'))</lastmod></url>" }) + ($posts | ForEach-Object { "  <url><loc>$site/blog/$($_.slug)</loc><lastmod>$($_.date)</lastmod></url>" })
 [IO.File]::WriteAllText("$root\sitemap.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n$($urls -join "`n")`n</urlset>`n", $enc)
 $items = $posts | Select-Object -First 20 | ForEach-Object { "  <item><title>$(& $H $_.title)</title><link>$site/blog/$($_.slug)</link><guid>$site/blog/$($_.slug)</guid><pubDate>$($_.when.ToString('ddd, dd MMM yyyy 09:00:00 -0600', $us))</pubDate><category>$(& $H $_.category)</category><description>$(& $H $_.description)</description></item>" }
