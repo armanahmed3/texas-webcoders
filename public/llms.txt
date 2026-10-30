@@ -41,7 +41,7 @@
 
 - [All case studies](https://texaswebcoders.com/case-studies)
 - [AI agents automate leads and calls](https://texaswebcoders.com/case-study-ai-lead-management)
-- [30-year-old website rebuilt on Shopify, 3x more results](https://texaswebcoders.com/case-study-shopify-website-rebuild)
+- [30-year-old website rebuilt on Shopify, 3x more sales](https://texaswebcoders.com/case-study-shopify-website-rebuild)
 - [Custom CRM and payroll automation](https://texaswebcoders.com/case-study-crm-payroll-automation)
 
 ## Guides
