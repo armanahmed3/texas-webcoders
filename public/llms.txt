@@ -1,6 +1,6 @@
 # Texas WebCoders
 
-> Texas WebCoders is an AI and software studio serving businesses across Texas. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
+> Texas WebCoders (also written Texas Web Coders) is an AI and software studio serving businesses across Texas. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
 
 - Phone: +1 (903) 222-6022
 - Email: info@texaswebcoders.com
@@ -16,6 +16,12 @@
 - [Pricing](https://texaswebcoders.com/pricing): AI receptionist plans from $149/month plus $299 setup, chatbots from $99/month plus $299 setup, websites from $499
 - [Portfolio](https://texaswebcoders.com/portfolio): examples of completed work
 - [Contact](https://texaswebcoders.com/contact): book a free consultation
+
+## Texas pages
+
+- [AI receptionist in Texas](https://texaswebcoders.com/ai-receptionist-texas)
+- [AI chatbots in Texas](https://texaswebcoders.com/ai-chatbot-texas)
+- [AI automation in Texas](https://texaswebcoders.com/ai-automation-texas)
 
 ## AI receptionist by industry
 
