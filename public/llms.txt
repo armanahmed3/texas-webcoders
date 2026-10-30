@@ -39,6 +39,7 @@
 
 ## Guides
 
+- [How to choose an AI agency in Texas](https://texaswebcoders.com/blog/how-to-choose-an-ai-agency-in-texas)
 - [How much does an AI receptionist cost?](https://texaswebcoders.com/blog/how-much-does-an-ai-receptionist-cost)
 - [AI receptionist vs answering service](https://texaswebcoders.com/blog/ai-receptionist-vs-answering-service)
 - [What is an AI receptionist?](https://texaswebcoders.com/blog/what-is-an-ai-receptionist)
