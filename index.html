@@ -8,8 +8,7 @@
 <link rel="icon" href="assets/logo-mark.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
-<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body data-page="home">
@@ -48,37 +47,35 @@
 
 <main id="top">
 <!-- HERO -->
-<section class="hero" data-shape="sphere" data-x="2.5" data-y="0.2" data-s="1" data-op="1">
+<section class="hero" data-shape="sphere" data-x="0" data-y="-4.3" data-s="1.6" data-op="0.85">
+  <div class="hx-pills" aria-hidden="true">
+    <span class="hx-pill" style="--x:7%;--y:27%" data-d="46"><i>AI Receptionist</i></span>
+    <span class="hx-pill" style="--x:81%;--y:22%" data-d="-34"><i>AI Chatbots</i></span>
+    <span class="hx-pill" style="--x:5%;--y:60%" data-d="-58"><i>Automation</i></span>
+    <span class="hx-pill" style="--x:84%;--y:56%" data-d="70"><i>AI SaaS</i></span>
+  </div>
   <div class="wrap hero-inner">
-    <div class="hero-grid">
-      <div>
-        <span class="tag h-in">AI studio · Texas</span>
-        <h1 aria-label="AI that answers, books and sells while you sleep.">
-          <span class="ln"><span>AI that answers,</span></span>
-          <span class="ln"><span>books &amp; sells</span></span>
-          <span class="ln"><span><em>while you sleep.</em></span></span>
-        </h1>
-        <p class="lead h-in">Texas WebCoders builds AI receptionists, chatbots, automations and AI-powered SaaS for clinics, law firms, contractors and growing companies, so no call, lead or customer slips through the cracks.</p>
-        <div class="hero-actions h-in">
-          <a class="btn btn-dark" href="#contact">Book a free AI demo <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a>
-          <a class="play-link" href="#receptionist"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>Hear a sample call</a>
-        </div>
-        <div class="hero-meta h-in">
-          <div><b>285+</b>projects shipped</div>
-          <div><b>98.6%</b>client retention</div>
-          <div><b>7–14 days</b>to go live</div>
-        </div>
-      </div>
-      <div class="callcard" id="callcard" aria-label="Example: an AI receptionist answering a late-night call">
-        <div class="cc-top"><span class="live"><i></i>Live call</span><span>2:14 AM</span></div>
-        <div class="bars" id="ccbars"></div>
-        <p class="cc-q">“Hi, can I book a cleaning for tomorrow afternoon?”</p>
-        <div class="cc-ai"><img class="mk" src="assets/logo-mark-orange.png" alt=""><span><b>AI Receptionist</b><span>Booked Tue 2:15 PM · Text confirmation sent</span></span></div>
-        <small>Sample conversation</small>
+    <span class="tag h-in" id="hero-tag">AI studio · Texas</span>
+    <h1 class="hx" aria-label="Hire AI that answers calls, books clients and closes leads while you sleep.">
+      <span class="hx-l" aria-hidden="true">Hire AI that</span>
+      <span class="hx-l hx-rot" aria-hidden="true"><span class="rw">answers calls</span><span class="rw">books clients</span><span class="rw">closes leads</span><span class="rw">follows up</span></span>
+      <span class="hx-l" aria-hidden="true">while you sleep.</span>
+    </h1>
+    <div class="hx-sub">
+      <p class="lead h-in">AI receptionists, chatbots, automations and AI-powered SaaS for clinics, law firms, contractors and growing companies across Texas.</p>
+      <div class="hero-actions h-in">
+        <a class="btn btn-dark" href="#contact">Book a free AI demo <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+        <a class="play-link" href="#receptionist"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>Hear a sample call</a>
       </div>
     </div>
   </div>
-  <div class="scroll-ind" aria-hidden="true"><span></span>SCROLL</div>
+  <div class="hx-bottom">
+    <div class="wrap hero-meta h-in">
+      <div><b>285+</b>projects shipped</div>
+      <div><b>98.6%</b>client retention</div>
+      <div><b>7–14 days</b>to go live</div>
+    </div>
+  </div>
 </section>
 
 <!-- MARQUEE -->
@@ -469,7 +466,6 @@ const MEDIA = 'https://texaswebcoders.com/portfolio-media/texaswebcoders/';
 
 /* ---------- small generated pieces ---------- */
 const bars = (el, n, max = 95) => { for (let i = 0; i < n; i++) { const b = document.createElement('i'); b.style.setProperty('--n', i); b.style.setProperty('--h', `${30 + Math.round(Math.abs(Math.sin(i * 1.7)) * (max - 30))}%`); el.appendChild(b); } };
-bars(document.getElementById('ccbars'), 34);
 bars(document.getElementById('phbars'), 30);
 const words = ['AI Receptionist', 'AI Chatbots', 'AI SaaS', 'Automation', 'Voice Agents', 'Lead Agents'];
 const mqHTML = words.map(w => `<span>${w}<svg><use href="#spark"/></svg></span>`).join('');
@@ -517,30 +513,43 @@ const splitWords = el => {
 
 
 /* ---------- loader → hero intro ---------- */
+const heroLines = [...document.querySelectorAll('.hx-l:not(.hx-rot)')], heroRot = [...document.querySelectorAll('.rw')];
+const lineChars = window.charSplit ? heroLines.map(charSplit) : [], rotChars = window.charSplit ? heroRot.map(charSplit) : [];
+const heroPills = [...document.querySelectorAll('.hx-pill')];
+function rotateWords() {
+  let cur = 0;
+  const next = () => {
+    const a = rotChars[cur]; cur = (cur + 1) % rotChars.length; const b = rotChars[cur];
+    gsap.to(a, {rotateX:90, y:-36, opacity:0, transformPerspective:700, duration:.5, ease:'power3.in', stagger:{each:.014, from:'center'}});
+    gsap.fromTo(b, {rotateX:-90, y:44, opacity:0, transformPerspective:700}, {rotateX:0, y:0, opacity:1, duration:.9, delay:.32, ease:'back.out(1.7)', stagger:{each:.02, from:'center'}});
+    gsap.delayedCall(2.8, next);
+  };
+  gsap.delayedCall(2.4, next);
+}
 function heroIntro() {
   window.particleIntro && particleIntro();
   if (!hasGSAP) return;
+  const R = gsap.utils.random;
+  window.scrambleText && scrambleText(document.getElementById('hero-tag'));
   const tl = gsap.timeline({defaults:{ease:'expo.out'}});
-  tl.from('.hero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.11})
-    .from('.h-in', {y:30, z:-120, rotateX:-18, transformPerspective:900, opacity:0, duration:1.3, stagger:.08}, .25)
-    .from('#callcard', {opacity:0, rotateY:-40, rotateX:20, z:-300, x:80, transformPerspective:1200, duration:1.8}, .35);
+  tl.fromTo([lineChars[0], rotChars[0], lineChars[1]].flat(), {opacity:0, z:() => R(-900, -300), x:() => R(-160, 160), y:() => R(-90, 120), rotateX:() => R(-120, 120), rotateY:() => R(-120, 120), transformPerspective:900},
+      {opacity:1, z:0, x:0, y:0, rotateX:0, rotateY:0, duration:1.7, stagger:{each:.016, from:'center'}}, .15)
+    .fromTo('.h-in', {y:36, z:-120, rotateX:-18, transformPerspective:900, opacity:0}, {y:0, z:0, rotateX:0, opacity:1, duration:1.3, stagger:.09}, .75)
+    .fromTo(heroPills, {opacity:0, scale:.3, z:-500, rotateY:() => R(-70, 70), transformPerspective:900}, {opacity:1, scale:1, z:0, rotateY:0, duration:1.3, stagger:.1, ease:'back.out(1.6)'}, .95);
+  rotateWords();
 }
 if (!reduce) {
   const ld = document.createElement('div');
   ld.className = 'loader'; ld.setAttribute('aria-hidden', 'true');
-  ld.innerHTML = '<div class="half t"></div><div class="half b"></div><div class="mid"><div><img class="ld-mark" src="assets/logo-mark-orange.png" alt=""><img class="ld-logo" src="assets/logo-white.png" alt=""><span class="count" id="ldc">000</span></div></div>';
+  const name = [...'TEXAS WEBCODERS'].map((c, i) => `<span style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
+  ld.innerHTML = `<div class="ld-door l"></div><div class="ld-door r"></div><div class="ld-mid"><div class="ld-core"><svg class="ld-ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57"/><circle class="p" cx="60" cy="60" r="57" pathLength="100"/></svg><img class="ld-mark" src="assets/logo-mark-orange.png" alt=""></div><div class="ld-name">${name}</div><span class="count" id="ldc">000</span></div>`;
   document.body.appendChild(ld);
-  if (hasGSAP) gsap.set(['.hero h1 .ln > span', '.h-in', '#callcard'], {opacity:0});
-  const cnt = ld.querySelector('#ldc'), t0 = performance.now();
-  (function tick(now) { const p = Math.min(1, (now - t0) / 1300); cnt.textContent = String(Math.round(p * 100)).padStart(3, '0'); if (p < 1) requestAnimationFrame(tick); })(t0);
-  setTimeout(() => {
-    ld.classList.add('out');
-    if (hasGSAP) gsap.set(['.hero h1 .ln > span', '.h-in', '#callcard'], {opacity:1});
-    heroIntro();
-  }, 1500);
-  setTimeout(() => ld.remove(), 2700);
+  if (hasGSAP) { gsap.set(['.h-in', ...heroPills, ...lineChars.flat()], {opacity:0}); gsap.set('.rw', {opacity:1}); gsap.set(rotChars.flat(), {opacity:0}); }
+  const cnt = ld.querySelector('#ldc'), ring = ld.querySelector('.p'), t0 = performance.now();
+  (function tick(now) { const p = Math.min(1, (now - t0) / 1500), v = Math.round((1 - Math.pow(1 - p, 3)) * 100); cnt.textContent = String(v).padStart(3, '0'); ring.style.strokeDashoffset = 100 - v; if (p < 1) requestAnimationFrame(tick); })(t0);
+  setTimeout(() => { ld.classList.add('out'); heroIntro(); }, 1700);
+  setTimeout(() => ld.remove(), 3100);
 } else heroIntro();
-
 /* ---------- nav ---------- */
 const hdr = document.getElementById('hdr'), burger = document.querySelector('.burger'), menu = document.getElementById('menu');
 burger.addEventListener('click', () => burger.setAttribute('aria-expanded', menu.classList.toggle('open')));
@@ -552,12 +561,6 @@ addEventListener('scroll', () => {
   hdr.classList.toggle('hide', y > 700 && y > lastY && !menu.classList.contains('open'));
   lastY = y;
 }, {passive:true});
-
-/* ---------- call card 3D tilt ---------- */
-if (finePointer && !reduce) {
-  const cc = document.getElementById('callcard');
-  addEventListener('pointermove', e => { const rx = (e.clientY / innerHeight - .5) * -14, ry = (e.clientX / innerWidth - .5) * 18; cc.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`; }, {passive:true});
-}
 
 /* ---------- missed-call calculator ---------- */
 (function roi() {
@@ -721,8 +724,8 @@ counters.forEach(c => cio.observe(c));
 if (hasGSAP) {
   // 3D word reveals on every section heading
   document.querySelectorAll('.split').forEach(h => {
-    const ws = splitWords(h);
-    gsap.from(ws, {yPercent:110, rotateX:-85, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.3, ease:'expo.out', stagger:.045, scrollTrigger:{trigger:h, start:'top 86%'}});
+    const cs = charSplit(h);
+    gsap.from(cs, {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.012, scrollTrigger:{trigger:h, start:'top 86%'}});
   });
   // generic 3D rise for leads, tags, cards
   gsap.utils.toArray('.head .lead, .tag:not(.h-in), .post, .ind a, .step, .q, .cinfo > *, .form').forEach(el => {
@@ -730,8 +733,14 @@ if (hasGSAP) {
   });
 
   // hero exit: content drifts up and blurs as you leave
-  gsap.to('.hero-inner', {yPercent:-14, rotateX:14, z:-220, transformPerspective:1400, transformOrigin:'50% 100%', opacity:0, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
-  gsap.to('#callcard', {rotateY:-35, rotateX:12, z:120, ease:'none', scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}});
+  gsap.timeline({scrollTrigger:{trigger:'.hero', start:'top top', end:'bottom top', scrub:true}, defaults:{ease:'none'}})
+    .to(heroLines[0], {xPercent:-34, rotateY:26, transformPerspective:1100, opacity:0}, 0)
+    .to(heroLines[1], {xPercent:34, rotateY:-26, transformPerspective:1100, opacity:0}, 0)
+    .to('.hx-rot', {scale:1.7, opacity:0}, 0)
+    .to('.hx-sub, .hx-bottom', {y:-90, opacity:0}, 0)
+    .to('.hx-pills', {scale:1.5, opacity:0}, 0);
+  const pointerPills = heroPills.map(p => ({x:gsap.quickTo(p, 'x', {duration:1, ease:'power3'}), y:gsap.quickTo(p, 'y', {duration:1, ease:'power3'}), d:+p.dataset.d}));
+  if (finePointer) addEventListener('pointermove', e => { const x = e.clientX / innerWidth - .5, y = e.clientY / innerHeight - .5; pointerPills.forEach(p => { p.x(x * p.d); p.y(y * p.d); }); }, {passive:true});
 
   // marquee speeds up and skews with scroll velocity
   const mq = gsap.to('#mq', {xPercent:-50, repeat:-1, duration:34, ease:'none'});

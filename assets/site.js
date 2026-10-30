@@ -31,6 +31,39 @@
     }
   });
 
+  /* ---------- text helpers shared with the home page ---------- */
+  // wraps every letter in a span, keeping words unbroken; returns the letter spans
+  const charSplit = window.charSplit = el => {
+    const out = [];
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 1) return walk(n);
+      if (n.nodeType !== 3 || !n.textContent) return;
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(' '));
+        const w = document.createElement('span'); w.className = 'wd';
+        [...part].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.appendChild(c); out.push(c); });
+        frag.appendChild(w);
+      });
+      n.replaceWith(frag);
+    });
+    walk(el); return out;
+  };
+  // eyebrow labels decode from random letters
+  const scrambleText = window.scrambleText = el => {
+    if (!el || el.children.length) return;
+    const text = el.textContent, pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/', total = Math.max(26, text.length * 1.5);
+    let f = 0;
+    const timer = setInterval(() => {
+      f++;
+      const done = Math.floor(f / total * text.length);
+      el.textContent = [...text].map((c, i) => i < done || c === ' ' ? c : pool[Math.floor(Math.random() * pool.length)]).join('');
+      if (f >= total) { clearInterval(timer); el.textContent = text; }
+    }, 28);
+  };
+  if (hasGSAP) addEventListener('load', () => $$('.tag').forEach(el => { if (!el.closest('.hero')) ScrollTrigger.create({trigger:el, start:'top 92%', once:true, onEnter:() => scrambleText(el)}); }));
+
   /* ---------- smooth scrolling; ScrollTrigger reads the same position, so scrubs stay locked to it ---------- */
   if (hasGSAP && window.Lenis) {
     const lenis = window.lenis = new Lenis({lerp:.1, wheelMultiplier:1, anchors:{offset:-90}});
@@ -91,7 +124,7 @@
     $$('main .lead, .srv p, .value p, .step p, .big-quote').forEach(el => {
       if (el.closest('.hero, .phero, .pin-spacer, .svc, .scard, .plan') || el.matches('.h-in, .p-in')) return;
       const words = wordSpans(el);
-      if (words.length) gsap.fromTo(words, {opacity:.12, y:16, rotateX:-55, transformPerspective:600, transformOrigin:'50% 100%'}, {opacity:1, y:0, rotateX:0, ease:'none', stagger:.05, scrollTrigger:{trigger:el, start:'top 90%', end:'top 58%', scrub:true}});
+      if (words.length) gsap.fromTo(words, {opacity:.1, y:20, skewX:-14}, {opacity:1, y:0, skewX:0, ease:'none', stagger:.05, scrollTrigger:{trigger:el, start:'top 90%', end:'top 58%', scrub:true}});
     });
   });
 
@@ -166,7 +199,8 @@
   /* ---------- page hero intro ---------- */
   if (hasGSAP) {
     const tl = gsap.timeline({delay:.45, defaults:{ease:'expo.out'}});
-    if ($('.phero h1 .ln > span')) tl.from('.phero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.1});
+    const heroCh = $$('.phero h1 .ln > span').flatMap(charSplit);
+    if (heroCh.length) tl.from(heroCh, {yPercent:120, rotateX:-100, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.1, ease:'back.out(1.5)', stagger:.018});
     tl
       .from('.phero .p-in', {y:30, z:-120, rotateX:-18, transformPerspective:900, opacity:0, duration:1.3, stagger:.08}, .2);
     if ($('.phero .p-card')) tl.from('.phero .p-card', {opacity:0, rotateY:-40, rotateX:18, z:-300, x:60, transformPerspective:1200, duration:1.8}, .3);
@@ -176,8 +210,7 @@
 
     // 3D word reveals on section headings
     $$('.split').forEach(h => {
-      const ws = splitWords(h);
-      gsap.from(ws, {yPercent:110, rotateX:-85, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.3, ease:'expo.out', stagger:.045, scrollTrigger:{trigger:h, start:'top 86%'}});
+      gsap.from(charSplit(h), {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.012, scrollTrigger:{trigger:h, start:'top 86%'}});
     });
     $$('.rise, .value, .form, .office, .srv-media').forEach(el => gsap.from(el, {y:60, rotateX:12, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}}));
     const gw = $('#giant') ? splitWords($('#giant')) : [];
