@@ -394,20 +394,8 @@
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta" aria-labelledby="ct-h" data-shape="sphere" data-x="0" data-y="0" data-s="2.6" data-op="0">
-  <div class="wrap cta-grid cta-solo">
-    <div>
-      <span class="tag">Your next hire</span>
-      <h2 id="ct-h" class="split" style="margin-top:24px">Let’s put AI <em>to work.</em></h2>
-      <p class="lead">Book a free 30-minute consultation. We’ll show you where AI can save hours every week, and what it would cost.</p>
-      <div class="hero-actions"><a class="btn btn-dark" href="#contact">Book a free AI demo <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a><a class="btn btn-line" href="tel:+19032226022" data-talk>Talk to our AI <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a><a class="play-link" href="tel:+19032226022"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>(903) 222-6022</a></div>
-    </div>
-  </div>
-</section>
-
 <!-- CONTACT -->
-<section class="block solid" id="contact" aria-labelledby="cn-h">
+<section class="block solid" id="contact" aria-labelledby="cn-h" data-shape="sphere" data-x="0" data-y="0" data-s="2.6" data-op="0">
   <div class="wrap contact">
     <div>
       <span class="tag">Contact</span>
@@ -826,7 +814,6 @@ if (hasGSAP) {
   // CTA headline scales in with depth
 
   // footer giant wordmark letters rise
-  gsap.from('.cta h2', {scale:.86, z:-200, transformPerspective:1000, opacity:.2, ease:'none', scrollTrigger:{trigger:'.cta', start:'top bottom', end:'center center', scrub:true}});
   const gw = splitWords(document.getElementById('giant'));
   gsap.from(gw, {yPercent:100, rotateX:-60, transformPerspective:800, duration:1.4, ease:'expo.out', stagger:.08, scrollTrigger:{trigger:'#giant', start:'top 95%'}});
 
