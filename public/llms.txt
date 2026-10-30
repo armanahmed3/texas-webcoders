@@ -30,6 +30,8 @@
 - [HVAC and contractors](https://texaswebcoders.com/ai-receptionist-hvac-contractors)
 - [Real estate agents](https://texaswebcoders.com/ai-receptionist-real-estate)
 - [Restaurants](https://texaswebcoders.com/ai-receptionist-restaurants)
+- [Roofing companies in Texas](https://texaswebcoders.com/ai-receptionist-roofing-texas)
+- [Pest control companies in Texas](https://texaswebcoders.com/ai-receptionist-pest-control-texas)
 - [Auto repair shops](https://texaswebcoders.com/ai-receptionist-auto-repair)
 - [Insurance agents](https://texaswebcoders.com/ai-receptionist-insurance-agents)
 - [Medical offices](https://texaswebcoders.com/ai-receptionist-medical-office)
