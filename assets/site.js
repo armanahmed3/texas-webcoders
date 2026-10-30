@@ -67,6 +67,42 @@
   });
   addEventListener('pageshow', e => { if (e.persisted) { curtain.classList.add('pt-out'); const main = $('main'); main && main.classList.remove('pt-leave'); window.lenis && lenis.start(); } });
 
+  /* ---------- text: paragraphs light up word by word with the scroll ---------- */
+  const wordSpans = el => {
+    const out = [];
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 1) return walk(n);
+      if (n.nodeType !== 3 || !n.textContent.trim()) return;
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(part));
+        const w = document.createElement('span'); w.className = 'tw'; w.textContent = part; frag.appendChild(w); out.push(w);
+      });
+      n.replaceWith(frag);
+    });
+    walk(el); return out;
+  };
+  if (hasGSAP) addEventListener('load', () => {
+    $$('main .lead, .srv p, .value p, .step p, .big-quote').forEach(el => {
+      if (el.closest('.hero, .phero, .pin-spacer, .svc, .scard, .plan') || el.matches('.h-in, .p-in')) return;
+      const words = wordSpans(el);
+      if (words.length) gsap.fromTo(words, {opacity:.12, y:16, rotateX:-55, transformPerspective:600, transformOrigin:'50% 100%'}, {opacity:1, y:0, rotateX:0, ease:'none', stagger:.05, scrollTrigger:{trigger:el, start:'top 90%', end:'top 58%', scrub:true}});
+    });
+  });
+
+  /* ---------- text: links and buttons roll over in 3D on hover ---------- */
+  if (finePointer && !reduce) document.addEventListener('pointerover', e => {
+    const el = e.target.closest && e.target.closest('.menu a, footer ul a, .btn');
+    if (!el || el.dataset.rolled) return;
+    const n = [...el.childNodes].find(c => c.nodeType === 3 && c.textContent.trim());
+    if (!n) return;
+    el.dataset.rolled = '1';
+    const text = n.textContent.trim(), roll = document.createElement('span');
+    roll.className = 'roll'; roll.dataset.t = text; roll.innerHTML = '<span></span>'; roll.firstChild.textContent = text;
+    n.replaceWith(roll);
+  }, {passive:true});
+
   /* ---------- sections sink back in 3D as the next one arrives (desktop; skips pinned and sticky sections) ---------- */
   if (hasGSAP) addEventListener('load', () => gsap.matchMedia().add('(min-width: 901px)', () => {
     $$('main > section').forEach(sec => {
