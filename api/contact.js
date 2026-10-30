@@ -1,17 +1,17 @@
 /* Texas WebCoders: contact form, chatbot bookings and newsletter sign-ups, delivered by SMTP.
    POST /api/contact  {"type":"contact|booking|newsletter","name","email","phone","service","budget","message","date","time","page"}
-   Environment variables (Vercel, same names as the old site): SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS,
-   SMTP_FROM, NOTIFICATION_EMAIL. Without them this answers 503 and the browser falls back to FormSubmit (see sendLead in site.js). */
+   Mail goes through sales@texaswebcoders.com; its password is the SMTP_PASS environment variable in Vercel.
+   Without it this answers 503 and the browser falls back to FormSubmit (see sendLead in site.js). */
 const nodemailer = require('nodemailer');
 const { readBody, send, sameOrigin, limited, text, oneLine, validEmail } = require('./_util');
 
+const SALES = 'sales@texaswebcoders.com';
 const transport = () => {
-  const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER, SMTP_PASS } = process.env;
-  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS) return null;
-  const port = Number(SMTP_PORT) || 587;
-  return nodemailer.createTransport({ host: SMTP_HOST, port, secure: SMTP_SECURE === 'true' || port === 465, auth: { user: SMTP_USER, pass: SMTP_PASS } });
+  const { SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_PASS } = process.env;
+  if (!SMTP_PASS) return null;
+  const port = Number(SMTP_PORT) || 465;
+  return nodemailer.createTransport({ host: SMTP_HOST || 'mail.texaswebcoders.com', port, secure: SMTP_SECURE === 'true' || port === 465, auth: { user: SALES, pass: SMTP_PASS } });
 };
-
 const table = rows => rows.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join('\n');
 
 module.exports = async (req, res) => {
@@ -35,8 +35,8 @@ module.exports = async (req, res) => {
   const mail = transport();
   if (!mail) return send(res, 503, { error: 'Email is not configured', fallback: true });
 
-  const to = process.env.NOTIFICATION_EMAIL || 'info@texaswebcoders.com';
-  const from = process.env.SMTP_FROM || process.env.SMTP_USER;
+  const to = SALES;
+  const from = SALES;
   const subject = type === 'booking' ? `New meeting request: ${name}, ${date} ${time}`
     : type === 'newsletter' ? `New newsletter subscriber: ${email}`
     : `New inquiry: ${service || 'General'} from ${name}`;
