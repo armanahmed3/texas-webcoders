@@ -31,13 +31,28 @@
     }
   });
 
-  /* ---------- page transitions: curtain lifts on load, drops before leaving ---------- */
+  /* ---------- smooth scrolling; ScrollTrigger reads the same position, so scrubs stay locked to it ---------- */
+  if (hasGSAP && window.Lenis) {
+    const lenis = window.lenis = new Lenis({lerp:.1, wheelMultiplier:1, anchors:{offset:-90}});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+  }
+
+  /* ---------- page transitions: 3D slats fold shut before leaving and fold open on load ---------- */
   const curtain = document.createElement('div');
   curtain.className = 'pt' + (isHome || reduce ? ' pt-out pt-instant' : '');
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<img src="assets/logo-mark-orange.png" alt="">';
+  curtain.innerHTML = Array.from({length:7}, (_, i) => `<b style="--i:${i}"></b>`).join('') + '<img src="assets/logo-mark-orange.png" alt="">';
   document.body.appendChild(curtain);
   if (!isHome && !reduce) setTimeout(() => curtain.classList.add('pt-out'), 120);
+  // fetch the next page on hover so it opens as the slats finish
+  const prefetched = new Set();
+  if (finePointer) document.addEventListener('pointerover', e => {
+    const a = e.target.closest && e.target.closest('a[href$=".html"]');
+    if (!a || a.origin !== location.origin || prefetched.has(a.href)) return;
+    prefetched.add(a.href);
+    const l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.href; document.head.appendChild(l);
+  }, {passive:true});
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href]');
     if (!a || reduce || a.target || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
@@ -45,9 +60,28 @@
     if (url.origin !== location.origin || url.pathname === location.pathname || !/(\.html|\/)$/.test(url.pathname)) return;
     e.preventDefault();
     curtain.classList.remove('pt-instant', 'pt-out');
-    setTimeout(() => { location.href = url.href; }, 700);
+    const main = $('main');
+    if (main) { main.style.transformOrigin = `50% ${scrollY + innerHeight / 2}px`; main.classList.add('pt-leave'); }
+    window.lenis && lenis.stop();
+    setTimeout(() => { location.href = url.href; }, 640);
   });
-  addEventListener('pageshow', e => { if (e.persisted) curtain.classList.add('pt-out'); });
+  addEventListener('pageshow', e => { if (e.persisted) { curtain.classList.add('pt-out'); const main = $('main'); main && main.classList.remove('pt-leave'); window.lenis && lenis.start(); } });
+
+  /* ---------- sections sink back in 3D as the next one arrives (desktop; skips pinned and sticky sections) ---------- */
+  if (hasGSAP) addEventListener('load', () => gsap.matchMedia().add('(min-width: 901px)', () => {
+    $$('main > section').forEach(sec => {
+      if (sec.matches('.hero, .phero, .band, .cta, [id="band"]') || sec.querySelector('.pin-spacer, .scard')) return;
+      if (sec.closest('.pin-spacer') || sec.offsetHeight < innerHeight * .5) return;
+      gsap.to(sec, {rotateX:7, z:-140, opacity:.55, transformPerspective:1700, transformOrigin:'50% 100%', ease:'none', scrollTrigger:{trigger:sec, start:'bottom 62%', end:'bottom 8%', scrub:true}});
+    });
+    // card grids fly in from depth, one after another (the home page animates its own cards)
+    if (!isHome && $('.post, .pitem, .ind a')) {
+      gsap.set('.post, .pitem, .ind a', {y:90, z:-260, rotateY:-22, rotateX:14, transformPerspective:1300, opacity:0});
+      ScrollTrigger.batch('.post, .pitem, .ind a', {start:'top 94%', once:true, onEnter: els => gsap.to(els, {y:0, z:0, rotateY:0, rotateX:0, opacity:1, duration:1.2, ease:'expo.out', stagger:.07})});
+    }
+    ScrollTrigger.refresh();
+  }));
+
   if (isHome) return; // the home page runs its own scripts for everything else
 
   /* ---------- nav ---------- */
@@ -83,8 +117,9 @@
   /* ---------- page hero intro ---------- */
   if (hasGSAP) {
     const tl = gsap.timeline({delay:.45, defaults:{ease:'expo.out'}});
-    tl.from('.phero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.1})
-      .from('.phero .p-in', {y:30, opacity:0, filter:'blur(8px)', duration:1.2, stagger:.08}, .2);
+    if ($('.phero h1 .ln > span')) tl.from('.phero h1 .ln > span', {yPercent:115, rotateX:-70, transformPerspective:800, transformOrigin:'50% 100%', duration:1.5, stagger:.1});
+    tl
+      .from('.phero .p-in', {y:30, z:-120, rotateX:-18, transformPerspective:900, opacity:0, duration:1.3, stagger:.08}, .2);
     if ($('.phero .p-card')) tl.from('.phero .p-card', {opacity:0, rotateY:-40, rotateX:18, z:-300, x:60, transformPerspective:1200, duration:1.8}, .3);
     // headings without line wrappers (e.g. blog posts) rise in as a whole
     $$('.phero h1').forEach(h => { if (!h.querySelector('.ln')) gsap.from(h, {y:40, opacity:0, rotateX:-30, transformPerspective:800, duration:1.3, delay:.45, ease:'expo.out'}); });
@@ -242,12 +277,13 @@
     const lb = $('#lb'), lbImg = $('#lb img'), lbCap = $('#lb p'), lbClose = $('#lb button');
     document.body.appendChild(lb); // escape <main>'s stacking context so it covers the header
     let opener = null;
-    const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; opener && opener.focus(); };
+    lb.setAttribute('data-lenis-prevent', '');
+    const close = () => { lb.classList.remove('open'); document.body.style.overflow = ''; window.lenis && lenis.start(); opener && opener.focus(); };
     grid.addEventListener('click', e => {
       const it = e.target.closest('.pitem'); if (!it) return;
       opener = it; const im = it.querySelector('img');
       lbImg.src = im.src; lbImg.alt = im.alt; lbCap.textContent = im.alt;
-      lb.classList.add('open'); document.body.style.overflow = 'hidden'; lbClose.focus();
+      lb.classList.add('open'); document.body.style.overflow = 'hidden'; window.lenis && lenis.stop(); lbClose.focus();
     });
     lbClose.addEventListener('click', close);
     lb.addEventListener('click', e => { if (e.target === lb) close(); });

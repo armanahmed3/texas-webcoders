@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "which-business-tasks-to-automate-first",
+        "title":  "Which Business Tasks Should You Automate First? A Simple Checklist",
+        "description":  "A simple way to find the repetitive work worth handing to AI: list your tasks, score them with five questions, and run a small pilot before you expand.",
+        "category":  "AI Automation",
+        "date":  "2026-10-30",
+        "readMins":  5,
+        "url":  "blog/which-business-tasks-to-automate-first.html"
+    },
+    {
         "slug":  "how-fast-should-a-business-website-load",
         "title":  "How Fast Should a Business Website Load? Core Web Vitals Explained",
         "description":  "What Google’s Core Web Vitals measure, the targets your website should hit, and the most common fixes for a slow small-business site.",

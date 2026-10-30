@@ -8,8 +8,9 @@
   if (!window.THREE || !canvas || !document.querySelector('[data-shape]')) return;
   let small = innerWidth < 900;
   const N = small ? 3200 : 6500;
-  const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({canvas, antialias:false, alpha:true, powerPreference:'high-performance'});
+  let ratio = Math.min(devicePixelRatio, 1.75);
+  renderer.setPixelRatio(ratio);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, .1, 100);
   camera.position.set(0, 0, 9); camera.lookAt(0, 0, 0);
@@ -68,19 +69,32 @@
   const ss = t => t * t * (3 - 2 * t);
   const easeOut = t => 1 - Math.pow(1 - t, 4);
   const clock = new THREE.Clock();
+  // scroll speed bends the camera; slow machines drop to 1x resolution instead of stuttering
+  let sy = scrollY, warp = 0, last = performance.now(), slow = 0;
   (function frame() {
     requestAnimationFrame(frame);
-    if (document.hidden) return;
-    const t = clock.getElapsedTime(), y = scrollY;
+    if (document.hidden) { last = performance.now(); return; }
+    const now = performance.now(), dt = now - last; last = now;
+    if (ratio > 1) { slow = dt > 26 ? slow + 1 : Math.max(0, slow - 1); if (slow > 40) { ratio = 1; renderer.setPixelRatio(1); renderer.setSize(innerWidth, innerHeight, false); } }
+    const t = clock.getElapsedTime(), v = scrollY - sy;
+    sy += v * .14;
+    warp += (Math.max(-1, Math.min(1, v / 260)) - warp) * .1;
+    const y = sy;
     let a = keys[0], b = keys[0], k = 0;
     for (let i = 0; i < keys.length - 1; i++) { if (y >= keys[i].at) { a = keys[i]; b = keys[i + 1]; k = ss(Math.min(1, (y - a.at) / Math.max(1, b.at - a.at))); } }
     if (y >= keys[keys.length - 1].at) { a = b = keys[keys.length - 1]; k = 0; }
     const A = SHAPES[a.shape], B = SHAPES[b.shape];
     const intro = introStart === null ? 0 : easeOut(Math.min(1, (performance.now() - introStart) / 2600));
     const breathe = reduce ? 0 : .02;
+    const morph = reduce ? 0 : Math.sin(k * Math.PI); // 0 at a shape, 1 halfway between two shapes
     for (let i = 0, j = 0; i < N; i++, j += 3) {
       const w = Math.sin(t * 1.2 + phase[i]) * breathe;
       let x = A[j] + (B[j] - A[j]) * k, yy = A[j+1] + (B[j+1] - A[j+1]) * k, z = A[j+2] + (B[j+2] - A[j+2]) * k;
+      if (morph > .001) { // points spiral around the centre on their way to the next shape
+        const ang = morph * (1.1 + phase[i] * .16), c = Math.cos(ang), s = Math.sin(ang), rx = x * c - z * s;
+        z = x * s + z * c; x = rx;
+        yy += Math.sin(phase[i] * 3) * morph * .5;
+      }
       if (intro < 1) { x = scatter[j] + (x - scatter[j]) * intro; yy = scatter[j+1] + (yy - scatter[j+1]) * intro; z = scatter[j+2] + (z - scatter[j+2]) * intro; }
       pos[j] = x + w; pos[j+1] = yy + w; pos[j+2] = z;
     }
@@ -93,8 +107,12 @@
     cloud.scale.setScalar(lerp(a.s, b.s) * (small ? .7 : 1) * (.85 + .15 * intro));
     cloud.rotation.y = spin * t * .18 + mx * .5;
     cloud.rotation.x = my * .3 + (1 - intro) * .6;
+    cloud.rotation.z = morph * .35 + warp * .25;
     mat.opacity = lerp(a.op, b.op) * (small ? .18 : 1) * Math.min(1, intro * 1.5);
-    renderer.render(scene, camera);
+    camera.position.z = 9 - morph * 2.4; // the camera dollies through the cloud between shapes
+    camera.fov = 45 + Math.abs(warp) * 16;
+    camera.updateProjectionMatrix();
+    if (mat.opacity > .004) renderer.render(scene, camera);
   })();
   if (!document.querySelector('.loader')) window.particleIntro();
 })();
