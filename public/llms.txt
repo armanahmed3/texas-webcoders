@@ -6,6 +6,7 @@
 - Email: info@texaswebcoders.com
 - Address: 5221 S Broadway Ave, TX 75703
 - Hours: Monday to Friday, 8 AM to 6 PM Central Time
+- Languages: AI calling agents and AI receptionists speak English and Spanish
 - Track record: 285+ projects shipped
 - Launch time: most AI receptionists and chatbots go live in 7 to 14 days
 
