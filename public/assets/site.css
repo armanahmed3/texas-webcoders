@@ -983,3 +983,17 @@ main.pt-leave{transition:transform .72s cubic-bezier(.76,0,.24,1),opacity .6s;tr
 .pt-mk i:nth-child(3){inset:-10px;border-color:rgba(255,79,26,.5);animation-duration:3.8s}
 @keyframes ptOrbit{from{transform:rotateX(68deg) rotateY(0) rotateZ(0)}to{transform:rotateX(68deg) rotateY(360deg) rotateZ(360deg)}}
 .pt-t{text-shadow:0 0 22px rgba(255,79,26,.6)}
+
+/* closing sections after the 3D logo removal */
+.cta-solo{grid-template-columns:1fr;justify-items:center;text-align:center}
+.cta-solo .lead{margin-left:auto;margin-right:auto}
+.cta-solo .hero-actions{justify-content:center}
+/* live news */
+.news-trends{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:24px}
+.news-trends b{margin-right:6px}
+.news-trends a{padding:7px 13px;border:1px solid var(--line);border-radius:999px;font-size:.86rem;font-weight:600}
+.news-trends a:hover{border-color:var(--accent);color:var(--accent-ink)}
+.news-note{grid-column:1/-1;margin-top:26px;font-size:.88rem;color:var(--ink-3)}
+.news-note a{text-decoration:underline}
+@media (max-width:1240px) and (min-width:901px){.menu a{padding:8px 9px;font-size:.88rem}}
+.cta:has(.cta-solo){min-height:0;padding:clamp(70px,9vw,120px) 0}

@@ -31,6 +31,19 @@
     }
   });
 
+  /* ---------- live news cards ([data-news="how many"]), filled from api/news.js ---------- */
+  const newsBoxes = $$('[data-news]');
+  if (newsBoxes.length) {
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;'}[c]));
+    const when = iso => { const h = Math.round((Date.now() - new Date(iso)) / 36e5); return h < 1 ? 'Just now' : h < 24 ? `${h}h ago` : new Date(iso).toLocaleDateString('en-US', {month:'short', day:'numeric'}); };
+    const card = i => `<a class="post" href="${esc(i.link)}" target="_blank" rel="noopener noreferrer"><span class="k"><b>${esc(i.topic)}</b><span>${when(i.date)}</span></span><h3>${esc(i.title)}</h3><span class="rd">${esc(i.source || 'Read article')} <svg class="icon"><use href="#i-ne"/></svg></span></a>`;
+    fetch('/api/news').then(r => { if (!r.ok) throw new Error(r.status); return r.json(); }).then(d => {
+      newsBoxes.forEach(b => { b.innerHTML = d.items.slice(0, +b.dataset.news).map(card).join(''); });
+      const t = $('#news-trends');
+      if (t && d.trends.length) { t.hidden = false; t.innerHTML = '<b>Trending now</b>' + d.trends.map(x => `<a href="https://news.google.com/search?q=${encodeURIComponent(x)}" target="_blank" rel="noopener noreferrer">${esc(x)}</a>`).join(''); }
+    }).catch(() => { newsBoxes.forEach(b => { b.innerHTML = '<p class="news-note">Live news isn’t available right now. Please check back soon, or read our <a href="blog.html">blog</a>.</p>'; }); });
+  }
+
   /* ---------- text helpers shared with the home page ---------- */
   // wraps every letter in a span, keeping words unbroken; returns the letter spans
   const charSplit = window.charSplit = el => {
@@ -311,17 +324,6 @@
     });
     addEventListener('load', () => ScrollTrigger.refresh());
   }
-
-  /* ---------- extruded 3D logo mark (stacked layers) ---------- */
-  $$('[data-logo3d]').forEach(box => {
-    for (let i = 0; i < 18; i++) {
-      const im = document.createElement('img');
-      im.src = 'assets/logo-mark-orange.png'; im.alt = '';
-      im.style.transform = `translateZ(${(9 - i) * 1.6}px)`;
-      if (i > 0 && i < 17) im.style.filter = `brightness(${.55 + i * .01})`;
-      box.appendChild(im);
-    }
-  });
 
   /* ---------- generated sound bars ---------- */
   $$('[data-bars]').forEach(el => { const n = +el.dataset.bars; for (let i = 0; i < n; i++) { const b = document.createElement('i'); b.style.setProperty('--n', i); b.style.setProperty('--h', `${30 + Math.round(Math.abs(Math.sin(i * 1.7)) * 65)}%`); el.appendChild(b); } });

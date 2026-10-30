@@ -41,7 +41,7 @@
       <li><a href="services.html">Services</a></li>
       <li><a href="portfolio.html">Portfolio</a></li>
       <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="blog.html">Blog</a></li>
+      <li><a href="blog.html">Blog</a></li><li><a href="news.html">News</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
@@ -382,16 +382,27 @@
   </div>
 </section>
 
+<!-- LIVE NEWS -->
+<section class="block paper" id="news" aria-labelledby="nw-h">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="tag">AI news</span><h2 id="nw-h" class="split">What’s moving in <em class="it acc">AI right now.</em></h2></div>
+      <p class="lead">Fresh headlines on AI for business, updated automatically throughout the day.</p>
+    </div>
+    <div class="posts" data-news="3"></div>
+    <div class="hero-actions" style="margin-top:30px"><a class="btn btn-line" href="news.html">See all news <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="cta" aria-labelledby="ct-h" data-shape="sphere" data-x="0" data-y="0" data-s="2.6" data-op="0">
-  <div class="wrap cta-grid">
+  <div class="wrap cta-grid cta-solo">
     <div>
       <span class="tag">Your next hire</span>
       <h2 id="ct-h" class="split" style="margin-top:24px">Let’s put AI <em>to work.</em></h2>
       <p class="lead">Book a free 30-minute consultation. We’ll show you where AI can save hours every week, and what it would cost.</p>
       <div class="hero-actions"><a class="btn btn-dark" href="#contact">Book a free AI demo <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a><a class="btn btn-line" href="tel:+19032226022" data-talk>Talk to our AI <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a><a class="play-link" href="tel:+19032226022"><span><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg></span>(903) 222-6022</a></div>
     </div>
-    <div class="logo3d-stage" aria-hidden="true"><div class="logo3d" id="logo3d"></div><div class="logo3d-floor"></div></div>
   </div>
 </section>
 
@@ -439,7 +450,7 @@
       </div>
       <div><h4>AI services</h4><ul><li><a href="ai-receptionist.html">AI Receptionist</a></li><li><a href="services.html#ai-chatbots">AI Chatbots</a></li><li><a href="services.html#ai-saas">AI SaaS Applications</a></li><li><a href="services.html#ai-automation">AI Workflow Automation</a></li><li><a href="services.html#ai-sales">AI Sales Agents</a></li><li><a href="services.html#ai-knowledge">Knowledge Assistants</a></li></ul></div>
       <div><h4>Studio</h4><ul><li><a href="services.html#websites">Websites &amp; e-commerce</a></li><li><a href="services.html#apps">Mobile apps</a></li><li><a href="services.html#uiux">UI/UX design</a></li><li><a href="services.html#graphic">Graphic design</a></li><li><a href="services.html#branding">Logo &amp; branding</a></li><li><a href="services.html#video">Video editing</a></li><li><a href="services.html#3d">3D video animation</a></li><li><a href="services.html#marketing">Digital marketing &amp; SEO</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="blog.html">Blog</a></li>
+      <div><h4>Company</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="news.html">News</a></li>
       <li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Blog</a></li><li><a href="#industries">Industries</a></li><li><a href="#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of service</a></li><li><a href="refund.html">Refund policy</a></li></ul></div>
       <div class="sub">
         <h4>Monthly AI notes</h4>
@@ -847,18 +858,6 @@ plansEl.addEventListener('click', e => {
   const msg = document.getElementById('f-msg');
   if (!msg.value) msg.value = `I'm interested in the ${tab} – ${a.dataset.plan} plan.`;
 });
-
-/* ---------- CTA: extruded 3D logo mark built from stacked layers ---------- */
-(function logo3d() {
-  const box = document.getElementById('logo3d');
-  for (let i = 0; i < 18; i++) {
-    const im = document.createElement('img');
-    im.src = 'assets/logo-mark-orange.png'; im.alt = '';
-    im.style.transform = `translateZ(${(9 - i) * 1.6}px)`;
-    if (i > 0 && i < 17) im.style.filter = `brightness(${.55 + i * .01})`;
-    box.appendChild(im);
-  }
-})();
 
 /* ---------- FAQ ---------- */
 document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', () => {
