@@ -2,3 +2,4 @@ public/blog/build.ps1
 public/blog/_template.html
 public/blog/posts/
 public/blog/publish.ps1
+public/blog/keywords.txt

@@ -997,3 +997,19 @@ main.pt-leave{transition:transform .72s cubic-bezier(.76,0,.24,1),opacity .6s;tr
 .news-note a{text-decoration:underline}
 @media (max-width:1240px) and (min-width:901px){.menu a{padding:8px 9px;font-size:.88rem}}
 .cta:has(.cta-solo){min-height:0;padding:clamp(70px,9vw,120px) 0}
+
+/* footer on phones */
+@media (max-width:640px){
+  footer{padding:64px 0 100px}
+  .f-grid{grid-template-columns:1fr 1fr;gap:34px 20px}
+  .f-about,.f-grid>.sub{grid-column:1/-1}
+  .f-about p{max-width:none}
+  .f-grid>div:nth-child(4){grid-column:1/-1}
+  .f-grid>div:nth-child(4) ul{grid-template-columns:1fr 1fr;gap:9px 20px}
+  .giant{margin-top:48px;font-size:11vw !important;letter-spacing:-.04em;white-space:nowrap}
+  .legal{flex-direction:column;align-items:flex-start;margin-top:28px}
+  .legal>span:first-child{display:flex;flex-direction:column;gap:10px}
+  .legal-links{margin-left:0}
+}
+.st-grid>*,.work-grid>*,.cta-grid>*,.contact>*{min-width:0}
+@media (max-width:900px){.st-info h3{overflow-wrap:anywhere;font-size:clamp(1.8rem,8vw,2.6rem)}.st-info .big-n{font-size:2.6rem}}

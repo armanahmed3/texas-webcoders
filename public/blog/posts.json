@@ -9,6 +9,15 @@
         "url":  "blog/which-business-tasks-to-automate-first.html"
     },
     {
+        "slug":  "how-much-does-an-ai-receptionist-cost",
+        "title":  "How Much Does an AI Receptionist Cost?",
+        "description":  "What an AI receptionist costs per month, what setup fees cover, what changes the price, and how to compare it with a hired receptionist or answering service.",
+        "category":  "AI Receptionist",
+        "date":  "2026-10-30",
+        "readMins":  5,
+        "url":  "blog/how-much-does-an-ai-receptionist-cost.html"
+    },
+    {
         "slug":  "how-fast-should-a-business-website-load",
         "title":  "How Fast Should a Business Website Load? Core Web Vitals Explained",
         "description":  "What Google’s Core Web Vitals measure, the targets your website should hit, and the most common fixes for a slow small-business site.",
@@ -16,6 +25,15 @@
         "date":  "2026-10-30",
         "readMins":  6,
         "url":  "blog/how-fast-should-a-business-website-load.html"
+    },
+    {
+        "slug":  "ai-receptionist-vs-answering-service",
+        "title":  "AI Receptionist vs Answering Service: Which Is Better?",
+        "description":  "How an AI receptionist compares with a live answering service on availability, cost, booking and caller experience, and how to choose for your business.",
+        "category":  "AI Receptionist",
+        "date":  "2026-10-30",
+        "readMins":  5,
+        "url":  "blog/ai-receptionist-vs-answering-service.html"
     },
     {
         "slug":  "ai-chatbot-vs-live-chat",
