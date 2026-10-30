@@ -37,6 +37,13 @@
 - [Medical offices](https://texaswebcoders.com/ai-receptionist-medical-office)
 - [Accountants and CPAs](https://texaswebcoders.com/ai-receptionist-accountants)
 
+## Case studies
+
+- [All case studies](https://texaswebcoders.com/case-studies)
+- [AI agents automate leads and calls](https://texaswebcoders.com/case-study-ai-lead-management)
+- [30-year-old website rebuilt on Shopify, 3x more results](https://texaswebcoders.com/case-study-shopify-website-rebuild)
+- [Custom CRM and payroll automation](https://texaswebcoders.com/case-study-crm-payroll-automation)
+
 ## Guides
 
 - [How to choose an AI agency in Texas](https://texaswebcoders.com/blog/how-to-choose-an-ai-agency-in-texas)
