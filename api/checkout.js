@@ -8,7 +8,7 @@ const path = require('path');
 let PLANS = null;
 function plans() {
   if (!PLANS) {
-    const src = fs.readFileSync(path.join(process.cwd(), 'assets', 'plans.js'), 'utf8');
+    const src = fs.readFileSync(path.join(process.cwd(), 'public', 'assets', 'plans.js'), 'utf8');
     const win = {};
     new Function('window', src)(win);
     PLANS = win.PLANS;

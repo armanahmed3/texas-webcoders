@@ -11,7 +11,7 @@ let SYSTEM = null;
 function systemPrompt() {
   if (SYSTEM) return SYSTEM;
   const win = {};
-  for (const f of ['plans.js', 'chat-knowledge.js']) new Function('window', fs.readFileSync(path.join(process.cwd(), 'assets', f), 'utf8'))(win);
+  for (const f of ['plans.js', 'chat-knowledge.js']) new Function('window', fs.readFileSync(path.join(process.cwd(), 'public', 'assets', f), 'utf8'))(win);
   const money = n => '$' + n.toLocaleString('en-US');
   const prices = Object.entries(win.PLANS).map(([tab, list]) => `${win.TWC_KB.tabs[tab] || tab}: ` + list.map(p =>
     `${p.name} ${p.custom ? '(custom quote)' : `${p.from ? 'from ' : ''}${money(p.price)}${p.per || ''}`}${p.setup ? ` + ${money(p.setup)} one-time setup` : ''}`).join('; ')).join('\n');

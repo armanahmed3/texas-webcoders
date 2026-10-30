@@ -1,5 +1,3 @@
-blog/build.ps1
-blog/_template.html
-blog/posts/
-vapi-agent/
-index-*.html
+public/blog/build.ps1
+public/blog/_template.html
+public/blog/posts/
