@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>try{if(sessionStorage.twcNav){document.documentElement.classList.add("nav-in");setTimeout(function(){document.documentElement.classList.remove("nav-in")},3000)}}catch(e){}</script>
+<script>(function(){var r=document.documentElement;try{if(sessionStorage.twcNav){r.classList.add("nav-in");setTimeout(function(){r.classList.remove("nav-in")},3000);return}}catch(e){}if(!matchMedia("(prefers-reduced-motion: reduce)").matches){r.classList.add("booting");setTimeout(function(){r.classList.remove("booting")},8000)}})()</script>
+<style>html.booting,html.booting body{background:#0D0D0D}html.booting body>*:not(.boot):not(.loader){visibility:hidden}.boot{display:none}html.booting .boot{display:grid;position:fixed;inset:0;z-index:199;place-items:center;background:#0D0D0D}.boot img{width:84px;height:auto}</style>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Texas WebCoders | AI Receptionists, AI Chatbots & AI SaaS Development in Texas</title>
-<meta name="description" content="Texas WebCoders builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS applications for clinics, law firms, contractors and growing businesses across Texas.">
+<title>AI Receptionist &amp; AI Chatbots in Texas | Texas WebCoders</title>
+<meta name="description" content="AI receptionists that answer calls 24/7, AI chatbots, automation and custom software for Texas businesses. Plans from $149/mo. Book a free demo.">
 <link rel="canonical" href="https://texaswebcoders.com/">
-<meta property="og:title" content="Texas WebCoders | AI Receptionists, Chatbots & SaaS">
-<meta property="og:description" content="AI receptionists, chatbots, automation and AI-powered SaaS for growing businesses across Texas.">
+<meta property="og:title" content="AI Receptionist &amp; AI Chatbots in Texas | Texas WebCoders">
+<meta property="og:description" content="AI receptionists that answer calls 24/7, AI chatbots, automation and custom software for Texas businesses. Plans from $149/mo. Book a free demo.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://texaswebcoders.com/">
+<meta property="og:site_name" content="Texas WebCoders">
 <meta property="og:image" content="https://texaswebcoders.com/assets/logo.png">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="assets/logo-mark.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Figtree:wght@400..800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ProfessionalService","@id":"https://texaswebcoders.com/#business","name":"Texas WebCoders","url":"https://texaswebcoders.com/","logo":"https://texaswebcoders.com/assets/logo.png","image":"https://texaswebcoders.com/assets/logo.png","telephone":"+1-903-222-6022","email":"info@texaswebcoders.com","priceRange":"$$","description":"AI and software studio building AI receptionists, AI chatbots, workflow automation, AI SaaS, websites, apps, branding, video and marketing for Texas businesses.","address":{"@type":"PostalAddress","streetAddress":"5221 S Broadway Ave","addressRegion":"TX","postalCode":"75703","addressCountry":"US"},"areaServed":{"@type":"State","name":"Texas"},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"},"sameAs":["https://www.facebook.com/share/1CNUeH9kjm/?mibextid=wwXIfr","https://www.linkedin.com/company/texas-web-coders/","https://www.instagram.com/texaswebcoders"]},{"@type":"WebSite","@id":"https://texaswebcoders.com/#website","url":"https://texaswebcoders.com/","name":"Texas WebCoders","publisher":{"@id":"https://texaswebcoders.com/#business"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What exactly is an AI receptionist?","acceptedAnswer":{"@type":"Answer","text":"It’s a voice AI that answers your business phone in a natural voice. It follows a script we write with you, answers common questions, books appointments into your calendar, takes messages and texts you a summary of every call."}},{"@type":"Question","name":"How much does an AI receptionist cost?","acceptedAnswer":{"@type":"Answer","text":"AI receptionist plans start at $149/month plus a $299 one-time setup. The Business plan, at $299/month plus $499 setup, adds calendar booking, lead qualification and urgent call transfer."}},{"@type":"Question","name":"Can it use my existing phone number?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can forward your current number to the AI for all calls, only after hours, or only when your team doesn’t pick up. We can also set up a new local number."}},{"@type":"Question","name":"What happens if the AI can’t answer a question?","acceptedAnswer":{"@type":"Answer","text":"It follows the rules you choose: transfer the call to your team, take a detailed message, or book a callback. Nothing gets lost."}},{"@type":"Question","name":"How long does it take to launch?","acceptedAnswer":{"@type":"Answer","text":"Most AI receptionists and chatbots go live in 7–14 days, including writing the script, training on your business and testing with you. Larger SaaS and automation projects get a clear timeline at your free consultation."}},{"@type":"Question","name":"Is my customer data secure?","acceptedAnswer":{"@type":"Answer","text":"We sign mutual NDAs, use encrypted connections and keep your data private to your business. For clinics we can design HIPAA-aware workflows."}},{"@type":"Question","name":"Do I own what you build?","acceptedAnswer":{"@type":"Answer","text":"For one-time builds like SaaS apps, automations and websites, you receive full source code and IP. Monthly AI plans include hosting, updates and ongoing tuning."}},{"@type":"Question","name":"Do you still build websites and apps?","acceptedAnswer":{"@type":"Answer","text":"Yes. We’ve shipped 285+ websites, mobile apps, online stores and brands, and website packages start at $499."}}]}</script>
 </head>
 <body data-page="home">
+<div class="boot" aria-hidden="true"><img src="assets/logo-mark-orange.png" alt=""></div>
 <canvas id="particles" aria-hidden="true"></canvas>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -268,12 +274,12 @@
       <p class="lead">Every AI we build is trained on how your business actually works: your services, your questions, your rules.</p>
     </div>
     <div class="ind">
-      <a href="#contact"><span class="n">01</span><h3>Medical &amp; dental clinics</h3><p>Book and reschedule appointments, answer insurance and hours questions, send reminders.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
-      <a href="#contact"><span class="n">02</span><h3>Law firms</h3><p>Screen new client inquiries, collect case details and schedule consultations after hours.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
-      <a href="#contact"><span class="n">03</span><h3>Home services &amp; contractors</h3><p>Capture every job request, quote common services and dispatch urgent calls to the crew.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+      <a href="ai-receptionist-dental-office.html"><span class="n">01</span><h3>Medical &amp; dental clinics</h3><p>Book and reschedule appointments, answer insurance and hours questions, send reminders.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+      <a href="ai-receptionist-law-firm.html"><span class="n">02</span><h3>Law firms</h3><p>Screen new client inquiries, collect case details and schedule consultations after hours.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+      <a href="ai-receptionist-hvac-contractors.html"><span class="n">03</span><h3>Home services &amp; contractors</h3><p>Capture every job request, quote common services and dispatch urgent calls to the crew.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
       <a href="#contact"><span class="n">04</span><h3>Logistics &amp; trucking</h3><p>Answer shipment status questions, take load requests and automate dispatch paperwork.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
-      <a href="#contact"><span class="n">05</span><h3>Real estate &amp; dealerships</h3><p>Qualify buyers, match them with listings or inventory and book showings and test drives.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
-      <a href="#contact"><span class="n">06</span><h3>Restaurants &amp; e-commerce</h3><p>Take reservations and orders, track deliveries and answer product questions 24/7.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+      <a href="ai-receptionist-real-estate.html"><span class="n">05</span><h3>Real estate &amp; dealerships</h3><p>Qualify buyers, match them with listings or inventory and book showings and test drives.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
+      <a href="ai-receptionist-restaurants.html"><span class="n">06</span><h3>Restaurants &amp; e-commerce</h3><p>Take reservations and orders, track deliveries and answer product questions 24/7.</p><span class="go"><svg class="icon"><use href="#i-ne"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -357,6 +363,7 @@
     </div>
     <div>
       <div class="q open"><button aria-expanded="true">What exactly is an AI receptionist?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></button><div class="a"><div><p>It’s a voice AI that answers your business phone in a natural voice. It follows a script we write with you, answers common questions, books appointments into your calendar, takes messages and texts you a summary of every call.</p></div></div></div>
+      <div class="q"><button aria-expanded="false">How much does an AI receptionist cost?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></button><div class="a"><div><p>AI receptionist plans start at $149/month plus a $299 one-time setup. The Business plan, at $299/month plus $499 setup, adds calendar booking, lead qualification and urgent call transfer.</p></div></div></div>
       <div class="q"><button aria-expanded="false">Can it use my existing phone number?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></button><div class="a"><div><p>Yes. You can forward your current number to the AI for all calls, only after hours, or only when your team doesn’t pick up. We can also set up a new local number.</p></div></div></div>
       <div class="q"><button aria-expanded="false">What happens if the AI can’t answer a question?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></button><div class="a"><div><p>It follows the rules you choose: transfer the call to your team, take a detailed message, or book a callback. Nothing gets lost.</p></div></div></div>
       <div class="q"><button aria-expanded="false">How long does it take to launch?<span class="pm"><svg class="icon"><use href="#i-plus"/></svg></span></button><div class="a"><div><p>Most AI receptionists and chatbots go live in 7–14 days, including writing the script, training on your business and testing with you. Larger SaaS and automation projects get a clear timeline at your free consultation.</p></div></div></div>
@@ -376,8 +383,8 @@
     </div>
     <div class="posts"><!--LATEST-POSTS-->
       <a class="post" href="blog/which-business-tasks-to-automate-first.html" data-cat="AI Automation"><span class="k"><b>AI Automation</b><span>5 min</span></span><h3>Which Business Tasks Should You Automate First? A Simple Checklist</h3><p>A simple way to find the repetitive work worth handing to AI: list your tasks, score them with five questions, and run a small pilot before you expand.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
+      <a class="post" href="blog/how-much-does-an-ai-receptionist-cost.html" data-cat="AI Receptionist"><span class="k"><b>AI Receptionist</b><span>5 min</span></span><h3>How Much Does an AI Receptionist Cost?</h3><p>What an AI receptionist costs per month, what setup fees cover, what changes the price, and how to compare it with a hired receptionist or answering service.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
       <a class="post" href="blog/how-fast-should-a-business-website-load.html" data-cat="Websites"><span class="k"><b>Websites</b><span>6 min</span></span><h3>How Fast Should a Business Website Load? Core Web Vitals Explained</h3><p>What Google’s Core Web Vitals measure, the targets your website should hit, and the most common fixes for a slow small-business site.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
-      <a class="post" href="blog/ai-chatbot-vs-live-chat.html" data-cat="AI Chatbots"><span class="k"><b>AI Chatbots</b><span>5 min</span></span><h3>AI Chatbot vs. Live Chat: Which Is Right for Your Website?</h3><p>A practical comparison of AI chatbots and human live chat, including costs, coverage and the hybrid setup most small businesses end up choosing.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
       <!--/LATEST-POSTS--></div>
   </div>
 </section>
@@ -438,8 +445,7 @@
       </div>
       <div><h4>AI services</h4><ul><li><a href="ai-receptionist.html">AI Receptionist</a></li><li><a href="services.html#ai-chatbots">AI Chatbots</a></li><li><a href="services.html#ai-saas">AI SaaS Applications</a></li><li><a href="services.html#ai-automation">AI Workflow Automation</a></li><li><a href="services.html#ai-sales">AI Sales Agents</a></li><li><a href="services.html#ai-knowledge">Knowledge Assistants</a></li></ul></div>
       <div><h4>Studio</h4><ul><li><a href="services.html#websites">Websites &amp; e-commerce</a></li><li><a href="services.html#apps">Mobile apps</a></li><li><a href="services.html#uiux">UI/UX design</a></li><li><a href="services.html#graphic">Graphic design</a></li><li><a href="services.html#branding">Logo &amp; branding</a></li><li><a href="services.html#video">Video editing</a></li><li><a href="services.html#3d">3D video animation</a></li><li><a href="services.html#marketing">Digital marketing &amp; SEO</a></li></ul></div>
-      <div><h4>Company</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="news.html">News</a></li>
-      <li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Blog</a></li><li><a href="#industries">Industries</a></li><li><a href="#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of service</a></li><li><a href="refund.html">Refund policy</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="pricing.html">Pricing</a></li><li><a href="blog.html">Blog</a></li><li><a href="news.html">News</a></li><li><a href="#industries">Industries</a></li><li><a href="#faq">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy policy</a></li><li><a href="terms.html">Terms of service</a></li><li><a href="refund.html">Refund policy</a></li></ul></div>
       <div class="sub">
         <h4>Monthly AI notes</h4>
         <form id="subForm" novalidate><label for="email" class="sr">Email address</label><input id="email" type="email" placeholder="you@company.com" autocomplete="email"><button type="submit">Subscribe</button></form>
@@ -449,7 +455,7 @@
     </div>
     <div class="giant" id="giant" aria-hidden="true">Texas WebCoders<span class="o">.</span></div>
     <div class="legal">
-      <span>© 2026 Texas WebCoders. All rights reserved.<span class="legal-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="refund.html">Refunds</a></span></span>
+      <span>© 2026 All rights reserved Texas WebCoders.<span class="legal-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="refund.html">Refunds</a></span></span>
       <span class="pay" aria-label="Accepted payment methods"><span>VISA</span><span>MASTERCARD</span><span>AMEX</span><span>PAYPAL</span><span>STRIPE</span></span>
     </div>
   </div>
@@ -552,6 +558,7 @@ function heroIntro() {
   rotateWords();
 }
 if (!reduce && hasGSAP) { gsap.set(['.h-in', ...heroPills, ...lineChars.flat()], {opacity:0}); gsap.set('.rw', {opacity:1}); gsap.set(rotChars.flat(), {opacity:0}); }
+if (reduce || !hasGSAP) root.classList.remove('booting');
 if (reduce) heroIntro();
 else if (window.navArrival) setTimeout(heroIntro, 760); // arriving from another page: the slats already played
 else {
@@ -561,6 +568,7 @@ else {
   const layers = Array.from({length:14}, (_, i) => `<img src="assets/logo-mark-orange.png" alt="" style="transform:translateZ(${(i - 7) * 1.4}px);filter:brightness(${i === 13 ? 1 : .5 + i * .02})">`).join('');
   ld.innerHTML = `<div class="ld-stage"><canvas class="ld-gl"></canvas><div class="ld-mid"><div class="ld-core"><div class="ld-3d">${layers}</div></div><div class="ld-name">${name}</div><span class="count" id="ldc">000</span></div></div>`;
   document.body.appendChild(ld);
+  root.classList.remove('booting'); document.querySelector('.boot').remove();
   const scene = window.introScene ? introScene(ld.querySelector('.ld-gl')) : null;
   const cnt = ld.querySelector('#ldc'), t0 = performance.now();
   (function tick(now) { const p = Math.min(1, (now - t0) / 2000), v = Math.round((1 - Math.pow(1 - p, 3)) * 100); cnt.textContent = String(v).padStart(3, '0'); if (p < 1) requestAnimationFrame(tick); })(t0);

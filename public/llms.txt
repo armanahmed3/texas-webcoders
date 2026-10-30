@@ -1,0 +1,32 @@
+# Texas WebCoders
+
+> Texas WebCoders is an AI and software studio serving businesses across Texas. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
+
+- Phone: +1 (903) 222-6022
+- Email: info@texaswebcoders.com
+- Address: 5221 S Broadway Ave, TX 75703
+- Hours: Monday to Friday, 8 AM to 6 PM Central Time
+- Track record: 285+ projects shipped
+- Launch time: most AI receptionists and chatbots go live in 7 to 14 days
+
+## Main pages
+
+- [AI Receptionist](https://texaswebcoders.com/ai-receptionist): voice AI that answers calls 24/7 and books appointments
+- [Services](https://texaswebcoders.com/services): all AI, web, design, video and marketing services
+- [Pricing](https://texaswebcoders.com/pricing): AI receptionist plans from $149/month plus $299 setup, chatbots from $99/month plus $299 setup, websites from $499
+- [Portfolio](https://texaswebcoders.com/portfolio): examples of completed work
+- [Contact](https://texaswebcoders.com/contact): book a free consultation
+
+## AI receptionist by industry
+
+- [Dental offices](https://texaswebcoders.com/ai-receptionist-dental-office)
+- [Law firms](https://texaswebcoders.com/ai-receptionist-law-firm)
+- [HVAC and contractors](https://texaswebcoders.com/ai-receptionist-hvac-contractors)
+- [Real estate agents](https://texaswebcoders.com/ai-receptionist-real-estate)
+- [Restaurants](https://texaswebcoders.com/ai-receptionist-restaurants)
+
+## Guides
+
+- [How much does an AI receptionist cost?](https://texaswebcoders.com/blog/how-much-does-an-ai-receptionist-cost)
+- [AI receptionist vs answering service](https://texaswebcoders.com/blog/ai-receptionist-vs-answering-service)
+- [What is an AI receptionist?](https://texaswebcoders.com/blog/what-is-an-ai-receptionist)
