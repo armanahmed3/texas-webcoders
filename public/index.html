@@ -450,6 +450,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="assets/plans.js"></script>
 <script src="assets/particles.js"></script>
+<script src="assets/intro.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/site.js"></script>
 <script src="assets/chat-widget.js" defer></script>
@@ -545,13 +546,15 @@ else {
   const ld = document.createElement('div');
   ld.className = 'loader'; ld.setAttribute('aria-hidden', 'true');
   const name = [...'TEXAS WEBCODERS'].map((c, i) => `<span style="--i:${i}">${c === ' ' ? '&nbsp;' : c}</span>`).join('');
-  const blinds = Array.from({length:9}, (_, i) => `<i style="--d:${Math.abs(i - 4)}"></i>`).join('');
-  ld.innerHTML = `<div class="ld-blinds">${blinds}</div><div class="ld-glow"></div><div class="ld-mid"><div class="ld-core"><svg class="ld-ring" viewBox="0 0 120 120"><circle cx="60" cy="60" r="57"/><circle class="p" cx="60" cy="60" r="57" pathLength="100"/></svg><img class="ld-mark" src="assets/logo-mark-orange.png" alt=""></div><div class="ld-name">${name}</div><span class="count" id="ldc">000</span></div>`;
+  const layers = Array.from({length:14}, (_, i) => `<img src="assets/logo-mark-orange.png" alt="" style="transform:translateZ(${(i - 7) * 1.4}px);filter:brightness(${i === 13 ? 1 : .5 + i * .02})">`).join('');
+  ld.innerHTML = `<div class="ld-stage"><canvas class="ld-gl"></canvas><div class="ld-mid"><div class="ld-core"><div class="ld-3d">${layers}</div></div><div class="ld-name">${name}</div><span class="count" id="ldc">000</span></div></div>`;
   document.body.appendChild(ld);
-  const cnt = ld.querySelector('#ldc'), ring = ld.querySelector('.p'), t0 = performance.now();
-  (function tick(now) { const p = Math.min(1, (now - t0) / 1800), v = Math.round((1 - Math.pow(1 - p, 3)) * 100); cnt.textContent = String(v).padStart(3, '0'); ring.style.strokeDashoffset = 100 - v; if (p < 1) requestAnimationFrame(tick); })(t0);
-  setTimeout(() => { ld.classList.add('out'); setTimeout(heroIntro, 260); }, 2000);
-  setTimeout(() => ld.remove(), 3500);
+  const scene = window.introScene ? introScene(ld.querySelector('.ld-gl')) : null;
+  const cnt = ld.querySelector('#ldc'), t0 = performance.now();
+  (function tick(now) { const p = Math.min(1, (now - t0) / 2000), v = Math.round((1 - Math.pow(1 - p, 3)) * 100); cnt.textContent = String(v).padStart(3, '0'); if (p < 1) requestAnimationFrame(tick); })(t0);
+  setTimeout(() => { scene && scene.burst(); }, 1750);
+  setTimeout(() => { ld.classList.add('out'); setTimeout(heroIntro, 280); }, 2200);
+  setTimeout(() => { scene && scene.stop(); ld.remove(); }, 3800);
 }
 /* ---------- nav ---------- */
 const hdr = document.getElementById('hdr'), burger = document.querySelector('.burger'), menu = document.getElementById('menu');

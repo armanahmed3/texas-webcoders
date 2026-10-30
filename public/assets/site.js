@@ -133,7 +133,7 @@
     gsap.ticker.add(t => lenis.raf(t * 1000));
   }
 
-  /* ---------- page transitions: 3D slats fold shut before leaving and fold open on load ---------- */
+  /* ---------- page transitions: an iris closes on a spinning 3D mark, then opens on the next page ---------- */
   // the head script marks arrivals from another page, so the dark curtain shows before anything else paints
   const arriving = window.navArrival = root.classList.contains('nav-in');
   let navLabel = '';
@@ -142,16 +142,15 @@
   const curtain = document.createElement('div');
   curtain.className = 'pt' + (startClosed ? '' : ' pt-out pt-instant');
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = Array.from({length:7}, (_, i) => `<b style="--d:${i}"></b>`).join('') + '<div class="pt-c"><div class="pt-mk"><svg viewBox="0 0 104 104"><circle cx="52" cy="52" r="48"/></svg><img src="assets/logo-mark-orange.png" alt=""></div><div class="pt-t"></div></div>';
+  curtain.innerHTML = '<div class="pt-c"><div class="pt-mk"><i></i><i></i><i></i><img src="assets/logo-mark-orange.png" alt=""></div><div class="pt-t"></div></div>';
   document.body.appendChild(curtain);
   root.classList.remove('nav-in');
-  const slats = [...curtain.querySelectorAll('b')], ptTitle = curtain.querySelector('.pt-t');
-  const slatOrder = fn => slats.forEach((b, i) => b.style.setProperty('--d', fn(i)));
+  const ptTitle = curtain.querySelector('.pt-t');
   ptTitle.textContent = navLabel;
-  // folded slats stay partly visible through the perspective, so the closed curtain must be hidden outright
+  // the open iris is fully transparent, but hide it outright so it can never block the page
   const hideCurtain = ms => setTimeout(() => { if (curtain.classList.contains('pt-out')) curtain.style.visibility = 'hidden'; }, ms);
   if (!startClosed) hideCurtain(0);
-  else { const wait = arriving ? 440 : 120; slatOrder(i => Math.abs(i - 3)); setTimeout(() => curtain.classList.add('pt-out'), wait); hideCurtain(wait + 900); }
+  else { const wait = arriving ? 440 : 120; setTimeout(() => curtain.classList.add('pt-out'), wait); hideCurtain(wait + 900); }
   // fetch the next page on hover so it opens as the slats finish
   const prefetched = new Set();
   if (finePointer) document.addEventListener('pointerover', e => {
@@ -170,7 +169,6 @@
     const label = a.textContent.replace(/\s+/g, ' ').trim();
     ptTitle.textContent = label.length <= 26 ? label : '';
     try { sessionStorage.twcNav = ptTitle.textContent || ' '; } catch {}
-    slatOrder(i => i);
     curtain.style.visibility = '';
     curtain.classList.remove('pt-instant', 'pt-out');
     const main = $('main');

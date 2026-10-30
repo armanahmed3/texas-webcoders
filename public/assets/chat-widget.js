@@ -20,9 +20,9 @@
   btn.innerHTML = `<span class="cw-open">${icons.chat}</span><span class="cw-shut">${icons.close}</span>`;
   const box = document.createElement('section');
   box.className = 'cw'; box.setAttribute('aria-label', 'Chat with Texas WebCoders AI assistant'); box.hidden = true;
-  box.innerHTML = `<header class="cw-top"><img src="assets/logo-mark-orange.png" alt=""><div><b>Texas WebCoders AI</b><small><i></i>Online · replies instantly</small></div>
+  box.innerHTML = `<div class="cw-top"><img src="assets/logo-mark-orange.png" alt=""><div><b>Texas WebCoders AI</b><small><i></i>Online · replies instantly</small></div>
       <a class="cw-voice" href="tel:+19032226022" data-talk aria-label="Talk to our AI by voice" title="Talk to our AI">${icons.mic}</a>
-      <button type="button" class="cw-x" aria-label="Close chat">${icons.close}</button></header>
+      <button type="button" class="cw-x" aria-label="Close chat">${icons.close}</button></div>
     <div class="cw-log" role="log" aria-live="polite" data-lenis-prevent></div>
     <div class="cw-chips"></div>
     <form class="cw-form"><input type="text" aria-label="Your message" placeholder="Ask anything…" maxlength="500" autocomplete="off"><button type="submit" aria-label="Send">${icons.send}</button></form>
