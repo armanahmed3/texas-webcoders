@@ -1013,3 +1013,23 @@ main.pt-leave{transition:transform .72s cubic-bezier(.76,0,.24,1),opacity .6s;tr
 }
 .st-grid>*,.work-grid>*,.cta-grid>*,.contact>*{min-width:0}
 @media (max-width:900px){.st-info h3{overflow-wrap:anywhere;font-size:clamp(1.8rem,8vw,2.6rem)}.st-info .big-n{font-size:2.6rem}}
+
+/* landing pages: moving service ticker, timeline text, stat band */
+.lp-mq{overflow:hidden;background:var(--dark);padding:15px 0}
+.lp-mq>div{display:flex;gap:44px;width:max-content;animation:lpMq 34s linear infinite}
+.lp-mq span{display:inline-flex;align-items:center;gap:44px;color:#fff;font:600 1rem var(--sans);white-space:nowrap}
+.lp-mq span::after{content:"";width:8px;height:8px;background:var(--accent);transform:rotate(45deg)}
+@keyframes lpMq{to{transform:translateX(-33.333%)}}
+.lp-more{margin-top:34px;color:var(--ink-2)}
+.lp-more a{color:var(--accent-ink);font-weight:700;text-decoration:underline}
+.lp-band{padding:clamp(56px,7vw,90px) 0}
+.nums.n3{grid-template-columns:repeat(3,1fr);margin-top:0;border-top:0}
+.nums.n3 strong{font-size:clamp(2.6rem,5vw,4.6rem)}
+.phero-side .stat{transition:transform .5s var(--ease)}
+.phero-side .stat:hover{transform:translateX(-8px)}
+@media (max-width:760px){.nums.n3{grid-template-columns:1fr}.nums.n3 div+div{padding-left:0;border-left:0}}
+@media (prefers-reduced-motion:reduce){.lp-mq>div{animation:none}}
+/* nav fits 9 links */
+.menu a{white-space:nowrap}
+@media (max-width:1500px) and (min-width:901px){.menu{gap:0}.menu a{padding:8px 8px;font-size:.86rem}.nav-right .btn{padding:.8em 1.1em;font-size:.86rem}}
+@media (max-width:1180px) and (min-width:901px){.nav-right .btn{display:none}}
