@@ -1031,5 +1031,25 @@ main.pt-leave{transition:transform .72s cubic-bezier(.76,0,.24,1),opacity .6s;tr
 @media (prefers-reduced-motion:reduce){.lp-mq>div{animation:none}}
 /* nav fits 9 links */
 .menu a{white-space:nowrap}
-@media (max-width:1500px) and (min-width:901px){.menu{gap:0}.menu a{padding:8px 8px;font-size:.86rem}.nav-right .btn{padding:.8em 1.1em;font-size:.86rem}}
-@media (max-width:1180px) and (min-width:901px){.nav-right .btn{display:none}}
+
+/* header system: same layout on every screen, logo never shrinks, always visible */
+header,header.hide{transform:none}
+header{background:rgba(255,255,255,.96);border-bottom-color:var(--line)}
+header .wrap.nav{width:100%;max-width:none;margin:0;padding:0 clamp(18px,3vw,56px);gap:clamp(12px,2vw,32px)}
+.brand{flex:none}
+.brand .logo{flex:none;display:block;height:42px;width:auto;max-width:none}
+.nav-right{flex:none}
+.nav-right .btn{white-space:nowrap}
+.menu{flex:1 1 auto;justify-content:center;min-width:0;gap:0}
+.menu a{padding:8px 11px;font-size:.92rem;white-space:nowrap}
+.menu a::after{left:11px;right:11px}
+@media (max-width:1440px){.menu a{padding:8px 8px;font-size:.87rem}.menu a::after{left:8px;right:8px}.nav-right .btn{font-size:.86rem;padding:.8em 1.1em}}
+@media (max-width:1280px){.brand .logo{height:38px}.menu a{padding:8px 6px;font-size:.82rem}.menu a::after{left:6px;right:6px}}
+@media (max-width:1180px){
+  .menu{display:none}
+  .burger{display:inline-flex}
+  .nav{position:relative}
+  .menu.open{display:flex;flex-direction:column;position:absolute;top:78px;left:0;right:0;margin:0 clamp(18px,3vw,56px);background:#fff;border:1px solid var(--line);border-radius:20px;padding:12px;box-shadow:0 30px 60px -30px rgba(13,13,13,.4);max-height:calc(100dvh - 100px);overflow-y:auto}
+  .menu.open a{padding:11px 12px;font-size:1rem}
+}
+@media (max-width:640px){.nav-right .btn{display:none}.brand .logo{height:34px}}
