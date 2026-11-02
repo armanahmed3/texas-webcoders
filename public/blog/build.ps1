@@ -43,6 +43,7 @@ foreach ($p in $posts) {
   $url = "$site/blog/$($p.slug)"
   $share = [uri]::EscapeDataString($url)
   $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; dateModified = $(if ($p.updated) { $p.updated } else { $p.date }); author = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/about" }; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/" }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
+  $faqLd = if ($p.faq) { '<script type="application/ld+json">' + (@{ '@context' = 'https://schema.org'; '@type' = 'FAQPage'; mainEntity = @($p.faq | ForEach-Object { @{ '@type' = 'Question'; name = $_.q; acceptedAnswer = @{ '@type' = 'Answer'; text = $_.a } } }) } | ConvertTo-Json -Depth 6 -Compress) + '</script>' } else { '' }
   $body = @"
 <div class="read-bar" aria-hidden="true"><i></i></div>
 <section class="phero post-hero" data-shape="layers" data-x="3.4" data-y="0.4" data-s="0.6" data-op="0.6">
@@ -73,7 +74,7 @@ foreach ($p in $posts) {
     <div class="posts">$(($related | ForEach-Object { Card $_ }) -join '')</div>
   </div>
 </section>
-<script type="application/ld+json">$ld</script>
+<script type="application/ld+json">$ld</script>$faqLd
 "@
   $pageTitle = if ("$($p.title) | Texas WebCoders".Length -le 60) { "$($p.title) | Texas WebCoders" } else { $p.title }
   $html = Page $pageTitle $p.description $url 'post' '<base href="../">' 'article' $body ''

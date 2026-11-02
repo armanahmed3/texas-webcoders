@@ -1079,3 +1079,6 @@ header .wrap.nav{width:100%;max-width:none;margin:0;padding:0 clamp(18px,3vw,56p
   .lp-table tbody th{width:100%;font-size:16px}
   .lp-table td::before{content:attr(data-label) ": ";font-weight:700;color:var(--ink)}
 }
+
+.post-grid>*{min-width:0}
+.prose .lp-table-wrap{margin:18px 0}
