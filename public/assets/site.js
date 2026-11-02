@@ -167,7 +167,7 @@
   // fetch the next page on hover so it opens as the slats finish
   const prefetched = new Set();
   if (finePointer) document.addEventListener('pointerover', e => {
-    const a = e.target.closest && e.target.closest('a[href$=".html"]');
+    const a = e.target.closest && e.target.closest('a[href$=".html"],a[href^="/"]');
     if (!a || a.origin !== location.origin || prefetched.has(a.href)) return;
     prefetched.add(a.href);
     const l = document.createElement('link'); l.rel = 'prefetch'; l.href = a.href; document.head.appendChild(l);
@@ -177,7 +177,7 @@
     if (!a || reduce || a.target || e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
     const url = new URL(a.href); // a.href is already resolved against <base>, which blog posts use
     const bare = p => p.replace(/\.html$/, '').replace(/\/index$/, '/');
-    if (url.origin !== location.origin || bare(url.pathname) === bare(location.pathname) || !/(\.html|\/)$/.test(url.pathname)) return;
+    if (url.origin !== location.origin || bare(url.pathname) === bare(location.pathname) || !/(\.html|\/|\/[^./]+)$/.test(url.pathname)) return;
     e.preventDefault();
     const label = a.textContent.replace(/\s+/g, ' ').trim();
     ptTitle.textContent = label.length <= 26 ? label : '';

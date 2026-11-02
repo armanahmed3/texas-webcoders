@@ -42,7 +42,7 @@ foreach ($p in $posts) {
   $related = $related | Select-Object -First 3
   $url = "$site/blog/$($p.slug)"
   $share = [uri]::EscapeDataString($url)
-  $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; author = @{ '@type' = 'Organization'; name = 'Texas WebCoders' }; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders' }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
+  $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; dateModified = $(if ($p.updated) { $p.updated } else { $p.date }); author = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/about" }; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/" }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
   $body = @"
 <div class="read-bar" aria-hidden="true"><i></i></div>
 <section class="phero post-hero" data-shape="layers" data-x="3.4" data-y="0.4" data-s="0.6" data-op="0.6">
@@ -75,7 +75,8 @@ foreach ($p in $posts) {
 </section>
 <script type="application/ld+json">$ld</script>
 "@
-  $html = Page "$($p.title) | Texas WebCoders Blog" $p.description $url 'post' '<base href="../">' 'article' $body ''
+  $pageTitle = if ("$($p.title) | Texas WebCoders".Length -le 60) { "$($p.title) | Texas WebCoders" } else { $p.title }
+  $html = Page $pageTitle $p.description $url 'post' '<base href="../">' 'article' $body ''
   [IO.File]::WriteAllText("$blog\$($p.slug).html", $html, $enc)
 }
 
@@ -107,7 +108,7 @@ $listBody = @"
   </div>
 </section>
 "@
-[IO.File]::WriteAllText("$root\blog.html", (Page 'AI Receptionist & Small Business AI Guides | Texas WebCoders' 'Plain-English guides on AI receptionists, AI chatbots, automation, websites and marketing for small businesses in Texas.' "$site/blog" 'blog' '' 'website' $listBody ''), $enc)
+[IO.File]::WriteAllText("$root\blog.html", (Page 'AI Receptionist & AI Guides | Texas WebCoders' 'Plain-English guides on AI receptionists, AI chatbots, automation, websites and marketing for small businesses in Texas.' "$site/blog" 'blog' '' 'website' $listBody ''), $enc)
 
 # ---------- posts.json index ----------
 $index = $posts | ForEach-Object { [ordered]@{ slug = $_.slug; title = $_.title; description = $_.description; category = $_.category; date = $_.date; readMins = $_.readMins; url = "blog/$($_.slug).html" } }
@@ -124,7 +125,7 @@ if ($homeHtml -match $pattern) {
 
 # ---------- sitemap + RSS ----------
 $pages = '','ai-receptionist','ai-calling-agent-texas','ai-receptionist-texas','ai-chatbot-texas','ai-automation-texas','web-design-texas','shopify-development-texas','custom-crm-development-texas','mobile-app-development-texas','ai-app-development-texas','ai-search-optimization-texas','ai-receptionist-roofing-texas','ai-receptionist-pest-control-texas','ai-receptionist-dental-office','ai-receptionist-law-firm','ai-receptionist-hvac-contractors','ai-receptionist-real-estate','ai-receptionist-restaurants','ai-receptionist-auto-repair','ai-receptionist-insurance-agents','ai-receptionist-medical-office','ai-receptionist-accountants','services','portfolio','case-studies','case-study-ai-lead-management','case-study-shopify-website-rebuild','case-study-crm-payroll-automation','pricing','blog','news','about','contact','terms','privacy','refund'
-$urls = ($pages | ForEach-Object { "  <url><loc>$site/$_</loc><lastmod>$($today.ToString('yyyy-MM-dd'))</lastmod></url>" }) + ($posts | ForEach-Object { "  <url><loc>$site/blog/$($_.slug)</loc><lastmod>$($_.date)</lastmod></url>" })
+$urls = ($pages | ForEach-Object { $f = if ($_) { "$root\$_.html" } else { "$root\index.html" }; "  <url><loc>$site/$_</loc><lastmod>$((Get-Item $f).LastWriteTime.ToString('yyyy-MM-dd'))</lastmod></url>" }) + ($posts | ForEach-Object { "  <url><loc>$site/blog/$($_.slug)</loc><lastmod>$($_.date)</lastmod></url>" })
 [IO.File]::WriteAllText("$root\sitemap.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n$($urls -join "`n")`n</urlset>`n", $enc)
 $items = $posts | Select-Object -First 20 | ForEach-Object { "  <item><title>$(& $H $_.title)</title><link>$site/blog/$($_.slug)</link><guid>$site/blog/$($_.slug)</guid><pubDate>$($_.when.ToString('ddd, dd MMM yyyy 09:00:00 -0600', $us))</pubDate><category>$(& $H $_.category)</category><description>$(& $H $_.description)</description></item>" }
 [IO.File]::WriteAllText("$root\feed.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<rss version=`"2.0`"><channel>`n  <title>Texas WebCoders Blog</title><link>$site/blog</link><description>AI, websites and growth guides for small businesses.</description>`n$($items -join "`n")`n</channel></rss>`n", $enc)
