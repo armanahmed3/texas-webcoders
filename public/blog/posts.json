@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "how-to-create-an-ai-chatbot-for-your-website",
+        "title":  "How to Create an AI Chatbot for Your Website",
+        "description":  "A step-by-step guide to creating an AI chatbot for your website: goals, training, tools, testing, costs, and when to build it yourself or hire a team.",
+        "category":  "AI Chatbots",
+        "date":  "2026-11-03",
+        "readMins":  7,
+        "url":  "blog/how-to-create-an-ai-chatbot-for-your-website.html"
+    },
+    {
         "slug":  "ai-receptionist-wylie-tx",
         "title":  "AI Receptionist in Wylie, TX: Cost and Local Guide",
         "description":  "An AI receptionist in Wylie, Texas answers calls 24/7 in English and Spanish, books jobs and starts at $149/month. See local data and pricing.",
@@ -662,7 +671,7 @@
         "description":  "An AI receptionist in El Paso, Texas answers calls 24/7 in English and Spanish, books jobs and starts at $149/month. See local data and pricing.",
         "category":  "Texas Cities",
         "date":  "2026-11-03",
-        "readMins":  6,
+        "readMins":  8,
         "url":  "blog/ai-receptionist-el-paso-tx.html"
     },
     {
@@ -810,6 +819,15 @@
         "url":  "blog/ai-receptionist-carrollton-tx.html"
     },
     {
+        "slug":  "ai-receptionist-buyers-guide",
+        "title":  "AI Receptionist Buyer\u0027s Guide: Cost, Features and How to Choose",
+        "description":  "What an AI receptionist does, what it costs, which features matter and how to compare AI receptionist providers, reviews, free trials and data privacy.",
+        "category":  "AI Receptionist",
+        "date":  "2026-11-03",
+        "readMins":  9,
+        "url":  "blog/ai-receptionist-buyers-guide.html"
+    },
+    {
         "slug":  "ai-receptionist-burleson-tx",
         "title":  "AI Receptionist in Burleson, TX: Cost and Local Guide",
         "description":  "An AI receptionist in Burleson, Texas answers calls 24/7 in English and Spanish, books jobs and starts at $149/month. See local data and pricing.",
@@ -907,6 +925,15 @@
         "date":  "2026-11-03",
         "readMins":  6,
         "url":  "blog/ai-receptionist-abilene-tx.html"
+    },
+    {
+        "slug":  "ai-lead-generation-for-small-business",
+        "title":  "AI Lead Generation for Small Businesses: Tools and How It Works",
+        "description":  "How AI lead generation works for small businesses: the main AI lead generation tools, what they cost, how to choose and mistakes to avoid.",
+        "category":  "AI Automation",
+        "date":  "2026-11-03",
+        "readMins":  7,
+        "url":  "blog/ai-lead-generation-for-small-business.html"
     },
     {
         "slug":  "is-an-ai-receptionist-worth-it",
