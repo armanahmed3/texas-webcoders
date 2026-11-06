@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "ai-voice-agent-pricing",
+        "title":  "AI Voice Agent Pricing: How It Works and What to Budget",
+        "description":  "AI voice agent pricing explained: per-minute, per-call and monthly plans, the costs that are easy to miss, and how to estimate your minutes before you buy.",
+        "category":  "AI Receptionist",
+        "date":  "2026-11-06",
+        "readMins":  5,
+        "url":  "blog/ai-voice-agent-pricing.html"
+    },
+    {
         "slug":  "ai-voice-agent-for-small-business",
         "title":  "AI Voice Agent for Small Business: What It Does and How to Start",
         "description":  "What an AI voice agent for small business can do, where it fits, the guardrails it needs, and a simple step-by-step plan to set one up and check its work.",
