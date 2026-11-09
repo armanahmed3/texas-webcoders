@@ -279,7 +279,7 @@ section{scroll-margin-top:90px}
 .plan{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:32px 28px;display:flex;flex-direction:column;transform-style:preserve-3d;transition:transform .7s var(--ease),opacity .4s;transition-delay:calc(var(--d,0) * 70ms)}
 .plan.flipout{transform:rotateY(-90deg) translateZ(40px);opacity:0}
 .plan.best{background:var(--dark);color:#fff;border-color:var(--dark)}
-.plan .ribbon{position:absolute;top:24px;right:24px;background:var(--accent);color:#fff;font:500 .62rem var(--mono);letter-spacing:.14em;padding:6px 10px;border-radius:999px}
+.plan .ribbon{position:absolute;top:24px;right:24px;background:var(--accent-ink);color:#fff;font:500 .62rem var(--mono);letter-spacing:.14em;padding:6px 10px;border-radius:999px}
 .plan h3{font-size:1.45rem;letter-spacing:-.03em;line-height:1.1;padding-right:80px}
 .plan .desc{font-size:.93rem;color:var(--ink-2);margin-top:12px;min-height:4.3em}
 .plan.best .desc{color:var(--on-dark)}
@@ -296,10 +296,10 @@ section{scroll-margin-top:90px}
 .plan li{display:flex;gap:10px;align-items:flex-start}
 .plan li .icon{width:18px;height:18px;color:var(--accent);margin-top:2px;stroke-width:2.6}
 .plan .btn{justify-content:center}
-.plan.best .btn-dark{background:var(--accent)}
+.plan.best .btn-dark{background:var(--accent-ink)}
 .plan.best .btn-dark:hover{background:#fff;color:var(--ink)}
 .price-note{text-align:center;margin-top:34px;color:var(--ink-2)}
-.price-note a{color:var(--accent-ink);font-weight:700;text-decoration:underline;text-underline-offset:4px}
+.price-note a{color:#C2370A;font-weight:700;text-decoration:underline;text-underline-offset:4px}
 
 /* faq */
 .faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,6vw,90px);align-items:start}

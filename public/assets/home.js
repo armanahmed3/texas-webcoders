@@ -77,8 +77,8 @@ function heroIntro() {
   window.particleIntro && particleIntro();
   if (!hasGSAP) return;
   const R = gsap.utils.random;
+  if (performance.now() > 1200) { rotateWords(); return; } // slower loads: keep the first screen still
   window.scrambleText && scrambleText(document.getElementById('hero-tag'));
-  if (performance.now() > 1500) { rotateWords(); return; }
   const tl = gsap.timeline({defaults:{ease:'expo.out'}});
   tl.fromTo([lineChars[0], rotChars[0], lineChars[1]].flat(), {z:() => R(-900, -300), x:() => R(-160, 160), y:() => R(-90, 120), rotateX:() => R(-120, 120), rotateY:() => R(-120, 120), transformPerspective:900},
       {z:0, x:0, y:0, rotateX:0, rotateY:0, duration:1.7, stagger:{each:.016, from:'center'}}, .15)
@@ -247,7 +247,8 @@ const runCount = el => {
   const t0 = performance.now(), dur = reduce ? 0 : 1800;
   (function tick(now) { const k = dur ? Math.min(1, (now - t0) / dur) : 1, v = end * (1 - Math.pow(1 - k, 4)); el.innerHTML = pre + v.toFixed(dec) + sup; if (k < 1) requestAnimationFrame(tick); })(t0);
 };
-const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { cio.unobserve(e.target); runCount(e.target); } }), {threshold:.4});
+// numbers already on screen when the page opens stay as they are; the rest count up when scrolled into view
+const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { cio.unobserve(e.target); if (performance.now() > 2500) runCount(e.target); } }), {threshold:.4});
 counters.forEach(c => cio.observe(c));
 
 /* ---------- GSAP scroll choreography (set up on first interaction) ---------- */
