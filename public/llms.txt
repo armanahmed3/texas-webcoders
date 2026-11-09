@@ -3,7 +3,6 @@
 > Texas WebCoders (also written Texas Web Coders) is an AI agency in Texas serving businesses across the state. It builds AI receptionists, AI chatbots, workflow automation and AI-powered SaaS, plus websites, mobile apps, branding, video and marketing.
 
 - Founded: 2019
-- Founders: Richard Growden, Peter Califf and Michael Jack
 - Phone: +1 (903) 222-6022
 - Email: info@texaswebcoders.com
 - Address: 5221 S Broadway Ave, Tyler, TX 75703
@@ -19,7 +18,7 @@
 - [Pricing](https://texaswebcoders.com/pricing): AI receptionist plans from $149/month plus $299 setup, chatbots from $99/month plus $299 setup, websites from $499
 - [Portfolio](https://texaswebcoders.com/portfolio): examples of completed work
 - [Contact](https://texaswebcoders.com/contact): book a free consultation
-- [About](https://texaswebcoders.com/about): founders, history and how we work
+- [About](https://texaswebcoders.com/about): history and how we work
 - [AI receptionist buyer's guide](https://texaswebcoders.com/blog/ai-receptionist-buyers-guide): cost, features and how to compare providers
 - [What is an AI receptionist?](https://texaswebcoders.com/blog/what-is-an-ai-receptionist): plain-English explainer
 

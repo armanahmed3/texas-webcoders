@@ -3,7 +3,6 @@
 window.TWC_KB = {
   tabs: {recep:'AI Receptionist', chat:'AI Chatbot', auto:'AI Automation', saas:'AI SaaS', web:'Websites', ecom:'E-commerce', app:'Mobile Apps', brand:'Logo & Branding', graphic:'Graphic Design', video:'Video & 3D Animation', grow:'SEO & Marketing'},
   items: [
-    {keys:['founder','founders','who started','who owns','owner','owners','who founded'], a:'Texas WebCoders was founded in 2019 by Richard Growden, Peter Califf and Michael Jack. Learn more on our [About page](about.html).'},
     {keys:['phone','call you','number','email','contact','reach','address','location','located','where are you','office'], a:'You can reach Texas WebCoders at (903) 222-6022 or info@texaswebcoders.com. The studio is at 5221 S Broadway Ave, TX 75703.'},
     {keys:['hours','open','closed','weekend','business hours'], a:'Our team is available Monday to Friday, 8 AM to 6 PM Central Time. The AI assistant and voice agent are available 24/7.'},
     {keys:['services','what do you do','offer','help with','what can you'], a:'We build AI receptionists, AI chatbots, workflow automation, AI SaaS applications, AI sales agents and knowledge assistants. We also do websites, e-commerce, mobile apps, UI/UX, graphic design, logos, video editing, 3D animation, SEO and marketing. See all [services](services.html).'},
