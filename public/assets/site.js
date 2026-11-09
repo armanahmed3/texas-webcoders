@@ -22,7 +22,7 @@
   // the WebGL particle background loads only after that first interaction
   if (!reduce && document.getElementById('particles')) whenActive(() => {
     const add = (src, cb) => { const el = document.createElement('script'); el.src = src; el.onload = cb; document.head.appendChild(el); };
-    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p2'));
+    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p3'));
   });
   /* ---------- Stripe checkout for fixed-price plans (api/checkout.js); falls back to the plan's contact link ---------- */
   document.addEventListener('click', async e => {
@@ -45,6 +45,19 @@
     }
   });
 
+  /* ---------- tools for AI agents (WebMCP, where the browser supports it) ---------- */
+  try {
+    const mc = navigator.modelContext;
+    if (mc && mc.registerTool) {
+      const text = t => ({content:[{type:'text', text:t}]});
+      mc.registerTool({name:'get_pricing', description:'List Texas WebCoders plans and prices for AI receptionists, chatbots, automation, websites and apps.', inputSchema:{type:'object', properties:{}}, execute: async () => text(JSON.stringify(window.PLANS || {}))});
+      mc.registerTool({name:'search_faq', description:'Search the questions and answers shown on this page.', inputSchema:{type:'object', properties:{query:{type:'string', description:'Words to look for'}}, required:['query']}, execute: async ({query}) => {
+        const q = String(query || '').toLowerCase();
+        const items = $$('.q, .qa h3').map(x => x.matches('.q') ? {q:(x.querySelector('button') || x).textContent.trim(), a:(x.querySelector('.a') || x).textContent.trim()} : {q:x.textContent.trim(), a:(x.nextElementSibling ? x.nextElementSibling.textContent.trim() : '')});
+        return text(JSON.stringify(items.filter(i => (i.q + ' ' + i.a).toLowerCase().includes(q)).slice(0, 8)));
+      }});
+    }
+  } catch (err) { console.warn('WebMCP tools unavailable', err); }
   /* ---------- live news cards ([data-news="how many"]), filled from api/news.js ---------- */
   const newsBoxes = $$('[data-news]');
   if (newsBoxes.length) {

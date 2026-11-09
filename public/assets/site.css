@@ -273,7 +273,7 @@ section{scroll-margin-top:90px}
 .ptabs button{font:700 .92rem var(--sans);border:0;background:none;color:var(--ink-2);padding:11px 18px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .25s}
 .ptabs button:hover{color:var(--ink);background:var(--paper)}
 .ptabs button[aria-selected="true"]{background:var(--ink);color:#fff}
-.ptabs button .ai{font:500 .6rem var(--mono);color:var(--accent);margin-left:6px;vertical-align:2px}
+.ptabs button .ai{font:500 .6rem var(--mono);color:var(--accent-ink);margin-left:6px;vertical-align:2px}
 .ptabs button[aria-selected="true"] .ai{color:var(--accent)}
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;perspective:1600px}
 .plan{position:relative;background:#fff;border:1px solid var(--line);border-radius:28px;padding:32px 28px;display:flex;flex-direction:column;transform-style:preserve-3d;transition:transform .7s var(--ease),opacity .4s;transition-delay:calc(var(--d,0) * 70ms)}
@@ -1082,3 +1082,8 @@ header .wrap.nav{width:100%;max-width:none;margin:0;padding:0 clamp(18px,3vw,56p
 
 .post-grid>*{min-width:0}
 .prose .lp-table-wrap{margin:18px 0}
+
+/* skip link, quick answers, last-updated note */
+.skip-link{position:absolute;left:16px;top:-60px;z-index:1000;padding:10px 16px;border-radius:999px;background:var(--ink);color:#fff;font:700 .9rem var(--sans);text-decoration:none;transition:top .2s}.skip-link:focus{top:16px}
+.qa h3{margin-top:26px}.qa .qa-a{max-width:68ch}.qa-dl{display:grid;grid-template-columns:minmax(140px,auto) 1fr;gap:10px 22px;margin:14px 0 0}.qa-dl dt{font-weight:800}.qa-dl dd{margin:0;color:var(--ink-2)}@media(max-width:640px){.qa-dl{grid-template-columns:1fr;gap:4px}.qa-dl dd{margin-bottom:10px}}
+.legal-upd{margin-right:14px;color:#8A8A92}
