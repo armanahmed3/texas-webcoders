@@ -257,8 +257,8 @@ counters.forEach(c => cio.observe(c));
 if (hasGSAP) whenActive(() => {
   // 3D word reveals on every section heading
   document.querySelectorAll('.split').forEach(h => {
-    const cs = charSplit(h);
-    gsap.from(cs, {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.012, scrollTrigger:{trigger:h, start:'top 86%'}});
+    const cs = wordSplit(h);
+    gsap.from(cs, {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.06, scrollTrigger:{trigger:h, start:'top 86%'}});
   });
   // generic 3D rise for leads, tags, cards
   gsap.utils.toArray('.head .lead, .tag:not(.h-in), .post, .ind a, .step, .q, .cinfo > *, .form').forEach(el => {
@@ -349,7 +349,7 @@ if (hasGSAP) whenActive(() => {
 const plans = window.PLANS;
 const plansEl = document.getElementById('plans');
 const money = n => '$' + n.toLocaleString();
-const planHTML = (p, i, key) => `<article class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}"${PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : ''}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></article>`;
+const planHTML = (p, i, key) => `<div class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}"${PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : ''}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></div>`;
 function renderPlans(key, animate) {
   const draw = () => {
     plansEl.innerHTML = plans[key].map((p, i) => planHTML(p, i, key)).join('');

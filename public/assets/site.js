@@ -21,7 +21,7 @@
   };
   // the WebGL particle background loads only after that first interaction
   if (!reduce && document.getElementById('particles')) whenActive(() => {
-    const add = (src, cb) => { const el = document.createElement('script'); el.src = src; el.onload = cb; document.head.appendChild(el); };
+    const add = (src, cb) => { const el = document.createElement('script'); el.async = true; el.src = src; el.onload = cb; document.head.appendChild(el); };
     add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p3'));
   });
   /* ---------- Stripe checkout for fixed-price plans (api/checkout.js); falls back to the plan's contact link ---------- */
@@ -48,7 +48,7 @@
   /* ---------- tools for AI agents (WebMCP, where the browser supports it) ---------- */
   try {
     const mc = navigator.modelContext;
-    if (mc && mc.registerTool) {
+    if (mc && mc.registerTool && !window.__webmcp) {
       const text = t => ({content:[{type:'text', text:t}]});
       mc.registerTool({name:'get_pricing', description:'List Texas WebCoders plans and prices for AI receptionists, chatbots, automation, websites and apps.', inputSchema:{type:'object', properties:{}}, execute: async () => text(JSON.stringify(window.PLANS || {}))});
       mc.registerTool({name:'search_faq', description:'Search the questions and answers shown on this page.', inputSchema:{type:'object', properties:{query:{type:'string', description:'Words to look for'}}, required:['query']}, execute: async ({query}) => {
@@ -58,6 +58,18 @@
       }});
     }
   } catch (err) { console.warn('WebMCP tools unavailable', err); }
+  /* ---------- blog search: /blog?q=words filters the article list ---------- */
+  const bq = new URLSearchParams(location.search).get('q');
+  if (bq && document.querySelector('.blog-list')) {
+    const words = bq.toLowerCase().split(/\s+/).filter(Boolean);
+    const cards = $$('.blog-list .post');
+    let shown = 0;
+    cards.forEach(c => { const hit = words.every(w => c.textContent.toLowerCase().includes(w)); c.hidden = !hit; if (hit) shown++; });
+    const note = document.createElement('p'); note.className = 'news-note'; note.setAttribute('role', 'status');
+    note.textContent = shown ? `Showing ${shown} article${shown === 1 ? '' : 's'} for "${bq}".` : `No articles match "${bq}". Try a shorter search.`;
+    document.querySelector('.blog-list').before(note);
+  }
+
   /* ---------- live news cards ([data-news="how many"]), filled from api/news.js ---------- */
   const newsBoxes = $$('[data-news]');
   if (newsBoxes.length) {
@@ -85,6 +97,22 @@
         const w = document.createElement('span'); w.className = 'wd';
         [...part].forEach(ch => { const c = document.createElement('span'); c.className = 'c'; c.textContent = ch; w.appendChild(c); out.push(c); });
         frag.appendChild(w);
+      });
+      n.replaceWith(frag);
+    });
+    walk(el); return out;
+  };
+  // wraps every word in a span and returns them (far fewer elements than per-letter splitting)
+  const wordSplit = window.wordSplit = el => {
+    const out = [];
+    const walk = node => [...node.childNodes].forEach(n => {
+      if (n.nodeType === 1) return walk(n);
+      if (n.nodeType !== 3 || !n.textContent) return;
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(part => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) return frag.appendChild(document.createTextNode(' '));
+        const w = document.createElement('span'); w.className = 'wd'; w.textContent = part; frag.appendChild(w); out.push(w);
       });
       n.replaceWith(frag);
     });
@@ -236,9 +264,9 @@
   };
   if (hasGSAP) whenActive(() => {
     $$('main .lead, .srv p, .value p, .step p, .big-quote').forEach(el => {
-      if (el.closest('.hero, .phero, .pin-spacer, .svc, .scard, .plan') || el.matches('.h-in, .p-in')) return;
-      const words = wordSpans(el);
-      if (words.length) gsap.fromTo(words, {opacity:.1, y:20, skewX:-14}, {opacity:1, y:0, skewX:0, ease:'none', stagger:.05, scrollTrigger:{trigger:el, start:'top 90%', end:'top 58%', scrub:true}});
+      if (el.closest('.hero, .phero, .pin-spacer, .svc, .scard, .plan, #quick-answers, #reviews') || el.matches('.h-in, .p-in')) return;
+      // whole paragraphs light up (one element each keeps the page light)
+      gsap.fromTo(el, {opacity:.15, y:24}, {opacity:1, y:0, ease:'none', scrollTrigger:{trigger:el, start:'top 92%', end:'top 62%', scrub:true}});
     });
   });
 
@@ -325,7 +353,7 @@
     whenActive(() => {
     // 3D word reveals on section headings
     $$('.split').forEach(h => {
-      gsap.from(charSplit(h), {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.012, scrollTrigger:{trigger:h, start:'top 86%'}});
+      gsap.from(wordSplit(h), {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.06, scrollTrigger:{trigger:h, start:'top 86%'}});
     });
     $$('.rise, .value, .form, .office, .srv-media').forEach(el => gsap.from(el, {y:60, rotateX:12, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}}));
     const gw = $('#giant') ? splitWords($('#giant')) : [];
