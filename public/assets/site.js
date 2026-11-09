@@ -9,7 +9,21 @@
   const MEDIA = 'https://texaswebcoders.com/portfolio-media/texaswebcoders/';
   const $ = s => document.querySelector(s);
   const $$ = s => [...document.querySelectorAll(s)];
-
+  // heavy effects start on the visitor's first interaction, so the page itself paints and responds at once
+  const whenActive = window.whenActive = fn => {
+    if (window.__active) return void fn();
+    (window.__activeQ = window.__activeQ || []).push(fn);
+    if (window.__activeHooked) return;
+    window.__activeHooked = true;
+    const evs = ['pointermove', 'pointerdown', 'touchstart', 'wheel', 'scroll', 'keydown'];
+    const go = () => { evs.forEach(e => removeEventListener(e, go, {passive:true})); window.__active = true; const q = window.__activeQ; window.__activeQ = []; q.forEach(f => { try { f(); } catch (err) { console.error(err); } }); };
+    evs.forEach(e => addEventListener(e, go, {passive:true}));
+  };
+  // the WebGL particle background loads only after that first interaction
+  if (!reduce && document.getElementById('particles')) whenActive(() => {
+    const add = (src, cb) => { const el = document.createElement('script'); el.src = src; el.onload = cb; document.head.appendChild(el); };
+    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p1'));
+  });
   /* ---------- Stripe checkout for fixed-price plans (api/checkout.js); falls back to the plan's contact link ---------- */
   document.addEventListener('click', async e => {
     const a = e.target.closest('[data-checkout]');
@@ -75,7 +89,7 @@
       if (f >= total) { clearInterval(timer); el.textContent = text; }
     }, 28);
   };
-  if (hasGSAP) addEventListener('load', () => $$('.tag').forEach(el => { if (!el.closest('.hero')) ScrollTrigger.create({trigger:el, start:'top 92%', once:true, onEnter:() => scrambleText(el)}); }));
+  if (hasGSAP) whenActive(() => $$('.tag').forEach(el => { if (!el.closest('.hero')) ScrollTrigger.create({trigger:el, start:'top 92%', once:true, onEnter:() => scrambleText(el)}); }));
 
   /* ---------- leads: our SMTP function first, FormSubmit (the old site's service) when SMTP isn't available ---------- */
   window.sendLead = async data => {
@@ -140,11 +154,11 @@
   if (oldRoute) location.replace(`${oldRoute[1]}.html`);
 
   /* ---------- smooth scrolling; ScrollTrigger reads the same position, so scrubs stay locked to it ---------- */
-  if (hasGSAP && window.Lenis) {
+  if (hasGSAP && window.Lenis) whenActive(() => {
     const lenis = window.lenis = new Lenis({lerp:.1, wheelMultiplier:1, anchors:{offset:-90}});
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(t => lenis.raf(t * 1000));
-  }
+  });
 
   /* ---------- page transitions: an iris closes on a spinning 3D mark, then opens on the next page ---------- */
   // the head script marks arrivals from another page, so the dark curtain shows before anything else paints
@@ -155,7 +169,7 @@
   const curtain = document.createElement('div');
   curtain.className = 'pt' + (startClosed ? '' : ' pt-out pt-instant');
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<div class="pt-c"><div class="pt-mk"><i></i><i></i><i></i><img src="assets/logo-mark-orange.png" alt=""></div><div class="pt-t"></div></div>';
+  curtain.innerHTML = '<div class="pt-c"><div class="pt-mk"><i></i><i></i><i></i><img src="assets/logo-mark-orange.webp" alt="" width="168" height="149"></div><div class="pt-t"></div></div>';
   document.body.appendChild(curtain);
   root.classList.remove('nav-in');
   const ptTitle = curtain.querySelector('.pt-t');
@@ -207,7 +221,7 @@
     });
     walk(el); return out;
   };
-  if (hasGSAP) addEventListener('load', () => {
+  if (hasGSAP) whenActive(() => {
     $$('main .lead, .srv p, .value p, .step p, .big-quote').forEach(el => {
       if (el.closest('.hero, .phero, .pin-spacer, .svc, .scard, .plan') || el.matches('.h-in, .p-in')) return;
       const words = wordSpans(el);
@@ -228,7 +242,7 @@
   }, {passive:true});
 
   /* ---------- big headings lean toward the pointer ---------- */
-  if (hasGSAP && finePointer) addEventListener('load', () => {
+  if (hasGSAP && finePointer) whenActive(() => {
     const heads = $$('.hero h1, .phero h1');
     if (!heads.length) return;
     gsap.set(heads, {transformPerspective:1100, transformStyle:'preserve-3d'});
@@ -237,7 +251,7 @@
   });
 
   /* ---------- sections sink back in 3D as the next one arrives (desktop; skips pinned and sticky sections) ---------- */
-  if (hasGSAP) addEventListener('load', () => gsap.matchMedia().add('(min-width: 901px)', () => {
+  if (hasGSAP) whenActive(() => gsap.matchMedia().add('(min-width: 901px)', () => {
     $$('main > section').forEach(sec => {
       if (sec.matches('.hero, .phero, .band, .cta, .work, [id="band"]') || sec.querySelector('.pin-spacer, .scard')) return;
       if (sec.closest('.pin-spacer') || sec.offsetHeight < innerHeight * .5) return;
@@ -287,14 +301,15 @@
   if (hasGSAP) {
     const tl = gsap.timeline({delay:.45, defaults:{ease:'expo.out'}});
     const heroCh = $$('.phero h1 .ln > span').flatMap(charSplit);
-    if (heroCh.length) tl.from(heroCh, {yPercent:120, rotateX:-100, transformPerspective:700, transformOrigin:'50% 100%', opacity:0, duration:1.1, ease:'back.out(1.5)', stagger:.018});
+    if (heroCh.length) tl.from(heroCh, {yPercent:120, rotateX:-100, transformPerspective:700, transformOrigin:'50% 100%', duration:1.1, ease:'back.out(1.5)', stagger:.018});
     tl
-      .from('.phero .p-in', {y:30, z:-120, rotateX:-18, transformPerspective:900, opacity:0, duration:1.3, stagger:.08}, .2);
+      .from('.phero .p-in', {y:30, z:-120, rotateX:-18, transformPerspective:900, duration:1.3, stagger:.08}, .2);
     if ($('.phero .p-card')) tl.from('.phero .p-card', {opacity:0, rotateY:-40, rotateX:18, z:-300, x:60, transformPerspective:1200, duration:1.8}, .3);
     // headings without line wrappers (e.g. blog posts) rise in as a whole
-    $$('.phero h1').forEach(h => { if (!h.querySelector('.ln')) gsap.from(h, {y:40, opacity:0, rotateX:-30, transformPerspective:800, duration:1.3, delay:.45, ease:'expo.out'}); });
+    $$('.phero h1').forEach(h => { if (!h.querySelector('.ln')) gsap.from(h, {y:40, rotateX:-30, transformPerspective:800, duration:1.3, delay:.45, ease:'expo.out'}); });
     gsap.to('.phero .wrap', {yPercent:-10, opacity:.15, ease:'none', scrollTrigger:{trigger:'.phero', start:'top top', end:'bottom top', scrub:true}});
 
+    whenActive(() => {
     // 3D word reveals on section headings
     $$('.split').forEach(h => {
       gsap.from(charSplit(h), {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.012, scrollTrigger:{trigger:h, start:'top 86%'}});
@@ -322,7 +337,8 @@
         .to('.booked', {opacity:1, y:0, z:0, rotateX:0, duration:.7, ease:'back.out(1.6)'})
         .to('#phone', {rotateY:16, rotateX:-4, duration:1, ease:'power1.inOut'});
     });
-    addEventListener('load', () => ScrollTrigger.refresh());
+    ScrollTrigger.refresh();
+    });
   }
 
   /* ---------- generated sound bars ---------- */
