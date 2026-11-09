@@ -25,7 +25,7 @@
       <button type="button" class="cw-x" aria-label="Close chat">${icons.close}</button></div>
     <div class="cw-log" role="log" aria-live="polite" data-lenis-prevent></div>
     <div class="cw-chips"></div>
-    <form class="cw-form"><input type="text" aria-label="Your message" placeholder="Ask anything…" maxlength="500" autocomplete="off" name="message"><button type="submit" aria-label="Send">${icons.send}</button></form>
+    <form class="cw-form" toolname="chat_with_assistant" tooldescription="Chat with Texas WebCoders AI assistant to ask questions or get assistance."><input type="text" aria-label="Your message" toolparamdescription="User question or message to the AI assistant" placeholder="Ask anything…" maxlength="500" autocomplete="off" name="message"><button type="submit" aria-label="Send">${icons.send}</button></form>
     <p class="cw-note">AI assistant, can make mistakes. <a href="privacy.html">Privacy</a></p>`;
   document.body.append(box, btn);
   const log = box.querySelector('.cw-log'), chipsEl = box.querySelector('.cw-chips'), form = box.querySelector('.cw-form'), input = form.querySelector('input');

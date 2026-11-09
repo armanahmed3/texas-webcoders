@@ -51,11 +51,11 @@ const splitWords = el => {
   const world = document.getElementById('wworld');
   for (let c = 0; c < 4; c++) {
     const col = document.createElement('div'); col.className = 'w-col'; col.dataset.dir = c % 2 ? 1 : -1;
-    col.innerHTML = shots.slice(c * 5, c * 5 + 5).map(([s, l], i) => `<figure class="shot" style="--h:${hs[(i + c) % 5]}px"><img decoding="async" data-src="${MEDIA + s}"${dimAttr(s)} alt=""><figcaption>${l}</figcaption></figure>`).join('');
+    col.innerHTML = shots.slice(c * 5, c * 5 + 5).map(([s, l], i) => `<figure class="shot" style="--h:${hs[(i + c) % 5]}px"><img loading="lazy" decoding="async" data-src="${MEDIA + s}"${dimAttr(s)} alt=""><figcaption>${l}</figcaption></figure>`).join('');
     world.appendChild(col);
   }
   // native lazy loading never fires on this tilted 3D wall, so images load as the section approaches
-  new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); world.querySelectorAll('img').forEach(i => { i.src = i.dataset.src; }); } }, {rootMargin:'900px 0px'}).observe(document.getElementById('work'));
+  new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); world.querySelectorAll('img').forEach(i => { i.loading = 'eager'; i.src = i.dataset.src; }); } }, {rootMargin:'900px 0px'}).observe(document.getElementById('work'));
 })();
 
 
@@ -181,13 +181,13 @@ let studioScroll = () => {};
     const f = document.createElement('figure'); f.className = 'pf';
     const media = s.video ? `<video data-src="${MEDIA + s.video}" muted loop playsinline autoplay preload="none"></video>`
       : s.editor ? '<div class="ed"><div class="ed-prev"><span class="ed-play"></span><span class="ed-tc">00:00:12:08</span></div><div class="ed-tracks"><span class="ed-ph"></span><div class="tr"><i style="left:2%;width:30%"></i><i style="left:35%;width:22%"></i><i style="left:60%;width:36%"></i></div><div class="tr v2"><i style="left:10%;width:18%"></i><i style="left:44%;width:28%"></i></div><div class="tr au"><i style="left:0;width:96%"></i></div><div class="tr au2"><i style="left:20%;width:40%"></i><i style="left:66%;width:22%"></i></div></div></div>'
-      : `<img${s.fit ? ' class="fit"' : ''} data-src="${MEDIA + s.img}"${dimAttr(s.img)} alt="" decoding="async">`;
+      : `<img${s.fit ? ' class="fit"' : ''} data-src="${MEDIA + s.img}"${dimAttr(s.img)} alt="" loading="lazy" decoding="async">`;
     f.innerHTML = `${media}<figcaption><span>${s.t}</span><i>${/^\$/.test(s.from) ? 'From ' : ''}${s.from}</i></figcaption>`;
     prism.appendChild(f);
     dots.appendChild(document.createElement('i'));
   });
   // the prism faces load as the section approaches (native lazy loading never fires on 3D faces)
-  new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); prism.querySelectorAll('[data-src]').forEach(m => { m.src = m.dataset.src; if (m.tagName === 'VIDEO') m.play().catch(() => {}); }); } }, {rootMargin:'900px 0px'}).observe(document.getElementById('studio'));
+  new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); prism.querySelectorAll('[data-src]').forEach(m => { if (m.tagName === 'IMG') m.loading = 'eager'; m.src = m.dataset.src; if (m.tagName === 'VIDEO') m.play().catch(() => {}); }); } }, {rootMargin:'900px 0px'}).observe(document.getElementById('studio'));
   const faces = [...prism.children];
   const depth = () => Math.round((prism.offsetWidth / 2) / Math.tan(Math.PI / n));
   const layout = () => { const z = depth(); faces.forEach((f, i) => f.style.transform = `rotateY(${i * step}deg) translateZ(${z}px)`); prism.dataset.z = z; };
