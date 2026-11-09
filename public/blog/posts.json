@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "ai-chatbot-for-customer-service",
+        "title":  "AI Chatbot for Customer Service: A Practical Small Business Guide",
+        "description":  "An AI chatbot for customer service answers common questions 24/7. Learn what it should handle, when to hand off to a person and how to set one up the right way.",
+        "category":  "AI Chatbots",
+        "date":  "2026-11-09",
+        "readMins":  5,
+        "url":  "blog/ai-chatbot-for-customer-service.html"
+    },
+    {
         "slug":  "ai-appointment-setter-for-small-business",
         "title":  "AI Appointment Setter for Small Business: How It Works and Setup",
         "description":  "What an AI appointment setter for small business does, where it fits, the rules to give it before launch, and a simple checklist for a smooth first month.",
