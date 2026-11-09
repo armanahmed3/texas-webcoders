@@ -172,7 +172,7 @@ section{scroll-margin-top:90px}
 .msg.c{background:var(--paper);align-self:flex-start;border-bottom-left-radius:4px}
 .msg.a{background:var(--ink);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .booked{margin:0 14px 12px;display:flex;gap:12px;align-items:center;border:1.5px solid var(--accent);background:var(--accent-wash);border-radius:16px;padding:12px;font-size:.82rem;line-height:1.35}
-.booked .ic{width:36px;height:36px;border-radius:10px;background:var(--accent);color:#fff;display:grid;place-items:center;flex:none}
+.booked .ic{width:36px;height:36px;border-radius:10px;background:var(--accent-ink);color:#fff;display:grid;place-items:center;flex:none}
 .booked b{display:block;font-size:.9rem}
 .sample{font:500 .62rem var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-align:center;padding-bottom:14px}
 
@@ -373,7 +373,7 @@ footer .brand small{color:#8A8A92}
 .sub input{flex:1;min-width:0;border:0;background:none;font:inherit;padding:8px 14px;color:#fff}
 .sub input:focus{outline:none}
 .sub input::placeholder{color:#8A8A92}
-.sub button{border:0;border-radius:999px;background:var(--accent);color:#fff;font:700 .88rem var(--sans);padding:0 18px;cursor:pointer}
+.sub button{border:0;border-radius:999px;background:var(--accent-ink);color:#fff;font:700 .88rem var(--sans);padding:0 18px;cursor:pointer}
 .sub button:hover{background:#fff;color:var(--ink)}
 .sub .msg{font-size:.84rem;min-height:1.3em;margin-top:8px;color:#7FE0A8}
 .sms-f{font-size:.78rem;color:#8A8A92;line-height:1.5;margin-top:10px}
@@ -497,7 +497,7 @@ footer .brand .logo{height:48px}
 @keyframes tdot{50%{transform:translateY(-4px);opacity:.4}}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.92)}}
 .wg-input{display:flex;justify-content:space-between;align-items:center;margin:0 12px 12px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;font-size:.78rem;color:var(--ink-3)}
-.wg-input i{width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
+.wg-input i{width:26px;height:26px;border-radius:50%;background:var(--accent-ink);color:#fff;display:grid;place-items:center;font-style:normal;font-weight:700}
 .cb-sample{position:absolute;left:24px;bottom:22px;font:600 .64rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
 
 /* creative studio: pinned 3D prism */
