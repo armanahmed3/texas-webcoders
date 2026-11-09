@@ -42,7 +42,7 @@ foreach ($p in $posts) {
   $related = $related | Select-Object -First 3
   $url = "$site/blog/$($p.slug)"
   $share = [uri]::EscapeDataString($url)
-  $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; dateModified = $(if ($p.updated) { $p.updated } else { $p.date }); author = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/about" }; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/" }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
+  $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; dateModified = $(if ($p.updated) { $p.updated } else { $p.date }); author = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/about" }; image = "$site/assets/logo.png"; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/"; logo = @{ '@type' = 'ImageObject'; url = "$site/assets/logo.png"; width = 846; height = 153 } }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
   $faqLd = if ($p.faq) { '<script type="application/ld+json">' + (@{ '@context' = 'https://schema.org'; '@type' = 'FAQPage'; mainEntity = @($p.faq | ForEach-Object { @{ '@type' = 'Question'; name = $_.q; acceptedAnswer = @{ '@type' = 'Answer'; text = $_.a } } }) } | ConvertTo-Json -Depth 6 -Compress) + '</script>' } else { '' }
   $body = @"
 <div class="read-bar" aria-hidden="true"><i></i></div>
@@ -74,7 +74,7 @@ foreach ($p in $posts) {
     <div class="posts">$(($related | ForEach-Object { Card $_ }) -join '')</div>
   </div>
 </section>
-<script type="application/ld+json">$ld</script>$faqLd
+<script type="application/ld+json">$ld</script><script type="application/ld+json">$(@{ '@context' = 'https://schema.org'; '@type' = 'BreadcrumbList'; itemListElement = @(@{ '@type' = 'ListItem'; position = 1; name = 'Home'; item = "$site/" }, @{ '@type' = 'ListItem'; position = 2; name = 'Blog'; item = "$site/blog" }, @{ '@type' = 'ListItem'; position = 3; name = $p.title; item = $url }) } | ConvertTo-Json -Depth 5 -Compress)</script>$faqLd
 "@
   $pageTitle = if ($p.seoTitle) { $p.seoTitle } elseif ("$($p.title) | Texas WebCoders".Length -le 60) { "$($p.title) | Texas WebCoders" } else { $p.title }
   $html = Page $pageTitle $p.description $url 'post' '<base href="../">' 'article' $body ''
