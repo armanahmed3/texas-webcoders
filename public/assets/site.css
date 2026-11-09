@@ -1087,3 +1087,4 @@ header .wrap.nav{width:100%;max-width:none;margin:0;padding:0 clamp(18px,3vw,56p
 .skip-link{position:absolute;left:16px;top:-60px;z-index:1000;padding:10px 16px;border-radius:999px;background:var(--ink);color:#fff;font:700 .9rem var(--sans);text-decoration:none;transition:top .2s}.skip-link:focus{top:16px}
 .qa h3{margin-top:26px}.qa .qa-a{max-width:68ch}.qa-dl{display:grid;grid-template-columns:minmax(140px,auto) 1fr;gap:10px 22px;margin:14px 0 0}.qa-dl dt{font-weight:800}.qa-dl dd{margin:0;color:var(--ink-2)}@media(max-width:640px){.qa-dl{grid-template-columns:1fr;gap:4px}.qa-dl dd{margin-bottom:10px}}
 .legal-upd{margin-right:14px;color:#8A8A92}
+.paper .prose a{color:#C2370A}
