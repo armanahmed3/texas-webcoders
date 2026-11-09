@@ -22,7 +22,7 @@
   // the WebGL particle background loads only after that first interaction
   if (!reduce && document.getElementById('particles')) whenActive(() => {
     const add = (src, cb) => { const el = document.createElement('script'); el.src = src; el.onload = cb; document.head.appendChild(el); };
-    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p1'));
+    add('https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js', () => add('assets/particles.js?v=p2'));
   });
   /* ---------- Stripe checkout for fixed-price plans (api/checkout.js); falls back to the plan's contact link ---------- */
   document.addEventListener('click', async e => {
