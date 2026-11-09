@@ -179,13 +179,15 @@ let studioScroll = () => {};
   const n = STUDIO.length, step = 360 / n;
   STUDIO.forEach((s, i) => {
     const f = document.createElement('figure'); f.className = 'pf';
-    const media = s.video ? `<video src="${MEDIA + s.video}" muted loop playsinline autoplay preload="metadata"></video>`
+    const media = s.video ? `<video data-src="${MEDIA + s.video}" muted loop playsinline autoplay preload="none"></video>`
       : s.editor ? '<div class="ed"><div class="ed-prev"><span class="ed-play"></span><span class="ed-tc">00:00:12:08</span></div><div class="ed-tracks"><span class="ed-ph"></span><div class="tr"><i style="left:2%;width:30%"></i><i style="left:35%;width:22%"></i><i style="left:60%;width:36%"></i></div><div class="tr v2"><i style="left:10%;width:18%"></i><i style="left:44%;width:28%"></i></div><div class="tr au"><i style="left:0;width:96%"></i></div><div class="tr au2"><i style="left:20%;width:40%"></i><i style="left:66%;width:22%"></i></div></div></div>'
-      : `<img${s.fit ? ' class="fit"' : ''} src="${MEDIA + s.img}"${dimAttr(s.img)} alt="" decoding="async">`;
+      : `<img${s.fit ? ' class="fit"' : ''} data-src="${MEDIA + s.img}"${dimAttr(s.img)} alt="" decoding="async">`;
     f.innerHTML = `${media}<figcaption><span>${s.t}</span><i>${/^\$/.test(s.from) ? 'From ' : ''}${s.from}</i></figcaption>`;
     prism.appendChild(f);
     dots.appendChild(document.createElement('i'));
   });
+  // the prism faces load as the section approaches (native lazy loading never fires on 3D faces)
+  new IntersectionObserver((es, io) => { if (es.some(e => e.isIntersecting)) { io.disconnect(); prism.querySelectorAll('[data-src]').forEach(m => { m.src = m.dataset.src; if (m.tagName === 'VIDEO') m.play().catch(() => {}); }); } }, {rootMargin:'900px 0px'}).observe(document.getElementById('studio'));
   const faces = [...prism.children];
   const depth = () => Math.round((prism.offsetWidth / 2) / Math.tan(Math.PI / n));
   const layout = () => { const z = depth(); faces.forEach((f, i) => f.style.transform = `rotateY(${i * step}deg) translateZ(${z}px)`); prism.dataset.z = z; };
