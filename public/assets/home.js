@@ -283,7 +283,7 @@ if (hasGSAP) whenActive(() => {
 
   // sections tilt up out of the depth as they arrive (3D camera push)
   gsap.utils.toArray('.plans, .posts, .ind, .roi-stage, .cyl-stage').forEach(el => {
-    gsap.fromTo(el, {rotateX:18, z:-180, opacity:.35, transformPerspective:1400, transformOrigin:'50% 0%'}, {rotateX:0, z:0, opacity:1, ease:'none', scrollTrigger:{trigger:el, start:'top bottom', end:'top 55%', scrub:true}});
+    gsap.from(el, {y:60, ease:'expo.out', duration:1.1, scrollTrigger:{trigger:el, start:'top 88%'}});
   });
 
   // chatbot browser swings in 3D with scroll

@@ -268,7 +268,7 @@
     $$('main > section').forEach(sec => {
       if (sec.matches('.hero, .phero, .band, .cta, .work, [id="band"]') || sec.querySelector('.pin-spacer, .scard')) return;
       if (sec.closest('.pin-spacer') || sec.offsetHeight < innerHeight * .5) return;
-      gsap.to(sec, {rotateX:7, z:-140, opacity:.55, transformPerspective:1700, transformOrigin:'50% 100%', ease:'none', scrollTrigger:{trigger:sec, start:'bottom 62%', end:'bottom 8%', scrub:true}});
+      // sections stay flat and sharp as you scroll past (the old tilt-back blurred text)
     });
     // card grids fly in from depth, one after another (the home page animates its own cards)
     if (!isHome && $('.post, .pitem, .ind a')) {
@@ -330,7 +330,7 @@
     $$('.rise, .value, .form, .office, .srv-media').forEach(el => gsap.from(el, {y:60, rotateX:12, transformPerspective:900, opacity:0, duration:1.1, ease:'expo.out', scrollTrigger:{trigger:el, start:'top 90%'}}));
     const gw = $('#giant') ? splitWords($('#giant')) : [];
     if (gw.length) gsap.from(gw, {yPercent:100, rotateX:-60, transformPerspective:800, duration:1.4, ease:'expo.out', stagger:.08, scrollTrigger:{trigger:'#giant', start:'top 95%'}});
-    $$('.cin').forEach(el => gsap.fromTo(el, {rotateX:16, z:-160, opacity:.35, transformPerspective:1400, transformOrigin:'50% 0%'}, {rotateX:0, z:0, opacity:1, ease:'none', scrollTrigger:{trigger:el, start:'top bottom', end:'top 55%', scrub:true}}));
+    $$('.cin').forEach(el => gsap.from(el, {y:50, ease:'expo.out', duration:1.1, scrollTrigger:{trigger:el, start:'top 88%'}}));
     if ($('.band')) gsap.fromTo('.band', {clipPath:'inset(10% 6% 10% 6% round 48px)'}, {clipPath:'inset(0% 0% 0% 0% round 0px)', ease:'none', scrollTrigger:{trigger:'.band', start:'top 95%', end:'top 25%', scrub:true}});
     if ($('#stepline')) {
       const steps = $$('.step');
