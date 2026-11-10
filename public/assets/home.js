@@ -11,9 +11,9 @@ const dimAttr = p => DIMS[p] ? ` width="${DIMS[p][0]}" height="${DIMS[p][1]}"` :
 
 /* ---------- small generated pieces ---------- */
 const bars = (el, n, max = 95) => { for (let i = 0; i < n; i++) { const b = document.createElement('i'); b.style.setProperty('--n', i); b.style.setProperty('--h', `${30 + Math.round(Math.abs(Math.sin(i * 1.7)) * (max - 30))}%`); el.appendChild(b); } };
-bars(document.getElementById('phbars'), 30);
+bars(document.getElementById('phbars'), 16);
 const words = ['AI Receptionist', 'AI Chatbots', 'AI SaaS', 'Automation', 'Voice Agents', 'Lead Agents'];
-const mqHTML = words.map(w => `<span>${w}<svg><use href="#spark"/></svg></span>`).join('');
+const mqHTML = words.map(w => `<span>${w}</span>`).join('');
 document.getElementById('mq').innerHTML = mqHTML + mqHTML;
 const tools = ['Google Calendar','Outlook','Calendly','HubSpot','Salesforce','Zoho CRM','GoHighLevel','Zapier','Make','Twilio'];
 const tools2 = ['WhatsApp','Slack','Stripe','Shopify','WordPress','QuickBooks','Google Sheets','Airtable','Gmail','Microsoft Teams'];
@@ -61,7 +61,7 @@ const splitWords = el => {
 
 /* ---------- loader → hero intro ---------- */
 const heroLines = [...document.querySelectorAll('.hx-l:not(.hx-rot)')], heroRot = [...document.querySelectorAll('.rw')];
-const lineChars = window.charSplit ? heroLines.map(charSplit) : [], rotChars = window.charSplit ? heroRot.map(charSplit) : [];
+const lineChars = window.wordSplit ? heroLines.map(wordSplit) : [], rotChars = window.wordSplit ? heroRot.map(wordSplit) : [];
 const heroPills = [...document.querySelectorAll('.hx-pill')];
 function rotateWords() {
   let cur = 0;
@@ -256,9 +256,9 @@ counters.forEach(c => cio.observe(c));
 /* ---------- GSAP scroll choreography (set up on first interaction) ---------- */
 if (hasGSAP) whenActive(() => {
   // 3D word reveals on every section heading
+  // whole-heading rise (splitting every heading into word spans added ~100 DOM nodes)
   document.querySelectorAll('.split').forEach(h => {
-    const cs = wordSplit(h);
-    gsap.from(cs, {yPercent:70, rotateX:-100, rotateZ:6, transformPerspective:600, transformOrigin:'50% 100%', opacity:0, duration:.95, ease:'back.out(1.5)', stagger:.06, scrollTrigger:{trigger:h, start:'top 86%'}});
+    gsap.from(h, {y:56, rotateX:-24, transformPerspective:800, transformOrigin:'50% 100%', duration:1.1, ease:'expo.out', scrollTrigger:{trigger:h, start:'top 88%'}});
   });
   // generic 3D rise for leads, tags, cards
   gsap.utils.toArray('.head .lead, .tag:not(.h-in), .post, .ind a, .step, .q, .cinfo > *, .form').forEach(el => {
@@ -349,7 +349,7 @@ if (hasGSAP) whenActive(() => {
 const plans = window.PLANS;
 const plansEl = document.getElementById('plans');
 const money = n => '$' + n.toLocaleString();
-const planHTML = (p, i, key) => `<div class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li><svg class="icon"><use href="#i-check"/></svg>${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}"${PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : ''}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></div>`;
+const planHTML = (p, i, key) => `<div class="plan${p.best ? ' best' : ''}" style="--d:${i}">${p.best ? '<span class="ribbon">MOST POPULAR</span>' : ''}<h3>${p.name}</h3><p class="desc">${p.desc}</p><div class="price">${p.custom ? '<strong>Custom</strong>' : `${p.from ? '<span class="from-l">From</span>' : ''}<strong>${money(p.price)}</strong>${p.per ? `<span class="per">${p.per}</span>` : ''}${p.was ? `<s aria-label="was ${money(p.was)}">${money(p.was)}</s>` : ''}`}</div>${p.note ? `<p class="note">${p.note}</p>` : ''}<ul>${p.items.map(t => `<li class="ic-check">${t}</li>`).join('')}</ul><a class="btn btn-dark" href="#contact" data-plan="${p.name}"${PLAN_BUYABLE(p) ? ` data-checkout="${key}|${p.name}"` : ''}>${p.custom || p.quote ? 'Request a quote' : 'Get started'} <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a></div>`;
 function renderPlans(key, animate) {
   const draw = () => {
     plansEl.innerHTML = plans[key].map((p, i) => planHTML(p, i, key)).join('');
