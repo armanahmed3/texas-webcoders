@@ -210,7 +210,7 @@
   const curtain = document.createElement('div');
   curtain.className = 'pt' + (startClosed ? '' : ' pt-out pt-instant');
   curtain.setAttribute('aria-hidden', 'true');
-  curtain.innerHTML = '<div class="pt-c"><div class="pt-mk"><i></i><i></i><i></i><img src="assets/logo-mark-orange.webp" alt="Texas WebCoders logo" width="168" height="149"></div><div class="pt-t"></div></div>';
+  curtain.innerHTML = '<div class="pt-c"><div class="pt-mk"><i></i><i></i><i></i><img src="assets/logo-mark-orange.webp" alt="Texas WebCoders logo" width="168" height="149" loading="lazy" decoding="async"></div><div class="pt-t"></div></div>';
   document.body.appendChild(curtain);
   root.classList.remove('nav-in');
   const ptTitle = curtain.querySelector('.pt-t');

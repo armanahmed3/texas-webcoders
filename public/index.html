@@ -27,7 +27,7 @@
 <meta name="author" content="Texas WebCoders"><meta property="og:updated_time" content="2026-11-11T00:00:00+00:00"><meta property="article:modified_time" content="2026-11-11T00:00:00+00:00"><link rel="sitemap" type="application/xml" title="Sitemap" href="https://texaswebcoders.com/sitemap.xml">
 <script>/* WebMCP */(function(m){if(!m||!m.registerTool)return;try{m.registerTool({name:"list_plans",description:"List Texas WebCoders plans and prices for AI receptionists, chatbots, automation, websites and apps.",inputSchema:{type:"object",properties:{}},execute:async function(){return{content:[{type:"text",text:JSON.stringify(window.PLANS||{})}]}}})}catch(e){}})(navigator.modelContext)</script>
 </head>
-<body data-page="home"><a class="skip-link" href="#top">Skip to main content</a><nav aria-label="breadcrumb" class="breadcrumb sr"><ol><li><a href="https://texaswebcoders.com/" aria-current="page">Home</a></li></ol></nav>
+<body data-page="home"><a class="skip-link" href="#top">Skip to main content</a><nav role="navigation" aria-label="breadcrumb" class="breadcrumb sr"><ol><li><a href="https://texaswebcoders.com/" aria-current="page">Home</a></li></ol></nav>
 <div class="boot" aria-hidden="true"><img src="assets/logo-mark-orange.webp" alt="Texas WebCoders logo" width="168" height="149" loading="lazy" decoding="async"></div>
 <canvas id="particles" aria-hidden="true"></canvas>
 
@@ -41,8 +41,8 @@
 <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 8h16M4 16h16"/></symbol>
 </svg>
 
-<header id="hdr">
-<nav class="wrap nav" aria-label="Main">
+<header id="hdr" role="banner">
+<nav class="wrap nav" role="navigation" aria-label="Main">
 <a class="brand" href="#top" aria-label="Texas WebCoders home"><img class="logo" src="assets/logo.webp" alt="Texas WebCoders – Software. Innovation. Transformation." width="846" height="153" loading="lazy" decoding="async"></a>
 <ul class="menu" id="menu">
 <li><a href="/ai-receptionist">AI Receptionist</a></li>
@@ -60,7 +60,7 @@
 </nav>
 </header>
 
-<main id="top">
+<main id="top" role="main">
 <!-- HERO -->
 <section class="hero" data-shape="sphere" data-x="0" data-y="-4.3" data-s="1.6" data-op="0.85">
 <div class="hx-pills" aria-hidden="true">
@@ -439,9 +439,9 @@
 <p class="lead">Hands-on guides and step-by-step playbooks, written by the team that builds AI systems for Texas businesses. <a href="/blog" style="font-weight:700;text-decoration:underline">Read the blog →</a></p>
 </div>
 <div class="posts"><!--LATEST-POSTS-->
-      <a class="post" href="blog/ai-automation-tools-for-small-business.html" data-cat="AI Automation"><span class="k"><b>AI Automation</b><span>5 min</span></span><h3>AI Automation Tools for Small Business: What to Use and How to Choose</h3><p>AI automation tools for small business handle repeat work like lead replies, booking and data entry. Learn the main types and how to choose the right one.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
-      <a class="post" href="blog/ai-chatbot-for-website-lead-generation.html" data-cat="AI Chatbots"><span class="k"><b>AI Chatbots</b><span>5 min</span></span><h3>AI Chatbot for Website Lead Generation: How to Set It Up Right</h3><p>An AI chatbot for website lead generation greets visitors, answers questions and captures contact details 24/7. Here’s how to set one up that brings real leads.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
-      <a class="post" href="blog/ai-chatbot-for-customer-service.html" data-cat="AI Chatbots"><span class="k"><b>AI Chatbots</b><span>5 min</span></span><h3>AI Chatbot for Customer Service: A Practical Small Business Guide</h3><p>An AI chatbot for customer service answers common questions 24/7. Learn what it should handle, when to hand off to a person and how to set one up the right way.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
+      <a class="post" href="/blog/ai-automation-tools-for-small-business" data-cat="AI Automation"><span class="k"><b>AI Automation</b><span>5 min</span></span><h3>AI Automation Tools for Small Business: What to Use and How to Choose</h3><p>AI automation tools for small business handle repeat work like lead replies, booking and data entry. Learn the main types and how to choose the right one.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
+      <a class="post" href="/blog/ai-chatbot-for-website-lead-generation" data-cat="AI Chatbots"><span class="k"><b>AI Chatbots</b><span>5 min</span></span><h3>AI Chatbot for Website Lead Generation: How to Set It Up Right</h3><p>An AI chatbot for website lead generation greets visitors, answers questions and captures contact details 24/7. Here’s how to set one up that brings real leads.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
+      <a class="post" href="/blog/ai-chatbot-for-customer-service" data-cat="AI Chatbots"><span class="k"><b>AI Chatbots</b><span>5 min</span></span><h3>AI Chatbot for Customer Service: A Practical Small Business Guide</h3><p>An AI chatbot for customer service answers common questions 24/7. Learn what it should handle, when to hand off to a person and how to set one up the right way.</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></a>
       <!--/LATEST-POSTS--></div>
 </div>
 </section>
@@ -488,7 +488,7 @@
 </section>
 </main>
 
-<footer>
+<footer role="contentinfo">
 <div class="wrap">
 <div class="f-grid">
 <div class="f-about">
@@ -524,7 +524,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="assets/plans.js?v=p8" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
-<script src="assets/site.js?v=p10" defer></script>
+<script src="assets/site.js?v=p11" defer></script>
 <script src="assets/chat-widget.js?v=p9" defer></script>
 <script type="module" src="assets/voice-agent.js?v=p8"></script>
 <script type="module" src="assets/home.js?v=p11"></script>
