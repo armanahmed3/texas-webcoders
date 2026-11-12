@@ -181,7 +181,7 @@ let studioScroll = () => {};
     const media = s.video ? `<video data-src="${MEDIA + s.video}" muted loop playsinline autoplay preload="none"></video>`
       : s.editor ? '<div class="ed"><div class="ed-prev"><span class="ed-play"></span><span class="ed-tc">00:00:12:08</span></div><div class="ed-tracks"><span class="ed-ph"></span><div class="tr"><i style="left:2%;width:30%"></i><i style="left:35%;width:22%"></i><i style="left:60%;width:36%"></i></div><div class="tr v2"><i style="left:10%;width:18%"></i><i style="left:44%;width:28%"></i></div><div class="tr au"><i style="left:0;width:96%"></i></div><div class="tr au2"><i style="left:20%;width:40%"></i><i style="left:66%;width:22%"></i></div></div></div>'
       : `<img${s.fit ? ' class="fit"' : ''} data-src="${MEDIA + s.img}"${dimAttr(s.img)} alt="${s.t} sample by Texas WebCoders" loading="lazy" decoding="async">`;
-    f.innerHTML = `${media}<figcaption><span>${s.t}</span><i>${/^\$/.test(s.from) ? 'From ' : ''}${s.from}</i></figcaption>`;
+    f.innerHTML = `${media}<figcaption><span>${s.t}</span></figcaption>`;
     prism.appendChild(f);
     dots.appendChild(document.createElement('i'));
   });
@@ -196,7 +196,7 @@ let studioScroll = () => {};
     if (i === cur) return; cur = i;
     const s = STUDIO[i];
     info.classList.remove('swap'); void info.offsetWidth; info.classList.add('swap');
-    info.innerHTML = `<span class="big-n">${String(i + 1).padStart(2, '0')}</span><h3>${s.t}</h3><p>${s.d}</p><div class="chips">${s.c.map(c => `<span>${c}</span>`).join('')}</div><p class="from">Starting at <b>${s.from}</b></p>`;
+    info.innerHTML = `<span class="big-n">${String(i + 1).padStart(2, '0')}</span><h3>${s.t}</h3><p>${s.d}</p><div class="chips">${s.c.map(c => `<span>${c}</span>`).join('')}</div>`;
     [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
   }
   const go = i => { const k = ((i % n) + n) % n; target = -k * step; if (scrollDriven && hasGSAP) { const st = ScrollTrigger.getAll().find(t => t.trigger && t.trigger.id === 'studio'); if (st) { const top = st.start + (st.end - st.start) * (k / (n - 1)); return window.lenis ? lenis.scrollTo(top) : scrollTo({top, behavior: 'smooth'}); } } show(k); };
@@ -377,3 +377,16 @@ document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', 
   const q = b.parentElement, open = !q.classList.contains('open');
   q.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
 }));
+
+/* safety net: some browsers never fire the observers above (3D faces, hidden tabs); load any image or
+   video that is still waiting for its source shortly after the page has loaded */
+(function loadLeftovers() {
+  const run = () => setTimeout(() => {
+    document.querySelectorAll('img[data-src]:not([src]), video[data-src]:not([src])').forEach(m => {
+      if (m.tagName === 'IMG') m.loading = 'eager';
+      m.src = m.dataset.src;
+    });
+    document.querySelectorAll('img[loading="lazy"]').forEach(i => { if (!i.complete || !i.naturalWidth) i.loading = 'eager'; });
+  }, 2500);
+  if (document.readyState === 'complete') run(); else addEventListener('load', run, {once:true});
+})();
