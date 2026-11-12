@@ -359,13 +359,13 @@ function renderPlans(key, animate) {
   [...plansEl.children].forEach(c => c.classList.add('flipout'));
   setTimeout(draw, 380);
 }
-renderPlans('recep', false);
+if (plansEl && plans) renderPlans('recep', false);
 document.querySelectorAll('.ptabs button').forEach(b => b.addEventListener('click', () => {
   if (b.getAttribute('aria-selected') === 'true') return;
   document.querySelectorAll('.ptabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   renderPlans(b.dataset.t, true);
 }));
-plansEl.addEventListener('click', e => {
+plansEl && plansEl.addEventListener('click', e => {
   const a = e.target.closest('[data-plan]'); if (!a) return;
   const tab = document.querySelector('.ptabs [aria-selected="true"]').textContent.replace('AI', '').trim();
   const msg = document.getElementById('f-msg');
