@@ -111,8 +111,8 @@ if ($homeHtml -match $pattern) {
 # ---------- sitemap + RSS ----------
 $pages = '','services','portfolio','case-studies','case-study-ai-lead-management','case-study-shopify-website-rebuild','case-study-crm-payroll-automation','blog','about','contact'
 $urls = ($pages | ForEach-Object { $f = if ($_) { "$root\$_.html" } else { "$root\index.html" }; "  <url><loc>$site/$_</loc><lastmod>$((Get-Item $f).LastWriteTime.ToString('yyyy-MM-dd'))</lastmod></url>" }) + ($posts | ForEach-Object { "  <url><loc>$site/blog/$($_.slug)</loc><lastmod>$($_.date)</lastmod></url>" })
-[IO.File]::WriteAllText("$root\sitemap.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n$($urls -join "`n")`n</urlset>`n", $enc)
+# sitemap.xml is no longer written (site is noindex)
 $items = $posts | Select-Object -First 20 | ForEach-Object { "  <item><title>$(& $H $_.title)</title><link>$site/blog/$($_.slug)</link><guid>$site/blog/$($_.slug)</guid><pubDate>$($_.when.ToString('ddd, dd MMM yyyy 09:00:00 -0600', $us))</pubDate><category>$(& $H $_.category)</category><description>$(& $H $_.description)</description></item>" }
 [IO.File]::WriteAllText("$root\feed.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<rss version=`"2.0`"><channel>`n  <title>Texas WebCoders Blog</title><link>$site/blog</link><description>AI, websites and growth guides for small businesses.</description>`n$($items -join "`n")`n</channel></rss>`n", $enc)
 
-"Built $($posts.Count) posts, blog.html, posts.json, sitemap.xml, feed.xml"
+"Built $($posts.Count) posts, blog.html, posts.json, feed.xml"

@@ -1,32 +1,45 @@
 User-agent: *
 Allow: /
 
-# AI search crawlers are welcome
+# AI crawlers and AI training are not allowed
 User-agent: GPTBot
-Allow: /
+Disallow: /
 
 User-agent: OAI-SearchBot
-Allow: /
+Disallow: /
 
 User-agent: ChatGPT-User
-Allow: /
+Disallow: /
 
 User-agent: ClaudeBot
-Allow: /
+Disallow: /
 
 User-agent: Claude-SearchBot
-Allow: /
+Disallow: /
 
 User-agent: Claude-User
-Allow: /
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
 
 User-agent: PerplexityBot
-Allow: /
+Disallow: /
 
 User-agent: Perplexity-User
-Allow: /
+Disallow: /
 
 User-agent: Google-Extended
-Allow: /
+Disallow: /
 
-Sitemap: https://texaswebcoders.com/sitemap.xml
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: meta-externalagent
+Disallow: /
