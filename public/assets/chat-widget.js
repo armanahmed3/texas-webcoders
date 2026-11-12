@@ -21,7 +21,6 @@
   const box = document.createElement('section');
   box.className = 'cw'; box.setAttribute('aria-label', 'Chat with Texas WebCoders AI assistant'); box.hidden = true;
   box.innerHTML = `<div class="cw-top"><img src="assets/logo-mark-orange.webp" alt="Texas WebCoders logo" width="168" height="149" loading="lazy" decoding="async"><div><b>Texas WebCoders AI</b><small><i></i>Online · replies instantly</small></div>
-      <a class="cw-voice" href="tel:+19032226022" data-talk aria-label="Talk to our AI by voice" title="Talk to our AI">${icons.mic}</a>
       <button type="button" class="cw-x" aria-label="Close chat">${icons.close}</button></div>
     <div class="cw-log" role="log" aria-live="polite" data-lenis-prevent></div>
     <div class="cw-chips"></div>
