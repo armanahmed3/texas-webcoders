@@ -86,38 +86,10 @@ $cats = $posts | ForEach-Object { $_.category } | Sort-Object -Unique
 $feat = $posts[0]
 $featImg = if ($feat.image) { "<span class=`"thumb`"><img src=`"$media$($feat.image)`" alt=`"`"></span>" } else { '' }
 $listBody = @"
-<section class="phero" data-shape="bubble" data-x="3.2" data-y="0.4" data-s="0.65" data-op="0.8" style="min-height:62vh">
-  <div class="wrap phero-grid">
-    <div>
-      <div class="crumbs"><a href="index.html">Home</a><i></i><span>Blog</span></div>
-      <h1>Notes from our <em>AI lab.</em></h1>
-      <p class="lead">Practical guides on AI receptionists, chatbots, automation, websites and growth, written for business owners.</p>
-    </div>
-    <div class="phero-side">
-      <div class="stat"><b>$($posts.Count)</b><span>articles published</span></div>
-      <div class="stat"><b>$($cats.Count)</b><span>topics covered</span></div>
-      <div class="stat"><b>$(Nice $feat.when)</b><span>latest article</span></div>
-    </div>
-  </div>
-</section>
-<section class="block solid" aria-labelledby="bl-h" style="padding-top:20px">
+<section class="block solid blog-only" aria-labelledby="bl-h">
   <div class="wrap">
-    <h2 id="bl-h" class="sr">Articles</h2>
-    <a class="feat-post" href="blog/$($feat.slug).html">$featImg<span class="fp-txt"><span class="k"><b>Latest · $(& $H $feat.category)</b><span>$(Nice $feat.when) · $($feat.readMins) min read</span></span><h3>$(& $H $feat.title)</h3><p>$(& $H $feat.description)</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></span></a>
-    <div class="pf-filters" id="bfilters" role="group" aria-label="Filter articles"><button aria-pressed="true" data-f="all">All<span>$($posts.Count)</span></button>$(($cats | ForEach-Object { $c = $_; "<button aria-pressed=`"false`" data-f=`"$(& $H $c)`">$(& $H $c)<span>$(@($posts | ? { $_.category -eq $c }).Count)</span></button>" }) -join '')</div>
-    <div class="posts blog-list">$(($posts | ForEach-Object { Card $_ }) -join '')</div>
-  </div>
-</section>
-"@
-$listBody += @"
-
-<section class="block paper" aria-labelledby="bl-about-h">
-  <div class="wrap">
-    <div class="head"><div><span class="tag">About this blog</span><h2 id="bl-about-h" class="split">What you will find on this blog</h2></div></div>
-    <div class="prose">
-      <p>The Texas WebCoders blog explains AI and website decisions in plain English for small business owners. Each guide aims to answer a practical question: what a tool does, what it costs, where it fits and what to check before you pay for it.</p>
-      <p>Prefer to talk it through? <a href="contact.html">Book a free consultation</a> and tell us what you want to fix first.</p>
-    </div>
+    <h1 id="bl-h" class="sr">Blog</h1>
+    <div class="posts blog-list">$(($posts | Select-Object -First 3 | ForEach-Object { Card $_ }) -join '')</div>
   </div>
 </section>
 "@
