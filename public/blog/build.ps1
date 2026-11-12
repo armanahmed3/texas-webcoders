@@ -116,9 +116,6 @@ $listBody += @"
     <div class="head"><div><span class="tag">About this blog</span><h2 id="bl-about-h" class="split">What you will find on this blog</h2></div></div>
     <div class="prose">
       <p>The Texas WebCoders blog explains AI and website decisions in plain English for small business owners. Each guide aims to answer a practical question: what a tool does, what it costs, where it fits and what to check before you pay for it.</p>
-      <p><strong>Start with the basics.</strong> New to AI phone answering? Read <a href="blog/what-is-an-ai-receptionist.html">what an AI receptionist is</a>, then see <a href="blog/how-much-does-an-ai-receptionist-cost.html">how much an AI receptionist costs</a> and how it compares with <a href="blog/ai-receptionist-vs-answering-service.html">a traditional answering service</a>.</p>
-      <p><strong>Find your Texas city.</strong> Our city guides use U.S. Census data to show local population, Spanish use at home, income and the largest job sectors. They also cover local area codes, pricing and the kinds of businesses that may benefit most. The <a href="ai-receptionist-texas.html">AI receptionist in Texas</a> page links to every city.</p>
-      <p><strong>Improve the rest of your business.</strong> Other guides help you decide <a href="blog/which-business-tasks-to-automate-first.html">which tasks to automate first</a>, choose between <a href="blog/ai-chatbot-vs-live-chat.html">an AI chatbot and live chat</a>, and understand <a href="blog/how-fast-should-a-business-website-load.html">how fast a business website should load</a>.</p>
       <p>Prefer to talk it through? <a href="contact.html">Book a free consultation</a> and tell us what you want to fix first.</p>
     </div>
   </div>

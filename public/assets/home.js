@@ -18,8 +18,7 @@ document.getElementById('mq').innerHTML = mqHTML + mqHTML;
 const tools = ['Google Calendar','Outlook','Calendly','HubSpot','Salesforce','Zoho CRM','GoHighLevel','Zapier','Make','Twilio'];
 const tools2 = ['WhatsApp','Slack','Stripe','Shopify','WordPress','QuickBooks','Google Sheets','Airtable','Gmail','Microsoft Teams'];
 const pill = t => `<span>${t}</span>`;
-document.getElementById('ig1').innerHTML = (tools.map(pill).join('')).repeat(2);
-document.getElementById('ig2').innerHTML = (tools2.map(pill).join('')).repeat(2);
+['ig1', 'ig2'].forEach((id, k) => { const el = document.getElementById(id); if (el) el.innerHTML = ((k ? tools2 : tools).map(pill).join('')).repeat(2); });
 
 /* split headings into words (for 3D word reveals) */
 const splitWords = el => {
@@ -221,6 +220,7 @@ let studioScroll = () => {};
 /* ---------- AI stack: 3D cylinder ---------- */
 (function cylinder() {
   const cyl = document.getElementById('cyl');
+  if (!cyl) return;
   const tiles = [['OpenAI GPT','Language models'],['Anthropic Claude','Reasoning & writing'],['Google Gemini','Multimodal AI'],['Meta Llama','Open-source models'],['ElevenLabs','Natural voices'],['Deepgram','Speech to text'],['Twilio','Phone & SMS'],['LangChain','AI orchestration'],['Pinecone','Vector memory'],['Supabase','Database & auth'],['Vercel','Edge hosting'],['AWS','Cloud infrastructure']];
   const n = tiles.length, step = 360 / n;
   tiles.forEach(([b, s]) => { const t = document.createElement('div'); t.className = 'tl'; t.innerHTML = `<b>${b}</b><span>${s}</span>`; cyl.appendChild(t); });
