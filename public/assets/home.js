@@ -18,7 +18,8 @@ document.getElementById('mq').innerHTML = mqHTML + mqHTML;
 const tools = ['Google Calendar','Outlook','Calendly','HubSpot','Salesforce','Zoho CRM','GoHighLevel','Zapier','Make','Twilio'];
 const tools2 = ['WhatsApp','Slack','Stripe','Shopify','WordPress','QuickBooks','Google Sheets','Airtable','Gmail','Microsoft Teams'];
 const pill = t => `<span>${t}</span>`;
-['ig1', 'ig2'].forEach((id, k) => { const el = document.getElementById(id); if (el) el.innerHTML = ((k ? tools2 : tools).map(pill).join('')).repeat(2); });
+document.getElementById('ig1').innerHTML = (tools.map(pill).join('')).repeat(2);
+document.getElementById('ig2').innerHTML = (tools2.map(pill).join('')).repeat(2);
 
 /* split headings into words (for 3D word reveals) */
 const splitWords = el => {
@@ -181,7 +182,7 @@ let studioScroll = () => {};
     const media = s.video ? `<video data-src="${MEDIA + s.video}" muted loop playsinline autoplay preload="none"></video>`
       : s.editor ? '<div class="ed"><div class="ed-prev"><span class="ed-play"></span><span class="ed-tc">00:00:12:08</span></div><div class="ed-tracks"><span class="ed-ph"></span><div class="tr"><i style="left:2%;width:30%"></i><i style="left:35%;width:22%"></i><i style="left:60%;width:36%"></i></div><div class="tr v2"><i style="left:10%;width:18%"></i><i style="left:44%;width:28%"></i></div><div class="tr au"><i style="left:0;width:96%"></i></div><div class="tr au2"><i style="left:20%;width:40%"></i><i style="left:66%;width:22%"></i></div></div></div>'
       : `<img${s.fit ? ' class="fit"' : ''} data-src="${MEDIA + s.img}"${dimAttr(s.img)} alt="${s.t} sample by Texas WebCoders" loading="lazy" decoding="async">`;
-    f.innerHTML = `${media}<figcaption><span>${s.t}</span></figcaption>`;
+    f.innerHTML = `${media}<figcaption><span>${s.t}</span><i>${/^\$/.test(s.from) ? 'From ' : ''}${s.from}</i></figcaption>`;
     prism.appendChild(f);
     dots.appendChild(document.createElement('i'));
   });
@@ -196,7 +197,7 @@ let studioScroll = () => {};
     if (i === cur) return; cur = i;
     const s = STUDIO[i];
     info.classList.remove('swap'); void info.offsetWidth; info.classList.add('swap');
-    info.innerHTML = `<span class="big-n">${String(i + 1).padStart(2, '0')}</span><h3>${s.t}</h3><p>${s.d}</p><div class="chips">${s.c.map(c => `<span>${c}</span>`).join('')}</div>`;
+    info.innerHTML = `<span class="big-n">${String(i + 1).padStart(2, '0')}</span><h3>${s.t}</h3><p>${s.d}</p><div class="chips">${s.c.map(c => `<span>${c}</span>`).join('')}</div><p class="from">Starting at <b>${s.from}</b></p>`;
     [...dots.children].forEach((d, k) => d.classList.toggle('on', k === i));
   }
   const go = i => { const k = ((i % n) + n) % n; target = -k * step; if (scrollDriven && hasGSAP) { const st = ScrollTrigger.getAll().find(t => t.trigger && t.trigger.id === 'studio'); if (st) { const top = st.start + (st.end - st.start) * (k / (n - 1)); return window.lenis ? lenis.scrollTo(top) : scrollTo({top, behavior: 'smooth'}); } } show(k); };
@@ -220,7 +221,6 @@ let studioScroll = () => {};
 /* ---------- AI stack: 3D cylinder ---------- */
 (function cylinder() {
   const cyl = document.getElementById('cyl');
-  if (!cyl) return;
   const tiles = [['OpenAI GPT','Language models'],['Anthropic Claude','Reasoning & writing'],['Google Gemini','Multimodal AI'],['Meta Llama','Open-source models'],['ElevenLabs','Natural voices'],['Deepgram','Speech to text'],['Twilio','Phone & SMS'],['LangChain','AI orchestration'],['Pinecone','Vector memory'],['Supabase','Database & auth'],['Vercel','Edge hosting'],['AWS','Cloud infrastructure']];
   const n = tiles.length, step = 360 / n;
   tiles.forEach(([b, s]) => { const t = document.createElement('div'); t.className = 'tl'; t.innerHTML = `<b>${b}</b><span>${s}</span>`; cyl.appendChild(t); });
@@ -359,13 +359,13 @@ function renderPlans(key, animate) {
   [...plansEl.children].forEach(c => c.classList.add('flipout'));
   setTimeout(draw, 380);
 }
-if (plansEl && plans) renderPlans('recep', false);
+renderPlans('recep', false);
 document.querySelectorAll('.ptabs button').forEach(b => b.addEventListener('click', () => {
   if (b.getAttribute('aria-selected') === 'true') return;
   document.querySelectorAll('.ptabs button').forEach(x => x.setAttribute('aria-selected', x === b));
   renderPlans(b.dataset.t, true);
 }));
-plansEl && plansEl.addEventListener('click', e => {
+plansEl.addEventListener('click', e => {
   const a = e.target.closest('[data-plan]'); if (!a) return;
   const tab = document.querySelector('.ptabs [aria-selected="true"]').textContent.replace('AI', '').trim();
   const msg = document.getElementById('f-msg');
@@ -377,16 +377,3 @@ document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', 
   const q = b.parentElement, open = !q.classList.contains('open');
   q.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
 }));
-
-/* safety net: some browsers never fire the observers above (3D faces, hidden tabs); load any image or
-   video that is still waiting for its source shortly after the page has loaded */
-(function loadLeftovers() {
-  const run = () => setTimeout(() => {
-    document.querySelectorAll('img[data-src]:not([src]), video[data-src]:not([src])').forEach(m => {
-      if (m.tagName === 'IMG') m.loading = 'eager';
-      m.src = m.dataset.src;
-    });
-    document.querySelectorAll('img[loading="lazy"]').forEach(i => { if (!i.complete || !i.naturalWidth) i.loading = 'eager'; });
-  }, 2500);
-  if (document.readyState === 'complete') run(); else addEventListener('load', run, {once:true});
-})();

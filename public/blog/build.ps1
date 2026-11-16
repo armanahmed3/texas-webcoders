@@ -61,7 +61,7 @@ foreach ($p in $posts) {
       <div class="aside-card">
         <span class="tag">Free consultation</span>
         <h3>Want this working for your business?</h3>
-        <p>Talk to our team and book a free consultation to see a live demo.</p>
+        <p>Talk to our team, or tap <b>Talk to our AI</b> at the bottom left to try our AI agent live.</p>
         <a class="btn btn-dark" href="contact.html">Book a free call <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a>
       </div>
       <div class="share"><span>Share</span><a href="https://www.linkedin.com/sharing/share-offsite/?url=$share" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/sharer/sharer.php?u=$share" target="_blank" rel="noopener">Facebook</a><a href="https://twitter.com/intent/tweet?url=$share" target="_blank" rel="noopener">X</a></div>
@@ -86,10 +86,41 @@ $cats = $posts | ForEach-Object { $_.category } | Sort-Object -Unique
 $feat = $posts[0]
 $featImg = if ($feat.image) { "<span class=`"thumb`"><img src=`"$media$($feat.image)`" alt=`"`"></span>" } else { '' }
 $listBody = @"
-<section class="block solid blog-only" aria-labelledby="bl-h">
+<section class="phero" data-shape="bubble" data-x="3.2" data-y="0.4" data-s="0.65" data-op="0.8" style="min-height:62vh">
+  <div class="wrap phero-grid">
+    <div>
+      <div class="crumbs"><a href="index.html">Home</a><i></i><span>Blog</span></div>
+      <h1>Notes from our <em>AI lab.</em></h1>
+      <p class="lead">Practical guides on AI receptionists, chatbots, automation, websites and growth, written for business owners.</p>
+    </div>
+    <div class="phero-side">
+      <div class="stat"><b>$($posts.Count)</b><span>articles published</span></div>
+      <div class="stat"><b>$($cats.Count)</b><span>topics covered</span></div>
+      <div class="stat"><b>$(Nice $feat.when)</b><span>latest article</span></div>
+    </div>
+  </div>
+</section>
+<section class="block solid" aria-labelledby="bl-h" style="padding-top:20px">
   <div class="wrap">
-    <h1 id="bl-h" class="sr">Blog</h1>
-    <div class="posts blog-list">$(($posts | Select-Object -First 3 | ForEach-Object { Card $_ }) -join '')</div>
+    <h2 id="bl-h" class="sr">Articles</h2>
+    <a class="feat-post" href="blog/$($feat.slug).html">$featImg<span class="fp-txt"><span class="k"><b>Latest · $(& $H $feat.category)</b><span>$(Nice $feat.when) · $($feat.readMins) min read</span></span><h3>$(& $H $feat.title)</h3><p>$(& $H $feat.description)</p><span class="rd">Read article <svg class="icon"><use href="#i-arrow"/></svg></span></span></a>
+    <div class="pf-filters" id="bfilters" role="group" aria-label="Filter articles"><button aria-pressed="true" data-f="all">All<span>$($posts.Count)</span></button>$(($cats | ForEach-Object { $c = $_; "<button aria-pressed=`"false`" data-f=`"$(& $H $c)`">$(& $H $c)<span>$(@($posts | ? { $_.category -eq $c }).Count)</span></button>" }) -join '')</div>
+    <div class="posts blog-list">$(($posts | ForEach-Object { Card $_ }) -join '')</div>
+  </div>
+</section>
+"@
+$listBody += @"
+
+<section class="block paper" aria-labelledby="bl-about-h">
+  <div class="wrap">
+    <div class="head"><div><span class="tag">About this blog</span><h2 id="bl-about-h" class="split">What you will find on this blog</h2></div></div>
+    <div class="prose">
+      <p>The Texas WebCoders blog explains AI and website decisions in plain English for small business owners. Each guide aims to answer a practical question: what a tool does, what it costs, where it fits and what to check before you pay for it.</p>
+      <p><strong>Start with the basics.</strong> New to AI phone answering? Read <a href="blog/what-is-an-ai-receptionist.html">what an AI receptionist is</a>, then see <a href="blog/how-much-does-an-ai-receptionist-cost.html">how much an AI receptionist costs</a> and how it compares with <a href="blog/ai-receptionist-vs-answering-service.html">a traditional answering service</a>.</p>
+      <p><strong>Find your Texas city.</strong> Our city guides use U.S. Census data to show local population, Spanish use at home, income and the largest job sectors. They also cover local area codes, pricing and the kinds of businesses that may benefit most. The <a href="ai-receptionist-texas.html">AI receptionist in Texas</a> page links to every city.</p>
+      <p><strong>Improve the rest of your business.</strong> Other guides help you decide <a href="blog/which-business-tasks-to-automate-first.html">which tasks to automate first</a>, choose between <a href="blog/ai-chatbot-vs-live-chat.html">an AI chatbot and live chat</a>, and understand <a href="blog/how-fast-should-a-business-website-load.html">how fast a business website should load</a>.</p>
+      <p>Prefer to talk it through? <a href="contact.html">Book a free consultation</a> and tell us what you want to fix first.</p>
+    </div>
   </div>
 </section>
 "@
@@ -109,10 +140,10 @@ if ($homeHtml -match $pattern) {
 }
 
 # ---------- sitemap + RSS ----------
-$pages = '','services','portfolio','case-studies','case-study-ai-lead-management','case-study-shopify-website-rebuild','case-study-crm-payroll-automation','blog','about','contact'
+$pages = '','ai-receptionist','ai-calling-agent-texas','ai-receptionist-texas','ai-chatbot-texas','ai-automation-texas','web-design-texas','web-design-tyler-tx','shopify-development-texas','custom-crm-development-texas','mobile-app-development-texas','mobile-app-development-dallas','mobile-app-development-houston','mobile-app-development-austin','ai-app-development-texas','ai-search-optimization-texas','ai-receptionist-roofing-texas','ai-receptionist-pest-control-texas','ai-receptionist-dental-office','ai-receptionist-law-firm','ai-receptionist-hvac-contractors','ai-receptionist-real-estate','ai-receptionist-restaurants','ai-receptionist-auto-repair','ai-receptionist-insurance-agents','ai-receptionist-medical-office','ai-receptionist-accountants','services','portfolio','case-studies','case-study-ai-lead-management','case-study-shopify-website-rebuild','case-study-crm-payroll-automation','pricing','blog','news','about','contact','terms','privacy','refund'
 $urls = ($pages | ForEach-Object { $f = if ($_) { "$root\$_.html" } else { "$root\index.html" }; "  <url><loc>$site/$_</loc><lastmod>$((Get-Item $f).LastWriteTime.ToString('yyyy-MM-dd'))</lastmod></url>" }) + ($posts | ForEach-Object { "  <url><loc>$site/blog/$($_.slug)</loc><lastmod>$($_.date)</lastmod></url>" })
-# sitemap.xml is no longer written (site is noindex)
+[IO.File]::WriteAllText("$root\sitemap.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<urlset xmlns=`"http://www.sitemaps.org/schemas/sitemap/0.9`">`n$($urls -join "`n")`n</urlset>`n", $enc)
 $items = $posts | Select-Object -First 20 | ForEach-Object { "  <item><title>$(& $H $_.title)</title><link>$site/blog/$($_.slug)</link><guid>$site/blog/$($_.slug)</guid><pubDate>$($_.when.ToString('ddd, dd MMM yyyy 09:00:00 -0600', $us))</pubDate><category>$(& $H $_.category)</category><description>$(& $H $_.description)</description></item>" }
 [IO.File]::WriteAllText("$root\feed.xml", "<?xml version=`"1.0`" encoding=`"UTF-8`"?>`n<rss version=`"2.0`"><channel>`n  <title>Texas WebCoders Blog</title><link>$site/blog</link><description>AI, websites and growth guides for small businesses.</description>`n$($items -join "`n")`n</channel></rss>`n", $enc)
 
-"Built $($posts.Count) posts, blog.html, posts.json, feed.xml"
+"Built $($posts.Count) posts, blog.html, posts.json, sitemap.xml, feed.xml"
