@@ -377,3 +377,16 @@ document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', 
   const q = b.parentElement, open = !q.classList.contains('open');
   q.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
 }));
+
+/* safety net: some browsers never fire the observers above (3D faces, hidden tabs); load any image or
+   video that is still waiting for its source shortly after the page has loaded */
+(function loadLeftovers() {
+  const run = () => setTimeout(() => {
+    document.querySelectorAll('img[data-src]:not([src]), video[data-src]:not([src])').forEach(m => {
+      if (m.tagName === 'IMG') m.loading = 'eager';
+      m.src = m.dataset.src;
+    });
+    document.querySelectorAll('img[loading="lazy"]').forEach(i => { if (!i.complete || !i.naturalWidth) i.loading = 'eager'; });
+  }, 2500);
+  if (document.readyState === 'complete') run(); else addEventListener('load', run, {once:true});
+})();
