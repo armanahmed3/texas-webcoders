@@ -31,7 +31,7 @@ function Page($title, $desc, $canonical, $page, $base, $ogtype, $body, $extra) {
   $template.Replace('{{TITLE}}', (& $H $title)).Replace('{{DESC}}', (& $H $desc)).Replace('{{CANONICAL}}', $canonical).Replace('{{PAGE}}', $page).Replace('{{BASE}}', $base).Replace('{{OGTYPE}}', $ogtype).Replace('{{EXTRA}}', $extra).Replace('{{BODY}}', $body)
 }
 function Card($p) {
-  $img = if ($p.image) { "<span class=`"thumb`"><img loading=`"lazy`" src=`"$media$($p.image)`" alt=`"`"></span>" } else { '' }
+  $img = if ($p.image) { "<span class=`"thumb`"><img loading=`"lazy`" src=`"$media$($p.image)`" alt=`"$(& $H $p.title)`"></span>" } else { '' }
   "<a class=`"post`" href=`"blog/$($p.slug).html`" data-cat=`"$(& $H $p.category)`">$img<span class=`"k`"><b>$(& $H $p.category)</b><span>$($p.readMins) min</span></span><h3>$(& $H $p.title)</h3><p>$(& $H $p.description)</p><span class=`"rd`">Read article <svg class=`"icon`"><use href=`"#i-arrow`"/></svg></span></a>"
 }
 function Nice($d) { $d.ToString('MMM d, yyyy', $us) }
@@ -84,7 +84,7 @@ foreach ($p in $posts) {
 # ---------- listing page ----------
 $cats = $posts | ForEach-Object { $_.category } | Sort-Object -Unique
 $feat = $posts[0]
-$featImg = if ($feat.image) { "<span class=`"thumb`"><img src=`"$media$($feat.image)`" alt=`"`"></span>" } else { '' }
+$featImg = if ($feat.image) { "<span class=`"thumb`"><img src=`"$media$($feat.image)`" alt=`"$(& $H $feat.title)`"></span>" } else { '' }
 $listBody = @"
 <section class="phero" data-shape="bubble" data-x="3.2" data-y="0.4" data-s="0.65" data-op="0.8" style="min-height:62vh">
   <div class="wrap phero-grid">
@@ -124,7 +124,7 @@ $listBody += @"
   </div>
 </section>
 "@
-[IO.File]::WriteAllText("$root\blog.html", (Page 'AI Receptionist and AI Guides Blog | Texas WebCoders' 'Plain-English guides on AI receptionists, AI chatbots, automation, websites and marketing for small businesses in Texas.' "$site/blog" 'blog' '' 'website' $listBody ''), $enc)
+[IO.File]::WriteAllText("$root\blog.html", (Page 'AI Receptionist and AI Guides Blog | Texas WebCoders' 'Plain-English guides on AI receptionists, AI chatbots, automation, websites and marketing for small businesses in Texas.' "$site/blog" 'blog' '' 'website' $listBody "<script type=`"application/ld+json`">$(@{ '@context' = 'https://schema.org'; '@type' = 'Blog'; name = 'Texas WebCoders Blog'; url = "$site/blog"; description = 'Plain-English guides on AI receptionists, AI chatbots, automation, websites and marketing for small businesses in Texas.'; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/" }; blogPost = @($posts | Select-Object -First 10 | ForEach-Object { @{ '@type' = 'BlogPosting'; headline = $_.title; url = "$site/blog/$($_.slug)"; datePublished = $_.when } }) } | ConvertTo-Json -Depth 6 -Compress)</script><script type=`"application/ld+json`">$(@{ '@context' = 'https://schema.org'; '@type' = 'BreadcrumbList'; itemListElement = @(@{ '@type' = 'ListItem'; position = 1; name = 'Home'; item = "$site/" }, @{ '@type' = 'ListItem'; position = 2; name = 'Blog'; item = "$site/blog" }) } | ConvertTo-Json -Depth 5 -Compress)</script>"), $enc)
 
 # ---------- posts.json index ----------
 $index = $posts | ForEach-Object { [ordered]@{ slug = $_.slug; title = $_.title; description = $_.description; category = $_.category; date = $_.date; readMins = $_.readMins; url = "blog/$($_.slug).html" } }
