@@ -34,12 +34,55 @@ function Card($p) {
   $img = if ($p.image) { "<span class=`"thumb`"><img loading=`"lazy`" src=`"$media$($p.image)`" alt=`"$(& $H $p.title)`"></span>" } else { '' }
   "<a class=`"post`" href=`"blog/$($p.slug).html`" data-cat=`"$(& $H $p.category)`">$img<span class=`"k`"><b>$(& $H $p.category)</b><span>$($p.readMins) min</span></span><h3>$(& $H $p.title)</h3><p>$(& $H $p.description)</p><span class=`"rd`">Read article <svg class=`"icon`"><use href=`"#i-arrow`"/></svg></span></a>"
 }
+# matching service, industry and city pages for a post (internal links in the side card)
+function SvcLinks($p) {
+  $t = "$($p.slug) $($p.title) $($p.category)".ToLower()
+  $l = [ordered]@{}
+  $ind = [ordered]@{ 'dental' = @('ai-receptionist-dental-office', 'AI receptionist for dental offices'); 'law' = @('ai-receptionist-law-firm', 'AI receptionist for law firms');
+    'attorney' = @('ai-receptionist-law-firm', 'AI receptionist for law firms'); 'hvac' = @('ai-receptionist-hvac-contractors', 'AI receptionist for HVAC and contractors');
+    'plumb' = @('ai-receptionist-hvac-contractors', 'AI receptionist for HVAC and contractors'); 'restaurant' = @('ai-receptionist-restaurants', 'AI phone answering for restaurants');
+    'real estate' = @('ai-receptionist-real-estate', 'AI receptionist for real estate'); 'real-estate' = @('ai-receptionist-real-estate', 'AI receptionist for real estate');
+    'medical' = @('ai-receptionist-medical-office', 'AI receptionist for medical offices'); 'clinic' = @('ai-receptionist-medical-office', 'AI receptionist for medical offices');
+    'spa' = @('ai-receptionist-medical-office', 'AI receptionist for clinics and spas'); 'auto repair' = @('ai-receptionist-auto-repair', 'AI receptionist for auto repair shops');
+    'auto-repair' = @('ai-receptionist-auto-repair', 'AI receptionist for auto repair shops'); 'accountant' = @('ai-receptionist-accountants', 'AI receptionist for accountants');
+    'cpa' = @('ai-receptionist-accountants', 'AI receptionist for accountants'); 'insurance' = @('ai-receptionist-insurance-agents', 'AI receptionist for insurance agents');
+    'roof' = @('ai-receptionist-roofing-texas', 'AI receptionist for roofing companies'); 'pest' = @('ai-receptionist-pest-control-texas', 'AI receptionist for pest control') }
+  foreach ($k in $ind.Keys) { if ($t.Contains($k)) { $l[$ind[$k][0]] = $ind[$k][1] } }
+  if ($p.slug -match '^ai-receptionist-.+-tx$') { $l['ai-receptionist-texas'] = 'AI receptionist in Texas' }
+  if ($t -match 'receptionist|answering|missed call|missed-call|appointment|phone') { $l['ai-receptionist'] = 'AI receptionist service' }
+  if ($t -match 'voice agent|voice-agent|calling') { $l['ai-calling-agent-texas'] = 'AI calling agents' }
+  if ($t -match 'chatbot|live chat|live-chat') { $l['ai-chatbot-texas'] = 'AI chatbot development' }
+  if ($t -match 'automat|lead') { $l['ai-automation-texas'] = 'AI automation services' }
+  if ($t -match 'website|web design|web-design|load') { $l['web-design-texas'] = 'Website design in Texas' }
+  if ($t -match 'tyler') { $l['web-design-tyler-tx'] = 'Web design in Tyler, TX' }
+  if ($t -match 'seo|search|agenc') { $l['ai-search-optimization-texas'] = 'AI search optimization (AEO and GEO)' }
+  if ($t -match 'agenc') { $l['blog/best-ai-agencies-in-usa'] = 'Best AI agencies in the USA' }
+  if ($t -match 'crm') { $l['custom-crm-development-texas'] = 'Custom CRM development' }
+  if ($t -match 'shopify|e-commerce|ecommerce|online store') { $l['shopify-development-texas'] = 'Shopify development' }
+  if ($t -match '\bapps?\b|mobile') { $l['mobile-app-development-texas'] = 'Mobile app development' }
+  if (-not $l.Count) { $l['services'] = 'All our services' }
+  $a = @($l.Keys | Select-Object -First 3 | ForEach-Object { "<a href=`"$_.html`">$(& $H $l[$_])</a>" })
+  $cs = if ($t -match 'shopify|e-commerce|ecommerce|online store|website|web design|web-design') { @('case-study-shopify-website-rebuild', 'how we rebuilt a 30-year-old website on Shopify') }
+        elseif ($t -match 'crm|payroll') { @('case-study-crm-payroll-automation', 'custom CRM and payroll automation') }
+        elseif ($t -match 'lead|automat|receptionist|calling|voice|chatbot|missed') { @('case-study-ai-lead-management', 'AI agents that handle leads and calls') }
+        else { $null }
+  $csHtml = if ($cs) { " Case study: <a href=`"$($cs[0]).html`">$($cs[1])</a>." } else { '' }
+  "<p class=`"rel-svc`">Related: $($a -join ', ').$csHtml</p>"
+}
 function Nice($d) { $d.ToString('MMM d, yyyy', $us) }
 
 # ---------- article pages ----------
 foreach ($p in $posts) {
-  $related = @($posts | Where-Object { $_.slug -ne $p.slug -and $_.category -eq $p.category }) + @($posts | Where-Object { $_.slug -ne $p.slug -and $_.category -ne $p.category })
-  $related = $related | Select-Object -First 3
+  # rotate through the category so every post is linked from its neighbours, plus one post from another category
+  $same = @($posts | Where-Object { $_.category -eq $p.category })
+  $ix = [array]::IndexOf(@($same | ForEach-Object { $_.slug }), $p.slug)
+  $related = @()
+  for ($k = 1; $k -le [Math]::Min(2, $same.Count - 1); $k++) { $related += $same[($ix + $k) % $same.Count] }
+  $others = @($posts | Where-Object { $_.category -ne $p.category })
+  $seed = 0; foreach ($ch in $p.slug.ToCharArray()) { $seed += [int]$ch }
+  if ($others.Count) { $related += $others[$seed % $others.Count] }
+  foreach ($q in $posts) { if ($related.Count -ge 3) { break }; if ($q.slug -ne $p.slug -and -not ($related | Where-Object { $_.slug -eq $q.slug })) { $related += $q } }
+  $svc = SvcLinks $p
   $url = "$site/blog/$($p.slug)"
   $share = [uri]::EscapeDataString($url)
   $ld = @{ '@context' = 'https://schema.org'; '@type' = 'BlogPosting'; headline = $p.title; description = $p.description; datePublished = $p.date; dateModified = $(if ($p.updated) { $p.updated } else { $p.date }); author = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/about" }; image = "$site/assets/logo.png"; publisher = @{ '@type' = 'Organization'; name = 'Texas WebCoders'; url = "$site/"; logo = @{ '@type' = 'ImageObject'; url = "$site/assets/logo.png"; width = 846; height = 153 } }; mainEntityOfPage = $url } | ConvertTo-Json -Depth 4 -Compress
@@ -62,6 +105,7 @@ foreach ($p in $posts) {
         <span class="tag">Free consultation</span>
         <h3>Want this working for your business?</h3>
         <p>Talk to our team, or tap <b>Talk to our AI</b> at the bottom left to try our AI agent live.</p>
+        $svc
         <a class="btn btn-dark" href="contact.html">Book a free call <span class="dot"><svg class="icon"><use href="#i-ne"/></svg></span></a>
       </div>
       <div class="share"><span>Share</span><a href="https://www.linkedin.com/sharing/share-offsite/?url=$share" target="_blank" rel="noopener">LinkedIn</a><a href="https://www.facebook.com/sharer/sharer.php?u=$share" target="_blank" rel="noopener">Facebook</a><a href="https://twitter.com/intent/tweet?url=$share" target="_blank" rel="noopener">X</a></div>
@@ -119,6 +163,7 @@ $listBody += @"
       <p><strong>Start with the basics.</strong> New to AI phone answering? Read <a href="blog/what-is-an-ai-receptionist.html">what an AI receptionist is</a>, then see <a href="blog/how-much-does-an-ai-receptionist-cost.html">how much an AI receptionist costs</a> and how it compares with <a href="blog/ai-receptionist-vs-answering-service.html">a traditional answering service</a>.</p>
       <p><strong>Find your Texas city.</strong> Our city guides use U.S. Census data to show local population, Spanish use at home, income and the largest job sectors. They also cover local area codes, pricing and the kinds of businesses that may benefit most. The <a href="ai-receptionist-texas.html">AI receptionist in Texas</a> page links to every city.</p>
       <p><strong>Improve the rest of your business.</strong> Other guides help you decide <a href="blog/which-business-tasks-to-automate-first.html">which tasks to automate first</a>, choose between <a href="blog/ai-chatbot-vs-live-chat.html">an AI chatbot and live chat</a>, and understand <a href="blog/how-fast-should-a-business-website-load.html">how fast a business website should load</a>.</p>
+      <p><strong>Comparing agencies?</strong> Our <a href="blog/best-ai-agencies-in-usa.html">guide to the best AI agencies in the USA</a> lists what to check before you hire one, and <a href="services.html">our services</a> page shows what we build.</p>
       <p>Prefer to talk it through? <a href="contact.html">Book a free consultation</a> and tell us what you want to fix first.</p>
     </div>
   </div>
