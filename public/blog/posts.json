@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "ai-receptionist-security",
+        "title":  "AI Receptionist Security: How to Protect Caller Data",
+        "description":  "AI receptionist security starts with collecting less, limiting what the AI can do and locking down accounts. Learn how to protect caller data step by step.",
+        "category":  "AI Receptionist",
+        "date":  "2026-11-25",
+        "readMins":  5,
+        "url":  "blog/ai-receptionist-security.html"
+    },
+    {
         "slug":  "custom-software-development-cost-for-small-business",
         "title":  "Custom Software Development Cost for Small Business: A Budget Guide",
         "description":  "Custom software development cost for small business depends on scope, integrations and AI features. Learn what drives price and how to budget for real value.",
