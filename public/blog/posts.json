@@ -1,5 +1,14 @@
 [
     {
+        "slug":  "how-to-make-your-website-ready-for-ai-agents",
+        "title":  "How to Make Your Website Ready for AI Agents and Assistants",
+        "description":  "Learn how to make your website ready for AI agents and assistants that research, compare and book for customers, with a plain-English checklist for owners.",
+        "category":  "Websites",
+        "date":  "2026-11-25",
+        "readMins":  5,
+        "url":  "blog/how-to-make-your-website-ready-for-ai-agents.html"
+    },
+    {
         "slug":  "ai-receptionist-security",
         "title":  "AI Receptionist Security: How to Protect Caller Data",
         "description":  "AI receptionist security starts with collecting less, limiting what the AI can do and locking down accounts. Learn how to protect caller data step by step.",
